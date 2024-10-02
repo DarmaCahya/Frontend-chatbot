@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+        }
+    </script>
+    <script>
+        // Function to initialize and toggle dark mode
+        function initMode() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        function toggleMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                setActiveLink();
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                setActiveLink();
+            }
+        }
+
+
+    </script>
+    <style>
+        body{
+            font-family: "Plus Jakarta Sans", sans-serif;;
+        }
+        
+    </style>
+</head>
+
+<body class="bg-white dark:bg-[#1B1B21] text-black dark:text-white transition duration-300">
+    <header class="sticky top-0 bg-white dark:bg-[#1B1B21] ">
+        <nav class="text-xl flex items-center justify-between p-10 lg:px-8 text-[#828282] w-full">
+            <div class="mx-32">
+                <a href="index.html">
+                    <img src="../../public/image/logo.png" alt="">
+                </a>
+            </div>
+            <div class="flex space-x-16 font-bold">
+                <a href="index.html" class="dark:text-white text-yellow-300">Beranda</a>
+                <a href="opening.html" class="hover:text-slate-400 dark:hover:text-white">Satria BIPA</a>
+                <a href="aboutUs.html" class="hover:text-slate-400 dark:hover:text-white">Arsitektur Satria BIPA</a>
+            </div>
+            <div class="mx-32">
+                <div class="text-center mt-5">
+                    <label class="inline-flex items-center mb-5 cursor-pointer">
+                        <span class="ms-3 text-gray-900 dark:text-gray-300">Light</span>
+                        <input 
+                            type="checkbox" 
+                            value="" 
+                            class="sr-only peer" 
+                            onclick="toggleMode()"
+                        >
+                        <div class="relative mx-3 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                        </div>
+                        <span class=" text-gray-900 dark:text-gray-300">Dark</span>
+                    </label>
+                </div>
+            </div>
+        </nav>
+        <hr class="border-0 h-[0.5px] bg-[#A2010B] mx-40">
+    </header>
+
+    <main>
+        <section class="scroll-mt-56">
+            <div class="my-16">
+                <div class="flex flex-row dark:bg-[#1B1B21] dark:bg-none bg-gradient-to-r from-[#EFEFEF]">
+                    <div class="my-10 mx-40 w-3/4 ">
+                        <h1 class="text-5xl font-bold mb-10 text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25] ">🙏 Selamat Datang!</h1>
+                        <p class="text-[#1B1B21] dark:text-[#6F6F73] text-2xl font-normal text-justify leading-10"> <span class="font-bold">Sahabat Tutur Berbahasa Indonesia (Satria) BIPA </span>adalah media pembelajaran interaktif dan inovatif yang memadukan <span class="italic">chatbot </span> berbasis kecerdasan buatan dalam pembelajaran BIPA. <span class="font-bold">Satria BIPA </span>
+                            dirancang agar dapat digunakan oleh semua pemelajar BIPA kapan saja dan dari mana saja. Anda dapat menggunakan Satria BIPA untuk memperkaya kosakata, berbicara dalam bahasa Indonesia, serta tata bahasa dalam bahasa Indonesia. Anda dapat menggunakan Satria BIPA sebagai mitra tutur untuk belajar BIPA. 
+                            Satria BIPA menawarkan bentuk percakapan yang relevan dalam bahasa Indonesia serta erat dengan nilai-nilai budaya Indonesia.</p>
+                    </div>
+                    <div class="w-1/2 ml-16 mr-1">
+                        <img src="../../public/image/mascot.png" class="object-cover h-[542px] w-[387px]" alt="aaaaaa">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="min-h-screen p-8 scroll-mt-36">
+            <div class="flex flex-col items-center my-20">
+                <div>
+                    <h1 class=" text-5xl p-4 font-bold mb-10 text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25] ">Pengalaman Belajar BIPA dengan Cara Baru!</h1>
+                </div>
+                <div class="flex flex-row ">
+                    <a href="" class="text-xl rounded bg-[#A2010B] hover:bg-slate-700 text-white p-5 mr-8 dark:bg-gradient-to-r dark:from-[#8F8F8F33] dark:to-[#FFFFFF33] dark:bg-opacity-20 dark:hover:bg-zinc-300">
+                        Coba Satria BIPA
+                    </a>
+                    
+                    <a href="aboutUs.html#video-BIPA" class="text-xl p-5 text-[#828282] hover:text-orange-400">
+                        Tonton Video
+                    </a>                    
+                </div>
+            </div>
+            <hr class="border-0 h-[0.5px] bg-[#A2010B] mx-40">
+
+            <div class="flex flex-col items-center mt-36">
+                <h1 class="items-center text-5xl font-bold mb-20 text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25] ">Layanan Satria BIPA</h1>
+                <div class="flex flex-col w-full">
+                    <div class="flex flex-row bg-[#F0F0F0] dark:bg-[#0a0a0c] mx-40 mb-10">
+                        <div class="rounded-lg bg-white m-7 flex-shrink-0">
+                            <img src="../../public/image/mascot.png" class="object-cover h-[200px] w-[170px]" alt="">
+                        </div>
+                        <div class="flex flex-col justify-center ml-10">
+                            <h2 class="dark:text-white text-3xl font-bold text-black mb-2">1. Penerjemahan Bahasa Indonesia</h2>
+                            <p class="dark:text-[#828282] text-black font-light text-2xl">Penerjemahan percakapan dari dan ke bahasa Indonesia secara akurat.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row bg-[#F0F0F0] dark:bg-[#0a0a0c] mx-40 mb-10">
+                        <div class="rounded-lg bg-white m-7 flex-shrink-0">
+                            <img src="../../public/image/mascot.png" class="object-cover h-[200px] w-[170px]" alt="">
+                        </div>
+                        <div class="flex flex-col justify-center ml-10">
+                            <h2 class="dark:text-white text-3xl font-bold text-black mb-2">1. Penerjemahan Bahasa Indonesia</h2>
+                            <p class="dark:text-[#828282] text-black font-light text-2xl">Penerjemahan percakapan dari dan ke bahasa Indonesia secara akurat.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row bg-[#F0F0F0] dark:bg-[#0a0a0c] mx-40 mb-10">
+                        <div class="rounded-lg bg-white m-7 flex-shrink-0">
+                            <img src="../../public/image/mascot.png" class="object-cover h-[200px] w-[170px]" alt="">
+                        </div>
+                        <div class="flex flex-col justify-center ml-10">
+                            <h2 class="dark:text-white text-3xl font-bold text-black mb-2">1. Penerjemahan Bahasa Indonesia</h2>
+                            <p class="dark:text-[#828282] text-black font-light text-2xl">Penerjemahan percakapan dari dan ke bahasa Indonesia secara akurat.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row bg-[#F0F0F0] dark:bg-[#0a0a0c] mx-40 mb-5">
+                        <div class="rounded-lg bg-white m-7 flex-shrink-0">
+                            <img src="../../public/image/mascot.png" class="object-cover h-[200px] w-[170px]" alt="">
+                        </div>
+                        <div class="flex flex-col justify-center ml-10">
+                            <h2 class="dark:text-white text-3xl font-bold text-black mb-2">1. Penerjemahan Bahasa Indonesia</h2>
+                            <p class="dark:text-[#828282] text-black font-light text-2xl">Penerjemahan percakapan dari dan ke bahasa Indonesia secara akurat.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>   
+    </main>
+
+    <footer class="p-6 bg-[#828282] text-white dark:bg-[#2E3032] dark:text-gray-200">
+        <div class="container mx-auto flex justify-between items-center">
+          <div class="flex items-center space-x-2">
+            <img src="../../public/image/logo.png" alt="Logo BIPA" class="h-8">
+            <span>Hak Cipta Badan Pengembangan dan Pembinaan Bahasa © 2024</span>
+          </div>
+          <div class="flex space-x-4">
+            <a href="#" class="hover:text-gray-400">
+              <i class="fab fa-medium"></i>
+            </a>
+            <a href="#" class="hover:text-gray-400">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="hover:text-gray-400">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+    </footer>
+    
+</body>
+
+</html>

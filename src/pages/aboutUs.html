@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsitektur Satria Bipa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+        }
+    </script>
+    <script>
+        // Function to initialize and toggle dark mode
+        function initMode() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        function toggleMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                setActiveLink();
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                setActiveLink();
+            }
+        }
+
+
+    </script>
+    <style>
+        body{
+            font-family: "Plus Jakarta Sans", sans-serif;;
+        }
+        
+    </style>
+</head>
+
+<body class="min-h-screen overflow-x-hidden flex flex-col bg-white dark:bg-[#1B1B21] text-black dark:text-white transition duration-300">
+    <header class="sticky top-0 bg-white dark:bg-[#1B1B21] z-20">
+        <nav class="text-xl flex items-center justify-between p-10 lg:px-8 text-[#828282] w-full">
+            <div class="mx-32">
+                <a href="index.html">
+                    <img src="../../public/image/logo.png" alt="">
+                </a>
+            </div>
+            <div class="flex space-x-16 font-bold">
+                <a href="index.html" class="hover:text-slate-400 dark:hover:text-white">Beranda</a>
+                <a href="opening.html" class="hover:text-slate-400 dark:hover:text-white">Satria BIPA</a>
+                <a href="aboutUs.html" class="dark:text-white text-yellow-300">Arsitektur Satria BIPA</a>
+            </div>
+            <div class="mx-32">
+                <div class="text-center mt-5">
+                    <label class="inline-flex items-center mb-5 cursor-pointer">
+                        <span class="ms-3 text-gray-900 dark:text-gray-300">Light</span>
+                        <input 
+                            type="checkbox" 
+                            value="" 
+                            class="sr-only peer" 
+                            onclick="toggleMode()"
+                        >
+                        <div class="relative mx-3 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                        </div>
+                        <span class=" text-gray-900 dark:text-gray-300">Dark</span>
+                    </label>
+                </div>
+            </div>
+        </nav>
+        <hr class="border-0 h-[0.5px] bg-[#A2010B] mx-40">
+    </header>
+    
+    <main class="flex-grow">
+        <div class="z-0 w-[800px] h-[500px] dark:bg-yellow-500 rounded-[100%] absolute blur-[90px] dark:opacity-10 left-[-400px] top-0"></div>
+        <div class="z-0 w-[900px] h-[890px] dark:bg-yellow-500 rounded-[100%] absolute blur-[90px] dark:opacity-10 right-[-400px] top-1/2"></div>
+
+        <section class="my-20 z-10">
+            <div class="flex flex-col items-center gap-3 z-10 text-center my-16">
+                <h1 class="text-5xl font-bold p-5 text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25] ">
+                    Tentang Portal BIPA Daring
+                </h1>
+                <p class="mx-44 text-[#1B1B21] text-center dark:text-[#6F6F73] text-3xl font-light leading-10">Portal BIPA Daring terdiri atas modul berisi bahan-bahan acuan pembelajaran BIPA, modul berisi data dan informasi lembaga penyelenggara program BIPA di dalam dan luar Indonesia, 
+                    modul berisi data dan informasi kiprah dan karya pemerhati BIPA, modul pengelolaan pembelajaran jarak jauh BIPA secara daring dan modul layanan tes daring pembelajaran BIPA yang terdiri atas tes penempatan bagi calon pemelajar BIPA dan tes evaluasi belajar bagi pemelajar BIPA.</p>
+
+                <p class="mx-44 text-[#1B1B21] text-center dark:text-[#6F6F73] text-3xl font-light mt-7 leading-10"><span class="italic">Chatbot </span> <span class="font-bold">Satria BIPA</span> hadir untuk menambah variasi metode pembelajaran, dan membantu pemelajar BIPA berbahasa Indonesia secara mendalam dan interaktif.</p>
+            </div>
+        </section>
+
+        <section id="video-BIPA" class="scroll-mt-40 ">
+            <div class="flex flex-col items-center z-10 gap-3 text-center my-20">
+                <h1 class="text-5xl font-bold p-5 text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25] ">
+                    Arsitektur Satria BIPA
+                </h1>
+                <div class="flex mt-5 mx-auto max-h-[720px] z-10 bg-[#828282] dark:bg-[#030303]">
+                    <div class="w-[1500px] h-[720px]"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="p-6 bg-[#828282] text-white dark:bg-[#2E3032] dark:text-gray-200">
+        <div class="container mx-auto flex justify-between items-center">
+          <div class="flex items-center space-x-2">
+            <img src="../../public/image/logo.png" alt="Logo BIPA" class="h-8">
+            <span>Hak Cipta Badan Pengembangan dan Pembinaan Bahasa © 2024</span>
+          </div>
+          <div class="flex space-x-4">
+            <a href="#" class="hover:text-gray-400">
+              <i class="fab fa-medium"></i>
+            </a>
+            <a href="#" class="hover:text-gray-400">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="hover:text-gray-400">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+    </footer>
+    
+</body>
+
+</html>
