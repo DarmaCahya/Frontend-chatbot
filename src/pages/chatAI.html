@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
+    <title>Chatbot Satria BIPA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
@@ -51,13 +51,13 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const chats = [
-                { question: "What are the traditional foods of Bali?" },
-                { question: "How did Batik become an important part of Indonesian culture?" },
-                { question: "What are the key differences between Jakarta and Bandung?" },
-                { question: "What festivals are celebrated in Sumatra?" },
-                { question: "What is the history behind the Borobudur Temple?" },
-                { question: "What makes Joglo architecture unique?" },
-                { question: "How is the culture in Sulawesi different from Java?" }
+                { question: "Bagaimana cara bertanya arah?" },
+                { question: "Buatkan saya pantun yang lucu" },
+                { question: "Bagaimana cara bertanya waktu?" },
+                { question: "Buatkan teks pidato singkat tentang kemerdekaan Indonesia" },
+                { question: "Bagaimana bertanya cara pergi menuju Candi Borobudur?" },
+                { question: "Ajar saya bertanya harga" },
+                { question: "Apa bedanya menyapa dengan bahasa formal dan informal?" }
             ];
 
             const chatList = document.getElementById("chat-list");
@@ -159,7 +159,7 @@
             <h1 class="text-2xl font-bold">Riwayat Percakapan</h1>
             <p class="flex items-center text-sm">
                 <img src="../../public/image/history-toggle.svg" class="mr-3" alt="">
-                Riwayat hasil pencarian Anda
+                Riwayat percakapan Anda dengan Satria BIPA
             </p>
         </section>
 
@@ -242,9 +242,9 @@
             <div class="flex flex-col items-center">
                 <div class="flex">
                     <img src="../../public/image/waving hand.png" class="mr-5" alt="">
-                    <h1 class="text-3xl xl:mb-2 md:text-left text-center xl:text-6xl font-bold text-[#AE020B] dark:bg-clip-text dark:text-transparent pb-2 dark:bg-gradient-to-r from-yellow-500 via-yellow-200 to-yellow-500">Halo, {user}</h1>
+                    <h1 class="text-3xl xl:mb-2 md:text-left text-center xl:text-6xl font-bold text-[#AE020B] dark:bg-clip-text dark:text-transparent pb-2 dark:bg-gradient-to-r from-yellow-500 via-yellow-200 to-yellow-500">Halo, Ferry</h1>
                 </div>
-                <p>Apa yang Dapat Saya Bantu Anda hari ini?</p>
+                <p class="font-bold">Mau belajar apa hari ini?</p>
             </div>
             <div class="flex justify-center my-14">
                 <a href="#" class="flex items-center p-6 w-60 bg-gray-700 hover:bg-gray-500 rounded-md ml-8 mr-8">
@@ -254,20 +254,23 @@
                     <p class=" text-white font-normal">Cara <span class="font-bold">bertanya tentang arah</span> </p>
                 </a>
                 <a href="#" class="flex items-center p-6 h-40 w-60  bg-gray-700 hover:bg-gray-500 rounded-md mr-8">
-                    <p class=" text-white font-normal"><span class="font-bold">Ayo, ngobrol!</span> Tanya apa saja dalam bahasa Indonesia </p>
+                    <p class=" text-white font-normal"><span class="font-bold">Ayo, ngobrol!</span>
+                    <br>
+                    Silakan tanya apa saja dalam bahasa Indonesia</p>
                 </a>
             </div>
             <div id="chat-box" class="flex-1 flex flex-col space-y-4 overflow-y-auto pr-2 sm:pr-4 scrollbar-custom">
             </div>
           
             <div class="mt-5 flex items-center mx-10 relative">
-                <input id="message-input" placeholder="Ask me anything... (tanya apa saja...)" type="text" class="flex-1 py-4 px-4 rounded-2xl border border-[#ffcc00] bg-[#1f1f1f] text-[#e0e0e0] pr-10" />
+                <input id="message-input" placeholder="Tanya apa saja dalam bahasa Indonesia...." type="text" class="flex-1 py-4 px-4 rounded-2xl border border-[#ffcc00] bg-[#1f1f1f] text-[#e0e0e0] pr-10" />
                 <a href="#" class="absolute right-4 top-1/2 transform -translate-y-1/2 mr-5"><img src="../../public/image/send.png" alt="Send Icon" class="h-6 w-6 hover:bg-slate-500"/></a>
             </div>            
           
             <p class="text-center text-lg text-[#a1a1a1] mt-5 mb-10">
-                AI mungkin memberikan informasi yang salah, terutama mengenai individu, jadi penting untuk memverifikasi tanggapannya.
-                <a href="#" class="underline">Privasi dan Aplikasi Anda</a>.
+                Satria BIPA mungkin dapat memberikan informasi yang keliru mengenai seseorang. Anda perlu memverifikasi informasi tentang individu.
+                <br>
+                <a href="#" class="underline">Ketentuan Privasi</a>
             </p>
         </main>
         <footer class="hidden lg:block p-5 z-20 bg-[#828282] text-white dark:bg-[#2E3032] dark:text-gray-200">
