@@ -66,11 +66,11 @@
             chats.forEach(chat => {
                 const li = document.createElement('li');
                 li.innerHTML = `
-                <a href="#" class="icon-chat flex items-center rounded-sm py-1 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <a href="#" class="icon-chat flex items-center rounded-sm py-1 hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <div class="mr-3">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_69_1199)">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6 5C5.73478 5 5.48043 5.10536 5.29289 5.29289C5.10536 5.48043 5 5.73478 5 6V18C5 18.2652 5.10536 18.5196 5.29289 18.7071C5.48043 18.8946 5.73478 19 6 19H18C18.2652 19 18.5196 18.8946 18.7071 18.7071C18.8946 18.5196 19 18.2652 19 18V6C19 5.73478 18.8946 5.48043 18.7071 5.29289C18.5196 5.10536 18.2652 5 18 5H6ZM3.87868 3.87868C4.44129 3.31607 5.20435 3 6 3H18C18.7956 3 19.5587 3.31607 20.1213 3.87868C20.6839 4.44129 21 5.20435 21 6V18C21 18.7957 20.6839 19.5587 20.1213 20.1213C19.5587 20.6839 18.7957 21 18 21H6C5.20435 21 4.44129 20.6839 3.87868 20.1213C3.31607 19.5587 3 18.7956 3 18V6C3 5.20435 3.31607 4.44129 3.87868 3.87868ZM9 10.5C8.17157 10.5 7.5 11.1716 7.5 12C7.5 12.8284 8.17157 13.5 9 13.5C9.82843 13.5 10.5 12.8284 10.5 12C10.5 11.1716 9.82843 10.5 9 10.5ZM15 10.5C14.1716 10.5 13.5 11.1716 13.5 12C13.5 12.8284 14.1716 13.5 15 13.5C15.8284 13.5 16.5 12.8284 16.5 12C16.5 11.1716 15.8284 10.5 15 10.5Z" fill="white"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6 5C5.73478 5 5.48043 5.10536 5.29289 5.29289C5.10536 5.48043 5 5.73478 5 6V18C5 18.2652 5.10536 18.5196 5.29289 18.7071C5.48043 18.8946 5.73478 19 6 19H18C18.2652 19 18.5196 18.8946 18.7071 18.7071C18.8946 18.5196 19 18.2652 19 18V6C19 5.73478 18.8946 5.48043 18.7071 5.29289C18.5196 5.10536 18.2652 5 18 5H6ZM3.87868 3.87868C4.44129 3.31607 5.20435 3 6 3H18C18.7956 3 19.5587 3.31607 20.1213 3.87868C20.6839 4.44129 21 5.20435 21 6V18C21 18.7957 20.6839 19.5587 20.1213 20.1213C19.5587 20.6839 18.7957 21 18 21H6C5.20435 21 4.44129 20.6839 3.87868 20.1213C3.31607 19.5587 3 18.7956 3 18V6C3 5.20435 3.31607 4.44129 3.87868 3.87868ZM9 10.5C8.17157 10.5 7.5 11.1716 7.5 12C7.5 12.8284 8.17157 13.5 9 13.5C9.82843 13.5 10.5 12.8284 10.5 12C10.5 11.1716 9.82843 10.5 9 10.5ZM15 10.5C14.1716 10.5 13.5 11.1716 13.5 12C13.5 12.8284 14.1716 13.5 15 13.5C15.8284 13.5 16.5 12.8284 16.5 12C16.5 11.1716 15.8284 10.5 15 10.5Z" fill="gray"/>
                             </g>
                             <defs>
                                 <clipPath id="clip0_69_1199">
@@ -79,7 +79,7 @@
                             </defs>
                         </svg>
                     </div>
-                    <div class="truncate-text truncate w-full">
+                    <div class="truncate-text truncate w-full text-sm md:text-base">
                         ${chat.question}
                     </div>
                 </a>
@@ -89,11 +89,11 @@
             chats.forEach(chat => {
                 const li = document.createElement('li');
                 li.innerHTML = `
-                <a href="#" class="icon-chat flex items-center rounded-sm py-1 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <a href="#" class="icon-chat flex items-center rounded-sm py-1 hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <div class="mr-3">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_69_1199)">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6 5C5.73478 5 5.48043 5.10536 5.29289 5.29289C5.10536 5.48043 5 5.73478 5 6V18C5 18.2652 5.10536 18.5196 5.29289 18.7071C5.48043 18.8946 5.73478 19 6 19H18C18.2652 19 18.5196 18.8946 18.7071 18.7071C18.8946 18.5196 19 18.2652 19 18V6C19 5.73478 18.8946 5.48043 18.7071 5.29289C18.5196 5.10536 18.2652 5 18 5H6ZM3.87868 3.87868C4.44129 3.31607 5.20435 3 6 3H18C18.7956 3 19.5587 3.31607 20.1213 3.87868C20.6839 4.44129 21 5.20435 21 6V18C21 18.7957 20.6839 19.5587 20.1213 20.1213C19.5587 20.6839 18.7957 21 18 21H6C5.20435 21 4.44129 20.6839 3.87868 20.1213C3.31607 19.5587 3 18.7956 3 18V6C3 5.20435 3.31607 4.44129 3.87868 3.87868ZM9 10.5C8.17157 10.5 7.5 11.1716 7.5 12C7.5 12.8284 8.17157 13.5 9 13.5C9.82843 13.5 10.5 12.8284 10.5 12C10.5 11.1716 9.82843 10.5 9 10.5ZM15 10.5C14.1716 10.5 13.5 11.1716 13.5 12C13.5 12.8284 14.1716 13.5 15 13.5C15.8284 13.5 16.5 12.8284 16.5 12C16.5 11.1716 15.8284 10.5 15 10.5Z" fill="white"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6 5C5.73478 5 5.48043 5.10536 5.29289 5.29289C5.10536 5.48043 5 5.73478 5 6V18C5 18.2652 5.10536 18.5196 5.29289 18.7071C5.48043 18.8946 5.73478 19 6 19H18C18.2652 19 18.5196 18.8946 18.7071 18.7071C18.8946 18.5196 19 18.2652 19 18V6C19 5.73478 18.8946 5.48043 18.7071 5.29289C18.5196 5.10536 18.2652 5 18 5H6ZM3.87868 3.87868C4.44129 3.31607 5.20435 3 6 3H18C18.7956 3 19.5587 3.31607 20.1213 3.87868C20.6839 4.44129 21 5.20435 21 6V18C21 18.7957 20.6839 19.5587 20.1213 20.1213C19.5587 20.6839 18.7957 21 18 21H6C5.20435 21 4.44129 20.6839 3.87868 20.1213C3.31607 19.5587 3 18.7956 3 18V6C3 5.20435 3.31607 4.44129 3.87868 3.87868ZM9 10.5C8.17157 10.5 7.5 11.1716 7.5 12C7.5 12.8284 8.17157 13.5 9 13.5C9.82843 13.5 10.5 12.8284 10.5 12C10.5 11.1716 9.82843 10.5 9 10.5ZM15 10.5C14.1716 10.5 13.5 11.1716 13.5 12C13.5 12.8284 14.1716 13.5 15 13.5C15.8284 13.5 16.5 12.8284 16.5 12C16.5 11.1716 15.8284 10.5 15 10.5Z" fill="gray"/>
                             </g>
                             <defs>
                                 <clipPath id="clip0_69_1199">
@@ -102,7 +102,7 @@
                             </defs>
                         </svg>
                     </div>
-                    <div class="truncate-text truncate w-full">
+                    <div class="truncate-text truncate w-full text-sm md:text-base">
                         ${chat.question}
                     </div>
                 </a>
@@ -133,7 +133,7 @@
     
     <style>
         body{
-            font-family: "Plus Jakarta Sans", sans-serif;;
+            font-family: "Plus Jakarta Sans", sans-serif;
         }
         
         .icon:hover path{
@@ -144,7 +144,7 @@
 </head>
 
 <body class="bg-white overflow-x-hidden dark:bg-[#1B1B21] text-black dark:text-white transition duration-75">
-    <aside id="default-sidebar" class="fixed bg-black top-0 left-0 z-40 w-[30rem] overflow-y-auto h-screen transition-transform -translate-x-full sm:translate-x-0 text-gray-400" aria-label="Sidebar">
+    <aside id="default-sidebar" class="fixed bg-black top-0 left-0 z-40 w-96 md:w-[30rem] overflow-y-auto h-screen transition-transform -translate-x-full sm:translate-x-0 text-gray-400" aria-label="Sidebar">
         <div class="flex justify-between m-10">
             <a href="">
                 <img src="../../public/image/hamburger.svg" class="bg-black hover:bg-slate-500" alt="">
@@ -164,7 +164,7 @@
         </section>
 
         <!--section riwayat chat-->
-        <section class="bg-[#1b1b21] p-10 m-10 rounded-md">
+        <section class="bg-[#1b1b21] p-10 m-10 rounded-md h-[40rem] overflow-y-auto">
             <div>
                 <p class="font-bold text-base mb-3">Terkini</p>
                 <ul id="chat-list" class="space-y-2 font-medium">
@@ -211,10 +211,8 @@
                     <!-- Toggle Dark Mode -->
                     <div class="flex items-center">
                         <label class="flex items-center">
-                            <span class="ml-3 hover:text-gray-900">Light</span>
                             <input type="checkbox" value="" class="sr-only peer" onclick="toggleMode()">
-                            <div class="relative mx-3 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                            <span class="hover:text-gray-900">Dark</span>
+                            <div class="relative mx-3 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-['🌞'] dark:after:content-['🌜'] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                         </label>
                     </div>             
                 </a>
@@ -223,7 +221,7 @@
     </aside>
      
     <div class=" sm:ml-[30rem]">
-        <header class="sticky top-0 ">
+        <header class="sticky top-0 sm:w-auto">
              <div class="flex justify-between items-center m-10">
                 <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class=" inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                     <span class="sr-only">Open sidebar</span>
@@ -231,9 +229,12 @@
                     <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
                     </svg>
                  </button>
-                <a href="../../index.html" class="flex items-center dark:bg-white bg-black p-1 px-4 rounded-full">
+                <a href="../../index.html" class="flex items-center border border-black/30 dark:border-white/30 bg-transparent p-1 px-4 rounded-full">
                     <img src="../../public/image/logo.svg" alt="Logo BIPA" class="h-8 mr-3">
-                    <p class="dark:text-black text-white dark:font-bold font-normal">Satria <span class="ml-1 text-red-800 font-bold dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r from-yellow-200 to-yellow-500">BIPA</span></p>
+                    <p class="dark:text-white text-black font-bold">
+                        Satria 
+                        <span class="ml-1 text-red-800 font-bold dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r from-yellow-200 to-yellow-500">BIPA</span>
+                    </p>
                 </a>
                 <a href="login.html" class="login text-base font-bold text-black hover:underline dark:text-white mr-10">Masuk</a>
               </div>
@@ -241,10 +242,10 @@
         <main class="mt-72">
             <div class="flex flex-col items-center">
                 <div class="flex">
-                    <img src="../../public/image/waving hand.png" class="mr-5" alt="">
+                    <img src="../../public/image/waving hand.png" class="mr-5 xl:h-16 " alt="">
                     <h1 class="text-3xl xl:mb-2 md:text-left text-center xl:text-6xl font-bold text-[#AE020B] dark:bg-clip-text dark:text-transparent pb-2 dark:bg-gradient-to-r from-yellow-500 via-yellow-200 to-yellow-500">Halo, {user}</h1>
                 </div>
-                <p>Apa yang Dapat Saya Bantu Anda hari ini?</p>
+                <p>Apa yang bisa saya bantu hari ini?</p>
             </div>
             <div class="flex justify-center my-14">
                 <a href="#" class="flex items-center p-6 w-60 bg-gray-700 hover:bg-gray-500 rounded-md ml-8 mr-8">
@@ -265,12 +266,12 @@
                 <a href="#" class="absolute right-4 top-1/2 transform -translate-y-1/2 mr-5"><img src="../../public/image/send.png" alt="Send Icon" class="h-6 w-6 hover:bg-slate-500"/></a>
             </div>            
           
-            <p class="text-center text-lg text-[#a1a1a1] mt-5 mb-10">
+            <p class="text-center mx-5 md:mx-0 text-sm  md:text-lg text-[#a1a1a1] mt-5 mb-10">
                 AI mungkin memberikan informasi yang salah, terutama mengenai individu, jadi penting untuk memverifikasi tanggapannya.
                 <a href="#" class="underline">Privasi dan Aplikasi Anda</a>.
             </p>
         </main>
-        <footer class="hidden lg:block p-5 z-20 bg-[#828282] text-white dark:bg-[#2E3032] dark:text-gray-200">
+        <footer class="hidden :block p-5 z-20 bg-[#828282] text-white dark:bg-[#2E3032] dark:text-gray-200">
             <div class="container z-20 mx-auto flex justify-between items-center">
               <div class="flex z-20 items-center space-x-2">
                 <img src="../../public/image/logo-bipa.png" alt="Logo BIPA" class="h-7 mr-3 sm:h-8 md:h-10" />
