@@ -42,28 +42,30 @@
             font-family: "Plus Jakarta Sans", sans-serif;;
         }
         
+        .icon-social path{
+            fill: white;
+        }
+
     </style>
 </head>
 
 <body class="min-h-screen overflow-x-hidden flex flex-col bg-white dark:bg-[#1B1B21] text-black dark:text-white transition duration-300">
-    <header class="sticky top-0 bg-white dark:bg-[#1B1B21] z-30">
-        <nav class="bg-white  dark:bg-gray-900 fixed w-full z-20 top-0 start-0">
-            <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="index.html" class="flex items-center dark:bg-white bg-black p-1 px-4 rounded-full">
-                    <img src="/public/image/logo.svg" alt="Logo BIPA" class="h-8 mr-3">
-                    <p class="dark:text-black text-white dark:font-bold font-normal">
+    <header class="sticky top-0 bg-white dark:bg-[#1B1B21] z-30 ">
+        <nav class="w-full bg-white  dark:bg-gray-900 fixed z-20 top-0 start-0 ">
+            <div class="flex flex-wrap items-center justify-between mx-auto p-4 xl:mx-32">
+                <a href="../../index.html" class="flex items-center border border-black/30 dark:border-white/30 bg-transparent p-1 px-4 rounded-full">
+                    <img src="../../public/image/logo.svg" alt="" class="h-8 ">
+                    <p class="dark:text-white text-black font-bold">
                         Satria 
                         <span class="ml-1 text-red-800 font-bold dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r from-yellow-200 to-yellow-500">BIPA</span>
                     </p>
-                </a> 
+                </a>                
                 <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <!-- Toggle Dark Mode -->
                     <div class="flex items-center">
                         <label class="flex items-center">
-                            <span class="ml-3 text-gray-900 dark:text-gray-300">Light</span>
                             <input type="checkbox" value="" class="sr-only peer" onclick="toggleMode()">
-                            <div class="relative mx-3 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                            <span class="text-gray-900 dark:text-gray-300">Dark</span>
+                            <div class="relative mx-3 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-['🌞'] dark:after:content-['🌜'] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
                         </label>
                     </div>
                     <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
@@ -76,51 +78,59 @@
                 <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                     <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-14 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
-                            <a href="../../index.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Beranda</a>
+                            <a href="../../index.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline hover:underline-offset-8 hover:duration-75">Beranda</a>
                         </li>
                         <li>
-                            <a href="opening.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Satria BIPA</a>
+                            <a href="opening.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline hover:underline-offset-8 hover:duration-75">Satria BIPA</a>
                         </li>
                         <li>
-                           <!-- <a href="aboutUs.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Arsitektur Satria BIPA</a> -->
-                        </li>
+                            <a href="aboutUs.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline hover:underline-offset-8 hover:duration-75">Arsitektur Satria BIPA</a>
+                        </li> 
                     </ul>
                 </div>
             </div>
-            <hr class=" border-0 h-[0.5px] bg-[#A2010B] 2xl:mx-32 ">
+            <hr class=" border-0 h-[1px] bg-[#A2010B] 2xl:mx-32 dark:bg-gradient-to-r from-yellow-200/50 to-yellow-500/50">
         </nav>
     </header>
     
     <main class="flex-grow">
-        <div class="z-0 w-[50rem] h-[31.25rem] dark:bg-yellow-500 rounded-full absolute blur-[5.625rem] dark:opacity-10 left-[-25rem] top-0 lg:w-[40rem] lg:h-[25rem] lg:left-[-20rem] md:w-[30rem] md:h-[18.75rem] md:left-[-15rem]"></div>
-        <div class="z-0 w-[56.25rem] h-[55.625rem] dark:bg-yellow-500 rounded-full absolute blur-[5.625rem] dark:opacity-10 right-[-25rem] top-1/2 lg:w-[48rem] lg:h-[45rem] lg:right-[-24rem] md:w-[36rem] md:h-[33.75rem] md:right-[-18rem]"></div>
-
-        <section class="my-40 z-10">
+        <div class="hidden md:block z-0 w-[50rem] h-[31.25rem] dark:bg-yellow-500 rounded-full absolute blur-[5.625rem] dark:opacity-10 left-[-25rem] top-0 lg:w-[40rem] lg:h-[25rem] lg:left-[-20rem] md:w-[30rem] md:h-[18.75rem] md:left-[-15rem]"></div>
+        <!--<div class="hidden md:block z-0 w-[56.25re] h-[55.625rem] dark:bg-yellow-500 rounded-full absolute blur-[5.625rem] dark:opacity-10 right-[-25rem] top-1/2 lg:w-[48rem] lg:h-[45rem] lg:right-[-24rem] md:w-[36rem] md:h-[33.75rem] md:right-[-18rem]"></div>
+        -->
+        <section class="my-28 z-10 ">
             <div class="flex flex-col items-center gap-3 z-10 text-center my-16">
-                <h1 class="text-5xl font-bold p-5 text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25] ">
+                <h1 class="text-xl md:text-3xl font-bold text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25] ">
                     Petunjuk Penggunaan Satria BIPA
                 </h1>
-                <p class="mx-44 text-[#1B1B21] text-center dark:text-[#6F6F73] text-3xl font-light leading-10">Silakan tonton video berikut sebagai panduan!</p>
+                <p class=" text-[#1B1B21] md:text-xl text-center dark:text-[#6F6F73] text-base font-light">Silakan tonton video berikut sebagai panduan!</p>
             </div>
             <div class="iframe-container w-full">
-                <iframe class="mx-auto aspect-video" width="100%" src="https://www.youtube.com/embed/r_mfyc-DEag?si=S_1hsQbUPc1M0Li4" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe class="mx-auto aspect-video" width="75%" src="https://www.youtube.com/embed/r_mfyc-DEag?si=S_1hsQbUPc1M0Li4" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
             </section>
     </main>
 
-    <footer class="p-6 z-20 bg-[#828282] text-white dark:bg-[#2E3032] dark:text-gray-200">
+    <footer class="w-full p-3 z-20 bg-[#828282] text-white dark:bg-[#2E3032] dark:text-gray-200">
         <div class="container z-20 mx-auto flex justify-between items-center">
-          <div class="flex z-20 items-center space-x-2">
-            <img src="../../public/image/logo-bipa.png" alt="Logo BIPA" class="h-10 mr-3">
-            <span>Hak Cipta Badan Pengembangan dan Pembinaan Bahasa © 2024</span>
+          <div class="flex z-20 items-center sm:ml-5 lg:ml-16">
+            <img src="../../public/image/logo-bipa.png" alt="Logo BIPA" class="h-7 mr-3 sm:h-8 md:h-10" />
+            <span class="text-[0.5rem] sm:text-base lg:text-lg">Hak Cipta Badan Pengembangan dan Pembinaan Bahasa © 2024</span>
           </div>
-          <div class="flex z-20 space-x-8">
+          <div class="flex z-20 space-x-3 items-center sm:mr-5 lg:mr-16">
             <a href="https://www.instagram.com/bipakemdikbud" class="hover:text-gray-400">
-                <i class="fab fa-instagram"><img src="../../public/image/instagram.png" alt="instagram logo" class="h-8"></i>
+                <i class="fab fa-instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="24" viewBox="0 0 24 24" class="w-7 h-5">
+                        <path fill="white" d="M 12 4 C 12 4 5.7455469 3.9999687 4.1855469 4.4179688 C 3.3245469 4.6479688 2.6479687 5.3255469 2.4179688 6.1855469 C 1.9999687 7.7455469 2 12 2 12 C 2 12 1.9999687 16.254453 2.4179688 17.814453 C 2.6479687 18.675453 3.3255469 19.352031 4.1855469 19.582031 C 5.7455469 20.000031 12 20 12 20 C 12 20 18.254453 20.000031 19.814453 19.582031 C 20.674453 19.352031 21.352031 18.674453 21.582031 17.814453 C 22.000031 16.254453 22 12 22 12 C 22 12 22.000031 7.7455469 21.582031 6.1855469 C 21.352031 5.3255469 20.674453 4.6479688 19.814453 4.4179688 C 18.254453 3.9999687 12 4 12 4 z M 12 6 C 14.882 6 18.490875 6.1336094 19.296875 6.3496094 C 19.465875 6.3946094 19.604391 6.533125 19.650391 6.703125 C 19.891391 7.601125 20 10.342 20 12 C 20 13.658 19.891391 16.397875 19.650391 17.296875 C 19.605391 17.465875 19.466875 17.604391 19.296875 17.650391 C 18.491875 17.866391 14.882 18 12 18 C 9.119 18 5.510125 17.866391 4.703125 17.650391 C 4.534125 17.605391 4.3956094 17.466875 4.3496094 17.296875 C 4.1086094 16.398875 4 13.658 4 12 C 4 10.342 4.1086094 7.6011719 4.3496094 6.7011719 C 4.3946094 6.5331719 4.533125 6.3946094 4.703125 6.3496094 C 5.508125 6.1336094 9.118 6 12 6 z M 10 8.5351562 L 10 15.464844 L 16 12 L 10 8.5351562 z"></path>
+                    </svg>
+                </i>
             </a>
             <a href="https://www.youtube.com/@bipakemdikbud" class="hover:text-gray-400">
-                <i class="fab fa-youtube"><img src="../../public/image/youtube.png" alt="youtube logo" class="h-8"></i>
-            </a>
+                <i class="fab fa-youtube">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24"  class="w-7 h-5">
+                        <path fill="white" d="M 8 3 C 5.243 3 3 5.243 3 8 L 3 16 C 3 18.757 5.243 21 8 21 L 16 21 C 18.757 21 21 18.757 21 16 L 21 8 C 21 5.243 18.757 3 16 3 L 8 3 z M 8 5 L 16 5 C 17.654 5 19 6.346 19 8 L 19 16 C 19 17.654 17.654 19 16 19 L 8 19 C 6.346 19 5 17.654 5 16 L 5 8 C 5 6.346 6.346 5 8 5 z M 17 6 A 1 1 0 0 0 16 7 A 1 1 0 0 0 17 8 A 1 1 0 0 0 18 7 A 1 1 0 0 0 17 6 z M 12 7 C 9.243 7 7 9.243 7 12 C 7 14.757 9.243 17 12 17 C 14.757 17 17 14.757 17 12 C 17 9.243 14.757 7 12 7 z M 12 9 C 13.654 9 15 10.346 15 12 C 15 13.654 13.654 15 12 15 C 10.346 15 9 13.654 9 12 C 9 10.346 10.346 9 12 9 z"></path>
+                    </svg>
+                </i>
+              </a>
           </div>
         </div>
     </footer>
