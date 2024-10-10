@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"  rel="stylesheet" />
+
     <script>
         tailwind.config = {
             darkMode: "class",
@@ -36,6 +39,14 @@
             }
         }
 
+        document.addEventListener('DOMContentLoaded', function () {
+            const burgerMenu = document.getElementById('burger-menu');
+            const navLinks = document.getElementById('navbar-default');
+
+            burgerMenu.addEventListener('click', () => {
+                navLinks.classList.toggle('hidden');
+            });
+        });
 
     </script>
     <style>
@@ -46,125 +57,136 @@
     </style>
 </head>
 
-<body class="bg-white overflow-x-hidden dark:bg-[#1B1B21] text-black dark:text-white transition duration-300">
+<body class="bg-white overflow-x-hidden dark:bg-[#1B1B21] text-black dark:text-white transition duration-75">
     <header class="sticky top-0 bg-white dark:bg-[#1B1B21] z-30">
-        <nav class="text-xl flex items-center justify-between p-10 lg:px-8 text-[#828282] w-full">
-            <div class="mx-32">
-                <a href="index.html">
-                    <img src="public/image/logo.png" alt="">
-                </a>
-            </div>
-            <div class="flex space-x-16 font-bold">
-                <a href="index.html" class="dark:text-white text-yellow-300">Beranda</a>
-                <a href="src/pages/opening.html" class="hover:text-slate-400 dark:hover:text-white">Satria BIPA</a>
-                <a href="src/pages/aboutUs.html" class="hover:text-slate-400 dark:hover:text-white">Arsitektur Satria BIPA</a>
-            </div>
-            <div class="mx-32">
-                <div class="text-center mt-5">
-                    <label class="inline-flex items-center mb-5 cursor-pointer">
-                        <span class="ms-3 text-gray-900 dark:text-gray-300">Light</span>
-                        <input 
-                            type="checkbox" 
-                            value="" 
-                            class="sr-only peer" 
-                            onclick="toggleMode()"
-                        >
-                        <div class="relative mx-3 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
-                        </div>
-                        <span class=" text-gray-900 dark:text-gray-300">Dark</span>
-                    </label>
+        <nav class="bg-white  dark:bg-gray-900 fixed w-full z-20 top-0 start-0">
+            <div class="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <a href="index.html" class="flex items-center dark:bg-white bg-black p-1 px-4 rounded-full">
+                    <img src="public/image/logo.svg" alt="Logo BIPA" class="h-8 mr-3">
+                    <p class="dark:text-black text-white dark:font-bold font-normal">
+                        Satria 
+                        <span class="ml-1 text-red-800 font-bold dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r from-yellow-200 to-yellow-500">BIPA</span>
+                    </p>
+                </a>                
+                <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                    <!-- Toggle Dark Mode -->
+                    <div class="flex items-center">
+                        <label class="flex items-center">
+                            <span class="ml-3 text-gray-900 dark:text-gray-300">Light</span>
+                            <input type="checkbox" value="" class="sr-only peer" onclick="toggleMode()">
+                            <div class="relative mx-3 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                            <span class="text-gray-900 dark:text-gray-300">Dark</span>
+                        </label>
+                    </div>
+                    <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+                    <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-14 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                        <li>
+                            <a href="index.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline hover:underline-offset-8 hover:duration-75">Beranda</a>
+                        </li>
+                        <li>
+                            <a href="src/pages/opening.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline hover:underline-offset-8 hover:duration-75">Satria BIPA</a>
+                        </li>
+                        <li>
+                            <!-- <a href="src/pages/aboutUs.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Arsitektur Satria BIPA</a> -->
+                        </li>
+                    </ul>
                 </div>
             </div>
+            <hr class=" border-0 h-[0.5px] bg-[#A2010B] 2xl:mx-32 ">
         </nav>
-        <hr class="border-0 h-[0.5px] bg-[#A2010B] mx-40">
     </header>
 
     <main>
-        <div class="z-0 w-[800px] h-[500px] dark:bg-yellow-500 rounded-[100%] absolute blur-[90px] dark:opacity-10 left-[-400px] top-0"></div>
-        <div class="z-0 w-[900px] h-[890px] dark:bg-yellow-500 rounded-[100%] absolute blur-[90px] dark:opacity-10 right-[-400px] top-[80%]"></div>
+        <div class="z-0 w-[50rem] h-[31.25rem] dark:bg-yellow-500 rounded-full absolute blur-[5.625rem] dark:opacity-10 left-[-25rem] top-0 lg:w-[40rem] lg:h-[25rem] lg:left-[-20rem] md:w-[30rem] md:h-[18.75rem] md:left-[-15rem]"></div>
+        <div   div class="z-0 w-[56.25rem] h-[55.625rem] dark:bg-yellow-500 rounded-full absolute blur-[5.625rem] dark:opacity-10 right-[-25rem] top-1/2 lg:w-[48rem] lg:h-[45rem] lg:right-[-24rem] md:w-[36rem] md:h-[33.75rem] md:right-[-18rem]"></div>
 
         <section class="scroll-mt-56">
-            <div class="my-16 z-20">
-                <div class="flex flex-row dark:bg-[#1B1B21] dark:bg-none bg-gradient-to-r from-[#EFEFEF]">
-                    <div class="my-10 mx-40 w-3/4 ">
-                        <h1 class="text-5xl font-bold p-5 mb-10 text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25] ">🙏 Selamat Datang!</h1>
-                        <p class="text-[#1B1B21] dark:text-[#6F6F73] text-2xl font-normal text-justify leading-10"> <span class="font-bold">Sahabat Tutur Berbahasa Indonesia (Satria) BIPA </span>adalah media pembelajaran interaktif dan inovatif yang memadukan <span class="italic">chatbot </span> berbasis kecerdasan buatan dalam pembelajaran BIPA. <span class="font-bold">Satria BIPA </span>
+            <div class="mt-20 mb-40 z-20">
+                <div class="flex flex-col md:flex-row-reverse md:mt-36 dark:bg-[#1B1B21] dark:bg-none mx-auto bg-gradient-to-r from-[#EFEFEF]">
+                    <div class="flex justify-center lg:mt-5 mt-14 md:w-1/3 xl:w-2/3">
+                        <img src="public/image/mascot.png" class="object-cover h-[20rem] md:h-[20rem] lg:h-[25rem] lg:w-[15rem] w-[12rem] xl:h-[30rem] xl:w-[25rem] xl:my-5" alt="Maskot Satria BIPA">
+                    </div>
+                    <div class="mx-3 md:mt-14 md:w-2/3 lg:mx-20 xl:ml-40 mb-5 md:mx-10  lg:flex lg:flex-col">
+                        <h1 class="flex text-3xl xl:mb-5 md:text-left text-center xl:text-5xl font-bold text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] pb-2 dark:via-[#FFEAA5] dark:to-[#FFCD25] "><img src="public/image/Folded Hands.png" class="mr-5" alt=""> Selamat Datang!</h1>
+                        <p class="mx-5 text-[#1B1B21] mt-3 text-base xl:text-2xl lg:text-lg dark:text-[#6F6F73] mx-3md:mt-3 md:mx-0 lg:mx-0 font-normal text-justify leading-loose"> <span class="font-bold">Sahabat Tutur Berbahasa Indonesia (Satria) BIPA </span>adalah media pembelajaran interaktif dan inovatif yang memadukan <span class="italic">chatbot </span> berbasis kecerdasan buatan dalam pembelajaran BIPA. <span class="font-bold">Satria BIPA </span>
                             dirancang agar dapat digunakan oleh semua pemelajar BIPA kapan saja dan dari mana saja. Anda dapat menggunakan Satria BIPA untuk memperkaya kosakata, berbicara dalam bahasa Indonesia, serta tata bahasa dalam bahasa Indonesia. Anda dapat menggunakan Satria BIPA sebagai mitra tutur untuk belajar BIPA. 
                             Satria BIPA menawarkan bentuk percakapan yang relevan dalam bahasa Indonesia serta erat dengan nilai-nilai budaya Indonesia.</p>
-                    </div>
-                    <div class="w-1/2 ml-16 mr-1">
-                        <img src="public/image/mascot.png" class="object-cover h-[542px] w-[387px]" alt="aaaaaa">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="min-h-screen p-8 scroll-mt-36">
-            <div class="flex z-20 flex-col items-center my-20">
+        <section class="min-h-screen scroll-mt-36 w-full">
+            <div class="lg:flex z-20 flex-col items-center">
                 <div>
-                    <h1 class=" text-5xl p-4 font-bold mb-10 text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25] ">Pengalaman Belajar BIPA dengan Cara Baru!</h1>
+                    <h1 class="text-3xl md:text-4xl xl:text-5xl text-center p-4 font-bold mb-5 text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25]">Pengalaman Belajar BIPA dengan Cara Baru!</h1>
                 </div>
-                <div class="flex flex-row ">
-                    <a href="src/pages/opening.html" class="text-xl rounded bg-[#A2010B] hover:bg-slate-700 text-white p-5 mr-8 dark:bg-gradient-to-r dark:from-[#8F8F8F33] dark:to-[#FFFFFF33] dark:bg-opacity-20 dark:hover:bg-zinc-300">
+                <div class="flex flex-row justify-center">
+                    <a href="src/pages/opening.html" class="text-center flex items-center text-xl rounded bg-[#A2010B] hover:bg-red-400 text-white xl:p-5 p-3 mr-8 dark:bg-gradient-to-r dark:from-[#8F8F8F33] dark:to-[#FFFFFF33] dark:bg-opacity-20 dark:hover:bg-zinc-300">
                         Coba Satria BIPA
                     </a>
-                    
+                    <!--
                     <a href="src/pages/aboutUs.html#video-BIPA" class="text-xl p-5 text-[#828282] hover:text-orange-400">
                         Tonton Video
-                    </a>                    
+                    </a>  
+                    -->                  
                 </div>
             </div>
-            <hr class="border-0 h-[0.5px] bg-[#A2010B] mx-40">
+            <hr class="border-0 h-[0.5px] bg-[#A2010B] 2xl:mx-32 mt-12">            
 
-            <div class="flex z-20 flex-col items-center mt-36">
-                <h1 class="items-center text-5xl font-bold mb-20 text-[#AE020B] dark:bg-clip-text p-5 dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25] ">Layanan Satria BIPA</h1>
+            <div class="flex z-20 flex-col items-center mt-28 mb-10">
+                <h1 class="text-3xl md:text-4xl xl:text-5xl text-center p-4 font-bold mb-5 text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25]">Layanan Satria BIPA</h1>
                 <div class="flex flex-col w-full z-20">
-                    <div class="flex flex-row bg-[#F0F0F0] z-20 dark:bg-[#0a0a0c] mx-40 mb-10">
-                        <div class="rounded-lg bg-white m-7 flex-shrink-0">
-                            <img src="public/image/mascot.png" class="object-cover h-[200px] w-[170px]" alt="">
+                    <div class="flex flex-row z-20 p-2 bg-[#F0F0F0] dark:bg-[#0a0a0c] sm:mx-7 md:mx-10 lg:mx-20 xl:mx-36 mx-5 mb-10">
+                        <div class="rounded-lg bg-white m-5 flex-shrink-0">
+                            <img src="public/image/mascot.png" class="object-cover h-[7rem] w-[7rem] lg:h-[10rem] lg:w-[10rem]" alt="">
                         </div>
-                        <div class="flex flex-col justify-center ml-10">
-                            <h2 class="dark:text-white text-3xl font-bold text-black mb-2">1. Pengenalan Budaya dengan Pembelajaran BIPA</h2>
-                            <p class="dark:text-[#828282] text-black font-light text-2xl">Memberikan wawasan dan informasi tentang berbagai tradisi, adat istiadat, dan nilai-nilai budaya Indonesia.</p>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-row bg-[#F0F0F0] z-20  dark:bg-[#0a0a0c] mx-40 mb-10">
-                        <div class="rounded-lg bg-white m-7 flex-shrink-0">
-                            <img src="public/image/mascot.png" class="object-cover h-[200px] w-[170px]" alt="">
-                        </div>
-                        <div class="flex flex-col justify-center ml-10">
-                            <h2 class="dark:text-white text-3xl font-bold text-black mb-2">2. Rekomendasi Tingkat Pembelajaran</h2>
-                            <p class="dark:text-[#828282] text-black font-light text-2xl">Menyarankan metode pembelajaran populer, penyesuaian tingkat kesulitan, dan kiat pembelajaran bahasa Indonesia.</p>
+                        <div class="flex flex-col justify-center xl:ml-20">
+                            <h2 class="dark:text-white md:text-xl lg:text-2xl xl:text-3xl text-lg font-bold text-black">1. Pengenalan Budaya dengan Pembelajaran BIPA</h2>
+                            <p class="dark:text-[#828282] mr-2 md:mr-10 lg:mr-16 text-justify md:text-lg lg:text-xl xl:text-2xl text-black font-light text-base">Memberikan wawasan dan informasi tentang berbagai tradisi, adat istiadat, dan nilai-nilai budaya Indonesia.</p>
                         </div>
                     </div>
 
-                    <div class="flex flex-row bg-[#F0F0F0] z-20 dark:bg-[#0a0a0c] mx-40 mb-5">
-                        <div class="rounded-lg bg-white m-7 flex-shrink-0">
-                            <img src="public/image/mascot.png" class="object-cover h-[200px] w-[170px]" alt="">
+                    <div class="flex flex-row z-20 p-2 bg-[#F0F0F0] dark:bg-[#0a0a0c] sm:mx-7 md:mx-10 lg:mx-20 xl:mx-36 mx-5 mb-10">
+                        <div class="rounded-lg bg-white m-5 flex-shrink-0">
+                            <img src="public/image/mascot.png" class="object-cover h-[7rem] w-[7rem] lg:h-[10rem] lg:w-[10rem]" alt="">
                         </div>
-                        <div class="flex flex-col justify-center ml-10">
-                            <h2 class="dark:text-white text-3xl font-bold text-black mb-2">3. Percakapan Bahasa Indonesia</h2>
-                            <p class="dark:text-[#828282] text-black font-light text-2xl">Latihan berbentuk percakapan  alami dalam Bahasa Indonesia, untuk meningkatkan kepercayaan diri dalam berbahasa Indonesia</p>
+                        <div class="flex flex-col justify-center xl:ml-20">
+                            <h2 class="dark:text-white md:text-xl lg:text-2xl xl:text-3xl text-lg font-bold text-black">2. Rekomendasi Tingkat Pembelajaran</h2>
+                            <p class="dark:text-[#828282] mr-2 md:mr-10 lg:mr-16 text-justify md:text-lg lg:text-xl xl:text-2xl text-black font-light text-base">Menyarankan metode pembelajaran populer, penyesuaian tingkat kesulitan, dan kiat pembelajaran bahasa Indonesia.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-row z-20 p-2 bg-[#F0F0F0] dark:bg-[#0a0a0c] sm:mx-7 md:mx-10 lg:mx-20 xl:mx-36 mx-5 mb-10">
+                        <div class="rounded-lg bg-white m-5 flex-shrink-0">
+                            <img src="public/image/mascot.png" class="object-cover h-[7rem] w-[7rem] lg:h-[10rem] lg:w-[10rem]" alt="">
+                        </div>
+                        <div class="flex flex-col justify-center xl:ml-20">
+                            <h2 class="dark:text-white md:text-xl lg:text-2xl xl:text-3xl text-lg font-bold text-black">3. Percakapan Bahasa Indonesia</h2>
+                            <p class="dark:text-[#828282] mr-2 md:mr-10 lg:mr-16 text-justify md:text-lg lg:text-xl xl:text-2xl text-black font-light text-base">Latihan berbentuk percakapan  alami dalam Bahasa Indonesia, untuk meningkatkan kepercayaan diri dalam berbahasa Indonesia.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>   
-        <div class="relative">
-            <div class="absolute bottom-[-80px] right-[-400px] z-0 w-[700px] h-[250px] dark:opacity-10 dark:bg-yellow-500 rounded-[100%] blur-[90px]"></div>
-        </div>
     </main>
 
-    <footer class="p-6 z-20 bg-[#828282] text-white dark:bg-[#2E3032] dark:text-gray-200">
+    <footer class="hidden lg:block p-5 z-20 bg-[#828282] text-white dark:bg-[#2E3032] dark:text-gray-200">
         <div class="container z-20 mx-auto flex justify-between items-center">
           <div class="flex z-20 items-center space-x-2">
-            <img src="public/image/logo.png" alt="Logo BIPA" class="h-10 mr-3">
+            <img src="public/image/logo-bipa.png" alt="Logo BIPA" class="h-7 mr-3 sm:h-8 md:h-10" />
             <span>Hak Cipta Badan Pengembangan dan Pembinaan Bahasa © 2024</span>
           </div>
           <div class="flex z-20 space-x-8">
             <a href="https://www.instagram.com/bipakemdikbud" class="hover:text-gray-400">
-                <i class="fab fa-medium"><img src="public/image/instagram.png" alt="instagram logo" class="h-8"></i>
+                <i class="fab fa-instagram"><img src="public/image/instagram.png" alt="instagram logo" class="h-8"></i>
             </a>
             <a href="https://www.youtube.com/@bipakemdikbud" class="hover:text-gray-400">
                 <i class="fab fa-youtube"><img src="public/image/youtube.png" alt="youtube logo" class="h-8"></i>
@@ -172,7 +194,5 @@
           </div>
         </div>
     </footer>
-    
 </body>
-
 </html>
