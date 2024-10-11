@@ -61,6 +61,39 @@
         const popup = document.getElementById(popupId);
         popup.classList.toggle('hidden');
       }
+
+      document.addEventListener("DOMContentLoaded", function() {
+        const countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
+                      "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia",
+                      "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon",
+                      "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia",
+                      "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt",
+                      "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia",
+                      "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary",
+                      "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan", 
+                      "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", 
+                      "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands",
+                      "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique",
+                      "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", 
+                      "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", 
+                      "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", 
+                      "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", 
+                      "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", 
+                      "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", 
+                      "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", 
+                      "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"];
+
+        // Ambil elemen dropdown
+        const countrySelect = document.getElementById("country");
+
+        // Loop untuk menambahkan opsi negara ke dalam dropdown
+        countries.forEach(country => {
+          let option = document.createElement("option");
+          option.value = country;
+          option.textContent = country;
+          countrySelect.appendChild(option);
+        });
+      });
     </script>
     <style>
       body {
@@ -108,9 +141,6 @@
                       <li>
                           <a href="opening.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline hover:underline-offset-8 hover:duration-75">Satria BIPA</a>
                       </li>
-                      <li>
-                          <a href="aboutUs.html" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline hover:underline-offset-8 hover:duration-75">Arsitektur Satria BIPA</a>
-                      </li> 
                   </ul>
               </div>
           </div>
@@ -129,60 +159,54 @@
         <span class="text-sm text-gray-700 dark:text-gray-300">Dark</span>
       </div>
   
-      <!-- LOGIN POPUP START -->
+      <!-- LOGIN BOX START -->
       <div class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
-        <div>
-          <label for="login" class="cursor-pointer text-xl font-bold text-black dark:text-white"><span class="hover:text-yellow-300">Login </span> / <span class="hover:text-yellow-300"> Register</span></label>
-        </div>
-        <input type="checkbox" id="login" class="peer fixed appearance-none opacity-0" />
-        <label for="login" class="pointer-events-none invisible fixed inset-0 flex cursor-pointer items-center justify-center bg-black/50 opacity-0 transition-all peer-checked:pointer-events-auto peer-checked:visible peer-checked:opacity-100">
-          <label class="max-h-[calc(100vh-5em)] h-fit max-w-lg overflow-y-auto rounded-xl bg-white dark:bg-[#1B1B21] p-6 shadow-2xl">
+        <div class="mx-2 max-h-[calc(100vh-5em)] border border-black/30 dark:border-white/50 h-fit max-w-lg overflow-y-auto rounded-xl bg-white dark:bg-[#1B1B21] p-6 shadow-2xl">
             <h1 class="text-right text-2xl text-[#6F6F73]"><i class="ri-close-fill"></i></h1>
             <h3 class="text-center font-bold text-xl pt-8">Selamat Datang</h3>
             <p class="text-center text-gray-400 text-sm pt-2">Masuk atau daftar ke akun Anda</p>
-  
+
             <!-- Masuk and Daftar Buttons -->
             <div class="my-5 font-semibold ">
-              <a href="#" onclick="togglePopup('login-popup')" class="login-btn w-full py-4 text-black bg-gray-200 rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white dark:bg-white dark:hover:bg-slate-500 dark:hover:text-white">
-                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g clip-path="url(#clip0_401_862)">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 3C4.70435 3 3.94129 3.31607 3.37868 3.87868C2.81607 4.44129 2.5 5.20435 2.5 6V18C2.5 18.7956 2.81607 19.5587 3.37868 20.1213C3.94129 20.6839 4.70435 21 5.5 21H12.5C13.2957 21 14.0587 20.6839 14.6213 20.1213C15.1839 19.5587 15.5 18.7957 15.5 18V16C15.5 15.4477 15.0523 15 14.5 15C13.9477 15 13.5 15.4477 13.5 16V18C13.5 18.2652 13.3946 18.5196 13.2071 18.7071C13.0196 18.8946 12.7652 19 12.5 19H5.5C5.23478 19 4.98043 18.8946 4.79289 18.7071C4.60536 18.5196 4.5 18.2652 4.5 18V6C4.5 5.73478 4.60536 5.48043 4.79289 5.29289C4.98043 5.10536 5.23478 5 5.5 5H12.5C12.7652 5 13.0196 5.10536 13.2071 5.29289C13.3946 5.48043 13.5 5.73478 13.5 6V8C13.5 8.55228 13.9477 9 14.5 9C15.0523 9 15.5 8.55228 15.5 8V6C15.5 5.20435 15.1839 4.44129 14.6213 3.87868C14.0587 3.31607 13.2956 3 12.5 3H5.5ZM11.2071 9.70711C11.5976 9.31658 11.5976 8.68342 11.2071 8.29289C10.8166 7.90237 10.1834 7.90237 9.79289 8.29289L6.79289 11.2929C6.40237 11.6834 6.40237 12.3166 6.79289 12.7071L9.79289 15.7071C10.1834 16.0976 10.8166 16.0976 11.2071 15.7071C11.5976 15.3166 11.5976 14.6834 11.2071 14.2929L9.91421 13H20.5C21.0523 13 21.5 12.5523 21.5 12C21.5 11.4477 21.0523 11 20.5 11H9.91421L11.2071 9.70711Z" fill="#212121"/>
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_401_862">
-                      <rect width="24" height="24" fill="white" transform="translate(0.5)"/>
-                    </clipPath>
-                  </defs>
-                </svg>
-                <i class="ri-login-box-line mr-4 text-xl"></i> Masuk
-              </a>              
+                <a onclick="togglePopup('login-popup')" class="login-btn w-full py-4 text-black bg-gray-200 rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white dark:bg-white dark:hover:bg-slate-500 dark:hover:text-white">
+                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_401_862)">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 3C4.70435 3 3.94129 3.31607 3.37868 3.87868C2.81607 4.44129 2.5 5.20435 2.5 6V18C2.5 18.7956 2.81607 19.5587 3.37868 20.1213C3.94129 20.6839 4.70435 21 5.5 21H12.5C13.2957 21 14.0587 20.6839 14.6213 20.1213C15.1839 19.5587 15.5 18.7957 15.5 18V16C15.5 15.4477 15.0523 15 14.5 15C13.9477 15 13.5 15.4477 13.5 16V18C13.5 18.2652 13.3946 18.5196 13.2071 18.7071C13.0196 18.8946 12.7652 19 12.5 19H5.5C5.23478 19 4.98043 18.8946 4.79289 18.7071C4.60536 18.5196 4.5 18.2652 4.5 18V6C4.5 5.73478 4.60536 5.48043 4.79289 5.29289C4.98043 5.10536 5.23478 5 5.5 5H12.5C12.7652 5 13.0196 5.10536 13.2071 5.29289C13.3946 5.48043 13.5 5.73478 13.5 6V8C13.5 8.55228 13.9477 9 14.5 9C15.0523 9 15.5 8.55228 15.5 8V6C15.5 5.20435 15.1839 4.44129 14.6213 3.87868C14.0587 3.31607 13.2956 3 12.5 3H5.5ZM11.2071 9.70711C11.5976 9.31658 11.5976 8.68342 11.2071 8.29289C10.8166 7.90237 10.1834 7.90237 9.79289 8.29289L6.79289 11.2929C6.40237 11.6834 6.40237 12.3166 6.79289 12.7071L9.79289 15.7071C10.1834 16.0976 10.8166 16.0976 11.2071 15.7071C11.5976 15.3166 11.5976 14.6834 11.2071 14.2929L9.91421 13H20.5C21.0523 13 21.5 12.5523 21.5 12C21.5 11.4477 21.0523 11 20.5 11H9.91421L11.2071 9.70711Z" fill="#212121"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_401_862">
+                                <rect width="24" height="24" fill="white" transform="translate(0.5)"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <i class="ri-login-box-line mr-4 text-xl"></i> Masuk
+                </a>              
             </div>
 
             <div class="my-5 font-semibold">
-              <a href="#" onclick="togglePopup('register-popup')" class="w-full py-4 border border-black dark:bg-gray-700 dark:border-yellow-500/20 dark:text-yellow-400 text-black bg-white rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white dark:hover:bg-slate-500 dark:hover:text-white">
-                <i class="ri-user-add-line mr-4 text-xl"></i> Daftar
-              </a>              
+                <a onclick="togglePopup('register-popup')" class="w-full py-4 border border-black dark:bg-gray-700 dark:border-yellow-500/20 dark:text-yellow-400 text-black bg-white rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white dark:hover:bg-slate-500 dark:hover:text-white">
+                    <i class="ri-user-add-line mr-4 text-xl"></i> Daftar
+                </a>              
             </div>
-  
+
             <hr class="border-primary border-black dark:border-primarydark2" />
             <div class="my-5 font-semibold">
-              <a href="chatAI.html" class="w-full py-4 text-black bg-gray-200 rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white">
-                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="-0.5 0 48 48" version="1.1"> <title>Google-color</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Color-" transform="translate(-401.000000, -860.000000)"> <g id="Google" transform="translate(401.000000, 860.000000)"> <path d="M9.82727273,24 C9.82727273,22.4757333 10.0804318,21.0144 10.5322727,19.6437333 L2.62345455,13.6042667 C1.08206818,16.7338667 0.213636364,20.2602667 0.213636364,24 C0.213636364,27.7365333 1.081,31.2608 2.62025,34.3882667 L10.5247955,28.3370667 C10.0772273,26.9728 9.82727273,25.5168 9.82727273,24" id="Fill-1" fill="#FBBC05"> </path> <path d="M23.7136364,10.1333333 C27.025,10.1333333 30.0159091,11.3066667 32.3659091,13.2266667 L39.2022727,6.4 C35.0363636,2.77333333 29.6954545,0.533333333 23.7136364,0.533333333 C14.4268636,0.533333333 6.44540909,5.84426667 2.62345455,13.6042667 L10.5322727,19.6437333 C12.3545909,14.112 17.5491591,10.1333333 23.7136364,10.1333333" id="Fill-2" fill="#EB4335"> </path> <path d="M23.7136364,37.8666667 C17.5491591,37.8666667 12.3545909,33.888 10.5322727,28.3562667 L2.62345455,34.3946667 C6.44540909,42.1557333 14.4268636,47.4666667 23.7136364,47.4666667 C29.4455,47.4666667 34.9177955,45.4314667 39.0249545,41.6181333 L31.5177727,35.8144 C29.3995682,37.1488 26.7323182,37.8666667 23.7136364,37.8666667" id="Fill-3" fill="#34A853"> </path> <path d="M46.1454545,24 C46.1454545,22.6133333 45.9318182,21.12 45.6113636,19.7333333 L23.7136364,19.7333333 L23.7136364,28.8 L36.3181818,28.8 C35.6879545,31.8912 33.9724545,34.2677333 31.5177727,35.8144 L39.0249545,41.6181333 C43.3393409,37.6138667 46.1454545,31.6490667 46.1454545,24" id="Fill-4" fill="#4285F4"> </path> </g> </g> </g> </svg>
-                <i class="ri-login-box-line mr-4 text-xl"></i> Lanjutkan dengan Google
-              </a>
+                <a href="chatAI.html" class="w-full py-4 text-black bg-gray-200 rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="-0.5 0 48 48" version="1.1"> <title>Google-color</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Color-" transform="translate(-401.000000, -860.000000)"> <g id="Google" transform="translate(401.000000, 860.000000)"> <path d="M9.82727273,24 C9.82727273,22.4757333 10.0804318,21.0144 10.5322727,19.6437333 L2.62345455,13.6042667 C1.08206818,16.7338667 0.213636364,20.2602667 0.213636364,24 C0.213636364,27.7365333 1.081,31.2608 2.62025,34.3882667 L10.5247955,28.3370667 C10.0772273,26.9728 9.82727273,25.5168 9.82727273,24" id="Fill-1" fill="#FBBC05"> </path> <path d="M23.7136364,10.1333333 C27.025,10.1333333 30.0159091,11.3066667 32.3659091,13.2266667 L39.2022727,6.4 C35.0363636,2.77333333 29.6954545,0.533333333 23.7136364,0.533333333 C14.4268636,0.533333333 6.44540909,5.84426667 2.62345455,13.6042667 L10.5322727,19.6437333 C12.3545909,14.112 17.5491591,10.1333333 23.7136364,10.1333333" id="Fill-2" fill="#EB4335"> </path> <path d="M23.7136364,37.8666667 C17.5491591,37.8666667 12.3545909,33.888 10.5322727,28.3562667 L2.62345455,34.3946667 C6.44540909,42.1557333 14.4268636,47.4666667 23.7136364,47.4666667 C29.4455,47.4666667 34.9177955,45.4314667 39.0249545,41.6181333 L31.5177727,35.8144 C29.3995682,37.1488 26.7323182,37.8666667 23.7136364,37.8666667" id="Fill-3" fill="#34A853"> </path> <path d="M46.1454545,24 C46.1454545,22.6133333 45.9318182,21.12 45.6113636,19.7333333 L23.7136364,19.7333333 L23.7136364,28.8 L36.3181818,28.8 C35.6879545,31.8912 33.9724545,34.2677333 31.5177727,35.8144 L39.0249545,41.6181333 C43.3393409,37.6138667 46.1454545,31.6490667 46.1454545,24" id="Fill-4" fill="#4285F4"> </path> </g> </g> </g> </svg>
+                    <i class="ri-login-box-line mr-4 text-xl"></i> Lanjutkan dengan Google
+                </a>
             </div>
-  
+
             <!-- Terms and Conditions -->
             <div class="mt-4 text-center text-sm text-gray-500 dark:text-gray-200">
-              Dengan melanjutkan, anda menyetujui <a href="#" class=" font-bold text-red-800 dark:text-yellow-400 hover:underline hover:duration-100 hover:text-blue-700">Syarat dan Ketentuan</a>
+                Dengan melanjutkan, anda menyetujui <a href="#" class=" font-bold text-red-800 dark:text-yellow-400 hover:underline hover:duration-100 hover:text-blue-700">Syarat dan Ketentuan</a>
             </div>
-          </label>
-        </label>
+        </div>
       </div>
 
       <!-- Popup for Login -->
       <div id="login-popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-white dark:bg-[#1B1B21] p-6 rounded-lg shadow-lg w-full max-w-lg">
+        <div class="bg-white mx-3 border dark:border-white/50  dark:bg-[#1B1B21] p-6 rounded-lg shadow-lg w-full max-w-lg">
           <h2 class="text-2xl font-bold mb-4 text-center">Login</h2>
           <form>
             <div class="mb-4">
@@ -195,7 +219,7 @@
             </div>
             <div class="flex justify-between items-center">
               <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Login</button>
-              <button type="button" onclick="togglePopup('login-popup')" class="text-red-600 hover:underline">Cancel</button>
+              <button type="button" onclick="togglePopup('login-popup')" class="text-red-600 dark:text-white  hover:underline">Cancel</button>
             </div>
           </form>
         </div>
@@ -203,7 +227,7 @@
 
       <!-- Popup for Register -->
       <div id="register-popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-white dark:bg-[#1B1B21] p-6 rounded-lg shadow-lg w-full max-w-lg">
+        <div class="bg-white border dark:border-white/50  mx-3 mt-5 dark:bg-[#1B1B21] p-6 rounded-lg shadow-lg w-full max-w-lg">
           <h2 class="text-2xl font-bold mb-4 text-center">Register</h2>
           <form>
             <div class="mb-4">
@@ -219,17 +243,25 @@
               <input type="password" id="register-password" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
             </div>
             <div class="mb-4">
+              <label for="country" class="block text-sm font-medium">Asal Negara</label>
+              <select id="country" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required>
+                <option value="">Pilih Negara</option>
+                <!-- Option negara akan diisi secara otomatis menggunakan JavaScript -->
+              </select>
+            </div>
+            <div class="mb-4">
               <label for="confirm-password" class="block text-sm font-medium">Confirm Password</label>
               <input type="password" id="confirm-password" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
             </div>
             <div class="flex justify-between items-center">
               <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Register</button>
-              <button type="button" onclick="togglePopup('register-popup')" class="text-red-600 hover:underline">Cancel</button>
+              <button type="button" onclick="togglePopup('register-popup')" class="text-red-600 dark:text-white hover:underline">Cancel</button>
             </div>
           </form>
         </div>
       </div>
     </main>  
+
     <footer class="w-full p-3 z-20 bg-[#828282] text-white dark:bg-[#2E3032] dark:text-gray-200">
       <div class="container z-20 mx-auto flex justify-between items-center">
         <div class="flex z-20 items-center sm:ml-5 lg:ml-16">
