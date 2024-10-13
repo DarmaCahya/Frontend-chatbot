@@ -57,11 +57,16 @@
         });
       });
       
-      function togglePopup(popupId) {
-        const popup = document.getElementById(popupId);
-        popup.classList.toggle('hidden');
+      function showLoginForm() {
+        document.getElementById('register-form').classList.add('hidden');
+        document.getElementById('login-form').classList.remove('hidden');
+        document.getElementById('welcome-section').classList.remove('hidden'); // Tampilkan welcome message kembali
       }
-
+      function showRegisterForm() {
+        document.getElementById('login-form').classList.add('hidden');
+        document.getElementById('register-form').classList.remove('hidden');
+        document.getElementById('welcome-section').classList.add('hidden'); // Sembunyikan welcome message
+      }
       document.addEventListener("DOMContentLoaded", function() {
         const countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
                       "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia",
@@ -148,118 +153,101 @@
       </nav>
   </header>
   
-    <main class="flex-grow">
-      <div class="flex items-center space-x-4">
-        <span class="text-sm text-gray-700 dark:text-gray-300">Light</span>
-        <label for="darkModeToggle" class="relative inline-block w-10 h-6">
-          <input type="checkbox" id="darkModeToggle" class="sr-only" />
-          <div class="block bg-gray-600 dark:bg-gray-300 w-10 h-6 rounded-full"></div>
-          <div class="dot absolute left-1 top-1 bg-white dark:bg-black w-4 h-4 rounded-full transition"></div>
-        </label>
-        <span class="text-sm text-gray-700 dark:text-gray-300">Dark</span>
-      </div>
+  <main class="flex-grow">
+    <div class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
+      <div class="mx-2 mb-10 mt-24 border border-black/30 dark:border-white/50 h-fit max-w-lg overflow-y-auto rounded-xl bg-white dark:bg-[#1B1B21] p-6 shadow-2xl">
+        <div id="welcome-section">
+          <h3 class="text-center font-bold text-xl pt-8">Selamat Datang</h3>
+          <p class="text-center text-gray-400 text-sm pt-2">Masuk ke Akun Anda atau Daftar Akun Baru</p>
+        </div>
   
-      <!-- LOGIN BOX START -->
-      <div class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
-        <div class="mx-2 max-h-[calc(100vh-5em)] border border-black/30 dark:border-white/50 h-fit max-w-lg overflow-y-auto rounded-xl bg-white dark:bg-[#1B1B21] p-6 shadow-2xl">
-            <h1 class="text-right text-2xl text-[#6F6F73]"><i class="ri-close-fill"></i></h1>
-            <h3 class="text-center font-bold text-xl pt-8">Selamat Datang</h3>
-            <p class="text-center text-gray-400 text-sm pt-2">Masuk ke Akun Anda atau Daftar Akun Baru</p>
-  
-            <!-- Masuk and Daftar Buttons -->
-            <div class="my-5 font-semibold ">
-                <a onclick="togglePopup('login-popup')" class="login-btn w-full py-4 text-black bg-gray-200 rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white dark:bg-white dark:hover:bg-slate-500 dark:hover:text-white">
-                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_401_862)">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 3C4.70435 3 3.94129 3.31607 3.37868 3.87868C2.81607 4.44129 2.5 5.20435 2.5 6V18C2.5 18.7956 2.81607 19.5587 3.37868 20.1213C3.94129 20.6839 4.70435 21 5.5 21H12.5C13.2957 21 14.0587 20.6839 14.6213 20.1213C15.1839 19.5587 15.5 18.7957 15.5 18V16C15.5 15.4477 15.0523 15 14.5 15C13.9477 15 13.5 15.4477 13.5 16V18C13.5 18.2652 13.3946 18.5196 13.2071 18.7071C13.0196 18.8946 12.7652 19 12.5 19H5.5C5.23478 19 4.98043 18.8946 4.79289 18.7071C4.60536 18.5196 4.5 18.2652 4.5 18V6C4.5 5.73478 4.60536 5.48043 4.79289 5.29289C4.98043 5.10536 5.23478 5 5.5 5H12.5C12.7652 5 13.0196 5.10536 13.2071 5.29289C13.3946 5.48043 13.5 5.73478 13.5 6V8C13.5 8.55228 13.9477 9 14.5 9C15.0523 9 15.5 8.55228 15.5 8V6C15.5 5.20435 15.1839 4.44129 14.6213 3.87868C14.0587 3.31607 13.2956 3 12.5 3H5.5ZM11.2071 9.70711C11.5976 9.31658 11.5976 8.68342 11.2071 8.29289C10.8166 7.90237 10.1834 7.90237 9.79289 8.29289L6.79289 11.2929C6.40237 11.6834 6.40237 12.3166 6.79289 12.7071L9.79289 15.7071C10.1834 16.0976 10.8166 16.0976 11.2071 15.7071C11.5976 15.3166 11.5976 14.6834 11.2071 14.2929L9.91421 13H20.5C21.0523 13 21.5 12.5523 21.5 12C21.5 11.4477 21.0523 11 20.5 11H9.91421L11.2071 9.70711Z" fill="#212121"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_401_862">
-                                <rect width="24" height="24" fill="white" transform="translate(0.5)"/>
-                            </clipPath>
-                        </defs>
-                    </svg>
+          <!-- Form Login -->
+          <div id="login-form">
+            <div class="my-5 font-semibold">
+              <form>
+                <h2 class="text-2xl font-bold mb-4 text-center">Masuk</h2>
+                <div class="mb-4">
+                  <label for="email" class="block text-sm font-medium">Pos-el (<span class="italic">Email</span>)</label>
+                  <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
+                </div>
+                <div class="mb-4">
+                  <label for="password" class="block text-sm font-medium">Sandi</label>
+                  <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
+                </div>
+                <div class="my-5 font-semibold">
+                  <button class="login-btn w-full py-4 text-black bg-gray-200 rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white dark:bg-white dark:hover:bg-slate-500 dark:hover:text-white">
                     <i class="ri-login-box-line mr-4 text-xl"></i> Masuk
-                </a>              
+                  </button>
+                </div>
+              </form>
             </div>
-
+  
+            <div class="mt-4">
+              <p>
+                Belum memiliki akun?
+                <button type="button" onclick="showRegisterForm()" class="text-sm text-gray-500 mb-5 font-bold dark:text-gray-200 hover:underline underline hover:text-blue-600 dark:hover:text-blue-600 "> Daftar</button>
+                </p>
+            </div>
+          </div>
+  
+          <!-- Form Register (Hidden by default) -->
+          <div id="register-form" class="hidden">
             <div class="my-5 font-semibold">
-                <a onclick="togglePopup('register-popup')" class="w-full py-4 border border-black dark:bg-gray-700 dark:border-yellow-500/20 dark:text-yellow-400 text-black bg-white rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white dark:hover:bg-slate-500 dark:hover:text-white">
+              <form>
+                <h2 class="text-2xl font-bold mb-4 text-center">Daftar</h2>
+                <div class="mb-4">
+                  <label for="username" class="block text-sm font-medium">Nama Pengguna</label>
+                  <input type="text" id="username" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
+                </div>
+                <div class="mb-4">
+                  <label for="register-email" class="block text-sm font-medium">Pos-el (<span class="italic">Email</span>)</label>
+                  <input type="email" id="register-email" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
+                </div>
+                <div class="mb-4">
+                  <label for="country" class="block text-sm font-medium">Asal Negara</label>
+                  <select id="country" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required>
+                    <option value="">Pilih Negara</option>
+                    <!-- List of countries will be populated here -->
+                  </select>
+                </div>
+                <div class="mb-4">
+                  <label for="register-password" class="block text-sm font-medium">Sandi</label>
+                  <input type="password" id="register-password" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
+                </div>
+                <div class="mb-4">
+                  <label for="confirm-password" class="block text-sm font-medium">Ulangi Sandi</label>
+                  <input type="password" id="confirm-password" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
+                </div>
+                <div class="my-5 font-semibold">
+                  <button class="w-full py-4 border border-black dark:bg-gray-700 dark:border-yellow-500/20 dark:text-yellow-400 text-black bg-white rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white dark:hover:bg-slate-500 dark:hover:text-white">
                     <i class="ri-user-add-line mr-4 text-xl"></i> Daftar
-                </a>              
+                  </button>
+                </div>
+                <div class="mt-4">
+                  <p>
+                    Sudah memiliki akun?
+                    <button type="button" onclick="showLoginForm()" class="text-sm text-gray-500 font-bold dark:text-gray-200 hover:underline underline hover:text-blue-600 dark:hover:text-blue-600 ">Masuk</button>
+                  </p>
+                </div>
+              </form>
             </div>
-
-            <hr class="border-primary border-black dark:border-primarydark2" />
-            <div class="my-5 font-semibold">
-                <a href="chatAI.html" class="w-full py-4 text-black bg-gray-200 rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white">
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="-0.5 0 48 48" version="1.1"> <title>Google-color</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Color-" transform="translate(-401.000000, -860.000000)"> <g id="Google" transform="translate(401.000000, 860.000000)"> <path d="M9.82727273,24 C9.82727273,22.4757333 10.0804318,21.0144 10.5322727,19.6437333 L2.62345455,13.6042667 C1.08206818,16.7338667 0.213636364,20.2602667 0.213636364,24 C0.213636364,27.7365333 1.081,31.2608 2.62025,34.3882667 L10.5247955,28.3370667 C10.0772273,26.9728 9.82727273,25.5168 9.82727273,24" id="Fill-1" fill="#FBBC05"> </path> <path d="M23.7136364,10.1333333 C27.025,10.1333333 30.0159091,11.3066667 32.3659091,13.2266667 L39.2022727,6.4 C35.0363636,2.77333333 29.6954545,0.533333333 23.7136364,0.533333333 C14.4268636,0.533333333 6.44540909,5.84426667 2.62345455,13.6042667 L10.5322727,19.6437333 C12.3545909,14.112 17.5491591,10.1333333 23.7136364,10.1333333" id="Fill-2" fill="#EB4335"> </path> <path d="M23.7136364,37.8666667 C17.5491591,37.8666667 12.3545909,33.888 10.5322727,28.3562667 L2.62345455,34.3946667 C6.44540909,42.1557333 14.4268636,47.4666667 23.7136364,47.4666667 C29.4455,47.4666667 34.9177955,45.4314667 39.0249545,41.6181333 L31.5177727,35.8144 C29.3995682,37.1488 26.7323182,37.8666667 23.7136364,37.8666667" id="Fill-3" fill="#34A853"> </path> <path d="M46.1454545,24 C46.1454545,22.6133333 45.9318182,21.12 45.6113636,19.7333333 L23.7136364,19.7333333 L23.7136364,28.8 L36.3181818,28.8 C35.6879545,31.8912 33.9724545,34.2677333 31.5177727,35.8144 L39.0249545,41.6181333 C43.3393409,37.6138667 46.1454545,31.6490667 46.1454545,24" id="Fill-4" fill="#4285F4"> </path> </g> </g> </g> </svg>
-                    <i class="ri-login-box-line mr-4 text-xl"></i> Lanjutkan dengan Google
-                </a>
-            </div>
-
-            <!-- Terms and Conditions -->
-            <div class="mt-4 text-center text-sm text-gray-500 dark:text-gray-200">
-                Dengan melanjutkan, Anda menyetujui <a href="#" class=" font-bold text-red-800 dark:text-yellow-400 hover:underline hover:duration-100 hover:text-blue-700">Syarat dan Ketentuan</a>
-            </div>
-        </div>
+          </div>
+  
+          <hr class="border-primary border-black dark:border-primarydark2" />
+          <div class="my-5 font-semibold">
+            <a href="chatAI.html" class="w-full py-4 text-black bg-gray-200 rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white">
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="-0.5 0 48 48" version="1.1"> <title>Google-color</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Color-" transform="translate(-401.000000, -860.000000)"> <g id="Google" transform="translate(401.000000, 860.000000)"> <path d="M9.82727273,24 C9.82727273,22.4757333 10.0804318,21.0144 10.5322727,19.6437333 L2.62345455,13.6042667 C1.08206818,16.7338667 0.213636364,20.2602667 0.213636364,24 C0.213636364,27.7365333 1.081,31.2608 2.62025,34.3882667 L10.5247955,28.3370667 C10.0772273,26.9728 9.82727273,25.5168 9.82727273,24" id="Fill-1" fill="#FBBC05"> </path> <path d="M23.7136364,10.1333333 C27.025,10.1333333 30.0159091,11.3066667 32.3659091,13.2266667 L39.2022727,6.4 C35.0363636,2.77333333 29.6954545,0.533333333 23.7136364,0.533333333 C14.4268636,0.533333333 6.44540909,5.84426667 2.62345455,13.6042667 L10.5322727,19.6437333 C12.3545909,14.112 17.5491591,10.1333333 23.7136364,10.1333333" id="Fill-2" fill="#EB4335"> </path> <path d="M23.7136364,37.8666667 C17.5491591,37.8666667 12.3545909,33.888 10.5322727,28.3562667 L2.62345455,34.3946667 C6.44540909,42.1557333 14.4268636,47.4666667 23.7136364,47.4666667 C29.4455,47.4666667 34.9177955,45.4314667 39.0249545,41.6181333 L31.5177727,35.8144 C29.3995682,37.1488 26.7323182,37.8666667 23.7136364,37.8666667" id="Fill-3" fill="#34A853"> </path> <path d="M46.1454545,24 C46.1454545,22.6133333 45.9318182,21.12 45.6113636,19.7333333 L23.7136364,19.7333333 L23.7136364,28.8 L36.3181818,28.8 C35.6879545,31.8912 33.9724545,34.2677333 31.5177727,35.8144 L39.0249545,41.6181333 C43.3393409,37.6138667 46.1454545,31.6490667 46.1454545,24" id="Fill-4" fill="#4285F4"> </path> </g> </g> </g> </svg>
+                <i class="ri-login-box-line mr-4 text-xl"></i> Lanjutkan dengan Google
+            </a>
+          </div>
+  
+          <!-- Terms and Conditions -->
+          <div class="mt-4 text-center text-sm text-gray-500 dark:text-gray-200">
+            Dengan melanjutkan, Anda menyetujui <a href="#" class="font-bold text-red-800 dark:text-yellow-400 hover:underline hover:duration-100 hover:text-blue-700">Syarat dan Ketentuan</a>
+          </div>
       </div>
-
-      <!-- Popup for Login -->
-      <div id="login-popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-white mx-3 border dark:border-white/50  dark:bg-[#1B1B21] p-6 rounded-lg shadow-lg w-full max-w-lg">
-          <h2 class="text-2xl font-bold mb-4 text-center">Masuk</h2>
-          <form>
-            <div class="mb-4">
-              <label for="email" class="block text-sm font-medium">Pos-el (<span class="italic">Email</span>)</label>
-              <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
-            </div>
-            <div class="mb-4">
-              <label for="password" class="block text-sm font-medium">Sandi</label>
-              <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
-            </div>
-            <div class="flex justify-between items-center">
-              <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Masuk</button>
-              <button type="button" onclick="togglePopup('login-popup')" class="text-red-600 dark:text-white  hover:underline">Batal</button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <!-- Popup for Register -->
-      <div id="register-popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-white border dark:border-white/50  mx-3 mt-5 dark:bg-[#1B1B21] p-6 rounded-lg shadow-lg w-full max-w-lg">
-          <h2 class="text-2xl font-bold mb-4 text-center">Daftar</h2>
-          <form>
-            <div class="mb-4">
-              <label for="username" class="block text-sm font-medium">Nama Pengguna</label>
-              <input type="text" id="username" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
-            </div>
-            <div class="mb-4">
-              <label for="email" class="block text-sm font-medium">Pos-el (<span class="italic">Email</span>)</label>
-              <input type="email" id="register-email" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
-            </div>
-            <div class="mb-4">
-              <label for="country" class="block text-sm font-medium">Asal Negara</label>
-              <select id="country" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required>
-                <option value="">Pilih Negara</option>
-              </select>
-            </div>
-            <div class="mb-4">
-              <label for="register-password" class="block text-sm font-medium">Sandi</label>
-              <input type="password" id="register-password" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
-            </div>
-            <div class="mb-4">
-              <label for="confirm-password" class="block text-sm font-medium">Ulangi Sandi</label>
-              <input type="password" id="confirm-password" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
-            </div>
-            <div class="flex justify-between items-center">
-              <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Daftar</button>
-              <button type="button" onclick="togglePopup('register-popup')" class="text-red-600 dark:text-white hover:underline">Batal</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </main>  
+    </div>
+  </main> 
 
     <footer class="w-full p-3 z-20 bg-[#828282] text-white dark:bg-[#2E3032] dark:text-gray-200">
       <div class="container z-20 mx-auto flex justify-between items-center">
@@ -267,18 +255,18 @@
           <img src="../../public/image/logo-bipa.png" alt="Logo BIPA" class="h-7 mr-3 sm:h-8 md:h-10" />
           <span class="text-[0.5rem] sm:text-base lg:text-lg">Hak Cipta Badan Pengembangan dan Pembinaan Bahasa © 2024</span>
         </div>
-        <div class="flex z-20 space-x-1 items-center sm:mr-5 lg:mr-16">
+        <div class="flex z-20 space-x-3 items-center sm:mr-5 lg:mr-16">
           <a href="https://www.instagram.com/bipakemdikbud" class="hover:text-gray-400">
               <i class="fab fa-instagram">
-                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="24" viewBox="0 0 24 24" class="w-7 h-5">
-                      <path fill="white" d="M 12 4 C 12 4 5.7455469 3.9999687 4.1855469 4.4179688 C 3.3245469 4.6479688 2.6479687 5.3255469 2.4179688 6.1855469 C 1.9999687 7.7455469 2 12 2 12 C 2 12 1.9999687 16.254453 2.4179688 17.814453 C 2.6479687 18.675453 3.3255469 19.352031 4.1855469 19.582031 C 5.7455469 20.000031 12 20 12 20 C 12 20 18.254453 20.000031 19.814453 19.582031 C 20.674453 19.352031 21.352031 18.674453 21.582031 17.814453 C 22.000031 16.254453 22 12 22 12 C 22 12 22.000031 7.7455469 21.582031 6.1855469 C 21.352031 5.3255469 20.674453 4.6479688 19.814453 4.4179688 C 18.254453 3.9999687 12 4 12 4 z M 12 6 C 14.882 6 18.490875 6.1336094 19.296875 6.3496094 C 19.465875 6.3946094 19.604391 6.533125 19.650391 6.703125 C 19.891391 7.601125 20 10.342 20 12 C 20 13.658 19.891391 16.397875 19.650391 17.296875 C 19.605391 17.465875 19.466875 17.604391 19.296875 17.650391 C 18.491875 17.866391 14.882 18 12 18 C 9.119 18 5.510125 17.866391 4.703125 17.650391 C 4.534125 17.605391 4.3956094 17.466875 4.3496094 17.296875 C 4.1086094 16.398875 4 13.658 4 12 C 4 10.342 4.1086094 7.6011719 4.3496094 6.7011719 C 4.3946094 6.5331719 4.533125 6.3946094 4.703125 6.3496094 C 5.508125 6.1336094 9.118 6 12 6 z M 10 8.5351562 L 10 15.464844 L 16 12 L 10 8.5351562 z"></path>
+                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24"  class="w-7 h-5">
+                      <path fill="white" d="M 8 3 C 5.243 3 3 5.243 3 8 L 3 16 C 3 18.757 5.243 21 8 21 L 16 21 C 18.757 21 21 18.757 21 16 L 21 8 C 21 5.243 18.757 3 16 3 L 8 3 z M 8 5 L 16 5 C 17.654 5 19 6.346 19 8 L 19 16 C 19 17.654 17.654 19 16 19 L 8 19 C 6.346 19 5 17.654 5 16 L 5 8 C 5 6.346 6.346 5 8 5 z M 17 6 A 1 1 0 0 0 16 7 A 1 1 0 0 0 17 8 A 1 1 0 0 0 18 7 A 1 1 0 0 0 17 6 z M 12 7 C 9.243 7 7 9.243 7 12 C 7 14.757 9.243 17 12 17 C 14.757 17 17 14.757 17 12 C 17 9.243 14.757 7 12 7 z M 12 9 C 13.654 9 15 10.346 15 12 C 15 13.654 13.654 15 12 15 C 10.346 15 9 13.654 9 12 C 9 10.346 10.346 9 12 9 z"></path>
                   </svg>
               </i>
           </a>
           <a href="https://www.youtube.com/@bipakemdikbud" class="hover:text-gray-400">
               <i class="fab fa-youtube">
-                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24"  class="w-7 h-5">
-                      <path fill="white" d="M 8 3 C 5.243 3 3 5.243 3 8 L 3 16 C 3 18.757 5.243 21 8 21 L 16 21 C 18.757 21 21 18.757 21 16 L 21 8 C 21 5.243 18.757 3 16 3 L 8 3 z M 8 5 L 16 5 C 17.654 5 19 6.346 19 8 L 19 16 C 19 17.654 17.654 19 16 19 L 8 19 C 6.346 19 5 17.654 5 16 L 5 8 C 5 6.346 6.346 5 8 5 z M 17 6 A 1 1 0 0 0 16 7 A 1 1 0 0 0 17 8 A 1 1 0 0 0 18 7 A 1 1 0 0 0 17 6 z M 12 7 C 9.243 7 7 9.243 7 12 C 7 14.757 9.243 17 12 17 C 14.757 17 17 14.757 17 12 C 17 9.243 14.757 7 12 7 z M 12 9 C 13.654 9 15 10.346 15 12 C 15 13.654 13.654 15 12 15 C 10.346 15 9 13.654 9 12 C 9 10.346 10.346 9 12 9 z"></path>
+                  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="24" viewBox="0 0 24 24" class="w-7 h-5">
+                      <path fill="white" d="M 12 4 C 12 4 5.7455469 3.9999687 4.1855469 4.4179688 C 3.3245469 4.6479688 2.6479687 5.3255469 2.4179688 6.1855469 C 1.9999687 7.7455469 2 12 2 12 C 2 12 1.9999687 16.254453 2.4179688 17.814453 C 2.6479687 18.675453 3.3255469 19.352031 4.1855469 19.582031 C 5.7455469 20.000031 12 20 12 20 C 12 20 18.254453 20.000031 19.814453 19.582031 C 20.674453 19.352031 21.352031 18.674453 21.582031 17.814453 C 22.000031 16.254453 22 12 22 12 C 22 12 22.000031 7.7455469 21.582031 6.1855469 C 21.352031 5.3255469 20.674453 4.6479688 19.814453 4.4179688 C 18.254453 3.9999687 12 4 12 4 z M 12 6 C 14.882 6 18.490875 6.1336094 19.296875 6.3496094 C 19.465875 6.3946094 19.604391 6.533125 19.650391 6.703125 C 19.891391 7.601125 20 10.342 20 12 C 20 13.658 19.891391 16.397875 19.650391 17.296875 C 19.605391 17.465875 19.466875 17.604391 19.296875 17.650391 C 18.491875 17.866391 14.882 18 12 18 C 9.119 18 5.510125 17.866391 4.703125 17.650391 C 4.534125 17.605391 4.3956094 17.466875 4.3496094 17.296875 C 4.1086094 16.398875 4 13.658 4 12 C 4 10.342 4.1086094 7.6011719 4.3496094 6.7011719 C 4.3946094 6.5331719 4.533125 6.3946094 4.703125 6.3496094 C 5.508125 6.1336094 9.118 6 12 6 z M 10 8.5351562 L 10 15.464844 L 16 12 L 10 8.5351562 z"></path>
                   </svg>
               </i>
             </a>
