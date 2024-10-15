@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Masuk Satria BIPA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
+    <script>
+      // Function to initialize and toggle dark mode
+      function initMode() {
+        if (
+          localStorage.theme === "dark" ||
+          (!("theme" in localStorage) &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      }
+
+      function toggleMode() {
+        if (document.documentElement.classList.contains("dark")) {
+          document.documentElement.classList.remove("dark");
+          localStorage.theme = "light";
+          setActiveLink();
+        } else {
+          document.documentElement.classList.add("dark");
+          localStorage.theme = "dark";
+          setActiveLink();
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const burgerMenu = document.getElementById("burger-menu");
+        const navLinks = document.getElementById("navbar-default");
+
+        burgerMenu.addEventListener("click", () => {
+          navLinks.classList.toggle("hidden");
+        });
+      });
+      
+      function showLoginForm() {
+        document.getElementById('register-form').classList.add('hidden');
+        document.getElementById('login-form').classList.remove('hidden');
+        document.getElementById('welcome-section').classList.remove('hidden'); // Tampilkan welcome message kembali
+      }
+      function showRegisterForm() {
+        document.getElementById('login-form').classList.add('hidden');
+        document.getElementById('register-form').classList.remove('hidden');
+        document.getElementById('welcome-section').classList.add('hidden'); // Sembunyikan welcome message
+      }
+      document.addEventListener("DOMContentLoaded", function() {
+        const countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
+                      "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia",
+                      "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon",
+                      "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia",
+                      "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt",
+                      "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia",
+                      "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary",
+                      "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan", 
+                      "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", 
+                      "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands",
+                      "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique",
+                      "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", 
+                      "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", 
+                      "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino", 
+                      "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", 
+                      "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", 
+                      "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", 
+                      "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", 
+                      "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"];
+
+        // Ambil elemen dropdown
+        const countrySelect = document.getElementById("country");
+
+        // Loop untuk menambahkan opsi negara ke dalam dropdown
+        countries.forEach(country => {
+          let option = document.createElement("option");
+          option.value = country;
+          option.textContent = country;
+          countrySelect.appendChild(option);
+        });
+      });
+    </script>
+    <style>
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+
+      .login-btn:hover svg path{
+        fill: white;
+      }
+
+    </style>
+  </head>
+
+  <body class="bg-white overflow-x-hidden dark:bg-[#1B1B21] text-black dark:text-white transition duration-75">
+    <%- include('partials/header') %>
+    <main class="flex-grow">
+      <div class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
+        <div class="mx-2 mb-10 mt-24 border border-black/30 dark:border-white/50 h-fit max-w-lg overflow-y-auto rounded-xl bg-white dark:bg-[#1B1B21] p-6 shadow-2xl">
+          <div id="welcome-section">
+            <h3 class="text-center font-bold text-xl pt-8">Selamat Datang</h3>
+            <p class="text-center text-gray-400 text-sm pt-2">Masuk ke Akun Anda atau Daftar Akun Baru</p>
+          </div>
+    
+            <!-- Form Login -->
+            <div id="login-form">
+              <div class="my-5 font-semibold">
+                <form>
+                  <h2 class="text-2xl font-bold mb-4 text-center">Masuk</h2>
+                  <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium">Pos-el (<span class="italic">Email</span>)</label>
+                    <input type="email" id="email" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
+                  </div>
+                  <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium">Sandi</label>
+                    <input type="password" id="password" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
+                  </div>
+                  <div class="my-5 font-semibold">
+                    <button class="login-btn w-full py-4 text-black bg-gray-200 rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white dark:bg-white dark:hover:bg-slate-500 dark:hover:text-white">
+                      <i class="ri-login-box-line mr-4 text-xl"></i> Masuk
+                    </button>
+                  </div>
+                </form>
+              </div>
+    
+              <div class="mt-4">
+                <p>
+                  Belum memiliki akun?
+                  <button type="button" onclick="showRegisterForm()" class="text-sm text-gray-500 mb-5 font-bold dark:text-gray-200 hover:underline underline hover:text-blue-600 dark:hover:text-blue-600 "> Daftar</button>
+                  </p>
+              </div>
+            </div>
+    
+            <!-- Form Register (Hidden by default) -->
+            <div id="register-form" class="hidden">
+              <div class="my-5 font-semibold">
+                <form>
+                  <h2 class="text-2xl font-bold mb-4 text-center">Daftar</h2>
+                  <div class="mb-4">
+                    <label for="username" class="block text-sm font-medium">Nama Pengguna</label>
+                    <input type="text" id="username" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
+                  </div>
+                  <div class="mb-4">
+                    <label for="register-email" class="block text-sm font-medium">Pos-el (<span class="italic">Email</span>)</label>
+                    <input type="email" id="register-email" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
+                  </div>
+                  <div class="mb-4">
+                    <label for="country" class="block text-sm font-medium">Asal Negara</label>
+                    <select id="country" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required>
+                      <option value="">Pilih Negara</option>
+                      <!-- List of countries will be populated here -->
+                    </select>
+                  </div>
+                  <div class="mb-4">
+                    <label for="register-password" class="block text-sm font-medium">Sandi</label>
+                    <input type="password" id="register-password" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
+                  </div>
+                  <div class="mb-4">
+                    <label for="confirm-password" class="block text-sm font-medium">Ulangi Sandi</label>
+                    <input type="password" id="confirm-password" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700" required />
+                  </div>
+                  <div class="my-5 font-semibold">
+                    <button class="w-full py-4 border border-black dark:bg-gray-700 dark:border-yellow-500/20 dark:text-yellow-400 text-black bg-white rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white dark:hover:bg-slate-500 dark:hover:text-white">
+                      <i class="ri-user-add-line mr-4 text-xl"></i> Daftar
+                    </button>
+                  </div>
+                  <div class="mt-4">
+                    <p>
+                      Sudah memiliki akun?
+                      <button type="button" onclick="showLoginForm()" class="text-sm text-gray-500 font-bold dark:text-gray-200 hover:underline underline hover:text-blue-600 dark:hover:text-blue-600 ">Masuk</button>
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+    
+            <hr class="border-primary border-black dark:border-primarydark2" />
+            <div class="my-5 font-semibold">
+              <a href="/chat" class="w-full py-4 text-black bg-gray-200 rounded-lg flex justify-center items-center hover:bg-slate-700 hover:text-white">
+                  <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="-0.5 0 48 48" version="1.1"> <title>Google-color</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Color-" transform="translate(-401.000000, -860.000000)"> <g id="Google" transform="translate(401.000000, 860.000000)"> <path d="M9.82727273,24 C9.82727273,22.4757333 10.0804318,21.0144 10.5322727,19.6437333 L2.62345455,13.6042667 C1.08206818,16.7338667 0.213636364,20.2602667 0.213636364,24 C0.213636364,27.7365333 1.081,31.2608 2.62025,34.3882667 L10.5247955,28.3370667 C10.0772273,26.9728 9.82727273,25.5168 9.82727273,24" id="Fill-1" fill="#FBBC05"> </path> <path d="M23.7136364,10.1333333 C27.025,10.1333333 30.0159091,11.3066667 32.3659091,13.2266667 L39.2022727,6.4 C35.0363636,2.77333333 29.6954545,0.533333333 23.7136364,0.533333333 C14.4268636,0.533333333 6.44540909,5.84426667 2.62345455,13.6042667 L10.5322727,19.6437333 C12.3545909,14.112 17.5491591,10.1333333 23.7136364,10.1333333" id="Fill-2" fill="#EB4335"> </path> <path d="M23.7136364,37.8666667 C17.5491591,37.8666667 12.3545909,33.888 10.5322727,28.3562667 L2.62345455,34.3946667 C6.44540909,42.1557333 14.4268636,47.4666667 23.7136364,47.4666667 C29.4455,47.4666667 34.9177955,45.4314667 39.0249545,41.6181333 L31.5177727,35.8144 C29.3995682,37.1488 26.7323182,37.8666667 23.7136364,37.8666667" id="Fill-3" fill="#34A853"> </path> <path d="M46.1454545,24 C46.1454545,22.6133333 45.9318182,21.12 45.6113636,19.7333333 L23.7136364,19.7333333 L23.7136364,28.8 L36.3181818,28.8 C35.6879545,31.8912 33.9724545,34.2677333 31.5177727,35.8144 L39.0249545,41.6181333 C43.3393409,37.6138667 46.1454545,31.6490667 46.1454545,24" id="Fill-4" fill="#4285F4"> </path> </g> </g> </g> </svg>
+                  <i class="ri-login-box-line mr-4 text-xl"></i> Lanjutkan dengan Google
+              </a>
+            </div>
+    
+            <!-- Terms and Conditions -->
+            <div class="mt-4 text-center text-sm text-gray-500 dark:text-gray-200">
+              Dengan melanjutkan, Anda menyetujui <a href="#" class="font-bold text-red-800 dark:text-yellow-400 hover:underline hover:duration-100 hover:text-blue-700">Syarat dan Ketentuan</a>
+            </div>
+        </div>
+      </div>
+    </main> 
+    <%- include('partials/footer') %>
+  </body>
+</html>

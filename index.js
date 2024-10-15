@@ -5,29 +5,25 @@ const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware untuk menyajikan file statis
 app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine', 'ejs');
 
-
-// Menyajikan file HTML sebagai halaman utama
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.render('index');
 });
 
-// Define your routes
 app.get('/opening', (req, res) => {
-    res.sendFile(path.join(__dirname, 'src/pages/opening.html'));
+    res.render('opening');
 });
 
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'src/pages/login.html'));
+    res.render('login');
 });
 
 app.get('/chat', (req, res) => {
-    res.sendFile(path.join(__dirname, 'src/pages/chatAI.html'));
+    res.render('chatAI');
 });
 
-// Jalankan server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

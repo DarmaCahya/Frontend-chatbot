@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda Satria BIPA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"  rel="stylesheet" />
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+        }
+    </script>
+    <script>
+        // Function to initialize and toggle dark mode
+        function initMode() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        function toggleMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                setActiveLink();
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                setActiveLink();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const burgerMenu = document.getElementById('burger-menu');
+            const navLinks = document.getElementById('navbar-default');
+
+            burgerMenu.addEventListener('click', () => {
+                navLinks.classList.toggle('hidden');
+            });
+        });
+
+    </script>
+    <style>
+        body{
+            font-family: "Plus Jakarta Sans", sans-serif;;
+        }
+        
+    </style>
+</head>
+
+<body class="bg-white overflow-x-hidden dark:bg-[#1B1B21] text-black dark:text-white transition duration-75">
+    <%- include('partials/header') %>
+    <main>
+        <div class="hidden md:block z-0 w-[50rem] h-[31.25rem] dark:bg-yellow-500 rounded-full absolute blur-[5.625rem] dark:opacity-10 left-[-25rem] top-0 lg:w-[40rem] lg:h-[25rem] lg:left-[-20rem] md:w-[30rem] md:h-[18.75rem] md:left-[-15rem]"></div>
+        <section class="scroll-mt-56">
+            <div class="mb-24 z-20">
+                <div class="flex flex-col md:flex-row-reverse md:mt-24 dark:bg-[#1B1B21] dark:bg-none mx-auto bg-[url('image/batik-bg.jpg')] bg-cover">
+                    <div class="flex justify-center lg:mt-5 lg:mx-0 mt-14 md:mr-10 md:mt-10 md:w-1/2 xl:w-2/3">
+                        <img src="/image/gatotkaca-removebg.png" class="object-cover h-[20rem] md:w-[23rem] md:h-[23rem] lg:h-[25rem] lg:w-[25rem] w-[19rem] xl:h-full xl:w-[25rem] my-7 md:my-0" alt="Maskot Satria BIPA">
+                    </div>
+                    <div class="mx-3 md:mt-14 md:w-1/2 lg:mx-14 xl:ml-40 mb-5 md:mx-10  lg:flex lg:flex-col">
+                        <h1 class="flex justify-center md:justify-start text-3xl xl:mb-5 md:text-left text-center xl:text-5xl font-bold text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] pb-2 dark:via-[#FFEAA5] dark:to-[#FFCD25] "><img src="image/Folded Hands.png" class="mr-5" alt=""> Selamat Datang!</h1>
+                        <p class="mx-5 text-[#1B1B21] mt-3 text-base xl:text-2xl lg:text-lg dark:text-[#6F6F73] mx-3md:mt-3 md:mx-0 lg:mx-0 font-normal text-justify leading-loose"> 
+                            <span class="font-bold">Sahabat Tutur Berbahasa Indonesia (Satria) BIPA </span> 
+                            dirancang agar dapat digunakan oleh para pengajar BIPA sebagai media pembelajaran BIPA dan oleh pemelajar BIPA kapan saja dan dari mana saja. Anda dapat menggunakan Satria BIPA sebagai mitra tutur untuk memperkaya kosakata, berlatih berbicara dalam bahasa Indonesia, serta tata bahasa dalam bahasa Indonesia.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="min-h-screen w-full">
+            <div class="lg:flex z-20 flex-col items-center">
+                <div>
+                    <h1 class="text-3xl md:text-4xl xl:text-5xl text-center p-4 font-bold mb-5 text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25]">Pengalaman Belajar BIPA dengan Cara Baru!</h1>
+                </div>
+                <div class="flex flex-row justify-center">
+                    <a href="/opening" class="text-center flex items-center text-xl rounded bg-[#A2010B] hover:bg-red-400 text-white xl:p-5 p-3 mr-8 dark:bg-gradient-to-r dark:from-[#8F8F8F33] dark:to-[#FFFFFF33] dark:bg-opacity-20 dark:hover:bg-zinc-300">
+                        Coba Satria BIPA
+                    </a>
+                    <!--
+                    <a href="src/pages/aboutUs.html#video-BIPA" class="text-xl p-5 text-[#828282] hover:text-orange-400">
+                        Tonton Video
+                    </a>  
+                    -->                  
+                </div>
+            </div>
+            <hr class="border-0 h-[0.5px] bg-[#A2010B] 2xl:mx-32 mt-12">            
+
+            <div class="flex z-20 flex-col items-center mt-28 mb-10">
+                <h1 class="text-3xl md:text-4xl xl:text-5xl text-center p-4 font-bold mb-5 text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25]">Fitur Satria BIPA</h1>
+                <div class="flex flex-col w-full z-20">
+                    <%- include('partials/fitur', { 
+                        imgSrc: '/image/fitur1.png', 
+                        imgAlt: 'Fitur 1', 
+                        title: '1. Pembelajaran BIPA dengan Muatan Konten Budaya', 
+                        description: 'Memberikan pembelajaran bahasa Indonesia dengan konteks budaya sebagai wawasan dan informasi tentang berbagai tradisi, adat istiadat, dan nilai-nilai budaya Indonesia.' 
+                    }) %>
+
+                    <%- include('partials/fitur', { 
+                        imgSrc: '/image/fitur2.png', 
+                        imgAlt: 'Fitur 2', 
+                        title: '2. Rekomendasi Materi Pembelajaran', 
+                        description: 'Menyarankan materi pembelajaran bahasa Indonesia yang terkait dengan pertanyaan pengguna, penyesuaian tingkat kesulitan, dan kiat-kiat belajar bahasa Indonesia.' 
+                    }) %>
+
+                    <%- include('partials/fitur', { 
+                        imgSrc: '/image/fitur3.png', 
+                        imgAlt: 'Fitur 3', 
+                        title: '3. Percakapan Bahasa Indonesia', 
+                        description: 'Latihan berbicara melalui teks berbentuk percakapan alami dalam Bahasa Indonesia untuk meningkatkan kepercayaan diri dan kelancaran berbicara dalam berbahasa Indonesia.' 
+                    }) %>
+                </div>
+            </div>
+        </section>   
+    </main>
+    <%- include('partials/footer') %>
+</body>
+</html>
