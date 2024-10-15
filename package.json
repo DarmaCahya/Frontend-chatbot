@@ -17,6 +17,9 @@
     "tailwindcss": "^3.4.13"
   },
   "dependencies": {
-    "chatbot": "file:"
+    "axios": "^1.7.7",
+    "chatbot": "file:",
+    "express": "^4.21.1",
+    "path": "^0.12.7"
   }
 }
