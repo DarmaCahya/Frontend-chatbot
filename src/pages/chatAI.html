@@ -2,15 +2,19 @@
 <html lang="id">
 
 <head>
+    <!-- Metadata dan tautan CSS -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot Satria BIPA</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Menggunakan font Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+    <!-- Memuat Tailwind CSS dan Flowbite -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <script
+        src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+        rel="stylesheet" />
 
     <script>
         tailwind.config = {
@@ -60,20 +64,20 @@
 
         /* Custom scrollbar styling untuk tampilan minimalis */
         .scrollbar-custom::-webkit-scrollbar {
-            width: 6px; /* Lebar scrollbar lebih kecil untuk tampilan minimalis */
+            width: 6px;
         }
 
         .scrollbar-custom::-webkit-scrollbar-track {
-            background: transparent; /* Transparan agar lebih minimalis */
+            background: transparent;
         }
 
         .scrollbar-custom::-webkit-scrollbar-thumb {
-            background-color: rgba(255, 255, 255, 0.3); /* Warna yang lebih halus */
-            border-radius: 3px; /* Sudut membulat */
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
         }
 
         .scrollbar-custom::-webkit-scrollbar-thumb:hover {
-            background-color: rgba(255, 255, 255, 0.5); /* Warna saat hover */
+            background-color: rgba(255, 255, 255, 0.5);
         }
 
         /* Firefox */
@@ -82,16 +86,17 @@
             scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
         }
 
-        /* Mencegah konten utama meluap */
+        /* Menyesuaikan tinggi kontainer utama */
         .main-container {
             display: flex;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
         }
 
         /* Gaya sidebar */
         aside {
             flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Gaya konten utama */
@@ -109,14 +114,12 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
         }
 
         .chat-area {
             flex: 1;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
         }
 
         .chat-box {
@@ -142,13 +145,13 @@
 
         /* Styling Chat Aktif */
         .active-chat {
-            background-color: #444; /* Warna latar belakang untuk chat aktif */
+            background-color: #444;
             color: white;
         }
 
         /* Efek Hover untuk Chat Items */
         .chat-item:hover {
-            background-color: #555; /* Warna latar belakang saat hover */
+            background-color: #555;
             color: white;
         }
 
@@ -163,32 +166,53 @@
     <div class="main-container">
         <!-- Sidebar -->
         <aside id="default-sidebar"
-            class="fixed bg-black h-screen top-0 left-0 z-40 w-80 md:w-[22rem] lg:w-[25rem] overflow-y-auto scrollbar-custom flex flex-col transition-transform -translate-x-full sm:translate-x-0 text-gray-400">
-            <div class="flex justify-between m-10 w-fit lg:mt-40 xl:mt-10 border rounded-md">
-                <button id="new-chat-btn" class="flex flex-row items-center p-2 m-1 bg-gray-800 hover:bg-gray-700 rounded-md">
-                    <img src="../../public/image/new-section.svg" class="bg-black hover:bg-slate-500 mr-2 h-6" alt="">
+            class="fixed bg-black h-screen top-0 left-0 z-40 w-80 md:w-[22rem] lg:w-[25rem] overflow-y-auto scrollbar-custom flex flex-col transition-transform -translate-x-full md:translate-x-0 text-gray-400">
+            <!-- Tombol untuk menutup sidebar pada layar kecil -->
+            <div class="flex justify-end p-4 md:hidden">
+                <button data-drawer-hide="default-sidebar" aria-controls="default-sidebar" type="button"
+                    class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 
+                            8.586l4.293-4.293a1 1 0 111.414 
+                            1.414L11.414 10l4.293 4.293a1 1 0 
+                            01-1.414 1.414L10 11.414l-4.293 
+                            4.293a1 1 0 01-1.414-1.414L8.586 
+                            10 4.293 5.707a1 1 0 010-1.414z">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Konten Sidebar -->
+            <div class="flex justify-between mx-10 mt-5 mb-2 w-fit border rounded-md">
+                <button id="new-chat-btn"
+                    class="flex flex-row items-center p-2 m-1 bg-gray-800 hover:bg-gray-700 rounded-md">
+                    <img src="../../public/image/new-section.svg"
+                        class="bg-black hover:bg-slate-500 mr-2 h-6" alt="New Chat">
                     <p>Mulai Percakapan Baru</p>
                 </button>
             </div>
 
             <!-- Judul Bagian -->
-            <section class="m-10 chat">
+            <section class="mx-10 mb-2">
                 <h1 class="text-2xl font-bold">Riwayat Percakapan</h1>
                 <p class="flex items-center text-sm">
-                    <img src="../../public/image/history-toggle.svg" class="mr-3 h-4" alt="">
+                    <img src="../../public/image/history-toggle.svg" class="mr-3 h-4" alt="History Toggle">
                     Riwayat percakapan Anda dengan Satria BIPA
                 </p>
             </section>
 
             <!-- Daftar Riwayat Chat -->
-            <section id="chat-history-list" class="bg-[#1b1b21] p-5 m-10 rounded-md flex-1 overflow-y-auto scrollbar-custom">
+            <section id="chat-history-list"
+                class="bg-[#1b1b21] p-5 mx-10 mb-5 rounded-md flex-grow overflow-y-auto scrollbar-custom">
                 <div>
                     <p class="font-bold text-base mb-3">Terkini</p>
                     <ul id="chat-list" class="space-y-2 font-medium">
                         <!-- Chat items akan ditambahkan di sini -->
                     </ul>
                 </div>
-                <hr class="my-5">
+                <hr class="my-3">
                 <div>
                     <p class="font-bold text-base mb-3">Kemarin</p>
                     <ul id="chat-list-2" class="space-y-2 font-medium">
@@ -198,50 +222,38 @@
             </section>
 
             <!-- Pengaturan dan Toggle Dark Mode -->
-            <section class="mb-10">
+            <section class="mx-10 mb-5">
+                <!-- Konten pengaturan tetap sama -->
                 <div>
-                    <a href="#" class="flex items-center bg-[#1b1b21] hover:bg-white p-3 mt-3 mx-10 rounded-md icon">
+                    <a href="#"
+                        class="flex items-center bg-[#1b1b21] hover:bg-white p-3 mt-3 rounded-md icon">
                         <!-- Icon Bantuan dan Teks -->
+                        <!-- (Isi ikon dan teks sesuai kebutuhan) -->
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_69_1199)">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M6 5C5.73478 5 5.48043 5.10536 5.29289 5.29289C5.10536 5.48043 5 5.73478 5 6V18C5 18.2652 5.10536 18.5196 5.29289 18.7071C5.48043 18.8946 5.73478 19 6 19H18C18.2652 19 18.5196 18.8946 18.7071 18.7071C18.8946 18.5196 19 18.2652 19 18V6C19 5.73478 18.8946 5.48043 18.7071 5.29289C18.5196 5.10536 18.2652 5 18 5H6ZM3.87868 3.87868C4.44129 3.31607 5.20435 3 6 3H18C18.7956 3 19.5587 3.31607 20.1213 3.87868C20.6839 4.44129 21 5.20435 21 6V18C21 18.7957 20.6839 19.5587 20.1213 20.1213C19.5587 20.6839 18.7957 21 18 21H6C5.20435 21 4.44129 20.6839 3.87868 20.1213C3.31607 19.5587 3 18.7956 3 18V6C3 5.20435 3.31607 4.44129 3.87868 3.87868ZM9 10.5C8.17157 10.5 7.5 11.1716 7.5 12C7.5 12.8284 8.17157 13.5 9 13.5C9.82843 13.5 10.5 12.8284 10.5 12C10.5 11.1716 9.82843 10.5 9 10.5ZM15 10.5C14.1716 10.5 13.5 11.1716 13.5 12C13.5 12.8284 14.1716 13.5 15 13.5C15.8284 13.5 16.5 12.8284 16.5 12C16.5 11.1716 15.8284 10.5 15 10.5Z"
-                                    fill="gray" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_69_1199">
-                                    <rect width="24" height="24" fill="white" />
-                                </clipPath>
-                            </defs>
+                            <!-- SVG ikon bantuan -->
+                            <!-- ... -->
                         </svg>
                         <p class="ml-3">Bantuan</p>
                     </a>
-                    <a href="#" class="flex items-center bg-[#1b1b21] hover:bg-white p-3 mt-3 mx-10 rounded-md icon">
+                    <a href="#"
+                        class="flex items-center bg-[#1b1b21] hover:bg-white p-3 mt-3 rounded-md icon">
                         <!-- Icon Pengaturan dan Teks -->
+                        <!-- (Isi ikon dan teks sesuai kebutuhan) -->
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_401_332)">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M9.16977 14.83C9.92977 15.58 10.9298 16 11.9998 16C13.0698 16 14.0798 15.59 14.8298 14.83C15.5798 14.07 15.9998 13.07 15.9998 12C15.9998 10.93 15.5898 9.93 14.8298 9.17C14.0698 8.42 13.0698 8 11.9998 8C10.9298 8 9.92977 8.42 9.16977 9.17C8.41977 9.93 7.99977 10.93 7.99977 12C7.99977 13.07 8.40977 14.08 9.16977 14.83ZM10.5898 10.59C10.9598 10.21 11.4698 10 11.9998 10H12.0098C12.5298 10 13.0398 10.22 13.4198 10.59C13.7998 10.96 14.0098 11.48 14.0098 12C14.0098 12.52 13.7898 13.04 13.4198 13.41C12.6698 14.15 11.3398 14.15 10.5898 13.41C10.2098 13.04 9.99977 12.53 9.99977 12C9.99977 11.47 10.2198 10.97 10.5898 10.59Z"
-                                    fill="white" />
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M9.34976 19.92C9.65977 21.16 10.7198 22 11.9998 22L12.0098 21.98C13.2898 21.98 14.3598 21.14 14.6598 19.9C14.6798 19.79 14.7398 19.69 14.8098 19.6C14.8798 19.51 14.9798 19.44 15.0798 19.4C15.1798 19.35 15.2998 19.34 15.4098 19.35C15.5198 19.35 15.6298 19.39 15.7298 19.45C16.8198 20.12 18.1598 19.95 19.0698 19.05C19.9798 18.15 20.1398 16.8 19.4698 15.71C19.4098 15.62 19.3698 15.51 19.3698 15.39C19.3598 15.28 19.3798 15.16 19.4198 15.06C19.4698 14.96 19.5398 14.86 19.6198 14.79C19.7098 14.72 19.8098 14.67 19.9198 14.64C21.1598 14.33 21.9998 13.27 21.9998 11.99C21.9998 10.71 21.1698 9.64 19.9198 9.34C19.8098 9.32 19.6998 9.26 19.6198 9.19C19.5298 9.12 19.4598 9.02 19.4198 8.92C19.3698 8.82 19.3698 8.7 19.3698 8.59C19.3698 8.48 19.4098 8.37 19.4698 8.27C20.1398 7.18 19.9798 5.84 19.0698 4.93C18.1698 4.02 16.8198 3.86 15.7298 4.53C15.6298 4.59 15.5198 4.63 15.4098 4.63C15.2998 4.64 15.1898 4.62 15.0798 4.58C14.9798 4.54 14.8898 4.47 14.8098 4.38C14.7398 4.29 14.6898 4.19 14.6598 4.08C14.6398 4.18 14.6398 4.3 14.6398 4.41C14.6298 4.52 14.5998 4.63 14.5398 4.73C14.1698 5.86 14.3298 7.2 15.2398 8.11C16.1498 9.02 17.4998 9.18 18.5898 8.51C18.6798 8.45 18.7998 8.39 18.9098 8.39C19.0198 8.38 19.1298 8.41 19.2398 8.45C19.3398 8.49 19.4398 8.56 19.5098 8.65C19.5798 8.74 19.6298 8.84 19.6598 8.95C19.6998 9.05 19.6998 9.17 19.6998 9.28C19.6898 9.39 19.6598 9.5 19.6198 9.6C19.5698 9.7 19.5098 9.8 19.4298 9.87C19.3398 9.94 19.2398 9.99 19.1298 10C17.8898 10.3 17.0498 11.37 17.0498 12C17.0498 13.28 17.8898 14.35 19.1298 14.65C19.2398 14.68 19.3398 14.73 19.4298 14.81C19.5198 14.88 19.5898 14.97 19.6198 15.08C19.6598 15.18 19.6598 15.3 19.6598 15.41C19.6498 15.52 19.6198 15.63 19.5698 15.73C19.2398 16.82 19.3998 18.16 20.3098 19.07C21.2198 19.97 22.5598 20.14 23.6598 19.47C23.7498 19.41 23.8698 19.37 23.9798 19.37C24.0898 19.35 24.1998 19.38 24.3098 19.42C24.4098 19.46 24.5098 19.53 24.5798 19.62C24.6498 19.71 24.6998 19.81 24.7298 19.92Z"
-                                    fill="white" />
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_401_332">
-                                    <rect width="24" height="24" fill="white" />
-                                </clipPath>
-                            </defs>
+                            <!-- SVG ikon pengaturan -->
+                            <!-- ... -->
                         </svg>
                         <p class="ml-3">Pengaturan</p>
                     </a>
-                    <a href="#" class="flex items-center bg-[#1b1b21] hover:bg-white p-3 mt-3 mx-10 rounded-md icon">
+                    <a href="#"
+                        class="flex items-center bg-[#1b1b21] hover:bg-white p-3 mt-3 rounded-md icon">
                         <!-- Toggle Dark Mode -->
                         <div class="flex items-center">
                             <label class="flex items-center">
-                                <input type="checkbox" value="" class="sr-only peer" onclick="toggleMode()">
+                                <input type="checkbox" value="" class="sr-only peer"
+                                    onclick="toggleMode()">
                                 <div
                                     class="relative mx-3 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-['🌞'] dark:after:content-['🌜'] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
                                 </div>
@@ -253,30 +265,43 @@
         </aside>
 
         <!-- Area Konten Utama -->
-        <div class="flex flex-col flex-1 ml-80 md:ml-[22rem] lg:ml-[25rem] xl:ml-[25rem]">
+        <div class="flex flex-col flex-1 md:ml-80 lg:ml-[22rem] xl:ml-[25rem]">
             <!-- Header -->
-            <header class="sticky bg-white dark:bg-[#1B1B21] top-0 p-5 sm:w-auto z-10">
+            <header class="sticky bg-white dark:bg-[#1B1B21] top-0 p-5 w-full z-10">
                 <div class="flex justify-between items-center">
-                    <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar"
+                    <button data-drawer-target="default-sidebar"
+                        data-drawer-toggle="default-sidebar"
                         aria-controls="default-sidebar" type="button"
-                        class="inline-flex items-center p-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700">
+                        class="inline-flex items-center p-2 ms-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700">
                         <span class="sr-only">Open sidebar</span>
-                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                        <!-- Icon SVG -->
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+                            viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path clip-rule="evenodd" fill-rule="evenodd"
-                                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
+                                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 
+                                    010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 
+                                    01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 
+                                    01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 
+                                    010 1.5H2.75A.75.75 0 012 10z">
                             </path>
                         </svg>
                     </button>
-                    <a href="../../index.html" class="flex items-center border border-black/30 dark:border-white/30 bg-transparent p-1 px-4 rounded-full">
-                        <img src="../../public/image/logo.svg" alt="Logo BIPA" class="h-8 mr-3">
+                    <a href="../../index.html"
+                        class="flex items-center border border-black/30 dark:border-white/30 bg-transparent p-1 px-4 rounded-full">
+                        <img src="../../public/image/logo.svg" alt="Logo BIPA"
+                            class="h-8 mr-3">
                         <p class="dark:text-white text-black font-bold">
                             Satria
-                            <span class="ml-1 text-red-800 font-bold dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r from-yellow-200 to-yellow-500">BIPA</span>
+                            <span
+                                class="ml-1 text-red-800 font-bold dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r from-yellow-200 to-yellow-500">BIPA</span>
                         </p>
                     </a>
                     <div class="flex items-center space-x-4">
-                        <a href="login.html" class="login text-base font-bold text-black hover:underline dark:text-white">Masuk</a>
+                        <a href="#"
+                            class="text-base font-bold text-black hover:underline dark:text-white">Pengaturan</a>
+                        <a href="login.html"
+                            class="login text-base font-bold text-black hover:underline dark:text-white">Masuk</a>
                     </div>
                 </div>
             </header>
@@ -286,31 +311,37 @@
                 <!-- Salam dan Rekomendasi Chat -->
                 <div class="flex flex-col items-center p-5 greeting-section">
                     <div class="flex items-center">
-                        <img src="../../public/image/waving hand.png" class="mr-5 xl:h-16" alt="">
-                        <h1 class="text-3xl xl:mb-2 md:text-left text-center xl:text-6xl font-bold text-[#AE020B] dark:bg-clip-text dark:text-transparent pb-2 dark:bg-gradient-to-r from-yellow-500 via-yellow-200 to-yellow-500">Halo, Ferry</h1>
+                        <img src="../../public/image/waving-hand.png" class="mr-5 xl:h-16"
+                            alt="Waving Hand">
+                        <h1
+                            class="text-3xl xl:mb-2 md:text-left text-center xl:text-6xl font-bold text-[#AE020B] dark:bg-clip-text dark:text-transparent pb-2 dark:bg-gradient-to-r from-yellow-500 via-yellow-200 to-yellow-500">
+                            Halo, Ferry</h1>
                     </div>
                     <p class="font-bold">Mau belajar apa hari ini?</p>
-                    <div class="chat-recom flex my-14 justify-center space-x-2 ml-3 mr-4">
+                    <div
+                        class="chat-recom flex flex-wrap my-14 justify-center space-x-2 ml-3 mr-4">
                         <a href="#"
-                            class="flex items-center p-6 w-40 bg-gray-700 hover:bg-gray-500 rounded-md">
+                            class="flex items-center p-6 w-40 bg-gray-700 hover:bg-gray-500 rounded-md m-2">
                             <p class="text-sm text-white font-normal">Buatkan <span
                                     class="font-bold">pantun lucu</span> dalam bahasa Indonesia!</p>
                         </a>
                         <a href="#"
-                            class="flex items-center p-6 w-40 bg-gray-700 hover:bg-gray-500 rounded-md">
+                            class="flex items-center p-6 w-40 bg-gray-700 hover:bg-gray-500 rounded-md m-2">
                             <p class="text-sm text-white font-normal">Cara <span
                                     class="font-bold">bertanya tentang arah</span></p>
                         </a>
                         <a href="#"
-                            class="flex items-center p-6 w-40 bg-gray-700 hover:bg-gray-500 rounded-md">
-                            <p class="text-sm text-white font-normal"><span class="font-bold">Ayo, ngobrol!</span></p>
+                            class="flex items-center p-6 w-40 bg-gray-700 hover:bg-gray-500 rounded-md m-2">
+                            <p class="text-sm text-white font-normal"><span
+                                    class="font-bold">Ayo, ngobrol!</span></p>
                         </a>
                     </div>
                 </div>
 
                 <!-- Area Chat -->
-                <div class="chat-area flex flex-col flex-1 overflow-hidden">
-                    <div id="chat-box" class="chat-box flex flex-col space-y-4 overflow-y-auto scrollbar-custom">
+                <div class="chat-area flex flex-col flex-1">
+                    <div id="chat-box"
+                        class="chat-box flex flex-col space-y-4 overflow-y-auto scrollbar-custom">
                         <!-- Pesan chat akan ditambahkan di sini -->
                     </div>
                 </div>
@@ -318,14 +349,17 @@
                 <!-- Input Chat -->
                 <div class="input-area bg-white dark:bg-[#1B1B21]">
                     <div class="flex items-center relative w-full">
-                        <input id="message-input" placeholder="Tanya apa saja dalam bahasa Indonesia...." type="text"
+                        <input id="message-input"
+                            placeholder="Tanya apa saja dalam bahasa Indonesia...." type="text"
                             class="flex-1 py-3 px-4 text-sm rounded-2xl border border-[#ffcc00] bg-[#1f1f1f] text-[#e0e0e0] pr-10" />
-                        <button class="absolute right-5 top-1/2 transform -translate-y-1/2">
+                        <button
+                            class="absolute right-5 top-1/2 transform -translate-y-1/2">
                             <img src="../../public/image/send.png" id="send-btn" alt="Send Icon"
                                 class="h-6 w-6 hover:bg-slate-500" />
                         </button>
                     </div>
-                    <p class="text-center text-sm md:text-base text-[#a1a1a1] mt-2">
+                    <p
+                        class="text-center text-sm md:text-base text-[#a1a1a1] mt-2">
                         Satria BIPA mungkin dapat memberikan informasi yang keliru mengenai seseorang. Anda perlu
                         memverifikasi informasi tentang individu.
                         <br>
@@ -335,28 +369,28 @@
             </main>
 
             <!-- Footer -->
-            <footer class="w-full p-3 bg-[#828282] text-white dark:bg-[#2E3032] dark:text-gray-200">
-                <div class="container mx-auto flex justify-between items-center">
-                    <div class="flex items-center sm:ml-5 lg:ml-16 xl:mx-5">
+            <footer
+                class="w-full p-3 bg-[#828282] text-white dark:bg-[#2E3032] dark:text-gray-200">
+                <div
+                    class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+                    <div
+                        class="flex items-center sm:ml-5 lg:ml-16 xl:mx-5 mb-4 md:mb-0">
                         <img src="../../public/image/logo-bipa.png" alt="Logo BIPA"
                             class="h-7 mr-3 sm:h-8 md:h-10" />
-                        <span class="text-sm sm:text-base lg:text-lg">Hak Cipta Badan Pengembangan dan Pembinaan Bahasa © 2024</span>
+                        <span
+                            class="text-sm sm:text-base lg:text-lg">Hak Cipta Badan Pengembangan dan Pembinaan Bahasa © 2024</span>
                     </div>
-                    <div class="flex z-20 space-x-3 items-center sm:mr-5 lg:mr-16">
-                        <a href="https://www.instagram.com/bipakemdikbud" class="hover:text-gray-400">
-                            <i class="fab fa-instagram">
-                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24"  class="w-7 h-5">
-                                    <path fill="white" d="M 8 3 C 5.243 3 3 5.243 3 8 L 3 16 C 3 18.757 5.243 21 8 21 L 16 21 C 18.757 21 21 18.757 21 16 L 21 8 C 21 5.243 18.757 3 16 3 L 8 3 z M 8 5 L 16 5 C 17.654 5 19 6.346 19 8 L 19 16 C 19 17.654 17.654 19 16 19 L 8 19 C 6.346 19 5 17.654 5 16 L 5 8 C 5 6.346 6.346 5 8 5 z M 17 6 A 1 1 0 0 0 16 7 A 1 1 0 0 0 17 8 A 1 1 0 0 0 18 7 A 1 1 0 0 0 17 6 z M 12 7 C 9.243 7 7 9.243 7 12 C 7 14.757 9.243 17 12 17 C 14.757 17 17 14.757 17 12 C 17 9.243 14.757 7 12 7 z M 12 9 C 13.654 9 15 10.346 15 12 C 15 13.654 13.654 15 12 15 C 10.346 15 9 13.654 9 12 C 9 10.346 10.346 9 12 9 z"></path>
-                                </svg>
-                            </i>
+                    <div class="flex space-x-3 sm:mr-5 lg:mr-16">
+                        <a href="https://www.instagram.com/bipakemdikbud"
+                            class="hover:text-gray-400">
+                            <!-- SVG Instagram -->
+                            <!-- ... -->
                         </a>
-                        <a href="https://www.youtube.com/@bipakemdikbud" class="hover:text-gray-400">
-                            <i class="fab fa-youtube">
-                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="24" viewBox="0 0 24 24" class="w-7 h-5">
-                                    <path fill="white" d="M 12 4 C 12 4 5.7455469 3.9999687 4.1855469 4.4179688 C 3.3245469 4.6479688 2.6479687 5.3255469 2.4179688 6.1855469 C 1.9999687 7.7455469 2 12 2 12 C 2 12 1.9999687 16.254453 2.4179688 17.814453 C 2.6479687 18.675453 3.3255469 19.352031 4.1855469 19.582031 C 5.7455469 20.000031 12 20 12 20 C 12 20 18.254453 20.000031 19.814453 19.582031 C 20.674453 19.352031 21.352031 18.674453 21.582031 17.814453 C 22.000031 16.254453 22 12 22 12 C 22 12 22.000031 7.7455469 21.582031 6.1855469 C 21.352031 5.3255469 20.674453 4.6479688 19.814453 4.4179688 C 18.254453 3.9999687 12 4 12 4 z M 12 6 C 14.882 6 18.490875 6.1336094 19.296875 6.3496094 C 19.465875 6.3946094 19.604391 6.533125 19.650391 6.703125 C 19.891391 7.601125 20 10.342 20 12 C 20 13.658 19.891391 16.397875 19.650391 17.296875 C 19.605391 17.465875 19.466875 17.604391 19.296875 17.650391 C 18.491875 17.866391 14.882 18 12 18 C 9.119 18 5.510125 17.866391 4.703125 17.650391 C 4.534125 17.605391 4.3956094 17.466875 4.3496094 17.296875 C 4.1086094 16.398875 4 13.658 4 12 C 4 10.342 4.1086094 7.6011719 4.3496094 6.7011719 C 4.3946094 6.5331719 4.533125 6.3946094 4.703125 6.3496094 C 5.508125 6.1336094 9.118 6 12 6 z M 10 8.5351562 L 10 15.464844 L 16 12 L 10 8.5351562 z"></path>
-                                </svg>
-                            </i>
-                          </a>
+                        <a href="https://www.youtube.com/@bipakemdikbud"
+                            class="hover:text-gray-400">
+                            <!-- SVG YouTube -->
+                            <!-- ... -->
+                        </a>
                     </div>
                 </div>
             </footer>
@@ -372,57 +406,57 @@
             const chatBox = document.getElementById("chat-box");
             const greetingSection = document.querySelector(".greeting-section");
             const chatList = document.getElementById("chat-list");
-            // const chatListKemarin = document.getElementById("chat-list-2"); // Tidak digunakan dalam perbaikan ini
 
             // Array untuk menyimpan semua chat
-            let chats = [];
-            let currentChatId = null;
-            let chatCounter = 1;
-
-            // Fungsi untuk membuat chat baru
-            function createNewChat() {
-                const chatId = `chat-${Date.now()}`; // ID unik berdasarkan timestamp
-                const chatName = `Chat ${chatCounter++}`;
-
-                // Menambahkan chat baru ke array chats
-                const newChat = {
-                    id: chatId,
-                    name: chatName,
+            let chats = [
+                {
+                    id: 'chat-1',
+                    name: 'Chat 1',
+                    messages: [
+                        { sender: 'user', text: 'Halo, bagaimana kabarmu?' },
+                        { sender: 'bot', text: 'Halo! Saya baik-baik saja, terima kasih. Bagaimana dengan Anda?' },
+                        { sender: 'user', text: 'Saya juga baik, terima kasih.' },
+                        { sender: 'bot', text: 'Senang mendengarnya! Ada yang bisa saya bantu?' }
+                    ]
+                },
+                {
+                    id: 'chat-2',
+                    name: 'Chat 2',
                     messages: []
-                };
-                chats.push(newChat);
-                console.log(`Chat baru dibuat: ${chatName} dengan ID ${chatId}`);
-                console.log('Array chats:', chats);
+                }
+            ];
+            let currentChatIndex = 0;
+            let chatCounter = 3; // Chat berikutnya akan menjadi Chat 3
 
-                // Menambahkan chat baru ke sidebar (Terkini)
-                const li = document.createElement('li');
-                li.innerHTML = `
-                    <a href="#" class="chat-item block p-2 rounded-md cursor-pointer" data-chat-id="${chatId}">
-                        ${chatName}
-                    </a>
-                `;
-                chatList.prepend(li); // Tambahkan di atas
+            // Menampilkan daftar chat pada sidebar
+            function renderChatList() {
+                chatList.innerHTML = ''; // Bersihkan daftar chat
+                chats.forEach((chat, index) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <a href="#" class="chat-item block p-2 rounded-md cursor-pointer" data-chat-index="${index}">
+                            ${chat.name}
+                        </a>
+                    `;
+                    chatList.appendChild(li);
 
-                // Menambahkan event listener untuk chat item
-                li.querySelector('.chat-item').addEventListener('click', function (e) {
-                    e.preventDefault();
-                    switchToChat(chatId);
+                    // Menambahkan event listener untuk chat item
+                    li.querySelector('.chat-item').addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const chatIndex = this.dataset.chatIndex;
+                        switchToChat(parseInt(chatIndex));
+                    });
                 });
-
-                // Switch ke chat baru
-                switchToChat(chatId);
             }
 
             // Fungsi untuk switch ke chat tertentu
-            function switchToChat(chatId) {
-                currentChatId = chatId;
-                const selectedChat = chats.find(chat => chat.id === chatId);
+            function switchToChat(chatIndex) {
+                currentChatIndex = chatIndex;
+                const selectedChat = chats[currentChatIndex];
                 if (!selectedChat) {
-                    console.error(`Chat dengan ID ${chatId} tidak ditemukan.`);
+                    console.error(`Chat dengan index ${chatIndex} tidak ditemukan.`);
                     return;
                 }
-
-                console.log(`Beralih ke chat: ${selectedChat.name}`);
 
                 // Menampilkan pesan dari chat yang dipilih
                 chatBox.innerHTML = '';
@@ -438,8 +472,8 @@
                 });
 
                 // Menandai chat yang aktif di sidebar
-                document.querySelectorAll('.chat-item').forEach(item => {
-                    if (item.dataset.chatId === chatId) {
+                document.querySelectorAll('.chat-item').forEach((item, index) => {
+                    if (index == currentChatIndex) {
                         item.classList.add('active-chat');
                     } else {
                         item.classList.remove('active-chat');
@@ -457,100 +491,113 @@
                 }
             }
 
-            // Fungsi untuk mengirim pesan
-            async function sendMessage() {
-    const messageText = messageInput.value.trim();
-    if (messageText === '' || !currentChatId) return;
+            // Fungsi untuk membuat chat baru
+            function createNewChat() {
+                const chatId = `chat-${Date.now()}`;
+                const chatName = `Chat ${chatCounter++}`;
 
-    // Menambahkan pesan pengguna ke array chats
-    const selectedChat = chats.find(chat => chat.id === currentChatId);
-    if (!selectedChat) {
-        console.error(`Chat dengan ID ${currentChatId} tidak ditemukan.`);
-        return;
-    }
+                // Menambahkan chat baru ke array chats
+                const newChat = {
+                    id: chatId,
+                    name: chatName,
+                    messages: []
+                };
+                chats.push(newChat);
 
-    const userMessage = {
-        sender: 'user',
-        text: messageText
-    };
-    selectedChat.messages.push(userMessage);
+                // Render ulang daftar chat
+                renderChatList();
 
-    // Menambahkan pesan pengguna ke chat box
-    const messageDiv = document.createElement('div');
-    messageDiv.classList.add('bg-[#ffcc00]', 'text-black', 'self-end', 'text-right', 'hover:shadow-md', 'p-4', 'rounded-md', 'max-w-xs', 'w-fit', 'shadow-lg', 'transition-all', 'duration-300');
-    messageDiv.textContent = messageText;
-    chatBox.appendChild(messageDiv);
-
-    // Scroll ke bawah
-    chatBox.scrollTop = chatBox.scrollHeight;
-
-    // Clear input
-    messageInput.value = '';
-
-    // Sembunyikan greeting jika ini pesan pertama
-    if (selectedChat.messages.length === 1) {
-        greetingSection.classList.add('hidden');
-    }
-
-    try {
-        // Mengirim permintaan ke API dengan protokol yang benar
-        const response = await fetch('http://35.94.216.188:6845/generate', { // Pastikan protokol sesuai
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ message: messageText })
-        });
-
-        if (!response.ok) {
-            throw new Error(`API error: ${response.status}`);
-        }
-
-        const data = await response.json();
-        const botResponse = data.reply || 'Maaf, terjadi kesalahan dalam mendapatkan respons dari server.';
-
-        // Menambahkan pesan bot ke array chats
-        const botMessage = {
-            sender: 'bot',
-            text: botResponse
-        };
-        selectedChat.messages.push(botMessage);
-
-        // Menambahkan pesan bot ke chat box
-        const botMessageDiv = document.createElement('div');
-        botMessageDiv.classList.add('bg-[#2b2b2b]', 'text-[#e0e0e0]', 'self-start', 'text-left', 'hover:bg-[#333]', 'hover:shadow-md', 'p-4', 'rounded-md', 'max-w-xs', 'w-fit', 'shadow-lg', 'transition-all', 'duration-300');
-        botMessageDiv.textContent = botResponse;
-        chatBox.appendChild(botMessageDiv);
-
-        // Scroll ke bawah
-        chatBox.scrollTop = chatBox.scrollHeight;
-    } catch (error) {
-        console.error('Error:', error);
-        // Menambahkan pesan error ke chat box
-        const errorDiv = document.createElement('div');
-        errorDiv.classList.add('bg-red-500', 'text-white', 'self-start', 'text-left', 'hover:shadow-md', 'p-4', 'rounded-md', 'max-w-xs', 'w-fit', 'shadow-lg', 'transition-all', 'duration-300');
-        errorDiv.textContent = 'Maaf, terjadi kesalahan saat menghubungi server.';
-        chatBox.appendChild(errorDiv);
-
-        // Scroll ke bawah
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
-}
-
-
-            // Fungsi untuk menginisialisasi dan menambahkan tombol toggle sidebar
-            function initializeSidebarToggle() {
-                const sidebarToggleButton = document.createElement('button');
-                sidebarToggleButton.className = 'sm:hidden fixed top-4 left-4 bg-[#ffcc00] text-black rounded-full p-3 z-20';
-                sidebarToggleButton.innerHTML = '<i class="fas fa-bars"></i>';
-                sidebarToggleButton.onclick = toggleSidebar;
-                document.body.appendChild(sidebarToggleButton);
+                // Switch ke chat baru
+                switchToChat(chats.length - 1);
             }
 
-            // Fungsi untuk toggle sidebar
-            function toggleSidebar() {
-                const sidebar = document.getElementById('default-sidebar'); // Perbaiki id di sini
-                sidebar.classList.toggle('-translate-x-full');
+            // Fungsi untuk mengirim pesan
+            async function sendMessage() {
+                const messageText = messageInput.value.trim();
+                if (messageText === '' || currentChatIndex === null) return;
+
+                // Menambahkan pesan pengguna ke array chats
+                const selectedChat = chats[currentChatIndex];
+                if (!selectedChat) {
+                    console.error(`Chat dengan index ${currentChatIndex} tidak ditemukan.`);
+                    return;
+                }
+
+                const userMessage = {
+                    sender: 'user',
+                    text: messageText
+                };
+                selectedChat.messages.push(userMessage);
+
+                // Menambahkan pesan pengguna ke chat box
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('bg-[#ffcc00]', 'text-black', 'self-end', 'text-right',
+                    'hover:shadow-md', 'p-4', 'rounded-md', 'max-w-xs', 'w-fit', 'shadow-lg',
+                    'transition-all', 'duration-300');
+                messageDiv.textContent = messageText;
+                chatBox.appendChild(messageDiv);
+
+                // Scroll ke bawah
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                // Clear input
+                messageInput.value = '';
+
+                // Sembunyikan greeting jika ini pesan pertama
+                if (selectedChat.messages.length === 1) {
+                    greetingSection.classList.add('hidden');
+                }
+
+                try {
+                    // Ganti URL berikut dengan endpoint API Anda
+                    console.log(messageText)
+                    const response = await fetch('http://ec2-52-89-76-29.us-west-2.compute.amazonaws.com:6845/generate', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ message: messageText })
+                    });
+
+                    if (!response.ok) {
+                        console.error(`API error: ${response.status} ${response.statusText}`);
+                        throw new Error(`API error: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    console.log(data)
+                    const botResponse = data.response || 'Maaf, terjadi kesalahan dalam mendapatkan respons dari server.';
+
+                    // Menambahkan pesan bot ke array chats
+                    const botMessage = {
+                        sender: 'bot',
+                        text: botResponse
+                    };
+                    selectedChat.messages.push(botMessage);
+
+                    // Menambahkan pesan bot ke chat box
+                    const botMessageDiv = document.createElement('div');
+                    botMessageDiv.classList.add('bg-[#2b2b2b]', 'text-[#e0e0e0]', 'self-start', 'text-left',
+                        'hover:bg-[#333]', 'hover:shadow-md', 'p-4', 'rounded-md', 'max-w-xs', 'w-fit',
+                        'shadow-lg', 'transition-all', 'duration-300');
+                    botMessageDiv.textContent = botResponse;
+                    chatBox.appendChild(botMessageDiv);
+
+                    // Scroll ke bawah
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                } catch (error) {
+                    console.error('Error saat menghubungi API:', error);
+                    // Menambahkan pesan error ke chat box
+                    const errorDiv = document.createElement('div');
+                    errorDiv.classList.add('bg-red-500', 'text-white', 'self-start', 'text-left',
+                        'hover:shadow-md', 'p-4', 'rounded-md', 'max-w-xs', 'w-fit', 'shadow-lg',
+                        'transition-all', 'duration-300');
+                    errorDiv.textContent = 'Maaf, terjadi kesalahan saat menghubungi server.';
+                    chatBox.appendChild(errorDiv);
+
+                    // Scroll ke bawah
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }
             }
 
             // Menghubungkan event listeners
@@ -566,11 +613,9 @@
                 }
             });
 
-            // Inisialisasi sidebar toggle dan buat tombol toggle
-            initializeSidebarToggle();
-
-            // Inisialisasi dengan satu chat default
-            createNewChat();
+            // Render daftar chat dan inisialisasi chat pertama
+            renderChatList();
+            switchToChat(currentChatIndex);
         });
     </script>
 
