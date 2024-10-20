@@ -210,5 +210,92 @@
       </div>
     </main> 
     <%- include('partials/footer') %>
+    <script>
+      document.getElementById('login-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+    
+        // Ambil data dari form
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+    
+        // Data yang akan dikirimkan ke API
+        const data = {
+          email: email,
+          password: password
+        };
+    
+        try {
+          // Kirim data ke API menggunakan POST request
+          const response = await fetch('https://4c89-35-85-179-20.ngrok-free.app/auth/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+    
+          // Cek respon dari API
+          if (response.ok) {
+            const result = await response.json();
+            alert('Masuk berhasil!');
+            window.location.href = '/chat';
+          } else {
+            const errorData = await response.json();
+            alert(`Error: ${errorData.message}`);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Terjadi kesalahan, coba lagi nanti.');
+        }
+      });
+
+      document.getElementById('register-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+    
+        // Ambil data dari form
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('register-email').value;
+        const country = document.getElementById('country').value;
+        const password = document.getElementById('register-password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+    
+        // Validasi password
+        if (password !== confirmPassword) {
+          alert('Password dan konfirmasi password tidak cocok!');
+          return;
+        }
+    
+        // Data yang akan dikirimkan ke API
+        const data = {
+          email: email,
+          country: country,
+          password: password  
+        };
+    
+        try {
+          // Kirim data ke API menggunakan POST request
+          const response = await fetch('https://4c89-35-85-179-20.ngrok-free.app/auth/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+    
+          // Cek respon dari API
+          if (response.ok) {
+            const result = await response.json();
+            alert('Pendaftaran berhasil!');
+            window.location.href = '/login';
+          } else {
+            const errorData = await response.json();
+            alert(`Error: ${errorData.message}`);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Terjadi kesalahan, coba lagi nanti.');
+        }
+      });
+    </script>
   </body>
 </html>

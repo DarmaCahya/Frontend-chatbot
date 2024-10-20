@@ -1,0 +1,23 @@
+{
+    "name": "icofont",
+    "description": "2100+ free icons to spice up your creative designs",
+    "version": "1.0.0",
+    "main": "main.js",
+    "scripts": {
+        "start": "node main.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/LuanHimmlisch/icofont.git"
+    },
+    "keywords": [
+        "icofont",
+        "icon",
+        "font"
+    ],
+    "author": "IcoFont",
+    "license": "CC-BY-4.0",
+    "devDependencies": {
+        "adm-zip": "^0.5.9"
+    }
+}

@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
+app.get('/index', (req, res) => {
     res.render('index');
 });
 
@@ -22,6 +22,10 @@ app.get('/login', (req, res) => {
 
 app.get('/chat', (req, res) => {
     res.render('chatAI');
+});
+
+app.get('/', (req, res) => {
+    res.render('test');
 });
 
 app.listen(PORT, () => {
