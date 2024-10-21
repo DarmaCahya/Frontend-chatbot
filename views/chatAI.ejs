@@ -144,35 +144,64 @@
         .chat-box div {
             word-wrap: break-word;
         }
+
+        /* Default sidebar */
+#default-sidebar {
+    width: 24rem; /* Full width */
+    transition: width 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+/* Minimized sidebar */
+#default-sidebar.minimized {
+    width: 80px; /* Narrow sidebar when minimized */
+}
+
+#default-sidebar.minimized #default-sidebar-content {
+    margin-left: 0px; /* Narrow sidebar when minimized */
+    margin-right: 0px; /* Narrow sidebar when minimized */
+    transition: all 250ms;
+}
+
+#default-sidebar.minimized #default-sidebar-setting {
+    margin-left: 0px; /* Narrow sidebar when minimized */
+    margin-right: 0px; /* Narrow sidebar when minimized */
+    transition: all 250ms;
+}
+
+#default-sidebar.minimized #default-sidebar-toggler {
+    justify-content: center;
+}
+
+#default-sidebar.minimized #default-sidebar-setting-content-minimized {
+    display: block;
+}
+
+#default-sidebar.minimized #default-sidebar-setting-content {
+    display: none;
+}
+
+#default-sidebar .sidebar-text {
+    display: inline-block; /* Show text by default */
+}
+
+/* Hide text when sidebar is minimized */
+#default-sidebar.minimized .sidebar-text {
+    display: none;
+}
+
     </style>
 </head>
 
 <body class="bg-white dark:bg-[#1B1B21] overflow-x-hidden text-black dark:text-white transition duration-75">
     <div class="main-container">
         <!-- Sidebar -->
-        <aside id="default-sidebar" class="fixed bg-black h-full top-0 left-0 z-40 w-80 md:w-[22rem] lg:w-[25rem] overflow-y-auto scrollbar-custom flex flex-col transition-transform translate-x-0 text-gray-400">
+        <aside id="default-sidebar" class="fixed bg-black h-full top-0 left-0 z-40 w-80 md:w-[22rem] lg:w-[25rem] overflow-y-auto scrollbar-custom flex flex-col transition-all duration-300 translate-x-0 text-gray-400">
             <!-- Tombol untuk menutup sidebar pada layar kecil -->
-            <div class="flex justify-end p-4">
-                <button data-drawer-hide="default-sidebar" aria-controls="default-sidebar" type="button"
+            <div id="default-sidebar-toggler" class="flex justify-end p-4">
+                <button id="toggle-sidebar" aria-controls="default-sidebar" type="button"
                     class="text-gray-400 hover:text-white">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M4.293 4.293a1 1 0 011.414 0L10 
-                            8.586l4.293-4.293a1 1 0 111.414 
-                            1.414L11.414 10l4.293 4.293a1 1 0 
-                            01-1.414 1.414L10 11.414l-4.293 
-                            4.293a1 1 0 01-1.414-1.414L8.586 
-                            10 4.293 5.707a1 1 0 010-1.414z">
-                        </path>
-                    </svg>
-                </button>
-                <button data-drawer-target="default-sidebar"
-                        data-drawer-toggle="default-sidebar"
-                        aria-controls="default-sidebar" type="button"
-                        class="inline-flex items-center p-2 ms-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none dark:text-gray-400 dark:hover:bg-gray-700">
-                        <span class="sr-only">Open sidebar</span>
-                        <!-- Icon SVG -->
-                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
+                    <!-- Placeholder for close button icon -->
+                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor"
                             viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path clip-rule="evenodd" fill-rule="evenodd"
@@ -183,52 +212,53 @@
                                     010 1.5H2.75A.75.75 0 012 10z">
                             </path>
                         </svg>
-                    </button>
-            </div>
-
-            <!-- Konten Sidebar -->
-            <div class="flex justify-between mx-10 mt-5 mb-2 w-fit border rounded-md">
-                <button id="new-chat-btn"
-                    class="flex flex-row items-center p-2 m-1 bg-gray-800 hover:bg-gray-700 rounded-md">
-                    <img src="/images/new-section.svg"
-                        class="bg-black hover:bg-slate-500 mr-2 h-6" alt="New Chat">
-                    <p>Mulai Percakapan Baru</p>
                 </button>
             </div>
-
-            <!-- Judul Bagian -->
-            <section class="mx-10 mb-2">
-                <h1 class="text-2xl font-bold  ml-6">Riwayat Percakapan</h1>
-                <p class="flex items-center text-sm">
-                    <img src="/images/history-toggle.svg" class="mr-3 h-4" alt="History Toggle">
-                    Riwayat percakapan Anda dengan Satria BIPA
-                </p>
-            </section>
-
-            <!-- Daftar Riwayat Chat -->
-            <section id="chat-history-list"
-                class="bg-[#1b1b21] p-5 mx-10 mb-5 rounded-md flex-grow overflow-y-auto scrollbar-custom">
-                <div>
-                    <p class="font-bold text-base mb-3">Terkini</p>
-                    <ul id="chat-list" class="space-y-2 font-medium">
-                        <!-- Chat items akan ditambahkan di sini -->
-                    </ul>
-                    <button id="show-more-btn" class="hidden text-sm text-blue-500 underline">Tampilkan lebih banyak</button>
-                    <button id="show-less-btn" class="hidden text-sm text-blue-500 underline">Tampilkan lebih sedikit</button>
-                </div>
-                <hr class="my-3">
+        
+            <!-- Konten Sidebar -->
+            <div id="default-sidebar-content" class="flex justify-between mx-10 mt-5 mb-2 w-fit border rounded-md">
+                <button id="new-chat-btn"
+                class="flex flex-row items-center justify-center p-2 m-2 bg-gray-800 hover:bg-gray-700 rounded-md">
+                    <img src="/images/new-section.svg"
+                    class="bg-black hover:bg-slate-500 h-6" alt="New Chat">
+                    <p class="sidebar-text ml-2">Mulai Percakapan Baru</p>
+                </button>
+            </div>
+            <div class="sidebar-content-wrapper">
+            
+                <!-- Judul Bagian -->
+                <section class="mx-10 mb-2">
+                    <h1 class="text-2xl font-bold ml-6 sidebar-text">Riwayat Percakapan</h1>
+                    <p class="flex items-center text-sm">
+                        <img src="/images/history-toggle.svg" class="mr-3 h-4" alt="History Toggle">
+                        <span class="sidebar-text">Riwayat percakapan Anda</span>
+                    </p>
+                </section>
+            
+                <!-- Daftar Riwayat Chat -->
+                <section id="chat-history-list" class="bg-[#1b1b21] p-5 mx-10 mb-5 rounded-md flex-grow overflow-y-auto scrollbar-custom">
+                    <div>
+                        <p class="font-bold text-base mb-3 sidebar-text">Terkini</p>
+                        <ul id="chat-list" class="space-y-2 font-medium">
+                            <!-- Chat items will be added here -->
+                        </ul>
+                        <button id="show-more-btn" class="hidden text-sm text-blue-500 underline">Tampilkan lebih banyak</button>
+                        <button id="show-less-btn" class="hidden text-sm text-blue-500 underline">Tampilkan lebih sedikit</button>
+                    </div>
+                    <hr class="my-3">
                 <div>
                     <p class="font-bold text-base mb-3">Kemarin</p>
                     <ul id="chat-list-2" class="space-y-2 font-medium">
                         <!-- Chat items akan ditambahkan di sini -->
                     </ul>
                 </div>
-            </section>
-
+                </section>
+            </div>
+        
             <!-- Pengaturan dan Toggle Dark Mode -->
-            <section class="mx-10 mb-5">
+            <section id="default-sidebar-setting" class="mx-10 mb-5 mt-auto">
                 <!-- Konten pengaturan tetap sama -->
-                <div>
+                <div id="default-sidebar-setting-content" class="">
                     <a href="#"
                         class="flex items-center bg-[#1b1b21] hover:bg-white p-3 mt-3 rounded-md icon">
                         <!-- Icon Bantuan dan Teks -->
@@ -273,11 +303,52 @@
                         </div>
                     </a>
                 </div>
+
+                <div id="default-sidebar-setting-content-minimized" class="hidden w-full space-y-4 flex justify-center">
+                    <div class="flex justify-center cursor-pointer">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_69_1038)">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.17317 2.7612C9.38642 2.25866 10.6868 2 12 2C13.3132 2 14.6136 2.25866 15.8268 2.7612C17.0401 3.26375 18.1425 4.00035 19.0711 4.92893C19.9997 5.85752 20.7362 6.95991 21.2388 8.17317C21.7413 9.38642 22 10.6868 22 12C22 13.3132 21.7413 14.6136 21.2388 15.8268C20.7362 17.0401 19.9997 18.1425 19.0711 19.0711C18.1425 19.9997 17.0401 20.7362 15.8268 21.2388C14.6136 21.7413 13.3132 22 12 22C10.6868 22 9.38642 21.7413 8.17317 21.2388C6.95991 20.7362 5.85752 19.9997 4.92893 19.0711C4.00035 18.1425 3.26375 17.0401 2.7612 15.8268C2.25866 14.6136 2 13.3132 2 12C2 10.6868 2.25866 9.38642 2.7612 8.17317C3.26375 6.95991 4.00035 5.85752 4.92893 4.92893C5.85752 4.00035 6.95991 3.26375 8.17317 2.7612ZM12 4C10.9494 4 9.90914 4.20693 8.93853 4.60896C7.96793 5.011 7.08601 5.60028 6.34315 6.34315C5.60028 7.08601 5.011 7.96793 4.60896 8.93853C4.20693 9.90914 4 10.9494 4 12C4 13.0506 4.20693 14.0909 4.60896 15.0615C5.011 16.0321 5.60028 16.914 6.34315 17.6569C7.08601 18.3997 7.96793 18.989 8.93853 19.391C9.90914 19.7931 10.9494 20 12 20C13.0506 20 14.0909 19.7931 15.0615 19.391C16.0321 18.989 16.914 18.3997 17.6569 17.6569C18.3997 16.914 18.989 16.0321 19.391 15.0615C19.7931 14.0909 20 13.0506 20 12C20 10.9494 19.7931 9.90914 19.391 8.93853C18.989 7.96793 18.3997 7.08602 17.6569 6.34315C16.914 5.60028 16.0321 5.011 15.0615 4.60896C14.0909 4.20693 13.0506 4 12 4ZM12 16C12.5523 16 13 16.4477 13 17V17.01C13 17.5623 12.5523 18.01 12 18.01C11.4477 18.01 11 17.5623 11 17.01V17C11 16.4477 11.4477 16 12 16ZM12.0813 5.97145C11.5241 5.9699 10.9742 6.09772 10.4748 6.34483C9.97535 6.59194 9.54013 6.9516 9.20334 7.39549C8.86952 7.83548 8.95559 8.46276 9.39557 8.79658C9.83555 9.1304 10.4628 9.04433 10.7967 8.60435C10.9463 8.40706 11.1398 8.24721 11.3617 8.13739C11.5837 8.02756 11.8281 7.97075 12.0758 7.97144C12.3234 7.97213 12.5675 8.03029 12.7888 8.14135C13.0102 8.2524 13.2027 8.41332 13.3513 8.61144C13.4999 8.80955 13.6005 9.03945 13.6451 9.28304C13.6897 9.52662 13.6772 9.77724 13.6086 10.0152C13.5399 10.2531 13.4169 10.4718 13.2493 10.6542C13.084 10.834 12.8798 10.9735 12.6524 11.0622C12.1479 11.2434 11.7149 11.582 11.4175 12.0282C11.1169 12.4791 10.9709 13.0155 11.0016 13.5565C11.0329 14.1079 11.5052 14.5296 12.0566 14.4983C12.608 14.467 13.0297 13.9947 12.9984 13.4433C12.9923 13.3351 13.0214 13.2278 13.0816 13.1376C13.1417 13.0475 13.2295 12.9792 13.3317 12.9433C13.3403 12.9403 13.3487 12.9372 13.3572 12.934C13.8776 12.7349 14.3448 12.4178 14.7218 12.0076C15.0989 11.5973 15.3756 11.1052 15.5301 10.5698C15.6846 10.0345 15.7128 9.47061 15.6124 8.92254C15.5119 8.37447 15.2856 7.85719 14.9513 7.41144C14.617 6.96568 14.1838 6.60361 13.6857 6.35373C13.1877 6.10386 12.6385 5.97299 12.0813 5.97145Z" fill="white"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_69_1038">
+                                    <rect width="24" height="24" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                    
+                    <div class="flex justify-center cursor-pointer">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_401_332)">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.16977 14.83C9.92977 15.58 10.9298 16 11.9998 16C13.0698 16 14.0798 15.59 14.8298 14.83C15.5798 14.07 15.9998 13.07 15.9998 12C15.9998 10.93 15.5898 9.93 14.8298 9.17C14.0698 8.42 13.0698 8 11.9998 8C10.9298 8 9.92977 8.42 9.16977 9.17C8.41977 9.93 7.99977 10.93 7.99977 12C7.99977 13.07 8.40977 14.08 9.16977 14.83ZM10.5898 10.59C10.9598 10.21 11.4698 10 11.9998 10H12.0098C12.5298 10 13.0398 10.22 13.4198 10.59C13.7998 10.96 14.0098 11.48 14.0098 12C14.0098 12.52 13.7898 13.04 13.4198 13.41C12.6698 14.15 11.3398 14.15 10.5898 13.41C10.2098 13.04 9.99977 12.53 9.99977 12C9.99977 11.47 10.2198 10.97 10.5898 10.59Z" fill="white"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.34976 19.92C9.65977 21.16 10.7198 22 11.9998 22L12.0098 21.98C13.2898 21.98 14.3598 21.14 14.6598 19.9C14.6798 19.79 14.7398 19.69 14.8098 19.6C14.8798 19.51 14.9798 19.44 15.0798 19.4C15.1798 19.35 15.2998 19.34 15.4098 19.35C15.5198 19.35 15.6298 19.39 15.7298 19.45C16.8198 20.12 18.1598 19.95 19.0698 19.05C19.9798 18.15 20.1398 16.8 19.4698 15.71C19.4098 15.62 19.3698 15.51 19.3698 15.39C19.3598 15.28 19.3798 15.16 19.4198 15.06C19.4698 14.96 19.5398 14.86 19.6198 14.79C19.7098 14.72 19.8098 14.67 19.9198 14.64C21.1598 14.33 21.9998 13.27 21.9998 11.99C21.9998 10.71 21.1698 9.64 19.9198 9.34C19.8098 9.32 19.6998 9.26 19.6198 9.19C19.5298 9.12 19.4598 9.02 19.4198 8.92C19.3698 8.82 19.3698 8.7 19.3698 8.59C19.3698 8.48 19.4098 8.37 19.4698 8.27C20.1398 7.18 19.9798 5.84 19.0698 4.93C18.1698 4.02 16.8198 3.86 15.7298 4.53C15.6298 4.59 15.5198 4.63 15.4098 4.63C15.2998 4.64 15.1898 4.62 15.0798 4.58C14.9798 4.54 14.8898 4.47 14.8098 4.38C14.7398 4.29 14.6898 4.19 14.6598 4.08C14.3498 2.84 13.2898 2 12.0098 2C10.7298 2 9.65977 2.84 9.35977 4.08C9.29977 4.31 9.13976 4.49 8.92976 4.58C8.71976 4.67 8.47976 4.65 8.27977 4.53C7.18977 3.86 5.84977 4.02 4.93977 4.93C4.02977 5.84 3.86977 7.18 4.53977 8.28C4.59977 8.38 4.63977 8.49 4.63977 8.6C4.64977 8.71 4.62977 8.83 4.58977 8.93C4.53977 9.03 4.47977 9.13 4.38977 9.2C4.29977 9.27 4.19977 9.32 4.08977 9.35C2.84977 9.65 2.00977 10.72 2.00977 12C2.00977 13.28 2.84977 14.35 4.08977 14.65C4.19977 14.68 4.29977 14.73 4.38977 14.81C4.47977 14.88 4.54977 14.97 4.58977 15.08C4.63977 15.18 4.63977 15.3 4.63977 15.41C4.62977 15.52 4.59977 15.63 4.53977 15.73C3.86977 16.82 4.02977 18.16 4.93977 19.07C5.83977 19.97 7.17977 20.14 8.27977 19.47C8.36977 19.41 8.48977 19.37 8.59976 19.37C8.70977 19.35 8.81977 19.38 8.92976 19.42C9.02977 19.46 9.12976 19.53 9.19977 19.62C9.26976 19.71 9.31977 19.81 9.34976 19.92ZM9.68976 17.57C9.35977 17.43 8.99977 17.36 8.64977 17.36V17.38H8.43976C8.00977 17.41 7.58977 17.55 7.22977 17.77C6.77977 18.04 6.43977 17.75 6.33977 17.66C6.23977 17.57 5.94977 17.22 6.22977 16.77C6.44977 16.4 6.58977 15.98 6.61977 15.56C6.64977 15.14 6.57977 14.7 6.41977 14.31C6.25977 13.91 5.99977 13.56 5.67977 13.28C5.35977 13 4.96977 12.8 4.54977 12.7C4.03977 12.58 3.99977 12.13 3.99977 12C3.99977 11.87 4.03977 11.42 4.54977 11.3C4.96977 11.2 5.35977 11 5.67977 10.72C6.00977 10.44 6.26977 10.09 6.42977 9.69C6.58977 9.3 6.65977 8.86 6.62977 8.44C6.59977 8.01 6.45976 7.59 6.23977 7.23C5.96977 6.78 6.25977 6.44 6.34977 6.34C6.43977 6.24 6.78977 5.95 7.23977 6.23C7.98977 6.69 8.88976 6.76 9.69977 6.42C10.5098 6.09 11.0898 5.4 11.2998 4.55C11.4198 4.04 11.8698 4 11.9998 4C12.1298 4 12.5798 4.04 12.6998 4.55C12.8098 4.97 13.0098 5.36 13.2798 5.68C13.5598 6.01 13.9198 6.27 14.3098 6.43C14.6998 6.59 15.1398 6.67 15.5598 6.63C15.9898 6.6 16.4098 6.46 16.7698 6.24C17.2198 5.97 17.5698 6.26 17.6598 6.35C17.7598 6.45 18.0398 6.79 17.7698 7.24C17.5498 7.6 17.4098 8.02 17.3798 8.45C17.3498 8.87 17.4198 9.3 17.5798 9.7C17.7398 10.09 17.9998 10.44 18.3198 10.72C18.6498 11 19.0398 11.2 19.4498 11.3C19.9598 11.42 19.9998 11.87 19.9998 12C19.9998 12.13 19.9598 12.58 19.4498 12.7C19.0398 12.8 18.6498 13 18.3198 13.28C17.9898 13.56 17.7398 13.91 17.5698 14.31C17.4098 14.71 17.3398 15.14 17.3698 15.56C17.3998 15.99 17.5398 16.4 17.7598 16.77C18.0298 17.22 17.7398 17.57 17.6498 17.66C17.5498 17.76 17.2098 18.04 16.7598 17.77C16.3998 17.55 15.9798 17.41 15.5498 17.38C15.1298 17.35 14.6998 17.42 14.2998 17.58C13.9098 17.74 13.5598 18 13.2798 18.32C12.9998 18.64 12.7998 19.03 12.6998 19.45C12.5798 19.96 12.1298 20 11.9998 20C11.8698 20 11.4198 19.96 11.2998 19.45C11.1998 19.04 10.9998 18.65 10.7198 18.32C10.4398 17.99 10.0798 17.73 9.68976 17.57Z" fill="white"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_401_332">
+                                    <rect width="24" height="24" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+               
+                    <div class="flex justify-center items-center">
+                        <label class="flex items-center">
+                            <input type="checkbox" value="" class="sr-only peer"
+                                onclick="toggleMode()">
+                            <div
+                                class="relative mx-3 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-['🌞'] dark:after:content-['🌜'] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                            </div>
+                        </label>
+                    </div>
+                  
+                </div>
             </section>
         </aside>
+        
 
         <!-- Area Konten Utama -->
-        <div class="flex flex-col flex-1 md:ml-[22rem] xl:ml-[25rem]">
+        <div id="main-content" class="flex flex-col flex-1 ml-[6rem] md:ml-[22rem] xl:ml-[24rem] transition-all">
             <!-- Header -->
             <header class="sticky bg-white dark:bg-[#1B1B21] md:ml-3 top-0 p-5 w-full z-10">
                 <div class="flex justify-between items-center">
@@ -377,19 +448,18 @@
 
     <!-- JavaScript -->
     <script>
-        const closeButton = document.querySelector('[data-drawer-hide="default-sidebar"]');
         const sidebar = document.getElementById('default-sidebar');
+        const closeButton = document.getElementById('toggle-sidebar');
+        const sidebarContentWrapper = document.querySelector('.sidebar-content-wrapper')
+        const mainContent = document.querySelector('#main-content')
 
+        // Add event listener to close button to minimize the sidebar
         closeButton.addEventListener('click', () => {
-            sidebar.classList.add('-translate-x-full');
+            sidebar.classList.toggle('minimized');
+            sidebarContentWrapper.classList.toggle('hidden')
+            mainContent.classList.toggle('xl:ml-[8rem]')
+            mainContent.classList.toggle('md:ml-[6rem]')
         });
-
-        const openButton = document.querySelector('[data-drawer-toggle="default-sidebar"]');
-
-        openButton.addEventListener('click', () => {
-            sidebar.classList.remove('-translate-x-full');
-        });
-
         document.addEventListener("DOMContentLoaded", function () {
             const newChatBtn = document.getElementById("new-chat-btn");
             const sendBtn = document.getElementById("send-btn");
@@ -400,21 +470,21 @@
             const chatRecomSection = document.querySelector(".chat-recom");
             const showMoreBtn = document.getElementById("show-more-btn");
             const showLessBtn = document.getElementById("show-less-btn");
-
             const alertPopup = document.getElementById("alert-popup");
 
-            let messageCount = 0;
-
-            // Inisialisasi dengan satu chat default
             let chats = [{
                 id: 'chat-1',
                 name: 'Chat 1',
                 messages: []
             }];
+            
+            let messageCount = 0;
             let currentChatIndex = 0;
-            let chatCounter = 2; // Chat berikutnya akan menjadi Chat 2
-
             const maxVisibleChats = 4;
+            let chatCounter = 2; 
+            let isShowingMore = false;
+
+            // Fungsi untuk merender daftar chat
             function renderChatList() {
                 chatList.innerHTML = '';
 
@@ -430,41 +500,58 @@
                         const chatIndex = parseInt(this.dataset.chatIndex);
                         switchToChat(chatIndex);
                     });
-                    if (index >= maxVisibleChats) {
-                        li.classList.add('hidden'); 
+
+                    // Sembunyikan chat jika show less aktif dan melebihi batas 4 chat
+                    if (index >= maxVisibleChats && !isShowingMore) {
+                        li.classList.add('hidden');
                     }
+
                     li.appendChild(a);
                     chatList.appendChild(li);
                 });
+
+                // Jika ada lebih dari maxVisibleChats, tampilkan tombol show more
                 if (chats.length > maxVisibleChats) {
-                    showMoreBtn.classList.remove('hidden');
+                    if (isShowingMore) {
+                        showMoreBtn.classList.add('hidden');
+                        showLessBtn.classList.remove('hidden');
+                    } else {
+                        showMoreBtn.classList.remove('hidden');
+                        showLessBtn.classList.add('hidden');
+                    }
                 } else {
                     showMoreBtn.classList.add('hidden');
+                    showLessBtn.classList.add('hidden');
                 }
             }
 
+            // Logika untuk tombol show more
             showMoreBtn.addEventListener('click', () => {
+                isShowingMore = true; // Aktifkan mode show more
                 const hiddenChats = document.querySelectorAll('#chat-list li.hidden');
                 hiddenChats.forEach(hiddenChat => {
-                    hiddenChat.classList.remove('hidden'); 
+                    hiddenChat.classList.remove('hidden');
                 });
-                showMoreBtn.classList.add('hidden'); 
+                showMoreBtn.classList.add('hidden');
                 showLessBtn.classList.remove('hidden');
             });
 
+            // Logika untuk tombol show less
             showLessBtn.addEventListener('click', () => {
+                isShowingMore = false; // Nonaktifkan mode show more
                 const allChats = document.querySelectorAll('#chat-list li');
-                
+
                 allChats.forEach((chat, index) => {
                     if (index >= maxVisibleChats) {
-                        chat.classList.add('hidden'); 
+                        chat.classList.add('hidden');
                     }
                 });
 
                 showLessBtn.classList.add('hidden');
-                showMoreBtn.classList.remove('hidden'); 
+                showMoreBtn.classList.remove('hidden');
             });
 
+            // Fungsi untuk berpindah chat
             function switchToChat(chatIndex) {
                 if (chatIndex < 0 || chatIndex >= chats.length) {
                     console.error(`Chat dengan index ${chatIndex} tidak ditemukan.`);
@@ -504,6 +591,7 @@
                 }
             }
 
+            // Fungsi untuk membuat chat baru
             function createNewChat() {
                 const chatId = `chat-${Date.now()}`;
                 const chatName = `Chat ${chatCounter++}`;
@@ -513,103 +601,11 @@
                     messages: []
                 };
                 chats.push(newChat);
-                renderChatList();
-                switchToChat(chats.length - 1);
+                renderChatList(); // Tetap panggil renderChatList tapi kondisi isShowingMore tetap dipertahankan
+                switchToChat(chats.length - 1); // Pindah ke chat baru
             }
 
-            async function sendMessage(messageText = '') {
-                if (messageText === '') {
-                    messageText = messageInput.value.trim();
-                }
-
-                if (messageText === '' || currentChatIndex === null) return;
-
-                const selectedChat = chats[currentChatIndex];
-                if (!selectedChat) {
-                    console.error(`Chat with index ${currentChatIndex} not found.`);
-                    return;
-                }
-
-                // Add the user message to the selected chat
-                const userMessage = {
-                    sender: 'user',
-                    text: messageText
-                };
-                selectedChat.messages.push(userMessage);
-
-                // Render the user's message
-                const userMessageDiv = document.createElement('div');
-                userMessageDiv.classList.add('bg-[#ffcc00]', 'text-black', 'self-end', 'text-justify','leading-relaxed', 'max-w-xl','p-4', 'rounded-md', 'w-fit', 'shadow-lg', 'mb-3');
-                userMessageDiv.textContent = messageText;
-                chatBox.appendChild(userMessageDiv);
-
-                chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
-
-                messageInput.value = ''; // Clear the input field
-
-                if (selectedChat.messages.length === 1) {
-                    greetingSection.classList.add('hidden');
-                }
-
-                messageCount++;
-
-                if (messageCount > 5) {
-                    alertPopup.classList.remove('hidden'); 
-                }
-
-                // Fetch the bot response
-                try {
-                    const response = await fetch('http://ec2-52-89-76-29.us-west-2.compute.amazonaws.com:6845/chat', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ question: messageText })
-                    });
-
-                    if (!response.ok) {
-                        console.error(`API error: ${response.status} ${response.statusText}`);
-                        throw new Error(`API error: ${response.status}`);
-                    }
-
-                    const data = await response.json();
-                    const botResponse = data.response || 'Maaf, terjadi kesalahan dalam mendapatkan respons dari server.';
-
-                    const botMessage = {
-                        sender: 'bot',
-                        text: botResponse
-                    };
-                    selectedChat.messages.push(botMessage);
-
-                    // Render the bot's message
-                    const botMessageDiv = document.createElement('div');
-                    botMessageDiv.classList.add('bg-[#2b2b2b]', 'text-[#e0e0e0]', 'self-start', 'text-justify','leading-relaxed', 'max-w-xl','p-4', 'rounded-md', 'w-fit', 'shadow-lg', 'mb-3');
-                    botMessageDiv.textContent = botResponse;
-                    chatBox.appendChild(botMessageDiv);
-
-                    chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
-                } catch (error) {
-                    console.error('Error fetching API:', error);
-
-                    // Display error message
-                    const errorDiv = document.createElement('div');
-                    errorDiv.classList.add('bg-red-500', 'text-white', 'self-start', 'text-justify','leading-relaxed', 'max-w-xl','p-4', 'rounded-md', 'w-fit', 'shadow-lg', 'mb-3');
-                    errorDiv.textContent = 'Maaf, terjadi kesalahan saat menghubungi server.';
-                    chatBox.appendChild(errorDiv);
-
-                    chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
-                }
-            }
-
-            chatRecomSection.addEventListener('click', function(e) {
-                const chatItem = e.target.closest('.chat-recom-item');
-                if (chatItem) {
-                    const messageText = chatItem.getAttribute('data-message');
-                    sendMessage(messageText);
-                }
-            });
-
-
+            // Event listener untuk tombol New Chat dan kirim pesan
             newChatBtn.addEventListener('click', function () {
                 createNewChat();
             });
