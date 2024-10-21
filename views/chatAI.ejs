@@ -605,6 +605,98 @@
                 switchToChat(chats.length - 1); // Pindah ke chat baru
             }
 
+            async function sendMessage(messageText = '') {
+                if (messageText === '') {
+                    messageText = messageInput.value.trim();
+                }
+
+                if (messageText === '' || currentChatIndex === null) return;
+
+                const selectedChat = chats[currentChatIndex];
+                if (!selectedChat) {
+                    console.error(`Chat with index ${currentChatIndex} not found.`);
+                    return;
+                }
+
+                // Add the user message to the selected chat
+                const userMessage = {
+                    sender: 'user',
+                    text: messageText
+                };
+                selectedChat.messages.push(userMessage);
+
+                // Render the user's message
+                const userMessageDiv = document.createElement('div');
+                userMessageDiv.classList.add('bg-[#ffcc00]', 'text-black', 'self-end', 'text-justify','leading-relaxed', 'max-w-xl','p-4', 'rounded-md', 'w-fit', 'shadow-lg', 'mb-3');
+                userMessageDiv.textContent = messageText;
+                chatBox.appendChild(userMessageDiv);
+
+                chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
+
+                messageInput.value = ''; // Clear the input field
+
+                if (selectedChat.messages.length === 1) {
+                    greetingSection.classList.add('hidden');
+                }
+
+                messageCount++;
+
+                if (messageCount > 5) {
+                    alertPopup.classList.remove('hidden'); 
+                }
+
+                // Fetch the bot response
+                try {
+                    const response = await fetch('http://ec2-52-89-76-29.us-west-2.compute.amazonaws.com:6845/generate', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ message: messageText })
+                    });
+
+                    if (!response.ok) {
+                        console.error(`API error: ${response.status} ${response.statusText}`);
+                        throw new Error(`API error: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const botResponse = data.response || 'Maaf, terjadi kesalahan dalam mendapatkan respons dari server.';
+
+                    const botMessage = {
+                        sender: 'bot',
+                        text: botResponse
+                    };
+                    selectedChat.messages.push(botMessage);
+
+                    // Render the bot's message
+                    const botMessageDiv = document.createElement('div');
+                    botMessageDiv.classList.add('bg-[#2b2b2b]', 'text-[#e0e0e0]', 'self-start', 'text-justify','leading-relaxed', 'max-w-xl','p-4', 'rounded-md', 'w-fit', 'shadow-lg', 'mb-3');
+                    botMessageDiv.textContent = botResponse;
+                    chatBox.appendChild(botMessageDiv);
+
+                    chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
+                } catch (error) {
+                    console.error('Error fetching API:', error);
+
+                    // Display error message
+                    const errorDiv = document.createElement('div');
+                    errorDiv.classList.add('bg-red-500', 'text-white', 'self-start', 'text-justify','leading-relaxed', 'max-w-xl','p-4', 'rounded-md', 'w-fit', 'shadow-lg', 'mb-3');
+                    errorDiv.textContent = 'Maaf, terjadi kesalahan saat menghubungi server.';
+                    chatBox.appendChild(errorDiv);
+
+                    chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
+                }
+            }
+
+            chatRecomSection.addEventListener('click', function(e) {
+                const chatItem = e.target.closest('.chat-recom-item');
+                if (chatItem) {
+                    const messageText = chatItem.getAttribute('data-message');
+                    sendMessage(messageText);
+                }
+            });
+
             // Event listener untuk tombol New Chat dan kirim pesan
             newChatBtn.addEventListener('click', function () {
                 createNewChat();
