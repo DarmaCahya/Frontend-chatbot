@@ -2,122 +2,245 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beranda Satria BIPA</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"  rel="stylesheet" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Beranda Satria BIPA</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+		rel="stylesheet">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/public/assets/css/global.css" />
 
-    <script>
-        tailwind.config = {
-            darkMode: "class",
-        }
-    </script>
-    <script>
-        // Function to initialize and toggle dark mode
-        function initMode() {
-            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        }
+	<script>
+		tailwind.config = {
+			darkMode: "class",
+		}
+	</script>
 
-        function toggleMode() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.theme = 'light';
-                setActiveLink();
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.theme = 'dark';
-                setActiveLink();
-            }
-        }
+	<script>
+		// Function to initialize and toggle dark mode
+		// function initMode() {
+		// 	if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+		// 		document.documentElement.classList.add('dark');
+		// 	} else {
+		// 		document.documentElement.classList.remove('dark');
+		// 	}
+		// }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const burgerMenu = document.getElementById('burger-menu');
-            const navLinks = document.getElementById('navbar-default');
+		// Toggle between dark and light mode
+		function toggleMode() {
+			const isDarkMode = document.documentElement.classList.toggle('dark');
 
-            burgerMenu.addEventListener('click', () => {
-                navLinks.classList.toggle('hidden');
-            });
-        });
+			// Update localStorage with the user's preference
+			localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
 
-    </script>
-    <style>
-        body{
-            font-family: "Plus Jakarta Sans", sans-serif;;
-        }
-        
-    </style>
+			// Also update the checkbox based on the mode
+			document.getElementById('darkModeToggle').checked = isDarkMode;
+		}
+
+		// On page load, apply the saved theme from localStorage and sync the toggle
+		window.onload = function () {
+			const theme = localStorage.getItem('theme');
+			const checkbox = document.getElementById('darkModeToggle');
+
+			if (theme === 'dark') {
+				document.documentElement.classList.add('dark');
+				checkbox.checked = true;  // Set the toggle to "checked" for dark mode
+			} else {
+				document.documentElement.classList.remove('dark');
+				checkbox.checked = false;  // Set the toggle to "unchecked" for light mode
+			}
+		};
+
+		document.addEventListener('DOMContentLoaded', function () {
+			const burgerMenu = document.getElementById('burger-menu');
+			const navLinks = document.getElementById('navbar-default');
+
+			burgerMenu.addEventListener('click', () => {
+				navLinks.classList.toggle('hidden');
+			});
+		});
+
+	</script>
+	<style>
+		body {
+			font-family: "Plus Jakarta Sans", sans-serif;
+			;
+		}
+	</style>
 </head>
 
-<body class="bg-white overflow-x-hidden dark:bg-[#1B1B21] text-black dark:text-white transition duration-75">
-    <%- include('partials/header') %>
-    <main>
-        <div class="hidden md:block z-0 w-[50rem] h-[31.25rem] dark:bg-yellow-500 rounded-full absolute blur-[5.625rem] dark:opacity-10 left-[-25rem] top-0 lg:w-[40rem] lg:h-[25rem] lg:left-[-20rem] md:w-[30rem] md:h-[18.75rem] md:left-[-15rem]"></div>
-        <section class="scroll-mt-56">
-            <div class="mb-24 z-20">
-                <div class="flex flex-col md:flex-row-reverse md:mt-24 dark:bg-[#1B1B21] dark:bg-none mx-auto bg-[url('images/batik-bg.jpg')] bg-cover">
-                    <div class="flex justify-center lg:mt-5 lg:mx-0 mt-20 md:mr-10 md:mt-10 md:w-1/2 xl:w-2/3">
-                        <img src="/images/Gatot Kaca.png" class="object-cover h-[15rem] w-[8rem] md:w-[15rem] md:h-[25rem] lg:h-[20rem] lg:w-[11rem] xl:h-[25rem] xl:w-[15rem] my-7 md:my-0" alt="Maskot Satria BIPA">
-                    </div>
-                    <div class="mx-3 md:mt-14 md:w-2/3 lg:mx-14 xl:ml-40 mb-5 md:mx-10  lg:flex lg:flex-col">
-                        <h1 class="flex justify-center md:justify-start text-3xl xl:mb-5 md:text-left text-center xl:text-5xl font-bold text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] pb-2 dark:via-[#FFEAA5] dark:to-[#FFCD25] "><img src="images/Folded Hands.png" class="mr-5" alt=""> Selamat Datang!</h1>
-                        <p class="mx-5 text-[#1B1B21] mt-3 text-base xl:text-2xl lg:text-lg dark:text-[#6F6F73] mx-3md:mt-3 md:mx-0 lg:mx-0 font-normal text-justify leading-loose"> 
-                            <span class="font-bold">Sahabat Tutur Berbahasa Indonesia (Satria) BIPA </span> 
-                            dirancang agar dapat digunakan oleh para pengajar BIPA sebagai media pembelajaran BIPA dan oleh pemelajar BIPA kapan saja dan dari mana saja. Anda dapat menggunakan Satria BIPA sebagai mitra tutur untuk memperkaya kosakata, berlatih berbicara dalam bahasa Indonesia, serta tata bahasa dalam bahasa Indonesia.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section class="min-h-screen w-full">
-            <div class="lg:flex z-20 flex-col items-center">
-                <div>
-                    <h1 class="text-3xl md:text-4xl xl:text-5xl text-center p-4 font-bold mb-5 text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25]">Pengalaman Belajar BIPA dengan Cara Baru!</h1>
-                </div>
-                <div class="flex flex-row justify-center">
-                    <a href="/opening" class="text-center flex items-center text-xl rounded bg-[#A2010B] hover:bg-red-400 text-white xl:p-5 p-3 dark:bg-gradient-to-r dark:from-[#8F8F8F33] dark:to-[#FFFFFF33] dark:bg-opacity-20 dark:hover:bg-zinc-300">
-                        Coba Satria BIPA
-                    </a>              
-                </div>
-            </div>
-            <hr class="border-0 h-[0.5px] bg-[#A2010B] 2xl:mx-32 mt-12">            
+<body class="bg-white relative overflow-x-hidden dark:bg-gray-900 text-black dark:text-white transition duration-75">
+	<%- include('partials/header') %>
 
-            <div class="flex z-20 flex-col items-center mt-28 mb-10">
-                <h1 class="text-3xl md:text-4xl xl:text-5xl text-center p-4 font-bold mb-5 text-[#AE020B] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FFD900] dark:via-[#FFEAA5] dark:to-[#FFCD25]">Fitur Satria BIPA</h1>
-                <div class="flex flex-col w-full z-20">
-                    <%- include('partials/fitur', { 
-                        imgSrc: '/images/fitur1.png', 
-                        imgAlt: 'Fitur 1', 
-                        title: '1. Pembelajaran BIPA dengan Muatan Konten Budaya', 
-                        description: 'Memberikan pembelajaran bahasa Indonesia dengan konteks budaya sebagai wawasan dan informasi tentang berbagai tradisi, adat istiadat, dan nilai-nilai budaya Indonesia.' 
-                    }) %>
+		<main class="mb-24">
+			<section class="scroll-mt-56" id="beranda">
+				<div class="mb-24">
+					<div
+						class="relative flex justify-center items-center aspect-square md:aspect-[16/6] md:mt-24 dark:bg-[#1B1B21] bg-gradient-to-br from-white to bg-neutral-600 h-full z-10 overflow-hidden">
 
-                    <%- include('partials/fitur', { 
-                        imgSrc: '/images/fitur2.png', 
-                        imgAlt: 'Fitur 2', 
-                        title: '2. Rekomendasi Materi Pembelajaran', 
-                        description: 'Menyarankan materi pembelajaran bahasa Indonesia yang terkait dengan pertanyaan pengguna, penyesuaian tingkat kesulitan, dan kiat-kiat belajar bahasa Indonesia.' 
-                    }) %>
+						<div
+							class="absolute justify-center md:top-0 md:bottom-0 -bottom-32 -right-12 lg:right-24 h-full -z-10">
+							<!-- Adjust height here -->
+							<img src="/images/Gatot Kaca.png"
+								class="object-cover h-auto max-w-64 md:max-w-96 w-full"
+								alt="Maskot Satria BIPA">
+						</div>
+						<div
+							class="flex w-full items-center md:mt-0 mt-12 leading-tight text-center justify-center flex-col gap-y-4 text-red-600 z-20">
+							<h1 class="text-3xl md:text-7xl font-extrabold">Satria <span class="text-white">BIPA</span>
+							</h1>
+							<div class="flex justify-center md:text-xl flex-col font-semibold text-gray-100">
+								<span class="text-xl md:text-xl text-red-600">Sahabat Tutur Berbahasa Indonesia</span>
+								<span>Bahasa Indonesia bagi Penutur Asing</span>
+							</div>
+							<button onclick="location.href='/login'" class="hover:cursor-pointer px-4 py-2 flex text-black bg-white rounded hover:bg-neutral-800 font-semibold hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-white dark:hover:bg-white/80 dark:focus:ring-white dark:text-black">Coba Sekarang</button>
+						</div>
+						<div class="absolute top-0 left-0 w-full h-full object-cover bg-black/10">
+							<img alt="background-batik" src="/images/batik-bg.jpg" class="h-full w-full opacity-20" />
+						</div>
+					</div>
+				</div>
+			</section>
 
-                    <%- include('partials/fitur', { 
-                        imgSrc: '/images/fitur3.png', 
-                        imgAlt: 'Fitur 3', 
-                        title: '3. Percakapan Bahasa Indonesia', 
-                        description: 'Latihan berbicara melalui teks berbentuk percakapan alami dalam Bahasa Indonesia untuk meningkatkan kepercayaan diri dan kelancaran berbicara dalam berbahasa Indonesia.' 
-                    }) %>
-                </div>
-            </div>
-        </section>   
-    </main>
-    <%- include('partials/footer') %>
+			<section class="w-full relative flex flex-col space-y-16" id="fitur">
+				<div class="h-fit absolute top-0 w-screen -z-10 translate-y-24">
+					<svg class="inline-block fill-current w-full h-auto text-gray-200/40 dark:text-gray-400/40"
+						viewBox="0 0 1440 450" xmlns="http://www.w3.org/2000/svg">
+						<path
+							d="M1189.2 169.2H421H253.8C159.8 169.2 69.1 203.1 0 262.6V449.8C30.5 349.9 131.3 276.7 252 276.7H424.1H1187.4C1280.9 276.7 1371 243.2 1440 184.3V0C1408.1 97.9 1308.3 169.2 1189.2 169.2Z">
+						</path>
+					</svg>
+				</div>
+
+				<div class="flex flex-col gap-y-8 max-w-7xl mx-auto">
+					<div class="flex flex-col md:flex-row w-full gap-x-24 p-8 md:p-4">
+						<div class="w-full md:w-1/2 rounded-[2.5rem] relative overflow-hidden border shadow-xl">
+							<img src="/images/fitur1.png" alt="" class="object-cover h-full w-full aspect-square">
+							<a href="#"
+								class=" absolute w-full h-full top-0 left-0 bg-white opacity-0 z-10 transition-opacity duration-300 hover:opacity-20 "></a>
+						</div>
+						<div class="w-full md:w-1/2 p-4 md:p-8 flex items-center justify-center">
+							<div class="flex flex-col pt-4 md:pt-0 gap-y-4 w-full items-start justify-center">
+								<div class="text-2xl md:text-5xl font-extrabold">Pembelajaran BIPA dengan Muatan Konten
+									Budaya</div>
+								<span
+									class="text-base md:text-xl text-gray-400 dark:text-gray-300 font-semibold">Memberikan
+									pembelajaran
+									bahasa Indonesia dengan konteks budaya sebagai wawasan dan informasi tentang
+									berbagai tradisi, adat istiadat, dan nilai-nilai budaya Indonesia.</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="flex flex-col gap-y-8 max-w-7xl mx-auto">
+					<div class="flex flex-col md:flex-row-reverse w-full gap-x-24 p-8 md:p-4">
+						<div class="w-full md:w-1/2 rounded-[2.5rem] relative overflow-hidden border shadow-xl">
+							<img src="/images/fitur2.png" alt="" class="object-cover h-full w-full aspect-square">
+							<a href="#"
+								class=" absolute w-full h-full top-0 left-0 bg-white opacity-0 z-10 transition-opacity duration-300 hover:opacity-20 "></a>
+						</div>
+						<div class="w-full md:w-1/2 p-4 md:p-8 flex items-center justify-center">
+							<div class="flex flex-col pt-4 md:pt-0 gap-y-4 w-full items-start justify-center">
+								<div class="text-2xl md:text-5xl font-extrabold">Rekomendasi Materi Pembelajaran</div>
+								<span
+									class="text-base md:text-xl text-gray-400 dark:text-gray-300 font-semibold">Menyarankan
+									materi
+									pembelajaran bahasa Indonesia yang terkait dengan pertanyaan pengguna, penyesuaian
+									tingkat kesulitan, dan kiat-kiat belajar bahasa Indonesia.</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="flex flex-col gap-y-8 max-w-7xl mx-auto">
+					<div class="flex flex-col md:flex-row w-full gap-x-24 p-8 md:p-4">
+						<div class="w-full md:w-1/2 rounded-[2.5rem] relative overflow-hidden border shadow-xl">
+							<img src="/images/fitur3.png" alt="" class="object-cover h-full w-full aspect-square">
+							<a href="#"
+								class=" absolute w-full h-full top-0 left-0 bg-white opacity-0 z-10 transition-opacity duration-300 hover:opacity-20 "></a>
+						</div>
+						<div class="w-full md:w-1/2 p-4 md:p-8 flex items-center justify-center">
+							<div class="flex flex-col pt-4 md:pt-0 gap-y-4 w-full items-start justify-center">
+								<div class="text-2xl md:text-5xl font-extrabold">Percakapan Bahasa Indonesia</div>
+								<span
+									class="text-base md:text-xl text-gray-400 dark:text-gray-300 font-semibold">Latihan
+									berbicara melalui
+									teks berbentuk percakapan alami dalam Bahasa Indonesia untuk meningkatkan
+									kepercayaan diri dan kelancaran berbicara dalam berbahasa Indonesia.</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class=" h-96 w-96 absolute right-36 -bottom-16 -z-10">
+
+					<div class="h-56 w-56 text-red-100 dark:text-red-900 absolute -z-10 left-20 top-20">
+						<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'>
+							<defs>
+								<pattern id='a' patternUnits='userSpaceOnUse' width='40' height='40'
+									patternTransform='scale(1) rotate(0)'>
+									<rect x='0' y='0' width='100%' height='100%' fill='none' />
+									<path d='M11 6a5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5 5 5 0 015 5' stroke-width='1'
+										stroke='none' fill='currentColor' />
+								</pattern>
+							</defs>
+							<rect width='800%' height='800%' transform='translate(0,0)' fill='url(#a)' />
+						</svg>
+					</div>
+
+					<div class="hidden sm:block h-28 w-28 text-gray-200/40 dark:text-gray-400/40 absolute a-z-10 -right-20 -bottom-20">
+						<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'>
+							<defs>
+								<pattern id='b' patternUnits='userSpaceOnUse' width='40' height='40'
+									patternTransform='scale(0.5) rotate(0)'>
+									<rect x='0' y='0' width='100%' height='100%' fill='none' />
+									<path d='M11 6a5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5 5 5 0 015 5' stroke-width='1'
+										stroke='none' fill='currentColor' />
+								</pattern>
+							</defs>
+							<rect width='800%' height='800%' transform='translate(0,0)' fill='url(#b)' />
+						</svg>
+					</div>
+
+				</div>
+			</section>
+
+
+
+			<section class="flex w-full max-w-7xl mx-auto bg-neutral-800 mt-12 md:rounded-xl shadow-md md:p-8"
+				id="panduan">
+				<div class="w-full flex items-center justify-center flex-col-reverse md:flex-row gap-x-24">
+					<div class="w-full md:w-1/2 p-8 pt-0">
+						<div class="flex flex-col gap-y-4 w-full items-start justify-center px-4 md:px-0">
+							<div class="text-xl md:text-4xl font-extrabold text-white">Pelajari lebih lanjut</div>
+							<div class="text-sm md:text-xl text-neutral-100 font-semibold">Tonton video tutorial berikut
+								untuk menggunakan Satria BIPA</div>
+							<a href="/login"
+								class="flex flex-col items-center justify-center gap-y-8 py-4 rounded-xl w-full">
+								<button onclick="location.href='/login'"
+									class="px-4 py-3 rounded-xl bg-red-600 text-white flex w-full gap-x-2 items-center justify-center group">Mulai
+									<span
+										class="group-hover:translate-x-2 transition-all duration-300 ease-in-out">→</span></button>
+							</a>
+						</div>
+					</div>
+					<div class="w-full md:w-1/2 p-8 flex items-center justify-end">
+						<iframe width="100%" height="100%" class="aspect-video rounded-xl"
+							src="https://www.youtube.com/embed/r_mfyc-DEag?si=Yd2C6KS9JGdllgbH"
+							title="YouTube video player" frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+					</div>
+				</div>
+			</section>
+		</main>
+		<%- include('partials/footer') %>
 </body>
+
 </html>

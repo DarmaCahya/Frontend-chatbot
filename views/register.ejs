@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daftar Akun - Satria BIPA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // List of countries
+      const countries = [
+        "Afghanistan", "Albania", "Algeria", "Andorra", "Angola",
+        "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
+        "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus",
+        "Belgium", "Belize", "Benin", "Bhutan", "Bolivia",
+        "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria",
+        "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon",
+        "Canada", "Central African Republic", "Chad", "Chile", "China",
+        "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia",
+        "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti",
+        "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt",
+        "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini",
+        "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia",
+        "Georgia", "Germany", "Ghana", "Greece", "Grenada",
+        "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti",
+        "Honduras", "Hungary", "Iceland", "India", "Indonesia",
+        "Iran", "Iraq", "Ireland", "Israel", "Italy",
+        "Ivory Coast", "Jamaica", "Japan", "Jordan", "Kazakhstan",
+        "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos",
+        "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya",
+        "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi",
+        "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands",
+        "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova",
+        "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique",
+        "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands",
+        "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea",
+        "North Macedonia", "Norway", "Oman", "Pakistan", "Palau",
+        "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines",
+        "Poland", "Portugal", "Qatar", "Romania", "Russia",
+        "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa",
+        "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia",
+        "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia",
+        "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan",
+        "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden",
+        "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania",
+        "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia",
+        "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine",
+        "United Arab Emirates", "United Kingdom", "United States", "Uruguay",
+        "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam",
+        "Yemen", "Zambia", "Zimbabwe"
+      ];
+
+      // Get the dropdown element
+      const countrySelect = document.getElementById("country");
+      const mainContainer = document.getElementById("main-container");
+
+      // Loop to add options to the dropdown
+      countries.forEach(country => {
+        let option = document.createElement("option");
+        option.value = country;
+        option.textContent = country;
+        countrySelect.appendChild(option);
+      });
+
+      // Move the container down on focus
+      countrySelect.addEventListener("focus", () => {
+        mainContainer.classList.add("mt-32"); // Adjust the margin as needed
+      });
+
+      // Reset the margin when the dropdown loses focus
+      countrySelect.addEventListener("blur", () => {
+        mainContainer.classList.remove("mt-32");
+      });
+    });
+  </script>
+
+  <style>
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+    }
+    /* Custom styles for the select element */
+    #country {
+      height: 40px; /* Adjust the height as needed */
+    }
+  </style>
+</head>
+
+<body class="bg-white dark:bg-gray-800 dark:text-white flex items-center justify-center min-h-screen">
+  <%- include('partials/header') %>
+
+  <main class="flex items-center justify-center w-full h-600 p-0 border-gray dark:border-gray-700 mt-16">
+    <div class="flex-1 flex items-center justify-center p-8">
+      <form class="w-full max-w-sm">
+        <h1 class="text-2xl font-bold text-center mb-6 dark:text-white">Daftar Akun</h1>
+        <div class="mb-4">
+          <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="username">Nama Pengguna</label>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Nama Pengguna">
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="email">Post-el(Email)</label>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="register-email" type="email" placeholder="Email">
+        </div>
+        <div class="mb-6 mt-8"> <!-- Increased margin top for spacing -->
+          <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="country">Asal Negara</label>
+          <select id="country" class="shadow appearance-none border rounded w-full py-1 px-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <option value="" disabled selected>Pilih Negara</option>
+          </select>
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="password">Sandi</label>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="register-password" type="password" placeholder="********">
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="confirm-password">Konfirmasi Sandi</label>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="confirm-password" type="password" placeholder="********">
+        </div>
+        <div class="flex items-center justify-between">
+          <button onclick="location.href='/login'" class="bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button">Daftar</button>
+        </div>
+        <div class="text-center">
+          <a href="/login" class="text-blue-500 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-500 text-sm">Sudah punya akun? Masuk disini</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Gambar versi desktop yang hanya muncul di layar md ke atas -->
+<img src="/images/Gatot Kaca.png" class="hidden md:block h-auto w-36 md:w-96 absolute bottom-0 md:-bottom-24 right-0 md:right-0 md:fixed" alt="Maskot Satria BIPA">
+
+
+</body>
+
+</html>
