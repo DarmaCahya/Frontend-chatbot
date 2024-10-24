@@ -28,6 +28,10 @@ app.get('/', (req, res) => {
     res.render('test');
 });
 
+app.get('/register', (req, res) => {
+    res.render('register')
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
