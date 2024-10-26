@@ -51,20 +51,7 @@
 
         initMode();
       });
-      
-      function showLoginForm() {
-        document.getElementById('register-form').classList.add('hidden');
-        document.getElementById('login-form').classList.remove('hidden');
-        document.getElementById('welcome-section').classList.remove('hidden'); // Tampilkan welcome message kembali
-      }
-
-      function showRegisterForm() {
-        document.getElementById('login-form').classList.add('hidden');
-        document.getElementById('register-form').classList.remove('hidden');
-        document.getElementById('welcome-section').classList.add('hidden'); // Sembunyikan welcome message
-      }
     </script>
-
 
     <style>
       body {
@@ -83,18 +70,18 @@
       <div class="relative flex flex-col md:flex-row w-full h-full border-l border-r border-gray dark:border-gray-700">
         <!-- Bagian kiri untuk form login -->
         <div class="flex-1 flex items-center justify-center p-8">
-          <form class="w-full max-w-sm">
+          <form id="login-form" class="w-full max-w-sm">
             <h2 class="text-3xl font-bold mb-6 text-center dark:text-white">Masuk</h2>
             <div class="mb-4">
               <label class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2" for="email">Pos-el(Email)</label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700" id="username" type="text" placeholder="Email">
+              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700" id="email" type="text" placeholder="Email">
             </div>
             <div class="mb-6">
               <label class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2" for="password">Sandi</label>
               <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700" id="password" type="password" placeholder="********">
             </div>
             <div class="flex items-center justify-between">
-              <button onclick="location.href='/chat'" class="bg-black dark:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button">Masuk</button>
+              <button class="bg-black dark:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button">Masuk</button>
             </div>
             <div class="text-center">
               <a href="/register" class="text-blue-500 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-400 text-sm">Belum punya akun? Daftar disini</a>
@@ -103,7 +90,6 @@
         </div>
       
         <div class="flex-1 flex items-center justify-center relative mt-6 md:mt-0">
-          <!-- Gambar yang berada di depan gradient -->
           <img 
             src="/images/Gatot Kaca.png" 
             class="object-cover h-auto max-w-full md:max-w-80 w-full" 
@@ -116,90 +102,30 @@
     <script>
       document.getElementById('login-form').addEventListener('submit', async function (event) {
         event.preventDefault();
-
-        // Ambil data dari form
+        
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-
-        // Data yang akan dikirimkan ke API
+    
         const data = {
           email: email,
           password: password
         };
-
+                
         try {
-          // Kirim data ke API menggunakan POST request
-          const response = await fetch('https://4c89-35-85-179-20.ngrok-free.app/auth/login', {
+          // Sending data to the API using POST request
+          const response = await fetch(process.env.LOGIN_API_URL, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
           });
-
-          // Cek respon dari API
-          if (response.ok) {
-            const result = await response.json();
-            alert('Masuk berhasil!');
-            window.location.href = '/chat';
-          } else {
-            const errorData = await response.json();
-            alert(`Error: ${errorData.message}`);
-          }
         } catch (error) {
           console.error('Error:', error);
-          alert('Terjadi kesalahan, coba lagi nanti.');
+          alert('An error occurred, please try again later.');
         }
       });
-
-      document.getElementById('register-form').addEventListener('submit', async function (event) {
-        event.preventDefault();
-
-        // Ambil data dari form
-        const username = document.getElementById('username').value;
-        const email = document.getElementById('register-email').value;
-        const country = document.getElementById('country').value;
-        const password = document.getElementById('register-password').value;
-        const confirmPassword = document.getElementById('confirm-password').value;
-
-        // Validasi password
-        if (password !== confirmPassword) {
-          alert('Password dan konfirmasi password tidak cocok!');
-          return;
-        }
-
-        // Data yang akan dikirimkan ke API
-        const data = {
-          email: email,
-          country: country,
-          password: password
-        };
-
-        try {
-          // Kirim data ke API menggunakan POST request
-          const response = await fetch('https://4c89-35-85-179-20.ngrok-free.app/auth/register', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          });
-
-          // Cek respon dari API
-          if (response.ok) {
-            const result = await response.json();
-            alert('Pendaftaran berhasil!');
-            window.location.href = '/login';
-          } else {
-            const errorData = await response.json();
-            alert(`Error: ${errorData.message}`);
-          }
-        } catch (error) {
-          console.error('Error:', error);
-          alert('Terjadi kesalahan, coba lagi nanti.');
-        }
-      });
-    </script>
+    </script>    
 </body>
 
 </html>

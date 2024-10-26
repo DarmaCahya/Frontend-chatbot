@@ -23,6 +23,7 @@
     "bootstrap": "^4.5.2",
     "boxicons": "^2.1.4",
     "chatbot": "file:",
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "icofont": "^1.0.0",
@@ -31,7 +32,7 @@
     "jquery.counterup": "^2.1.0",
     "owl.carousel": "^2.3.4",
     "path": "^0.12.7",
-    "postcss-cli": "^11.0.0"
+    "postcss-cli": "^11.0.0",
     "remixicon": "^4.3.0"
   }
 }

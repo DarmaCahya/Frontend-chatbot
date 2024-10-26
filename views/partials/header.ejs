@@ -26,7 +26,9 @@
 			localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
 
 			// Also update the checkbox based on the mode
-			document.getElementById('darkModeToggle').checked = isDarkMode;
+            document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById('darkModeToggle').checked = isDarkMode;
+            });
 		}
 
 		// On page load, apply the saved theme from localStorage and sync the toggle
@@ -46,12 +48,16 @@
 
             if (theme === 'dark') {
                 console.log('Dark theme applied');
-                document.getElementById('icon-light').style.display = 'none';
-                document.getElementById('icon-dark').style.display = 'inline';
+                document.addEventListener("DOMContentLoaded", function() {
+                    document.getElementById('icon-light').style.display = 'none';
+                    document.getElementById('icon-dark').style.display = 'inline';
+                });
             } else {
                 console.log('Light theme applied');
-                document.getElementById('icon-light').style.display = 'inline';
-                document.getElementById('icon-dark').style.display = 'none';
+                document.addEventListener("DOMContentLoaded", function() {
+                    document.getElementById('icon-light').style.display = 'inline';
+                    document.getElementById('icon-dark').style.display = 'none';
+                });
             }
         }
 
@@ -64,8 +70,9 @@
         }
 
         // Add event listener to the button
-        document.getElementById('theme-toggle-btn').addEventListener('click', toggleTheme);
-
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById('theme-toggle-btn').addEventListener('click', toggleTheme);
+        });
         // Apply theme on page load
         document.addEventListener('DOMContentLoaded', applyTheme);
     </script>
