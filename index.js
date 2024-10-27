@@ -31,7 +31,6 @@ app.get('/register', (req, res) => {
     res.render('register')
 })
 app.post('/api/register', async(req,res) => {
-    console.log(req.username);
     try {
         const response = await fetch('http://ec2-35-85-179-20.us-west-2.compute.amazonaws.com/user/api/auth/register', {
             method: 'POST',
@@ -51,7 +50,6 @@ app.post('/api/register', async(req,res) => {
         console.error('Error:', error);
         res.status(500).json({ message: "Terjadi kesalahan saat melakukan registrasi." });
     }
-    
 })
 
 app.get('/login', (req, res) => {
@@ -72,6 +70,10 @@ app.post ('/api/login', async(req,res) => {
         res.status(response.status).json(data);
         res.status(500).json({ message: "Terjadi kesalahan saat melakukan registrasi." });
     }
+})
+
+app.get('/verify', (req, res) => {
+    res.render('verify')
 })
 
 app.get('/response', (req, res) => {

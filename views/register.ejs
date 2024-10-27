@@ -162,14 +162,23 @@
         console.log(data)
         try {
           // Kirim data ke API menggunakan POST request
-          const response = await fetch('http://ec2-35-85-179-20.us-west-2.compute.amazonaws.com/user/api/auth/register', {
+          const response = await fetch('/api/register', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-            mode: "cors"
+            mode: "no-cors"
           });
+          if (response.ok) {
+                const responseData = await response.json();
+                console.log('Registration successful:', responseData);
+                window.location.href = '/verify';
+            } else {
+                const errorData = await response.json();
+                console.error('Registration failed:', errorData);
+                alert('Registrasi gagal: ' + (errorData.message || 'Kesalahan tidak diketahui.'));
+            }
         } catch (error) {
           alert('Terjadi kesalahan, coba lagi nanti.');
         }
