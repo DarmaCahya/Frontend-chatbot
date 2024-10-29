@@ -42,6 +42,7 @@ app.post('/api/register', async (req, res) => {
         const contentType = response.headers.get("content-type");
         if (contentType && contentType.includes("application/json")) {
             const data = await response.json();
+            console.log(data);
             res.status(response.status).json(data);
         } else {
             const text = await response.text();
@@ -50,7 +51,7 @@ app.post('/api/register', async (req, res) => {
         }
     } catch (error) {
         console.error("Error:", error); // Log error for debugging
-        res.status(500).json({ message: "Terjadi kesalahan saat melakukan registrasi." });
+        res.status(500).json({ message: "Terjadi kesalahan saat melakukan pendaftaran." });
     }
 });
 
@@ -69,6 +70,7 @@ app.post('/api/login', async (req, res) => {
         const contentType = response.headers.get("content-type");
         if (contentType && contentType.includes("application/json")) {
             const data = await response.json();
+            console.log(data);
             res.status(response.status).json(data);
         } else {
             const text = await response.text();
@@ -77,7 +79,7 @@ app.post('/api/login', async (req, res) => {
         }
     } catch (error) {
         console.error("Error:", error); // Log error for debugging
-        res.status(500).json({ message: "Terjadi kesalahan saat melakukan registrasi." });
+        res.status(500).json({ message: "Terjadi kesalahan saat melakukan masuk." });
     }
 });
 
