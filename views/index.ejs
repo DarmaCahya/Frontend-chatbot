@@ -76,18 +76,17 @@
 
 <body class="bg-white relative overflow-x-hidden dark:bg-gray-900 text-black dark:text-white transition duration-75">
 	<%- include('partials/header') %>
-
 		<main class="mb-24">
 			<section class="scroll-mt-56" id="beranda">
 				<div class="mb-24">
 					<div
-						class="relative flex justify-center items-center aspect-square md:aspect-[16/6] md:mt-24 dark:bg-[#1B1B21] bg-gradient-to-br from-white to bg-neutral-600 h-full z-10 overflow-hidden">
+						class="relative flex justify-center items-center aspect-square md:aspect-[16/6] md:mt-24 bg-gradient-to-br from-white to bg-neutral-600 dark:bg-none dark:bg-gray-800 h-full z-10 overflow-hidden">
 
 						<div
 							class="absolute justify-center md:top-0 md:bottom-0 -bottom-32 -right-12 lg:right-24 h-full -z-10">
 							<!-- Adjust height here -->
 							<img src="/images/Gatot Kaca.png"
-								class="object-cover h-auto max-w-64 md:max-w-96 w-full"
+								class="object-cover lg:my-10 h-auto max-w-64 md:max-w-96 w-full"
 								alt="Maskot Satria BIPA">
 						</div>
 						<div
@@ -100,7 +99,7 @@
 							</div>
 							<button onclick="location.href='/login'" class="hover:cursor-pointer px-4 py-2 flex text-black bg-white rounded hover:bg-neutral-800 font-semibold hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-white dark:hover:bg-white/80 dark:focus:ring-white dark:text-black">Coba Sekarang</button>
 						</div>
-						<div class="absolute top-0 left-0 w-full h-full object-cover bg-black/10">
+						<div class="absolute top-0 left-0 w-full h-full object-cover bg-black/10 dark:hidden">
 							<img alt="background-batik" src="/images/batik-bg.jpg" class="h-full w-full opacity-20" />
 						</div>
 					</div>

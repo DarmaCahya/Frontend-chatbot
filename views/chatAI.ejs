@@ -353,8 +353,8 @@
 				<div class="flex justify-end flex-1 items-center">
 					<%- include('partials/logo-header') %>
 						<div class="flex items-center space-x-4 mr-5">
-							<a href="/login"
-								class="login text-base font-bold text-black hover:underline dark:text-white">Masuk</a>
+							<!-- <a href="/login"
+								class="login text-base font-bold text-black hover:underline dark:text-white">Masuk</a> -->
 						</div>
 				</div>
 			</header>
@@ -367,7 +367,7 @@
 						<img src="/images/waving hand.png" class="mr-5 xl:h-16" alt="Waving Hand">
 						<h1
 							class="text-3xl xl:mb-2 md:text-left text-center xl:text-6xl font-bold text-[#AE020B] dark:bg-clip-text dark:text-transparent pb-2 dark:bg-gradient-to-r from-yellow-500 via-yellow-200 to-yellow-500">
-							Halo, Ferry</h1>
+							Halo</h1>
 					</div>
 					<p class="font-bold">Mau belajar apa hari ini?</p>
 					<div class="chat-recom grid grid-cols-2 gap-3 lg:grid-cols-3 my-3">
@@ -473,14 +473,10 @@
 				const showLessBtn = document.getElementById("show-less-btn");
 				const alertPopup = document.getElementById("alert-popup");
 
-				let chats = [{
-					id: 'chat-1',
-					name: 'Chat 1',
-					messages: []
-				}];
+				let chats = [];
 
 				let messageCount = 0;
-				let currentChatIndex = 0;
+				let currentChatIndex = null;
 				const maxVisibleChats = 4;
 				let chatCounter = 2;
 				let isShowingMore = false;
@@ -491,9 +487,10 @@
 
 					chats.forEach((chat, index) => {
 						const li = document.createElement('li');
+						li.className = 'relative';
 						const a = document.createElement('a');
 						a.href = '#';
-						a.className = 'chat-item dark:hover:bg-white/10 hover:bg-black/10 block p-3 rounded-md cursor-pointer';
+						a.className = 'chat-item dark:hover:bg-white/10 hover:bg-black/10 block p-3 rounded-md cursor-pointer flex justify-between items-center';
 						a.dataset.chatIndex = index;
 						a.textContent = chat.name;
 						a.addEventListener('click', function (e) {
@@ -502,14 +499,85 @@
 							switchToChat(chatIndex);
 						});
 
+						const ellipsisButton = document.createElement('button');
+						ellipsisButton.className = 'ml-2 text-gray-500 bg-transparent border-none focus:outline-none flex items-center';
+						ellipsisButton.innerHTML = '...';
+						ellipsisButton.style.fontSize = '1.25rem';
+						ellipsisButton.style.cursor = 'pointer';
+						ellipsisButton.addEventListener('click', function (e) {
+							e.stopPropagation();
+							toggleDropdown(index);
+						});
+
+						a.appendChild(ellipsisButton);
+
+						const dropdownMenu = document.createElement('div');
+						dropdownMenu.className = 'absolute border bg-gray-500 right-0 top-full mt-2 w-32 text-white shadow-lg rounded-lg p-2 hidden';
+						dropdownMenu.id = `dropdown-${index}`;
+
+						const optionRename = document.createElement('div');
+						optionRename.className = 'p-2 hover:bg-gray-100 cursor-pointer';
+						optionRename.textContent = 'Rename';
+						optionRename.addEventListener('click', function () {
+							// Buat elemen input sementara di sebelah teks
+							const input = document.createElement('input');
+							input.type = 'text';
+							input.value = chat.name; // Set nilai input ke nama chat saat ini
+							input.className = 'p-2 border-none bg-transparent outline-none'; // Tambahkan style transparan dan border-none
+							
+							// Sesuaikan lebar input dengan panjang teks
+							input.style.width = `${chat.name.length + 1}ch`; // `+1` untuk spasi tambahan
+							
+							// Ganti teks dengan input tanpa mengosongkan elemen `a`
+							a.innerHTML = ''; // Kosongkan konten `a`
+							a.appendChild(input); // Sisipkan input ke dalam `a`
+							input.focus(); // Fokuskan ke input untuk mulai mengedit
+
+							// Event ketika input kehilangan fokus atau pengguna menekan "Enter"
+							input.addEventListener('blur', function () {
+								chat.name = input.value; // Simpan nama baru ke dalam data
+								a.textContent = chat.name; // Tampilkan nama baru di UI
+
+								// Tambahkan kembali tombol ellipsis setelah mengganti teks
+								a.appendChild(ellipsisButton);
+							});
+
+							input.addEventListener('keydown', function (e) {
+								if (e.key === 'Enter') {
+									input.blur(); // Simpan dan keluar dari edit mode saat "Enter" ditekan
+								}
+							});
+						});
+						dropdownMenu.appendChild(optionRename);
+						
+						const optionDelete = document.createElement('div');
+						optionDelete.className = 'p-2 hover:bg-gray-100 cursor-pointer';
+						optionDelete.textContent = 'Delete';
+						optionDelete.addEventListener('click', function () {
+							const confirmDelete = confirm("Are you sure you want to delete this chat?");
+							if (confirmDelete) {
+								chats.splice(index, 1); // Hapus chat dari daftar
+								currentChatIndex = null; // Reset index chat aktif
+								
+								renderChatList(); // Render ulang daftar chat
+								
+								// Bersihkan isi chat dan tampilkan bagian greeting
+								chatBox.innerHTML = ''; // Kosongkan chat box
+								greetingSection.classList.remove('hidden'); // Tampilkan greeting
+							}
+						});
+						dropdownMenu.appendChild(optionDelete);
+
 						// Sembunyikan chat jika show less aktif dan melebihi batas 4 chat
 						if (index >= maxVisibleChats && !isShowingMore) {
 							li.classList.add('hidden');
 						}
 
 						li.appendChild(a);
+						li.appendChild(dropdownMenu); 
 						chatList.appendChild(li);
 					});
+
 
 					// Jika ada lebih dari maxVisibleChats, tampilkan tombol show more
 					if (chats.length > maxVisibleChats) {
@@ -525,6 +593,22 @@
 						showLessBtn.classList.add('hidden');
 					}
 				}
+
+				function toggleDropdown(index) {
+					const dropdown = document.getElementById(`dropdown-${index}`);
+					if (dropdown) {
+						dropdown.classList.toggle('hidden');
+					}
+				}
+
+				document.addEventListener('click', function (event) {
+					chats.forEach((_, index) => {
+						const dropdown = document.getElementById(`dropdown-${index}`);
+						if (dropdown && !dropdown.contains(event.target) && !event.target.closest('.text-gray-500')) {
+							dropdown.classList.add('hidden');
+						}
+					});
+				});
 
 				// Logika untuk tombol show more
 				showMoreBtn.addEventListener('click', () => {
@@ -611,8 +695,11 @@
 						messageText = messageInput.value.trim();
 					}
 
-					if (messageText === '' || currentChatIndex === null) return;
+					if (messageText === '') return;
 
+					if (currentChatIndex === null) {
+						createNewChat();
+					}
 					const selectedChat = chats[currentChatIndex];
 					if (!selectedChat) {
 						console.error(`Chat with index ${currentChatIndex} not found.`);
@@ -626,16 +713,18 @@
 					};
 					selectedChat.messages.push(userMessage);
 
-					// Render the user's message
+					if (selectedChat.messages.length === 1) {
+						selectedChat.name = messageText; 
+						renderChatList(); 
+					}
+
 					const userMessageDiv = document.createElement('div');
 					userMessageDiv.classList.add('bg-gray-200', 'text-black', 'self-end', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-xl', 'mb-3', 'border-[#2b2b2b]', 'border');
 					userMessageDiv.textContent = messageText;
 					chatBox.appendChild(userMessageDiv);
 
-					chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
-
-					messageInput.value = ''; // Clear the input field
-
+					chatBox.scrollTop = chatBox.scrollHeight;
+					messageInput.value = '';
 					if (selectedChat.messages.length === 1) {
 						greetingSection.classList.add('hidden');
 					}
@@ -645,7 +734,6 @@
 					if (messageCount > 5) {
 						alertPopup.classList.remove('hidden');
 					}
-
 					// Fetch the bot response
 					try {
 						const response = await fetch('http://ec2-52-89-76-29.us-west-2.compute.amazonaws.com:6845/generate', {
@@ -700,7 +788,7 @@
 
 				// Event listener untuk tombol New Chat dan kirim pesan
 				newChatBtn.addEventListener('click', function () {
-					createNewChat();
+					createNewChat()
 				});
 				sendBtn.addEventListener('click', function () {
 					sendMessage();

@@ -45,12 +45,15 @@
         const burgerMenu = document.getElementById("burger-menu");
         const navLinks = document.getElementById("navbar-default");
 
-        burgerMenu.addEventListener("click", () => {
-          navLinks.classList.toggle("hidden");
-        });
+        if (burgerMenu) { // Tambahkan kondisi ini
+          burgerMenu.addEventListener("click", () => {
+            navLinks.classList.toggle("hidden");
+          });
+        }
 
         initMode();
       });
+
     </script>
 
     <style>
@@ -66,22 +69,22 @@
 
   <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex items-center justify-center min-h-screen">
   <%- include('partials/header') %>
-    <main class="bg-white dark:bg-gray-800 flex items-center justify-center w-full h-600 p-0 border-gray dark:border-gray-700">
-      <div class="relative flex flex-col md:flex-row w-full h-full border-l border-r border-gray dark:border-gray-700">
+    <main class=" dark:bg-gray-800 flex items-center justify-center w-full h-600 p-0 dark:border-gray-700 mt-12">
+      <div class="relative flex flex-col md:flex-row w-full h-full border-l border-r border-gray dark:border-gray-700 bg-[url(/images/batik-bg.jpg)] dark:bg-none bg-cover ">
         <!-- Bagian kiri untuk form login -->
         <div class="flex-1 flex items-center justify-center p-8">
           <form id="login-form" class="w-full max-w-sm">
-            <h2 class="text-3xl font-bold mb-6 text-center dark:text-white">Masuk</h2>
+            <h2 class="text-3xl font-bold mb-6 text-center mt-5 dark:text-white">Masuk</h2>
             <div class="mb-4">
               <label class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2" for="email">Pos-el(Email)</label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700" id="email" type="text" placeholder="Email">
+              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline bg-white dark:bg-gray-700" id="email" type="text" placeholder="Email">
             </div>
             <div class="mb-6">
               <label class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2" for="password">Sandi</label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline dark:bg-gray-700" id="password" type="password" placeholder="********">
-            </div>
+              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline bg-white dark:bg-gray-700" id="password" type="password" placeholder="********">
+            </div>            
             <div class="flex items-center justify-between">
-              <button class="bg-black dark:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button">Masuk</button>
+              <button class="bg-black dark:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">Masuk</button>
             </div>
             <div class="text-center">
               <a href="/register" class="text-blue-500 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-400 text-sm">Belum punya akun? Daftar disini</a>
@@ -92,10 +95,9 @@
         <div class="flex-1 flex items-center justify-center relative mt-6 md:mt-0">
           <img 
             src="/images/Gatot Kaca.png" 
-            class="object-cover h-auto max-w-full md:max-w-80 w-full" 
+            class="object-cover h-60 md:h-auto max-w-full md:max-w-80 md:w-full w-32 mb-10 lg:mt-20" 
             alt="Maskot Satria BIPA">
         </div>
-        
       </div>
     </main>
     <!-- <%- include('partials/footer') %> -->
@@ -112,17 +114,22 @@
         };
                 
         try {
-          // Sending data to the API using POST request
-          const response = await fetch(process.env.LOGIN_API_URL, {
+          const response = await fetch('/api/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
           });
+          if (response.ok) {
+              window.location.href = '/chat';
+          } else {
+              console.error('Response error:', response);
+              const errorData = await response.json();
+              alert('Registrasi gagal: ' + (errorData.message || 'Kesalahan tidak diketahui.'));
+          }
         } catch (error) {
-          console.error('Error:', error);
-          alert('An error occurred, please try again later.');
+          alert('Terjadi kesalahan, coba lagi nanti.');
         }
       });
     </script>    

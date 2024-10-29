@@ -159,28 +159,24 @@
           password: password,
           country: country,
         };
-        console.log(data)
         try {
-          // Kirim data ke API menggunakan POST request
           const response = await fetch('/api/register', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
-            mode: "no-cors"
           });
           if (response.ok) {
-                const responseData = await response.json();
-                console.log('Registration successful:', responseData);
-                window.location.href = '/verify';
-            } else {
-                const errorData = await response.json();
-                console.error('Registration failed:', errorData);
-                alert('Registrasi gagal: ' + (errorData.message || 'Kesalahan tidak diketahui.'));
-            }
+              const responseData = await response.json();
+              console.log('Pendaftaran berhasil:', responseData);
+              window.location.href = '/verify';
+          } else {
+              console.error('Terjadi kesalahan:', response);
+              const errorData = await response.json();
+          }
         } catch (error) {
-          alert('Terjadi kesalahan, coba lagi nanti.');
+          alert('Terjadi kesalahan dalam melakukan pendaftaran, coba lagi nanti.');
         }
       });
   </script>

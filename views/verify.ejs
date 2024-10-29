@@ -66,12 +66,14 @@
 
   <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex items-center justify-center min-h-screen">
   <%- include('partials/header') %>
-    <main class="bg-white dark:bg-gray-800 flex items-center justify-center w-full h-600 p-0 border-gray dark:border-gray-700">
-      <div class="relative flex flex-col md:flex-row w-full h-full border-l border-r border-gray dark:border-gray-700">
-        
-      </div>
-    </main>
-    <!-- <%- include('partials/footer') %> -->
+  <main>
+    <div class=" border p-5 bg-white  rounded-xl m-5">
+        <h1 class=" font-semibold text-start text-2xl	dark:text-black tracking-tight ml-5">Pendaftaran berhasil! Silakan cek email Anda 
+            untuk melanjutkan verifikasi</h1>
+        <div class="flex mt-5 ml-5">
+            <a href="/login" class="bg-black hover:bg-slate-700 dark:hover:bg-gray-500 dark:bg-gray-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Kembali ke masuk</a>
+        </div>
+    </div>
+  </main>
 </body>
-    <h1>Tolong cek email anda</h1>
 </html>
