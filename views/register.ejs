@@ -148,8 +148,8 @@
         const password = document.getElementById('register-password').value;
         const confirmPassword = document.getElementById('confirm-password').value;
 
-        if (password !== confirmPassword) {
-          alert('Password dan konfirmasi password tidak cocok!');
+        if (!username || !email || !country || !password || !confirmPassword) {
+          alert('Semua field harus diisi.');
           return;
         }
 

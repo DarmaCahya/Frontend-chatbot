@@ -107,6 +107,11 @@
         
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
+
+        if (!email || !password) {
+            alert('Email dan password harus diisi.');
+            return;
+        }
     
         const data = {
           email: email,
@@ -126,7 +131,7 @@
           } else {
               console.error('Response error:', response);
               const errorData = await response.json();
-              alert('Registrasi gagal: ' + (errorData.message || 'Kesalahan tidak diketahui.'));
+              alert('Masuk gagal: ' + (errorData.message || 'Kesalahan tidak diketahui.'));
           }
         } catch (error) {
           alert('Terjadi kesalahan, coba lagi nanti.');
