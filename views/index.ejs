@@ -12,7 +12,6 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="/public/assets/css/global.css" />
 
 	<script>
 		tailwind.config = {
@@ -59,9 +58,13 @@
 			const burgerMenu = document.getElementById('burger-menu');
 			const navLinks = document.getElementById('navbar-default');
 
-			burgerMenu.addEventListener('click', () => {
-				navLinks.classList.toggle('hidden');
-			});
+			if (burgerMenu && navLinks) {
+				burgerMenu.addEventListener('click', () => {
+					navLinks.classList.toggle('hidden');
+				});
+			} else {
+				console.error("Element with id 'burger-menu' or 'navbar-default' not found.");
+			}
 		});
 
 	</script>
