@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 });
 
 // API Chat
-app.post('/history', async (req, res) => {
+app.post('/histories', async (req, res) => {
     try{
         const {historyName, status, userId, token} = req.body;
 
