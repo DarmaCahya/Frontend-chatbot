@@ -127,11 +127,13 @@
             body: JSON.stringify(data),
           });
           if (response.ok) {
-              window.location.href = 'http://satriabipa.transdigiedu.com:3000/chat';
+            const responseData = await response.json();
+            localStorage.setItem('token', responseData.token);
+            window.location.href = '/chats';
           } else {
-              console.error('Response error:', response);
-              const errorData = await response.json();
-              alert('Masuk gagal: ' + (errorData.message || 'Kesalahan tidak diketahui.'));
+            console.error('Response error:', response);
+            const errorData = await response.json();
+            alert('Masuk gagal: ' + (errorData.message || 'Kesalahan tidak diketahui.'));
           }
         } catch (error) {
           alert('Terjadi kesalahan, coba lagi nanti.');

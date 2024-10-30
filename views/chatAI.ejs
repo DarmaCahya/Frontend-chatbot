@@ -194,6 +194,7 @@
 			/* Show text by default */
 		}
 	</style>
+	<script	script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
 </head>
 
 <body class="bg-gray-100  dark:bg-gray-700 overflow-x-hidden text-black dark:text-white transition duration-75">
@@ -366,7 +367,7 @@
 				<div class="flex flex-col items-center h-full p-5 greeting-section">
 					<div class="flex items-center">
 						<img src="/images/waving hand.png" class="mr-5 xl:h-16" alt="Waving Hand">
-						<h1
+						<h1 id="greeting"
 							class="text-3xl xl:mb-2 md:text-left text-center xl:text-6xl font-bold text-[#AE020B] dark:bg-clip-text dark:text-transparent pb-2 dark:bg-gradient-to-r from-yellow-500 via-yellow-200 to-yellow-500">
 							Halo</h1>
 					</div>
@@ -449,6 +450,35 @@
 
 		<!-- JavaScript -->
 		<script>
+			function getUserDataFromToken() {
+				const token = localStorage.getItem('token');
+				if (!token) {
+					return null;
+				}
+
+				if (typeof jwt_decode === 'function') {
+					try {
+						const decodedToken = jwt_decode(token);
+						return {
+							email: decodedToken.sub,
+							role: decodedToken.role,
+							username: decodedToken.userName,
+							userId: decodedToken.userUuid
+						};
+					} catch (error) {
+						console.error("Error decoding token:", error);
+						return null;
+					}
+				} else {
+					console.error("jwt_decode is not defined");
+					return null;
+				}
+			}
+			const userData = getUserDataFromToken();
+			
+			if (userData && userData.username) {
+				document.getElementById("greeting").textContent = `Halo, ${userData.username}`;
+			}
 			const sidebar = document.getElementById('default-sidebar');
 			const closeButton = document.getElementById('toggle-sidebar');
 			const sidebarContentWrapper = document.querySelector('.sidebar-content-wrapper')
@@ -678,17 +708,44 @@
 				}
 
 				// Fungsi untuk membuat chat baru
-				function createNewChat() {
+				async function createNewChat() {
 					const chatId = `chat-${Date.now()}`;
 					const chatName = `Chat ${chatCounter++}`;
 					const newChat = {
-						id: chatId,
 						name: chatName,
 						messages: []
 					};
 					chats.push(newChat);
-					renderChatList(); // Tetap panggil renderChatList tapi kondisi isShowingMore tetap dipertahankan
-					switchToChat(chats.length - 1); // Pindah ke chat baru
+					renderChatList();
+					switchToChat(chats.length - 1); 
+					if (!userData) {
+						console.error("User not authenticated.");
+						return;
+					}
+					console.log(userData.userUuid);
+					try {
+						const response = await fetch('/history', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json'
+							},
+							body: JSON.stringify({
+								historyName: chatName,
+								status: "ACTIVE",
+								userId: userData.userUuid 
+							})
+						});
+
+						if (!response.ok) {
+							throw new Error("Failed to save chat to server. Status: " + response.status);
+						}
+
+						const data = await response.json();
+						console.log("Chat successfully saved to server:", data);
+
+					} catch (error) {
+						console.error("Error saving chat to server:", error);
+					}
 				}
 
 				async function sendMessage(messageText = '') {
@@ -805,7 +862,6 @@
 				switchToChat(0);
 			});
 		</script>
-
 </body>
 
 </html>
