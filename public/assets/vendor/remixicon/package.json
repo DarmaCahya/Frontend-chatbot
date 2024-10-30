@@ -27,5 +27,8 @@
   "contributors": [
     "Wendy Gao <wendygaoyuan@163.com>",
     "Jimmy Cheung <jimmy@remixdesign.cn>"
-  ]
+  ],
+  "dependencies": {
+    "remixicon": "file:"
+  }
 }

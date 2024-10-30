@@ -197,10 +197,10 @@
 	<script	script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
 </head>
 
-<body class="bg-gray-100  dark:bg-gray-700 overflow-x-hidden text-black dark:text-white transition duration-75">
+<body class="overflow-x-hidden text-black transition duration-75 bg-gray-100 dark:bg-gray-700 dark:text-white">
 	<div class="flex h-screen">
 		<button id="toggle-sidebar" aria-controls="default-sidebar" type="button"
-			class="text-gray-600 p-3 z-50 absolute top-6 left-3 hover:text-gray-500 dark:text-gray-300">
+			class="absolute z-50 p-3 text-gray-600 top-6 left-3 hover:text-gray-500 dark:text-gray-300">
 			<!-- Placeholder for close button icon -->
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
 				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -211,12 +211,12 @@
 		</button>
 		<!-- Sidebar -->
 		<aside id="default-sidebar"
-			class="bg-gray-200 hidden minimized pt-24 dark:bg-gray-800 h-screen top-0 left-0 z-40 overflow-y-auto scrollbar-custom md:flex flex-col space-y-3 transition-all duration-300 translate-x-0 px-3">
+			class="top-0 left-0 z-40 flex-col hidden h-screen px-3 pt-24 space-y-3 overflow-y-auto transition-all duration-300 translate-x-0 bg-gray-200 minimized dark:bg-gray-800 scrollbar-custom md:flex">
 			<!-- Tombol untuk menutup sidebar pada layar kecil -->
-			<div class="flex w-full flex-col flex-1 space-y-6">
+			<div class="flex flex-col flex-1 w-full space-y-6">
 
 				<!-- Konten Sidebar -->
-				<button id="new-chat-btn" class="flex w-fit bg-white/10 px-3 py-2 rounded-xl">
+				<button id="new-chat-btn" class="flex px-3 py-2 w-fit bg-white/10 rounded-xl">
 					<div>
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
 							stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -231,7 +231,7 @@
 					<!-- Daftar Riwayat Chat -->
 					<section id="chat-history-list" class="scrollbar-custom">
 						<div>
-							<p class="font-semibold mb-3">Riwayat Percakapan</p>
+							<p class="mb-3 font-semibold">Riwayat Percakapan</p>
 							<ul id="chat-list" class="flex flex-col pr-3 space-y-3 font-medium">
 								<!-- Chat items will be added here -->
 							</ul>
@@ -242,7 +242,7 @@
 						</div>
 						<hr class="my-3">
 						<div>
-							<p class="font-bold text-base mb-3">Kemarin</p>
+							<p class="mb-3 text-base font-bold">Kemarin</p>
 							<ul id="chat-list-2" class="space-y-2 font-medium">
 								<!-- Chat items akan ditambahkan di sini -->
 							</ul>
@@ -252,13 +252,13 @@
 			</div>
 
 			<!-- Pengaturan dan Toggle Dark Mode -->
-			<section class="w-full sticky bottom-5 dark:bg-gray-800 bg-neutral-200">
+			<section class="sticky w-full bottom-5 dark:bg-gray-800 bg-neutral-200">
 				<!-- Konten pengaturan tetap sama -->
-				<div id="default-sidebar-setting-content" class="flex minimized flex-col">
-					<a href="#" class="flex items-center hover:bg-white/10 p-3 rounded-md icon">
+				<div id="default-sidebar-setting-content" class="flex flex-col minimized">
+					<a href="#" class="flex items-center p-3 rounded-md hover:bg-white/10 icon">
 						<!-- Icon Bantuan dan Teks -->
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-							class="fill-current text-gray-800 dark:text-white">
+							class="text-gray-800 fill-current dark:text-white">
 							<g clip-path="url(#clip0_69_1038)">
 								<path fill-rule="evenodd" clip-rule="evenodd"
 									d="M8.17317 2.7612C9.38642 2.25866 10.6868 2 12 2C13.3132 2 14.6136 2.25866 15.8268 2.7612C17.0401 3.26375 18.1425 4.00035 19.0711 4.92893C19.9997 5.85752 20.7362 6.95991 21.2388 8.17317C21.7413 9.38642 22 10.6868 22 12C22 13.3132 21.7413 14.6136 21.2388 15.8268C20.7362 17.0401 19.9997 18.1425 19.0711 19.0711C18.1425 19.9997 17.0401 20.7362 15.8268 21.2388C14.6136 21.7413 13.3132 22 12 22C10.6868 22 9.38642 21.7413 8.17317 21.2388C6.95991 20.7362 5.85752 19.9997 4.92893 19.0711C4.00035 18.1425 3.26375 17.0401 2.7612 15.8268C2.25866 14.6136 2 13.3132 2 12C2 10.6868 2.25866 9.38642 2.7612 8.17317C3.26375 6.95991 4.00035 5.85752 4.92893 4.92893C5.85752 4.00035 6.95991 3.26375 8.17317 2.7612ZM12 4C10.9494 4 9.90914 4.20693 8.93853 4.60896C7.96793 5.011 7.08601 5.60028 6.34315 6.34315C5.60028 7.08601 5.011 7.96793 4.60896 8.93853C4.20693 9.90914 4 10.9494 4 12C4 13.0506 4.20693 14.0909 4.60896 15.0615C5.011 16.0321 5.60028 16.914 6.34315 17.6569C7.08601 18.3997 7.96793 18.989 8.93853 19.391C9.90914 19.7931 10.9494 20 12 20C13.0506 20 14.0909 19.7931 15.0615 19.391C16.0321 18.989 16.914 18.3997 17.6569 17.6569C18.3997 16.914 18.989 16.0321 19.391 15.0615C19.7931 14.0909 20 13.0506 20 12C20 10.9494 19.7931 9.90914 19.391 8.93853C18.989 7.96793 18.3997 7.08602 17.6569 6.34315C16.914 5.60028 16.0321 5.011 15.0615 4.60896C14.0909 4.20693 13.0506 4 12 4ZM12 16C12.5523 16 13 16.4477 13 17V17.01C13 17.5623 12.5523 18.01 12 18.01C11.4477 18.01 11 17.5623 11 17.01V17C11 16.4477 11.4477 16 12 16ZM12.0813 5.97145C11.5241 5.9699 10.9742 6.09772 10.4748 6.34483C9.97535 6.59194 9.54013 6.9516 9.20334 7.39549C8.86952 7.83548 8.95559 8.46276 9.39557 8.79658C9.83555 9.1304 10.4628 9.04433 10.7967 8.60435C10.9463 8.40706 11.1398 8.24721 11.3617 8.13739C11.5837 8.02756 11.8281 7.97075 12.0758 7.97144C12.3234 7.97213 12.5675 8.03029 12.7888 8.14135C13.0102 8.2524 13.2027 8.41332 13.3513 8.61144C13.4999 8.80955 13.6005 9.03945 13.6451 9.28304C13.6897 9.52662 13.6772 9.77724 13.6086 10.0152C13.5399 10.2531 13.4169 10.4718 13.2493 10.6542C13.084 10.834 12.8798 10.9735 12.6524 11.0622C12.1479 11.2434 11.7149 11.582 11.4175 12.0282C11.1169 12.4791 10.9709 13.0155 11.0016 13.5565C11.0329 14.1079 11.5052 14.5296 12.0566 14.4983C12.608 14.467 13.0297 13.9947 12.9984 13.4433C12.9923 13.3351 13.0214 13.2278 13.0816 13.1376C13.1417 13.0475 13.2295 12.9792 13.3317 12.9433C13.3403 12.9403 13.3487 12.9372 13.3572 12.934C13.8776 12.7349 14.3448 12.4178 14.7218 12.0076C15.0989 11.5973 15.3756 11.1052 15.5301 10.5698C15.6846 10.0345 15.7128 9.47061 15.6124 8.92254C15.5119 8.37447 15.2856 7.85719 14.9513 7.41144C14.617 6.96568 14.1838 6.60361 13.6857 6.35373C13.1877 6.10386 12.6385 5.97299 12.0813 5.97145Z" />
@@ -272,9 +272,9 @@
 						<p class="ml-3 [&_.minimized_&_.flex]:hidden">Bantuan</p>
 					</a>
 
-					<a href="#" class="flex items-center hover:bg-white/10 p-3 rounded-md icon">
+					<a href="#" class="flex items-center p-3 rounded-md hover:bg-white/10 icon">
 						<!-- Icon Pengaturan dan Teks -->
-						<svg width="24" height="24" class="fill-current text-gray-800 dark:text-white"
+						<svg width="24" height="24" class="text-gray-800 fill-current dark:text-white"
 							viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g clip-path="url(#clip0_401_332)">
 								<path fill-rule="evenodd" clip-rule="evenodd"
@@ -290,18 +290,18 @@
 						</svg>
 						<p class="ml-3">Pengaturan</p>
 					</a>
-					<a class="flex items-center hover:bg-white/10 p-3 rounded-md icon">
+					<a class="flex items-center p-3 rounded-md hover:bg-white/10 icon">
 						<!-- Toggle Dark Mode -->
 						<div class="flex items-center">
 							<!-- Light theme icon SVG -->
-							<span id="icon-light" onclick="toggleMode()" class="hover:cursor-pointer text-black dark:text-white">
+							<span id="icon-light" onclick="toggleMode()" class="text-black hover:cursor-pointer dark:text-white">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
 							</span>
 						</div>
 					</a>
 				</div>
 
-				<div class="w-full space-y-4 hidden justify-center" id="default-sidebar-setting-content-minimized">
+				<div class="justify-center hidden w-full space-y-4" id="default-sidebar-setting-content-minimized">
 					<div class="flex justify-center cursor-pointer">
 						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g clip-path="url(#clip0_69_1038)">
@@ -335,7 +335,7 @@
 						</svg>
 					</div>
 
-					<div class="flex justify-center items-center text-white dark:text-black">
+					<div class="flex items-center justify-center text-white dark:text-black">
 						<span id="icon-light" id="theme-toggle-btn" class="hover:cursor-pointer" onclick="toggleMode()">
 						<!-- Light theme icon SVG -->
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
@@ -348,15 +348,15 @@
 
 		<div id="main-content" class="flex flex-col flex-1 transition-all">
 			<!-- Header -->
-			<header class="sticky flex top-0 p-5 w-full z-10">
-				<div class="flex justify-end flex-1 items-center">
-					<a href="/index" class=" bg-transparent p-1 px-4 rounded-full">
-						<img src="/images/white.png" alt="Logo Light Mode" class="block dark:hidden h-12 w-36 md:w-40">
-						<img src="/images/black.png" alt="Logo Black Mode" class="hidden dark:block h-12 w-36 md:w-40">
+			<header class="sticky top-0 z-10 flex w-full p-5">
+				<div class="flex items-center justify-end flex-1">
+					<a href="/index" class="p-1 px-4 bg-transparent rounded-full ">
+						<img src="/images/white.png" alt="Logo Light Mode" class="block h-12 dark:hidden w-36 md:w-40">
+						<img src="/images/black.png" alt="Logo Black Mode" class="hidden h-12 dark:block w-36 md:w-40">
 					</a>
-					<div class="flex items-center space-x-4 mr-5">
+					<div class="flex items-center mr-5 space-x-4">
 						<!-- <a href="/login"
-							class="login text-base font-bold text-black hover:underline dark:text-white">Masuk</a> -->
+							class="text-base font-bold text-black login hover:underline dark:text-white">Masuk</a> -->
 					</div>
 				</div>
 			</header>
@@ -372,37 +372,37 @@
 							Halo</h1>
 					</div>
 					<p class="font-bold">Mau belajar apa hari ini?</p>
-					<div class="chat-recom grid grid-cols-2 gap-3 lg:grid-cols-3 my-3">
-						<a href="#" data-message="Buatkan pantun lucu dalam bahasa Indonesia!"
-							class="chat-recom-item flex justify-center items-center border dark:border-gray-100 border-gray-800 rounded-md p-4">
+					<div class="grid grid-cols-2 gap-3 my-3 chat-recom lg:grid-cols-3">
+						<!-- <a href="#" data-message="Buatkan pantun lucu dalam bahasa Indonesia!"
+							class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
 							<p class="text-sm font-normal">Buatkan <span class="font-bold">pantun lucu</span>
 								dalam bahasa Indonesia!</p>
-						</a>
+						</a> -->
 						<a href="#" data-message="Cara bertanya tentang arah"
-							class="chat-recom-item flex justify-center items-center border dark:border-gray-100 border-gray-800 rounded-md p-4">
+							class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
 							<p class="text-sm font-normal">Cara <span class="font-bold">bertanya tentang
 									arah</span></p>
 						</a>
 						<a href="#" data-message="Ayo, ngobrol!"
-							class="chat-recom-item flex justify-center items-center border dark:border-gray-100 border-gray-800 rounded-md p-4">
+							class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
 							<p class="text-sm font-normal"><span class="font-bold">Ayo, ngobrol!</span></p>
 						</a>
 					</div>
 				</div>
 
 				<!-- Area Chat -->
-				<div class="chat-area flex flex-col flex-1">
+				<div class="flex flex-col flex-1 chat-area">
 					<div id="chat-box" class="chat-box flex flex-col max-h-[42rem] space-y-4 scrollbar-custom">
 						<!-- Pesan chat akan ditambahkan di sini -->
 					</div>
 				</div>
 
 				<!-- Input Chat -->
-				<div class="input-area dark:bg-gray-700 bg-gray-100">
-					<div class="flex items-center relative w-full">
+				<div class="bg-gray-100 input-area dark:bg-gray-700">
+					<div class="relative flex items-center w-full">
 						<input id="message-input" placeholder="Tanya apa saja dalam bahasa Indonesia...." type="text"
-							class="flex-1 py-3 px-4 text-sm rounded-2xl border border-gray-800 dark:bg-gray-800 bg-gray-200 dark:border-gray-100 pr-10" />
-						<button id="send-btn" class="absolute right-5 top-1/2 transform -translate-y-1/2">
+							class="flex-1 px-4 py-3 pr-10 text-sm bg-gray-200 border border-gray-800 rounded-2xl dark:bg-gray-800 dark:border-gray-100" />
+						<button id="send-btn" class="absolute transform -translate-y-1/2 right-5 top-1/2">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
 								fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
 								stroke-linejoin="round" class="lucide lucide-send ">
@@ -450,15 +450,16 @@
 
 		<!-- JavaScript -->
 		<script>
+			const token_jwt = localStorage.getItem('token');
+
 			function getUserDataFromToken() {
-				const token = localStorage.getItem('token');
-				if (!token) {
+				if (!token_jwt) {
 					return null;
 				}
 
 				if (typeof jwt_decode === 'function') {
 					try {
-						const decodedToken = jwt_decode(token);
+						const decodedToken = jwt_decode(token_jwt);
 						return {
 							email: decodedToken.sub,
 							role: decodedToken.role,
@@ -722,30 +723,6 @@
 						console.error("User not authenticated.");
 						return;
 					}
-					console.log(userData.userUuid);
-					try {
-						const response = await fetch('/history', {
-							method: 'POST',
-							headers: {
-								'Content-Type': 'application/json'
-							},
-							body: JSON.stringify({
-								historyName: chatName,
-								status: "ACTIVE",
-								userId: userData.userUuid 
-							})
-						});
-
-						if (!response.ok) {
-							throw new Error("Failed to save chat to server. Status: " + response.status);
-						}
-
-						const data = await response.json();
-						console.log("Chat successfully saved to server:", data);
-
-					} catch (error) {
-						console.error("Error saving chat to server:", error);
-					}
 				}
 
 				async function sendMessage(messageText = '') {
@@ -756,7 +733,7 @@
 					if (messageText === '') return;
 
 					if (currentChatIndex === null) {
-						createNewChat();
+						await createNewChat();
 					}
 					const selectedChat = chats[currentChatIndex];
 					if (!selectedChat) {
@@ -775,7 +752,32 @@
 						selectedChat.name = messageText; 
 						renderChatList(); 
 					}
+					if (!selectedChat.historyId) {
+						try {
+							const response = await fetch('/history', {
+								method: 'POST',
+								headers: {
+									'Content-Type': 'application/json',
+									'Authorization': token_jwt
+								},
+								body: JSON.stringify({
+									historyName: messageText,
+									status: "ACTIVE",
+									userId: userData.userId,
+									token: token_jwt
+								})
+							});
 
+							if (!response.ok) {
+								throw new Error("Failed to save chat to server. Status: " + response.status);
+							}
+
+							const data = await response.json();
+							selectedChat.historyId  = data.id;
+						} catch (error) {
+							console.error("Error saving chat to server:", error);
+						}
+					}
 					const userMessageDiv = document.createElement('div');
 					userMessageDiv.classList.add('bg-gray-200', 'text-black', 'self-end', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-xl', 'mb-3', 'border-[#2b2b2b]', 'border');
 					userMessageDiv.textContent = messageText;
@@ -793,49 +795,53 @@
 						alertPopup.classList.remove('hidden');
 					}
 					// Fetch the bot response
-					try {
-						const response = await fetch('/bot', {
-							method: 'POST',
-							headers: {
-								'Content-Type': 'application/json',
-							},
-							body: JSON.stringify({ message: messageText })
-						});
+						try {
+							const response = await fetch('/bot', {
+								method: 'POST',
+								headers: {
+									'Content-Type': 'application/json',
+									'Authorization': token_jwt
+								},
+								body: JSON.stringify({ 
+									message: messageText, 
+									token_jwt, 
+									historyId: selectedChat.historyId 
+								})
+							});
 
-						if (!response.ok) {
-							console.error(`API error: ${response.status} ${response.statusText}`);
-							throw new Error(`API error: ${response.status}`);
+							if (!response.ok) {
+								console.error(`API error: ${response.status} ${response.statusText}`);
+								throw new Error(`API error: ${response.status}`);
+							}
+
+							const data = await response.json();
+							const botResponse = data.response || 'Maaf, terjadi kesalahan dalam mendapatkan respons dari server.';
+
+							const botMessage = {
+								sender: 'bot',
+								text: botResponse
+							};
+							selectedChat.messages.push(botMessage);
+
+							// Render the bot's message
+							const botMessageDiv = document.createElement('div');
+							botMessageDiv.classList.add('bg-[#2b2b2b]', 'text-[#e0e0e0]', 'self-start', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-xl', 'mb-3');
+							botMessageDiv.textContent = botResponse;
+							chatBox.appendChild(botMessageDiv);
+
+							chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
+						} catch (error) {
+							console.error('Error fetching API:', error);
+
+							// Display error message
+							const errorDiv = document.createElement('div');
+							errorDiv.classList.add('bg-red-500', 'text-white', 'self-start', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-lg', 'mb-3');
+							errorDiv.textContent = 'Maaf, terjadi kesalahan saat menghubungi server.';
+							chatBox.appendChild(errorDiv);
+
+							chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
 						}
-
-						const data = await response.json();
-						const botResponse = data.response || 'Maaf, terjadi kesalahan dalam mendapatkan respons dari server.';
-
-						const botMessage = {
-							sender: 'bot',
-							text: botResponse
-						};
-						selectedChat.messages.push(botMessage);
-
-						// Render the bot's message
-						const botMessageDiv = document.createElement('div');
-						botMessageDiv.classList.add('bg-[#2b2b2b]', 'text-[#e0e0e0]', 'self-start', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-xl', 'mb-3');
-						botMessageDiv.textContent = botResponse;
-						chatBox.appendChild(botMessageDiv);
-
-						chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
-					} catch (error) {
-						console.error('Error fetching API:', error);
-
-						// Display error message
-						const errorDiv = document.createElement('div');
-						errorDiv.classList.add('bg-red-500', 'text-white', 'self-start', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-lg', 'mb-3');
-						errorDiv.textContent = 'Maaf, terjadi kesalahan saat menghubungi server.';
-						chatBox.appendChild(errorDiv);
-
-						chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
-					}
 				}
-
 				chatRecomSection.addEventListener('click', function (e) {
 					const chatItem = e.target.closest('.chat-recom-item');
 					if (chatItem) {

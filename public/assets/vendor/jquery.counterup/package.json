@@ -25,6 +25,7 @@
   ],
   "dependencies": {
     "jquery": ">=1.5.0",
+    "jquery.counterup": "file:",
     "waypoints": ">=3.0"
   },
   "author": "Benjamin Intal (https://github.com/bfintal/)",

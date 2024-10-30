@@ -16,7 +16,8 @@
   },
   "license": "LicenseRef-LICENSE",
   "dependencies": {
-    "jquery": "*"
+    "jquery": "*",
+    "jquery-easing": "file:"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

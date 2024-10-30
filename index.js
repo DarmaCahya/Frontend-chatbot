@@ -30,12 +30,13 @@ app.get('/', (req, res) => {
 // API Chat
 app.post('/history', async (req, res) => {
     try{
-        const {historyName, status, userId} = req.body;
+        const {historyName, status, userId, token} = req.body;
 
         const response = await fetch(process.env.HISTORY_API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ historyName,status, userId })
         })
@@ -56,14 +57,15 @@ app.post('/history', async (req, res) => {
 
 app.post('/bot', async (req,res ) => {
     try {
-        const { message } = req.body; 
-
+        const { message, token_jwt, historyId } = req.body; 
+        console.log('history', historyId);
         const response = await fetch(process.env.BOT_API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token_jwt}`
             },
-            body: JSON.stringify({ message })
+            body: JSON.stringify({ 'chat': message, 'historyId': historyId })
         });
 
         const contentType = response.headers.get("content-type");

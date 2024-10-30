@@ -71,5 +71,8 @@
     "animate.min.css",
     "animate.css",
     "source/**/*.css"
-  ]
+  ],
+  "dependencies": {
+    "animate.css": "file:"
+  }
 }

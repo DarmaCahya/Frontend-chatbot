@@ -19,5 +19,8 @@
     "license": "CC-BY-4.0",
     "devDependencies": {
         "adm-zip": "^0.5.9"
+    },
+    "dependencies": {
+        "icofont": "file:"
     }
 }
