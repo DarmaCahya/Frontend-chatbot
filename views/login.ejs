@@ -127,7 +127,7 @@
             body: JSON.stringify(data),
           });
           if (response.ok) {
-              window.location.href = '/chat';
+              window.location.href = 'http://ec2-35-85-179-20.us-west-2.compute.amazonaws.com:3000/chat';
           } else {
               console.error('Response error:', response);
               const errorData = await response.json();
