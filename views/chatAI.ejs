@@ -549,7 +549,7 @@
 
 						const optionRename = document.createElement('div');
 						optionRename.className = 'p-2 hover:bg-gray-100 cursor-pointer';
-						optionRename.textContent = 'Rename';
+						optionRename.textContent = 'Ubah Nama';
 						optionRename.addEventListener('click', function () {
 							// Buat elemen input sementara di sebelah teks
 							const input = document.createElement('input');
@@ -584,7 +584,7 @@
 						
 						const optionDelete = document.createElement('div');
 						optionDelete.className = 'p-2 hover:bg-gray-100 cursor-pointer';
-						optionDelete.textContent = 'Delete';
+						optionDelete.textContent = 'Hapus';
 						optionDelete.addEventListener('click', function () {
 							const confirmDelete = confirm("Are you sure you want to delete this chat?");
 							if (confirmDelete) {
@@ -711,7 +711,7 @@
 				// Fungsi untuk membuat chat baru
 				async function createNewChat() {
 					const chatId = `chat-${Date.now()}`;
-					const chatName = `Chat ${chatCounter++}`;
+					const chatName = `Percakapan ${chatCounter++}`;
 					const newChat = {
 						name: chatName,
 						messages: []
@@ -791,9 +791,10 @@
 
 					messageCount++;
 
+					/*
 					if (messageCount > 5) {
 						alertPopup.classList.remove('hidden');
-					}
+					} */
 					// Fetch the bot response
 						try {
 							const response = await fetch('/bot', {
