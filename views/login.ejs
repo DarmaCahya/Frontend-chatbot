@@ -127,7 +127,7 @@
             body: JSON.stringify(data),
           });
           if (response.ok) {
-              window.location.href = 'http://satriabipa.transdigiedu.com:3000/chat';
+              window.location.href = '/chats';
           } else {
               console.error('Response error:', response);
               const errorData = await response.json();
