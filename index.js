@@ -18,7 +18,7 @@ app.get('/opening', (req, res) => {
     res.render('opening');
 });
 
-app.get('/chat', (req, res) => {
+app.get('/chats', (req, res) => {
     res.render('chatAI');
 });
 
