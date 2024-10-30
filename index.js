@@ -26,13 +26,39 @@ app.get('/', (req, res) => {
     res.render('test');
 });
 
+app.post('/bot', async (req,res ) => {
+    try {
+        const { message } = req.body; 
+
+        const response = await fetch(process.env.BOT_API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message })
+        });
+
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            const data = await response.json();
+            res.status(response.status).json(data);
+        } else {
+            const text = await response.text();
+            res.status(response.status).json({ message: text });
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ message: "Terjadi kesalahan saat menghubungi bot." });
+    }
+});
+
 // authentikasi API
 app.get('/register', (req, res) => {
     res.render('register')
 })
 app.post('/api/register', async (req, res) => {
     try {
-        const response = await fetch('http://ec2-35-85-179-20.us-west-2.compute.amazonaws.com/user/api/auth/register', {
+        const response = await fetch(process.env.REGISTER_API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -60,7 +86,8 @@ app.get('/login', (req, res) => {
 });
 app.post('/api/login', async (req, res) => {
     try {
-        const response = await fetch('http://ec2-35-85-179-20.us-west-2.compute.amazonaws.com/user/api/auth/login', {
+        console.log(process.env.LOGIN_API_URL);
+        const response = await fetch(process.env.LOGIN_API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -75,7 +102,7 @@ app.post('/api/login', async (req, res) => {
         } else {
             const text = await response.text();
             console.error("Error: Expected JSON but received:", text);
-            res.status(response.status).json({ message: text });
+            res.status(response.status).json({ message: "Terjadi kesalahan saat melakukan masuk." });
         }
     } catch (error) {
         console.error("Error:", error); // Log error for debugging

@@ -737,7 +737,7 @@
 					}
 					// Fetch the bot response
 					try {
-						const response = await fetch('http://ec2-52-89-76-29.us-west-2.compute.amazonaws.com:6845/generate', {
+						const response = await fetch('/bot', {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json',
