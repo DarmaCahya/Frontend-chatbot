@@ -172,8 +172,8 @@
               console.log('Pendaftaran berhasil:', responseData);
               window.location.href = '/verify';
           } else {
-              console.error('Terjadi kesalahan:', response);
               const errorData = await response.json();
+              alert(errorData.message)
           }
         } catch (error) {
           alert('Terjadi kesalahan dalam melakukan pendaftaran, coba lagi nanti.');

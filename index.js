@@ -47,7 +47,6 @@ app.post('/bot', async (req,res ) => {
             res.status(response.status).json({ message: text });
         }
     } catch (error) {
-        console.error("Error:", error);
         res.status(500).json({ message: "Terjadi kesalahan saat menghubungi bot." });
     }
 });
@@ -68,15 +67,12 @@ app.post('/api/register', async (req, res) => {
         const contentType = response.headers.get("content-type");
         if (contentType && contentType.includes("application/json")) {
             const data = await response.json();
-            console.log(data);
             res.status(response.status).json(data);
         } else {
             const text = await response.text();
-            console.error("Error: Expected JSON but received:", text);
             res.status(response.status).json({ message: text });
         }
     } catch (error) {
-        console.error("Error:", error); // Log error for debugging
         res.status(500).json({ message: "Terjadi kesalahan saat melakukan pendaftaran." });
     }
 });
@@ -86,7 +82,6 @@ app.get('/login', (req, res) => {
 });
 app.post('/api/login', async (req, res) => {
     try {
-        console.log(process.env.LOGIN_API_URL);
         const response = await fetch(process.env.LOGIN_API_URL, {
             method: 'POST',
             headers: {
@@ -97,15 +92,11 @@ app.post('/api/login', async (req, res) => {
         const contentType = response.headers.get("content-type");
         if (contentType && contentType.includes("application/json")) {
             const data = await response.json();
-            console.log(data);
             res.status(response.status).json(data);
         } else {
-            const text = await response.text();
-            console.error("Error: Expected JSON but received:", text);
             res.status(response.status).json({ message: "Terjadi kesalahan saat melakukan masuk." });
         }
     } catch (error) {
-        console.error("Error:", error); // Log error for debugging
         res.status(500).json({ message: "Terjadi kesalahan saat melakukan masuk." });
     }
 });

@@ -129,7 +129,6 @@
           if (response.ok) {
               window.location.href = '/chats';
           } else {
-              console.error('Response error:', response);
               const errorData = await response.json();
               alert('Masuk gagal: ' + (errorData.message || 'Kesalahan tidak diketahui.'));
           }
