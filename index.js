@@ -54,6 +54,26 @@ app.post('/histories', async (req, res) => {
         res.status(500).json({ message: "Terjadi kesalahan saat membuat history." });
     }
 });
+app.get('/history-lists', async (req, res) =>{
+    try{
+        const historyList = process.env.HISTORYLIST_API_URL;
+        const {token, userId} = req.body;
+        console.log('${historyList}/${userId}');
+        const response = await fetch(`${historyList}/${userId}`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Gagal mengambil daftar chat');
+        }
+    } catch (error) {
+        console.error(error);
+        alert('Gagal mengambil daftar chat dari database');
+    }
+})
 
 app.post('/bot', async (req,res ) => {
     try {
