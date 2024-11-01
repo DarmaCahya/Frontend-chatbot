@@ -513,32 +513,8 @@
 				let chatCounter = 2;
 				let isShowingMore = false;
 
-				async function fetchChatList() {
-					try {
-						const response = await fetch('/history-lists', {
-							method: 'GET',
-							headers: {
-								'Content-Type': 'application/json',
-								'Authorization': token_jwt
-							},
-							body: JSON.stringify({
-								userId: userData.userId,
-								token: token_jwt
-							})
-						});
-						const dataResponse = await response.json();
-						chats = dataResponse;
-						renderChatList(chats);
-						if (!response.ok) {
-							throw new Error('Gagal mengambil daftar chat');
-						}
-					} catch (error) {
-						console.error(error);
-					}
-				}
-
 				// Fungsi untuk merender daftar chat
-				function renderChatList(chats) {
+				function renderChatList() {
 					chatList.innerHTML = '';
 
 					chats.forEach((chat, index) => {
@@ -791,8 +767,6 @@
 									token: token_jwt
 								})
 							});
-							const dataResponse = await response.json();
-							console.log(dataResponse);
 
 							if (!response.ok) {
 								throw new Error("Failed to save chat to server. Status: " + response.status);
