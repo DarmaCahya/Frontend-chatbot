@@ -200,7 +200,7 @@
 <body class="overflow-x-hidden text-black transition duration-75 bg-gray-100 dark:bg-gray-700 dark:text-white">
 	<div class="flex h-screen">
 		<button id="toggle-sidebar" aria-controls="default-sidebar" type="button"
-			class="absolute z-50 p-3 text-gray-600 top-6 left-3 hover:text-gray-500 dark:text-gray-300">
+			class="fixed z-50 p-3 text-gray-600 top-6 left-3 hover:text-gray-500 dark:text-gray-300">
 			<!-- Placeholder for close button icon -->
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
 				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -214,7 +214,6 @@
 			class="top-0 left-0 z-40 flex-col hidden h-screen px-3 pt-24 space-y-3 overflow-y-auto transition-all duration-300 translate-x-0 bg-gray-200 minimized dark:bg-gray-800 scrollbar-custom md:flex">
 			<!-- Tombol untuk menutup sidebar pada layar kecil -->
 			<div class="flex flex-col flex-1 w-full space-y-6">
-
 				<!-- Konten Sidebar -->
 				<button id="new-chat-btn" class="flex px-3 py-2 w-fit bg-white/10 rounded-xl">
 					<div>
@@ -370,7 +369,7 @@
 			</header>
 
 			<!-- Area Chat Utama -->
-			<main class="flex flex-col flex-1 lg:ml-12 xl:ml-0">
+			<main class="flex flex-col flex-1 lg:ml-2 xl:ml-0">
 				<!-- Salam dan Rekomendasi Chat -->
 				<div class="flex flex-col items-center h-full p-5 greeting-section">
 					<div class="flex items-center">
@@ -426,35 +425,6 @@
 
 		</div>
 	</div>
-
-	<div id=" alert-popup" tabindex="-1"
-		class="hidden fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full  justify-center items-center">
-		<div class="relative w-full max-w-md max-h-full border border-black dark:border-slate-700">
-			<div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-				<!-- Header modal -->
-				<div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-					<h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-						Pemberitahuan
-					</h3>
-				</div>
-				<!-- Body modal -->
-				<div class="p-6 space-y-6">
-					<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-						Anda telah menggunakan <span class="font-bold">SATRIA BIPA</span> lebih dari
-						5 kali. <br>
-						Untuk melanjutkan penggunaan dan mengakses fitur <span class="font-bold">SATRIA BIPA</span>
-						secara maksimal,
-						silakan masuk atau buat akun terlebih dahulu.
-					</p>
-				</div>
-				<!-- Footer modal -->
-				<div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-					<a href="/login"
-						class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Masuk
-						/ Buat Akun</a>
-				</div>
-			</div>
-		</div>
 
 		<!-- JavaScript -->
 		<script>
@@ -820,12 +790,16 @@
 						console.error(`Chat with index ${currentChatIndex} not found.`);
 						return;
 					}
+					if (!selectedChat.messages) {
+						selectedChat.messages = [];
+					}
 
 					// Add the user message to the selected chat
 					const userMessage = {
 						sender: 'user',
 						text: messageText
 					};
+					console.log(userMessage);
 					selectedChat.messages.push(userMessage);
 
 					if (selectedChat.messages.length === 1) {
