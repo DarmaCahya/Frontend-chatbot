@@ -299,6 +299,14 @@
 							</span>
 						</div>
 					</a>
+					<a href="#" class="flex items-center p-3 rounded-md hover:bg-white/10 icon" id="logout-button">
+						<!-- Icon Pengaturan dan Teks -->
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+							<path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+						</svg>
+						<p class="ml-3">Keluar</p>
+					</a>
 				</div>
 
 				<div class="justify-center hidden w-full space-y-4" id="default-sidebar-setting-content-minimized">
@@ -373,11 +381,10 @@
 					</div>
 					<p class="font-bold">Mau belajar apa hari ini?</p>
 					<div class="grid grid-cols-2 gap-3 my-3 chat-recom lg:grid-cols-3">
-						<!-- <a href="#" data-message="Buatkan pantun lucu dalam bahasa Indonesia!"
+						<a href="#" data-message="Bagaimana cara bertanya tentang harga?"
 							class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
-							<p class="text-sm font-normal">Buatkan <span class="font-bold">pantun lucu</span>
-								dalam bahasa Indonesia!</p>
-						</a> -->
+							<p class="text-sm font-bold">Bagaimana cara bertanya tentang harga?</p>
+						</a>
 						<a href="#" data-message="Cara bertanya tentang arah"
 							class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
 							<p class="text-sm font-normal">Cara <span class="font-bold">bertanya tentang
@@ -447,11 +454,20 @@
 				</div>
 			</div>
 		</div>
-
+	</div>
 		<!-- JavaScript -->
 		<script>
-			const token_jwt = localStorage.getItem('token');
+			document.getElementById("logout-button").addEventListener("click", function(event) {
+				event.preventDefault();
 
+				localStorage.removeItem("token"); 
+				sessionStorage.removeItem("token");
+
+				window.location.href = "/login";
+			});
+
+			let chats = [];
+			const token_jwt = localStorage.getItem('token');
 			function getUserDataFromToken() {
 				if (!token_jwt) {
 					return null;
@@ -476,6 +492,30 @@
 				}
 			}
 			const userData = getUserDataFromToken();
+
+			async function getAllHistory() {
+				try{
+					const response = await fetch(`/history-lists/${userData.userId}`,{
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': token_jwt
+						}
+					})
+					const data = await response.json();
+					chats = data.sort((a, b) => {
+						const dateA = new Date(...a.updatedAt);
+    					const dateB = new Date(...b.updatedAt);
+						return dateB - dateA;
+					});
+					chats = data;
+					if (!response.ok) {
+						throw new Error('Gagal mengambil daftar chat');
+					}
+				}catch (error) {
+					console.error(error);
+				}
+			}
 			
 			if (userData && userData.username) {
 				document.getElementById("greeting").textContent = `Halo, ${userData.username}`;
@@ -505,14 +545,12 @@
 				const showLessBtn = document.getElementById("show-less-btn");
 				const alertPopup = document.getElementById("alert-popup");
 
-				let chats = [];
-
 				let messageCount = 0;
 				let currentChatIndex = null;
 				const maxVisibleChats = 4;
 				let chatCounter = 2;
 				let isShowingMore = false;
-
+				
 				// Fungsi untuk merender daftar chat
 				function renderChatList() {
 					chatList.innerHTML = '';
@@ -524,7 +562,7 @@
 						a.href = '#';
 						a.className = 'chat-item dark:hover:bg-white/10 hover:bg-black/10 block p-3 rounded-md cursor-pointer flex justify-between items-center';
 						a.dataset.chatIndex = index;
-						a.textContent = chat.name;
+						a.textContent = chat.historyName;
 						a.addEventListener('click', function (e) {
 							e.preventDefault();
 							const chatIndex = parseInt(this.dataset.chatIndex);
@@ -544,33 +582,54 @@
 						a.appendChild(ellipsisButton);
 
 						const dropdownMenu = document.createElement('div');
-						dropdownMenu.className = 'absolute border bg-gray-500 right-0 top-full mt-2 w-32 text-white shadow-lg rounded-lg p-2 hidden';
+						dropdownMenu.className = 'z-10 absolute border bg-gray-500 right-0 top-full mt-2 w-32 text-white shadow-lg rounded-lg p-2 hidden';
 						dropdownMenu.id = `dropdown-${index}`;
 
 						const optionRename = document.createElement('div');
 						optionRename.className = 'p-2 hover:bg-gray-100 cursor-pointer';
 						optionRename.textContent = 'Ubah Nama';
 						optionRename.addEventListener('click', function () {
-							// Buat elemen input sementara di sebelah teks
 							const input = document.createElement('input');
 							input.type = 'text';
-							input.value = chat.name; // Set nilai input ke nama chat saat ini
-							input.className = 'p-2 border-none bg-transparent outline-none'; // Tambahkan style transparan dan border-none
-							
-							// Sesuaikan lebar input dengan panjang teks
-							input.style.width = `${chat.name.length + 1}ch`; // `+1` untuk spasi tambahan
-							
-							// Ganti teks dengan input tanpa mengosongkan elemen `a`
-							a.innerHTML = ''; // Kosongkan konten `a`
-							a.appendChild(input); // Sisipkan input ke dalam `a`
-							input.focus(); // Fokuskan ke input untuk mulai mengedit
+							input.value = chat.historyName; 
+							input.className = 'p-2 border-none bg-transparent outline-none'; 
+								
+							input.style.width = `${chat.historyName.length + 1}ch`;
+								
+							a.innerHTML = ''; 
+							a.appendChild(input); 
+							input.focus(); 
 
-							// Event ketika input kehilangan fokus atau pengguna menekan "Enter"
-							input.addEventListener('blur', function () {
-								chat.name = input.value; // Simpan nama baru ke dalam data
-								a.textContent = chat.name; // Tampilkan nama baru di UI
+							input.addEventListener('blur', async function () {
+								const newHistoryName = input.value;
+								chat.historyName = newHistoryName;
+								a.textContent = newHistoryName ; 
+								try {
+									const historyId = chat.id;
+									const response = await fetch(`/histories/${historyId}`, {
+										method: 'PUT',
+										headers: {
+											'Content-Type': 'application/json',
+											'Authorization': token_jwt 
+										},
+										body: JSON.stringify({ historyName: newHistoryName, status: chat.status, userId: `${userData.userId}` }) 
+									});
+									if (!response.ok) {
+										throw new Error('Gagal memperbarui nama chat di server');
+									}
+									const data = await response.json();
+									const chatIndex = chats.indexOf(chat);
+									if (chatIndex > -1) {
+										chats.splice(chatIndex, 1);
+									}
 
-								// Tambahkan kembali tombol ellipsis setelah mengganti teks
+									chats.unshift(chat);
+
+									renderChatList();
+								} catch (error) {
+									console.error("Error:", error);
+									alert("Gagal memperbarui nama chat di server.");
+								}
 								a.appendChild(ellipsisButton);
 							});
 
@@ -585,17 +644,34 @@
 						const optionDelete = document.createElement('div');
 						optionDelete.className = 'p-2 hover:bg-gray-100 cursor-pointer';
 						optionDelete.textContent = 'Hapus';
-						optionDelete.addEventListener('click', function () {
-							const confirmDelete = confirm("Are you sure you want to delete this chat?");
+						optionDelete.addEventListener('click', async function () {
+							const confirmDelete = confirm("Apakah kamu yakin akan menghapus chat ini?");
 							if (confirmDelete) {
-								chats.splice(index, 1); // Hapus chat dari daftar
-								currentChatIndex = null; // Reset index chat aktif
-								
-								renderChatList(); // Render ulang daftar chat
-								
-								// Bersihkan isi chat dan tampilkan bagian greeting
-								chatBox.innerHTML = ''; // Kosongkan chat box
-								greetingSection.classList.remove('hidden'); // Tampilkan greeting
+								try {
+									const historyId = chat.id;
+									const response = await fetch(`/histories/${historyId}`, {
+										method: 'DELETE',
+										headers: {
+											'Content-Type': 'application/json',
+											'Authorization': token_jwt 
+										}
+									});
+
+									if (!response.ok) {
+										throw new Error('Gagal menghapus chat');
+									}
+
+									chats.splice(index, 1); 
+									currentChatIndex = null;
+										
+									renderChatList(); 
+										
+									chatBox.innerHTML = '';
+									greetingSection.classList.remove('hidden'); 
+								} catch (error) {
+									console.error("Error:", error);
+									alert("Gagal menghapus chat dari server.");
+								}
 							}
 						});
 						dropdownMenu.appendChild(optionDelete);
@@ -747,7 +823,8 @@
 						text: messageText
 					};
 					selectedChat.messages.push(userMessage);
-
+					console.log('historyId: ',selectedChat.historyId);
+					
 					if (selectedChat.messages.length === 1) {
 						selectedChat.name = messageText; 
 						renderChatList(); 
@@ -774,6 +851,7 @@
 
 							const data = await response.json();
 							selectedChat.historyId  = data.id;
+							console.log('historyId setelah fetch: ',selectedChat.historyId);
 						} catch (error) {
 							console.error("Error saving chat to server:", error);
 						}
@@ -816,7 +894,9 @@
 							}
 
 							const data = await response.json();
-							const botResponse = data.response || 'Maaf, terjadi kesalahan dalam mendapatkan respons dari server.';
+							let botResponse = data.response || 'Maaf, terjadi kesalahan dalam mendapatkan respons dari server.';
+
+							botResponse = botResponse.replace(/\*(.*?)\*/g, "<em>$1</em>");
 
 							const botMessage = {
 								sender: 'bot',
@@ -824,13 +904,13 @@
 							};
 							selectedChat.messages.push(botMessage);
 
-							// Render the bot's message
 							const botMessageDiv = document.createElement('div');
 							botMessageDiv.classList.add('bg-[#2b2b2b]', 'text-[#e0e0e0]', 'self-start', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-xl', 'mb-3');
-							botMessageDiv.textContent = botResponse;
+
+							botMessageDiv.innerHTML = botResponse;
 							chatBox.appendChild(botMessageDiv);
 
-							chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
+							chatBox.scrollTop = chatBox.scrollHeight;
 						} catch (error) {
 							console.error('Error fetching API:', error);
 
