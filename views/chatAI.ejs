@@ -516,7 +516,7 @@
 					console.error(error);
 				}
 			}
-			
+
 			if (userData && userData.username) {
 				document.getElementById("greeting").textContent = `Halo, ${userData.username}`;
 			}
@@ -533,7 +533,7 @@
 				// mainContent.classList.toggle('xl:ml-[8rem]')
 				// mainContent.classList.toggle('md:ml-[6rem]')
 			});
-			document.addEventListener("DOMContentLoaded", function () {
+			document.addEventListener("DOMContentLoaded", async function () {
 				const newChatBtn = document.getElementById("new-chat-btn");
 				const sendBtn = document.getElementById("send-btn");
 				const messageInput = document.getElementById("message-input");
@@ -554,7 +554,6 @@
 				// Fungsi untuk merender daftar chat
 				function renderChatList() {
 					chatList.innerHTML = '';
-
 					chats.forEach((chat, index) => {
 						const li = document.createElement('li');
 						li.className = 'relative';
@@ -566,7 +565,7 @@
 						a.addEventListener('click', function (e) {
 							e.preventDefault();
 							const chatIndex = parseInt(this.dataset.chatIndex);
-							switchToChat(chatIndex);
+							// switchToChat(chatIndex);
 						});
 
 						const ellipsisButton = document.createElement('button');
@@ -701,6 +700,7 @@
 						showLessBtn.classList.add('hidden');
 					}
 				}
+				renderChatList();
 
 				function toggleDropdown(index) {
 					const dropdown = document.getElementById(`dropdown-${index}`);
@@ -745,44 +745,44 @@
 				});
 
 				// Fungsi untuk berpindah chat
-				function switchToChat(chatIndex) {
-					if (chatIndex < 0 || chatIndex >= chats.length) {
-						console.error(`Chat dengan index ${chatIndex} tidak ditemukan.`);
-						chatBox.innerHTML = '';
-						greetingSection.classList.remove('hidden');
-						return;
-					}
-					currentChatIndex = chatIndex;
-					const selectedChat = chats[currentChatIndex];
+				// function switchToChat(chatIndex) {
+				// 	if (chatIndex < 0 || chatIndex >= chats.length) {
+				// 		console.error(`Chat dengan index ${chatIndex} tidak ditemukan.`);
+				// 		chatBox.innerHTML = '';
+				// 		greetingSection.classList.remove('hidden');
+				// 		return;
+				// 	}
+				// 	currentChatIndex = chatIndex;
+				// 	const selectedChat = chats[currentChatIndex];
 
-					chatBox.innerHTML = '';
-					selectedChat.messages.forEach(message => {
-						const messageDiv = document.createElement('div');
-						const classes = message.sender === 'user' ?
-							'bg-[#ffcc00] text-black self-end text-right' :
-							'bg-[#2b2b2b] text-[#e0e0e0] self-start text-left';
-						messageDiv.classList.add(...classes.split(' '),
-							'hover:shadow-md', 'p-4', 'rounded-md', 'max-w-xs', 'w-fit', 'shadow-lg', 'transition-all', 'duration-300');
-						messageDiv.textContent = message.text;
-						chatBox.appendChild(messageDiv);
-					});
+				// 	chatBox.innerHTML = '';
+				// 	selectedChat.messages.forEach(message => {
+				// 		const messageDiv = document.createElement('div');
+				// 		const classes = message.sender === 'user' ?
+				// 			'bg-[#ffcc00] text-black self-end text-right' :
+				// 			'bg-[#2b2b2b] text-[#e0e0e0] self-start text-left';
+				// 		messageDiv.classList.add(...classes.split(' '),
+				// 			'hover:shadow-md', 'p-4', 'rounded-md', 'max-w-xs', 'w-fit', 'shadow-lg', 'transition-all', 'duration-300');
+				// 		messageDiv.textContent = message.text;
+				// 		chatBox.appendChild(messageDiv);
+				// 	});
 
-					document.querySelectorAll('.chat-item').forEach(item => {
-						if (parseInt(item.dataset.chatIndex) === currentChatIndex) {
-							item.classList.add('active-chat');
-						} else {
-							item.classList.remove('active-chat');
-						}
-					});
+				// 	document.querySelectorAll('.chat-item').forEach(item => {
+				// 		if (parseInt(item.dataset.chatIndex) === currentChatIndex) {
+				// 			item.classList.add('active-chat');
+				// 		} else {
+				// 			item.classList.remove('active-chat');
+				// 		}
+				// 	});
 
-					chatBox.scrollTop = chatBox.scrollHeight;
+				// 	chatBox.scrollTop = chatBox.scrollHeight;
 
-					if (selectedChat.messages.length > 0) {
-						greetingSection.classList.add('hidden');
-					} else {
-						greetingSection.classList.remove('hidden');
-					}
-				}
+				// 	if (selectedChat.messages.length > 0) {
+				// 		greetingSection.classList.add('hidden');
+				// 	} else {
+				// 		greetingSection.classList.remove('hidden');
+				// 	}
+				// }
 
 				// Fungsi untuk membuat chat baru
 				async function createNewChat() {
@@ -792,9 +792,11 @@
 						name: chatName,
 						messages: []
 					};
+					await getAllHistory();
 					chats.push(newChat);
+					currentChatIndex = chats.length - 1;
 					renderChatList();
-					switchToChat(chats.length - 1); 
+					// switchToChat(chats.length - 1); 
 					if (!userData) {
 						console.error("User not authenticated.");
 						return;
@@ -805,7 +807,6 @@
 					if (messageText === '') {
 						messageText = messageInput.value.trim();
 					}
-
 					if (messageText === '') return;
 
 					if (currentChatIndex === null) {
@@ -813,8 +814,12 @@
 					}
 					const selectedChat = chats[currentChatIndex];
 					if (!selectedChat) {
-						console.error(`Chat with index ${currentChatIndex} not found.`);
+						console.error("selectedChat atau selectedChat.messages tidak ditemukan.");
 						return;
+					}
+
+					if (!selectedChat.messages) {
+						selectedChat.messages = [];
 					}
 
 					// Add the user message to the selected chat
@@ -823,7 +828,6 @@
 						text: messageText
 					};
 					selectedChat.messages.push(userMessage);
-					console.log('historyId: ',selectedChat.historyId);
 					
 					if (selectedChat.messages.length === 1) {
 						selectedChat.name = messageText; 
@@ -851,7 +855,6 @@
 
 							const data = await response.json();
 							selectedChat.historyId  = data.id;
-							console.log('historyId setelah fetch: ',selectedChat.historyId);
 						} catch (error) {
 							console.error("Error saving chat to server:", error);
 						}
@@ -946,7 +949,7 @@
 
 				// Inisialisasi dengan chat pertama
 				renderChatList();
-				switchToChat(0);
+				// switchToChat(0);
 			});
 		</script>
 </body>
