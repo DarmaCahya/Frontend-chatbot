@@ -550,6 +550,8 @@
 				const maxVisibleChats = 4;
 				let chatCounter = 2;
 				let isShowingMore = false;
+				await getAllHistory();
+				renderChatList();
 				
 				// Fungsi untuk merender daftar chat
 				function renderChatList() {
