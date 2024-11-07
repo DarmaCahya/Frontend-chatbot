@@ -200,7 +200,7 @@
 <body class="overflow-x-hidden text-black transition duration-75 bg-gray-100 dark:bg-gray-700 dark:text-white">
 	<div class="flex h-screen">
 		<button id="toggle-sidebar" aria-controls="default-sidebar" type="button"
-			class="absolute z-50 p-3 text-gray-600 top-6 left-3 hover:text-gray-500 dark:text-gray-300">
+			class="fixed z-50 p-3 text-gray-600 top-6 left-3 hover:text-gray-500 dark:text-gray-300">
 			<!-- Placeholder for close button icon -->
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
 				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -214,7 +214,6 @@
 			class="top-0 left-0 z-40 flex-col hidden h-screen px-3 pt-24 space-y-3 overflow-y-auto transition-all duration-300 translate-x-0 bg-gray-200 minimized dark:bg-gray-800 scrollbar-custom md:flex">
 			<!-- Tombol untuk menutup sidebar pada layar kecil -->
 			<div class="flex flex-col flex-1 w-full space-y-6">
-
 				<!-- Konten Sidebar -->
 				<button id="new-chat-btn" class="flex px-3 py-2 w-fit bg-white/10 rounded-xl">
 					<div>
@@ -252,7 +251,7 @@
 			</div>
 
 			<!-- Pengaturan dan Toggle Dark Mode -->
-			<section class="sticky w-full bottom-5 dark:bg-gray-800 bg-neutral-200">
+			<section class="sticky w-full h-full bottom-5 dark:bg-gray-800 bg-neutral-200">
 				<!-- Konten pengaturan tetap sama -->
 				<div id="default-sidebar-setting-content" class="flex flex-col minimized">
 					<a href="#" class="flex items-center p-3 rounded-md hover:bg-white/10 icon">
@@ -292,12 +291,20 @@
 					</a>
 					<a class="flex items-center p-3 rounded-md hover:bg-white/10 icon">
 						<!-- Toggle Dark Mode -->
-						<div class="flex items-center">
+						<div class="flex items-center bg-zinc-300 dark:bg-transparent">
 							<!-- Light theme icon SVG -->
-							<span id="icon-light" onclick="toggleMode()" class="text-black hover:cursor-pointer dark:text-white">
+							<span id="icon-light" onclick="toggleMode()" class="text-black hover:cursor-pointer dark:text-white border dark:border">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
 							</span>
 						</div>
+					</a>
+					<a href="#" class="flex items-center p-3 rounded-md hover:bg-white/10 icon" id="logout-button">
+						<!-- Icon Pengaturan dan Teks -->
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+							<path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+						</svg>
+						<p class="ml-3">Keluar</p>
 					</a>
 				</div>
 
@@ -337,9 +344,9 @@
 
 					<div class="flex items-center justify-center text-white dark:text-black">
 						<span id="icon-light" id="theme-toggle-btn" class="hover:cursor-pointer" onclick="toggleMode()">
-						<!-- Light theme icon SVG -->
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-					</span>
+							<!-- Light theme icon SVG -->
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+						</span>
 					</div>
 
 				</div>
@@ -362,7 +369,7 @@
 			</header>
 
 			<!-- Area Chat Utama -->
-			<main class="flex flex-col flex-1 lg:ml-12 xl:ml-0">
+			<main class="flex flex-col flex-1 lg:ml-2 xl:ml-0">
 				<!-- Salam dan Rekomendasi Chat -->
 				<div class="flex flex-col items-center h-full p-5 greeting-section">
 					<div class="flex items-center">
@@ -372,12 +379,16 @@
 							Halo</h1>
 					</div>
 					<p class="font-bold">Mau belajar apa hari ini?</p>
+<<<<<<< HEAD
 					<div class="grid grid-cols-2 gap-3 my-4 chat-recom lg:grid-cols-4">
 						<!-- <a href="#" data-message="Buatkan pantun lucu dalam bahasa Indonesia!"
+=======
+					<div class="grid grid-cols-2 gap-3 my-3 chat-recom lg:grid-cols-3">
+						<a href="#" data-message="Apa itu Diksi?"
+>>>>>>> 3ed02fd5ada8ef2df2e3eaecd07ab9915e999a48
 							class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
-							<p class="text-sm font-normal">Buatkan <span class="font-bold">pantun lucu</span>
-								dalam bahasa Indonesia!</p>
-						</a> -->
+							<p class="text-sm font-normal">Apa itu Diksi? </p>
+						</a>
 						<a href="#" data-message="Cara bertanya tentang arah"
 							class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
 							<p class="text-sm font-normal">Cara <span class="font-bold">bertanya tentang
@@ -419,37 +430,17 @@
 		</div>
 	</div>
 
-	<div id=" alert-popup" tabindex="-1"
-		class="hidden fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full  justify-center items-center">
-		<div class="relative w-full max-w-md max-h-full border border-black dark:border-slate-700">
-			<div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-				<!-- Header modal -->
-				<div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-					<h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-						Pemberitahuan
-					</h3>
-				</div>
-				<!-- Body modal -->
-				<div class="p-6 space-y-6">
-					<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-						Anda telah menggunakan <span class="font-bold">SATRIA BIPA</span> lebih dari
-						5 kali. <br>
-						Untuk melanjutkan penggunaan dan mengakses fitur <span class="font-bold">SATRIA BIPA</span>
-						secara maksimal,
-						silakan masuk atau buat akun terlebih dahulu.
-					</p>
-				</div>
-				<!-- Footer modal -->
-				<div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-					<a href="/login"
-						class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Masuk
-						/ Buat Akun</a>
-				</div>
-			</div>
-		</div>
-
 		<!-- JavaScript -->
 		<script>
+			document.getElementById("logout-button").addEventListener("click", function(event) {
+				event.preventDefault();
+
+				localStorage.removeItem("token"); 
+				sessionStorage.removeItem("token");
+
+				window.location.href = "/login";
+			});
+			
 			const token_jwt = localStorage.getItem('token');
 
 			function getUserDataFromToken() {
@@ -493,7 +484,7 @@
 				// mainContent.classList.toggle('xl:ml-[8rem]')
 				// mainContent.classList.toggle('md:ml-[6rem]')
 			});
-			document.addEventListener("DOMContentLoaded", function () {
+			document.addEventListener("DOMContentLoaded", async function () {
 				const newChatBtn = document.getElementById("new-chat-btn");
 				const sendBtn = document.getElementById("send-btn");
 				const messageInput = document.getElementById("message-input");
@@ -514,7 +505,28 @@
 				let isShowingMore = false;
 
 				// Fungsi untuk merender daftar chat
-				function renderChatList() {
+				async function renderChatList() {
+					try{
+						const response = await fetch(`/history-lists/${userData.userId}`,{
+							method: 'GET',
+							headers: {
+								'Content-Type': 'application/json',
+								'Authorization': token_jwt
+							}
+						})
+						const data = await response.json();
+						chats = data.sort((a, b) => {
+							const dateA = new Date(...a.updatedAt);
+    						const dateB = new Date(...b.updatedAt);
+
+							return dateB - dateA;
+						});
+						if (!response.ok) {
+							throw new Error('Gagal mengambil daftar chat');
+						}
+					}catch (error) {
+						console.error(error);
+					}
 					chatList.innerHTML = '';
 
 					chats.forEach((chat, index) => {
@@ -524,7 +536,7 @@
 						a.href = '#';
 						a.className = 'chat-item dark:hover:bg-white/10 hover:bg-black/10 block p-3 rounded-md cursor-pointer flex justify-between items-center';
 						a.dataset.chatIndex = index;
-						a.textContent = chat.name;
+						a.textContent = chat.historyName;
 						a.addEventListener('click', function (e) {
 							e.preventDefault();
 							const chatIndex = parseInt(this.dataset.chatIndex);
@@ -544,33 +556,54 @@
 						a.appendChild(ellipsisButton);
 
 						const dropdownMenu = document.createElement('div');
-						dropdownMenu.className = 'absolute border bg-gray-500 right-0 top-full mt-2 w-32 text-white shadow-lg rounded-lg p-2 hidden';
+						dropdownMenu.className = 'z-10 absolute border bg-gray-500 right-0 top-full mt-2 w-32 text-white shadow-lg rounded-lg p-2 hidden';
 						dropdownMenu.id = `dropdown-${index}`;
 
 						const optionRename = document.createElement('div');
 						optionRename.className = 'p-2 hover:bg-gray-100 cursor-pointer';
 						optionRename.textContent = 'Ubah Nama';
-						optionRename.addEventListener('click', function () {
-							// Buat elemen input sementara di sebelah teks
+						optionRename.addEventListener('click', async function () {
 							const input = document.createElement('input');
 							input.type = 'text';
-							input.value = chat.name; // Set nilai input ke nama chat saat ini
-							input.className = 'p-2 border-none bg-transparent outline-none'; // Tambahkan style transparan dan border-none
+							input.value = chat.historyName; 
+							input.className = 'p-2 border-none bg-transparent outline-none'; 
 							
-							// Sesuaikan lebar input dengan panjang teks
-							input.style.width = `${chat.name.length + 1}ch`; // `+1` untuk spasi tambahan
+							input.style.width = `${chat.historyName.length + 1}ch`;
 							
-							// Ganti teks dengan input tanpa mengosongkan elemen `a`
-							a.innerHTML = ''; // Kosongkan konten `a`
-							a.appendChild(input); // Sisipkan input ke dalam `a`
-							input.focus(); // Fokuskan ke input untuk mulai mengedit
+							a.innerHTML = ''; 
+							a.appendChild(input); 
+							input.focus(); 
 
-							// Event ketika input kehilangan fokus atau pengguna menekan "Enter"
-							input.addEventListener('blur', function () {
-								chat.name = input.value; // Simpan nama baru ke dalam data
-								a.textContent = chat.name; // Tampilkan nama baru di UI
+							input.addEventListener('blur', async function () {
+								const newHistoryName = input.value;
+								chat.historyName = newHistoryName;
+								a.textContent = newHistoryName ; 
+								try{
+									const historyId = chat.id;
+									const response = await fetch(`/histories/${historyId}`, {
+										method: 'PUT',
+										headers: {
+											'Content-Type': 'application/json',
+											'Authorization': token_jwt 
+										},
+										body: JSON.stringify({ historyName: newHistoryName, status: chat.status, userId: `${userData.userId}` }) 
+									});
+									if (!response.ok) {
+										throw new Error('Gagal memperbarui nama chat di server');
+									}
+									const data = await response.json();
+									const chatIndex = chats.indexOf(chat);
+									if (chatIndex > -1) {
+										chats.splice(chatIndex, 1);
+									}
 
-								// Tambahkan kembali tombol ellipsis setelah mengganti teks
+									chats.unshift(chat);
+
+									renderChatList();
+								} catch (error) {
+									console.error("Error:", error);
+									alert("Gagal memperbarui nama chat di server.");
+								}
 								a.appendChild(ellipsisButton);
 							});
 
@@ -585,17 +618,34 @@
 						const optionDelete = document.createElement('div');
 						optionDelete.className = 'p-2 hover:bg-gray-100 cursor-pointer';
 						optionDelete.textContent = 'Hapus';
-						optionDelete.addEventListener('click', function () {
+						optionDelete.addEventListener('click', async function () {
 							const confirmDelete = confirm("Are you sure you want to delete this chat?");
 							if (confirmDelete) {
-								chats.splice(index, 1); // Hapus chat dari daftar
-								currentChatIndex = null; // Reset index chat aktif
-								
-								renderChatList(); // Render ulang daftar chat
-								
-								// Bersihkan isi chat dan tampilkan bagian greeting
-								chatBox.innerHTML = ''; // Kosongkan chat box
-								greetingSection.classList.remove('hidden'); // Tampilkan greeting
+								try{
+									const historyId = chat.id;
+									const response = await fetch(`/histories/${historyId}`, {
+										method: 'DELETE',
+										headers: {
+											'Content-Type': 'application/json',
+											'Authorization': token_jwt 
+										}
+									});
+
+									if (!response.ok) {
+										throw new Error('Gagal menghapus chat');
+									}
+
+									chats.splice(index, 1); 
+									currentChatIndex = null;
+									
+									renderChatList(); 
+									
+									chatBox.innerHTML = '';
+									greetingSection.classList.remove('hidden'); 
+								} catch (error) {
+									console.error("Error:", error);
+									alert("Gagal menghapus chat dari server.");
+								}
 							}
 						});
 						dropdownMenu.appendChild(optionDelete);
@@ -679,6 +729,10 @@
 					currentChatIndex = chatIndex;
 					const selectedChat = chats[currentChatIndex];
 
+					if (!selectedChat.messages || !Array.isArray(selectedChat.messages)) {
+						selectedChat.messages = [];
+					}
+
 					chatBox.innerHTML = '';
 					selectedChat.messages.forEach(message => {
 						const messageDiv = document.createElement('div');
@@ -740,12 +794,16 @@
 						console.error(`Chat with index ${currentChatIndex} not found.`);
 						return;
 					}
+					if (!selectedChat.messages) {
+						selectedChat.messages = [];
+					}
 
 					// Add the user message to the selected chat
 					const userMessage = {
 						sender: 'user',
 						text: messageText
 					};
+					console.log(userMessage);
 					selectedChat.messages.push(userMessage);
 
 					if (selectedChat.messages.length === 1) {
@@ -774,6 +832,7 @@
 
 							const data = await response.json();
 							selectedChat.historyId  = data.id;
+							renderChatList()
 						} catch (error) {
 							console.error("Error saving chat to server:", error);
 						}
