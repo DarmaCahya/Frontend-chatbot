@@ -200,7 +200,7 @@
 <body class="overflow-x-hidden text-black transition duration-75 bg-gray-100 dark:bg-gray-700 dark:text-white">
 	<div class="flex h-screen">
 		<button id="toggle-sidebar" aria-controls="default-sidebar" type="button"
-			class="fixed z-50 p-3 text-gray-600 top-6 left-3 hover:text-gray-500 dark:text-gray-300">
+			class="absolute z-20 p-3 text-gray-600 top-6 left-3 hover:text-gray-500 dark:text-gray-300">
 			<!-- Placeholder for close button icon -->
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
 				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -212,8 +212,20 @@
 		<!-- Sidebar -->
 		<aside id="default-sidebar"
 			class="top-0 left-0 z-40 flex-col hidden h-screen px-3 pt-24 space-y-3 overflow-y-auto transition-all duration-300 translate-x-0 bg-gray-200 minimized dark:bg-gray-800 scrollbar-custom md:flex">
+
+			<!-- tombol hide sidebar -->
+			<div id="" class="fixed top-0">
+				<button id="toggle-button-inside-sidebar" aria-controls="default-sidebar" type="button" class="absolute pl-0 py-3 text-gray-600 top-6 left-3 hover:text-gray-500 dark:text-gray-300">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-left">
+						<rect width="18" height="18" x="3" y="3" rx="2" />
+						<path d="M9 3v18" />
+					</svg>
+				</button>
+			</div>
+
 			<!-- Tombol untuk menutup sidebar pada layar kecil -->
 			<div class="flex flex-col flex-1 w-full space-y-6">
+
 				<!-- Konten Sidebar -->
 				<button id="new-chat-btn" class="flex px-3 py-2 w-fit bg-white/10 rounded-xl">
 					<div>
@@ -251,7 +263,7 @@
 			</div>
 
 			<!-- Pengaturan dan Toggle Dark Mode -->
-			<section class="sticky w-full h-full bottom-5 dark:bg-gray-800 bg-neutral-200">
+			<section class="sticky w-full bottom-5 dark:bg-gray-800 bg-neutral-200">
 				<!-- Konten pengaturan tetap sama -->
 				<div id="default-sidebar-setting-content" class="flex flex-col minimized">
 					<a href="#" class="flex items-center p-3 rounded-md hover:bg-white/10 icon">
@@ -291,9 +303,9 @@
 					</a>
 					<a class="flex items-center p-3 rounded-md hover:bg-white/10 icon">
 						<!-- Toggle Dark Mode -->
-						<div class="flex items-center bg-zinc-300 dark:bg-transparent">
+						<div class="flex items-center">
 							<!-- Light theme icon SVG -->
-							<span id="icon-light" onclick="toggleMode()" class="text-black hover:cursor-pointer dark:text-white border dark:border">
+							<span id="icon-light" onclick="toggleMode()" class="text-black hover:cursor-pointer dark:text-white">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
 							</span>
 						</div>
@@ -344,9 +356,9 @@
 
 					<div class="flex items-center justify-center text-white dark:text-black">
 						<span id="icon-light" id="theme-toggle-btn" class="hover:cursor-pointer" onclick="toggleMode()">
-							<!-- Light theme icon SVG -->
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-						</span>
+						<!-- Light theme icon SVG -->
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+					</span>
 					</div>
 
 				</div>
@@ -369,7 +381,7 @@
 			</header>
 
 			<!-- Area Chat Utama -->
-			<main class="flex flex-col flex-1 lg:ml-2 xl:ml-0">
+			<main class="flex flex-col flex-1 lg:ml-12 xl:ml-0">
 				<!-- Salam dan Rekomendasi Chat -->
 				<div class="flex flex-col items-center h-full p-5 greeting-section">
 					<div class="flex items-center">
@@ -379,15 +391,10 @@
 							Halo</h1>
 					</div>
 					<p class="font-bold">Mau belajar apa hari ini?</p>
-<<<<<<< HEAD
-					<div class="grid grid-cols-2 gap-3 my-4 chat-recom lg:grid-cols-4">
-						<!-- <a href="#" data-message="Buatkan pantun lucu dalam bahasa Indonesia!"
-=======
 					<div class="grid grid-cols-2 gap-3 my-3 chat-recom lg:grid-cols-3">
-						<a href="#" data-message="Apa itu Diksi?"
->>>>>>> 3ed02fd5ada8ef2df2e3eaecd07ab9915e999a48
+						<a href="#" data-message="Bagaimana cara bertanya tentang harga?"
 							class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
-							<p class="text-sm font-normal">Apa itu Diksi? </p>
+							<p class="text-sm font-bold">Bagaimana cara bertanya tentang harga?</p>
 						</a>
 						<a href="#" data-message="Cara bertanya tentang arah"
 							class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
@@ -430,19 +437,48 @@
 		</div>
 	</div>
 
+	<div id=" alert-popup" tabindex="-1"
+		class="hidden fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full  justify-center items-center">
+		<div class="relative w-full max-w-md max-h-full border border-black dark:border-slate-700">
+			<div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+				<!-- Header modal -->
+				<div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+					<h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+						Pemberitahuan
+					</h3>
+				</div>
+				<!-- Body modal -->
+				<div class="p-6 space-y-6">
+					<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+						Anda telah menggunakan <span class="font-bold">SATRIA BIPA</span> lebih dari
+						5 kali. <br>
+						Untuk melanjutkan penggunaan dan mengakses fitur <span class="font-bold">SATRIA BIPA</span>
+						secara maksimal,
+						silakan masuk atau buat akun terlebih dahulu.
+					</p>
+				</div>
+				<!-- Footer modal -->
+				<div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+					<a href="/login"
+						class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Masuk
+						/ Buat Akun</a>
+				</div>
+			</div>
+		</div>
+
 		<!-- JavaScript -->
 		<script>
 			document.getElementById("logout-button").addEventListener("click", function(event) {
 				event.preventDefault();
 
-				localStorage.removeItem("token"); 
+				localStorage.removeItem("token");
 				sessionStorage.removeItem("token");
 
 				window.location.href = "/login";
 			});
-			
-			const token_jwt = localStorage.getItem('token');
 
+			let chats = [];
+			const token_jwt = localStorage.getItem('token');
 			function getUserDataFromToken() {
 				if (!token_jwt) {
 					return null;
@@ -467,7 +503,31 @@
 				}
 			}
 			const userData = getUserDataFromToken();
-			
+
+			async function getAllHistory() {
+				try{
+					const response = await fetch(`/history-lists/${userData.userId}`,{
+						method: 'GET',
+						headers: {
+							'Content-Type': 'application/json',
+							'Authorization': token_jwt
+						}
+					})
+					const data = await response.json();
+					chats = data.sort((a, b) => {
+						const dateA = new Date(...a.updatedAt);
+    					const dateB = new Date(...b.updatedAt);
+						return dateB - dateA;
+					});
+					chats = data;
+					if (!response.ok) {
+						throw new Error('Gagal mengambil daftar chat');
+					}
+				}catch (error) {
+					console.error(error);
+				}
+			}
+
 			if (userData && userData.username) {
 				document.getElementById("greeting").textContent = `Halo, ${userData.username}`;
 			}
@@ -484,6 +544,15 @@
 				// mainContent.classList.toggle('xl:ml-[8rem]')
 				// mainContent.classList.toggle('md:ml-[6rem]')
 			});
+
+			//add event listener to close button to minimize sidebar
+			const closeButtonSidebar = document.getElementById('toggle-button-inside-sidebar');
+			closeButtonSidebar.addEventListener('click', () => {
+				sidebar.classList.toggle('minimized');
+				sidebar.classList.toggle('hidden');
+				sidebarContentWrapper.classList.toggle('minimized')
+			})
+
 			document.addEventListener("DOMContentLoaded", async function () {
 				const newChatBtn = document.getElementById("new-chat-btn");
 				const sendBtn = document.getElementById("send-btn");
@@ -496,39 +565,17 @@
 				const showLessBtn = document.getElementById("show-less-btn");
 				const alertPopup = document.getElementById("alert-popup");
 
-				let chats = [];
-
 				let messageCount = 0;
 				let currentChatIndex = null;
 				const maxVisibleChats = 4;
 				let chatCounter = 2;
 				let isShowingMore = false;
+				await getAllHistory();
+				renderChatList();
 
 				// Fungsi untuk merender daftar chat
-				async function renderChatList() {
-					try{
-						const response = await fetch(`/history-lists/${userData.userId}`,{
-							method: 'GET',
-							headers: {
-								'Content-Type': 'application/json',
-								'Authorization': token_jwt
-							}
-						})
-						const data = await response.json();
-						chats = data.sort((a, b) => {
-							const dateA = new Date(...a.updatedAt);
-    						const dateB = new Date(...b.updatedAt);
-
-							return dateB - dateA;
-						});
-						if (!response.ok) {
-							throw new Error('Gagal mengambil daftar chat');
-						}
-					}catch (error) {
-						console.error(error);
-					}
+				function renderChatList() {
 					chatList.innerHTML = '';
-
 					chats.forEach((chat, index) => {
 						const li = document.createElement('li');
 						li.className = 'relative';
@@ -540,7 +587,7 @@
 						a.addEventListener('click', function (e) {
 							e.preventDefault();
 							const chatIndex = parseInt(this.dataset.chatIndex);
-							switchToChat(chatIndex);
+							// switchToChat(chatIndex);
 						});
 
 						const ellipsisButton = document.createElement('button');
@@ -562,31 +609,31 @@
 						const optionRename = document.createElement('div');
 						optionRename.className = 'p-2 hover:bg-gray-100 cursor-pointer';
 						optionRename.textContent = 'Ubah Nama';
-						optionRename.addEventListener('click', async function () {
+						optionRename.addEventListener('click', function () {
 							const input = document.createElement('input');
 							input.type = 'text';
-							input.value = chat.historyName; 
-							input.className = 'p-2 border-none bg-transparent outline-none'; 
-							
+							input.value = chat.historyName;
+							input.className = 'p-2 border-none bg-transparent outline-none';
+
 							input.style.width = `${chat.historyName.length + 1}ch`;
-							
-							a.innerHTML = ''; 
-							a.appendChild(input); 
-							input.focus(); 
+
+							a.innerHTML = '';
+							a.appendChild(input);
+							input.focus();
 
 							input.addEventListener('blur', async function () {
 								const newHistoryName = input.value;
 								chat.historyName = newHistoryName;
-								a.textContent = newHistoryName ; 
-								try{
+								a.textContent = newHistoryName ;
+								try {
 									const historyId = chat.id;
 									const response = await fetch(`/histories/${historyId}`, {
 										method: 'PUT',
 										headers: {
 											'Content-Type': 'application/json',
-											'Authorization': token_jwt 
+											'Authorization': token_jwt
 										},
-										body: JSON.stringify({ historyName: newHistoryName, status: chat.status, userId: `${userData.userId}` }) 
+										body: JSON.stringify({ historyName: newHistoryName, status: chat.status, userId: `${userData.userId}` })
 									});
 									if (!response.ok) {
 										throw new Error('Gagal memperbarui nama chat di server');
@@ -619,15 +666,15 @@
 						optionDelete.className = 'p-2 hover:bg-gray-100 cursor-pointer';
 						optionDelete.textContent = 'Hapus';
 						optionDelete.addEventListener('click', async function () {
-							const confirmDelete = confirm("Are you sure you want to delete this chat?");
+							const confirmDelete = confirm("Apakah kamu yakin akan menghapus chat ini?");
 							if (confirmDelete) {
-								try{
+								try {
 									const historyId = chat.id;
 									const response = await fetch(`/histories/${historyId}`, {
 										method: 'DELETE',
 										headers: {
 											'Content-Type': 'application/json',
-											'Authorization': token_jwt 
+											'Authorization': token_jwt
 										}
 									});
 
@@ -635,13 +682,13 @@
 										throw new Error('Gagal menghapus chat');
 									}
 
-									chats.splice(index, 1); 
+									chats.splice(index, 1);
 									currentChatIndex = null;
-									
-									renderChatList(); 
-									
+
+									renderChatList();
+
 									chatBox.innerHTML = '';
-									greetingSection.classList.remove('hidden'); 
+									greetingSection.classList.remove('hidden');
 								} catch (error) {
 									console.error("Error:", error);
 									alert("Gagal menghapus chat dari server.");
@@ -675,6 +722,7 @@
 						showLessBtn.classList.add('hidden');
 					}
 				}
+				renderChatList();
 
 				function toggleDropdown(index) {
 					const dropdown = document.getElementById(`dropdown-${index}`);
@@ -719,48 +767,44 @@
 				});
 
 				// Fungsi untuk berpindah chat
-				function switchToChat(chatIndex) {
-					if (chatIndex < 0 || chatIndex >= chats.length) {
-						console.error(`Chat dengan index ${chatIndex} tidak ditemukan.`);
-						chatBox.innerHTML = '';
-						greetingSection.classList.remove('hidden');
-						return;
-					}
-					currentChatIndex = chatIndex;
-					const selectedChat = chats[currentChatIndex];
+				// function switchToChat(chatIndex) {
+				// 	if (chatIndex < 0 || chatIndex >= chats.length) {
+				// 		console.error(`Chat dengan index ${chatIndex} tidak ditemukan.`);
+				// 		chatBox.innerHTML = '';
+				// 		greetingSection.classList.remove('hidden');
+				// 		return;
+				// 	}
+				// 	currentChatIndex = chatIndex;
+				// 	const selectedChat = chats[currentChatIndex];
 
-					if (!selectedChat.messages || !Array.isArray(selectedChat.messages)) {
-						selectedChat.messages = [];
-					}
+				// 	chatBox.innerHTML = '';
+				// 	selectedChat.messages.forEach(message => {
+				// 		const messageDiv = document.createElement('div');
+				// 		const classes = message.sender === 'user' ?
+				// 			'bg-[#ffcc00] text-black self-end text-right' :
+				// 			'bg-[#2b2b2b] text-[#e0e0e0] self-start text-left';
+				// 		messageDiv.classList.add(...classes.split(' '),
+				// 			'hover:shadow-md', 'p-4', 'rounded-md', 'max-w-xs', 'w-fit', 'shadow-lg', 'transition-all', 'duration-300');
+				// 		messageDiv.textContent = message.text;
+				// 		chatBox.appendChild(messageDiv);
+				// 	});
 
-					chatBox.innerHTML = '';
-					selectedChat.messages.forEach(message => {
-						const messageDiv = document.createElement('div');
-						const classes = message.sender === 'user' ?
-							'bg-[#ffcc00] text-black self-end text-right' :
-							'bg-[#2b2b2b] text-[#e0e0e0] self-start text-left';
-						messageDiv.classList.add(...classes.split(' '),
-							'hover:shadow-md', 'p-4', 'rounded-md', 'max-w-xs', 'w-fit', 'shadow-lg', 'transition-all', 'duration-300');
-						messageDiv.textContent = message.text;
-						chatBox.appendChild(messageDiv);
-					});
+				// 	document.querySelectorAll('.chat-item').forEach(item => {
+				// 		if (parseInt(item.dataset.chatIndex) === currentChatIndex) {
+				// 			item.classList.add('active-chat');
+				// 		} else {
+				// 			item.classList.remove('active-chat');
+				// 		}
+				// 	});
 
-					document.querySelectorAll('.chat-item').forEach(item => {
-						if (parseInt(item.dataset.chatIndex) === currentChatIndex) {
-							item.classList.add('active-chat');
-						} else {
-							item.classList.remove('active-chat');
-						}
-					});
+				// 	chatBox.scrollTop = chatBox.scrollHeight;
 
-					chatBox.scrollTop = chatBox.scrollHeight;
-
-					if (selectedChat.messages.length > 0) {
-						greetingSection.classList.add('hidden');
-					} else {
-						greetingSection.classList.remove('hidden');
-					}
-				}
+				// 	if (selectedChat.messages.length > 0) {
+				// 		greetingSection.classList.add('hidden');
+				// 	} else {
+				// 		greetingSection.classList.remove('hidden');
+				// 	}
+				// }
 
 				// Fungsi untuk membuat chat baru
 				async function createNewChat() {
@@ -770,9 +814,11 @@
 						name: chatName,
 						messages: []
 					};
+					await getAllHistory();
 					chats.push(newChat);
+					currentChatIndex = chats.length - 1;
 					renderChatList();
-					switchToChat(chats.length - 1); 
+					// switchToChat(chats.length - 1);
 					if (!userData) {
 						console.error("User not authenticated.");
 						return;
@@ -783,7 +829,6 @@
 					if (messageText === '') {
 						messageText = messageInput.value.trim();
 					}
-
 					if (messageText === '') return;
 
 					if (currentChatIndex === null) {
@@ -791,9 +836,10 @@
 					}
 					const selectedChat = chats[currentChatIndex];
 					if (!selectedChat) {
-						console.error(`Chat with index ${currentChatIndex} not found.`);
+						console.error("selectedChat atau selectedChat.messages tidak ditemukan.");
 						return;
 					}
+
 					if (!selectedChat.messages) {
 						selectedChat.messages = [];
 					}
@@ -803,7 +849,6 @@
 						sender: 'user',
 						text: messageText
 					};
-					console.log(userMessage);
 					selectedChat.messages.push(userMessage);
 
 					if (selectedChat.messages.length === 1) {
@@ -832,7 +877,6 @@
 
 							const data = await response.json();
 							selectedChat.historyId  = data.id;
-							renderChatList()
 						} catch (error) {
 							console.error("Error saving chat to server:", error);
 						}
@@ -875,7 +919,9 @@
 							}
 
 							const data = await response.json();
-							const botResponse = data.response || 'Maaf, terjadi kesalahan dalam mendapatkan respons dari server.';
+							let botResponse = data.response || 'Maaf, terjadi kesalahan dalam mendapatkan respons dari server.';
+
+							botResponse = botResponse.replace(/\*(.*?)\*/g, "<em>$1</em>");
 
 							const botMessage = {
 								sender: 'bot',
@@ -883,13 +929,13 @@
 							};
 							selectedChat.messages.push(botMessage);
 
-							// Render the bot's message
 							const botMessageDiv = document.createElement('div');
 							botMessageDiv.classList.add('bg-[#2b2b2b]', 'text-[#e0e0e0]', 'self-start', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-xl', 'mb-3');
-							botMessageDiv.textContent = botResponse;
+
+							botMessageDiv.innerHTML = botResponse;
 							chatBox.appendChild(botMessageDiv);
 
-							chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
+							chatBox.scrollTop = chatBox.scrollHeight;
 						} catch (error) {
 							console.error('Error fetching API:', error);
 
@@ -925,7 +971,7 @@
 
 				// Inisialisasi dengan chat pertama
 				renderChatList();
-				switchToChat(0);
+				// switchToChat(0);
 			});
 		</script>
 </body>

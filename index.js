@@ -30,7 +30,8 @@ app.get('/', (req, res) => {
 // API Chat
 app.post('/histories', async (req, res) => {
     try{
-        const {historyName, status, userId, token} = req.body;
+        const {historyName, status, userId} = req.body;
+        const token = req.headers.authorization;
         const response = await fetch(process.env.HISTORY_API_URL, {
             method: 'POST',
             headers: {
@@ -94,7 +95,7 @@ app.get('/history-lists/:userId', async (req, res) =>{
         if (!response.ok) {
             throw new Error('Gagal mengambil daftar chat');
         }
-        const data = await response.json(); 
+        const data = await response.json();
         res.status(200).json(data);
     }catch (error) {
         console.error(error);
@@ -132,6 +133,7 @@ app.put('/histories/:id', async (req, res) => {
 app.post('/bot', async (req,res ) => {
     try {
         const { message, token_jwt, historyId } = req.body; 
+        console.log('history', historyId);
         const response = await fetch(process.env.BOT_API_URL, {
             method: 'POST',
             headers: {
