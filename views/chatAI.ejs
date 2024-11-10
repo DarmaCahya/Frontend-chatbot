@@ -587,9 +587,8 @@
 						a.addEventListener('click', function (e) {
 							e.preventDefault();
 							const chatIndex = parseInt(this.dataset.chatIndex);
-							const chatHistoryId = chat.id;
 							// switchToChat(chatIndex);
-							showHistoryMessage(chatHistoryId);
+							showHistoryMessage(chat, chatIndex);
 						});
 
 						const ellipsisButton = document.createElement('button');
@@ -857,7 +856,7 @@
 						selectedChat.name = messageText; 
 						renderChatList(); 
 					}
-					if (!selectedChat.historyId) {
+					if (!selectedChat.id) {
 						try {
 							const response = await fetch('/histories', {
 								method: 'POST',
@@ -878,7 +877,7 @@
 							}
 
 							const data = await response.json();
-							selectedChat.historyId  = data.id;
+							selectedChat.id  = data.id;
 						} catch (error) {
 							console.error("Error saving chat to server:", error);
 						}
@@ -906,7 +905,7 @@
 							body: JSON.stringify({
 								message: messageText,
 								token_jwt,
-								historyId: selectedChat.historyId
+								historyId: selectedChat.id
 							})
 						});
 
@@ -960,7 +959,9 @@
 					chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
 				}
 
-				async function showHistoryMessage(historyId){
+				async function showHistoryMessage(chat, chatIndex){
+					historyId = chat.id;
+					currentChatIndex = chatIndex;
 					chatBox.innerHTML = '';
 					greetingSection.classList.add('hidden');
 					try{
