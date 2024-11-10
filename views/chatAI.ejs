@@ -587,7 +587,9 @@
 						a.addEventListener('click', function (e) {
 							e.preventDefault();
 							const chatIndex = parseInt(this.dataset.chatIndex);
+							const chatHistoryId = chat.id;
 							// switchToChat(chatIndex);
+							showHistoryMessage(chatHistoryId);
 						});
 
 						const ellipsisButton = document.createElement('button');
@@ -624,7 +626,7 @@
 							input.addEventListener('blur', async function () {
 								const newHistoryName = input.value;
 								chat.historyName = newHistoryName;
-								a.textContent = newHistoryName ; 
+								a.textContent = newHistoryName ;
 								try {
 									const historyId = chat.id;
 									const response = await fetch(`/histories/${historyId}`, {
@@ -685,7 +687,7 @@
 									chats.splice(index, 1); 
 									currentChatIndex = null;
 										
-									renderChatList(); 
+									renderChatList();
 										
 									chatBox.innerHTML = '';
 									greetingSection.classList.remove('hidden'); 
@@ -881,12 +883,7 @@
 							console.error("Error saving chat to server:", error);
 						}
 					}
-					const userMessageDiv = document.createElement('div');
-					userMessageDiv.classList.add('bg-gray-200', 'text-black', 'self-end', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-xl', 'mb-3', 'border-[#2b2b2b]', 'border');
-					userMessageDiv.textContent = messageText;
-					chatBox.appendChild(userMessageDiv);
-
-					chatBox.scrollTop = chatBox.scrollHeight;
+					showUserMessage(messageText);
 					messageInput.value = '';
 					if (selectedChat.messages.length === 1) {
 						greetingSection.classList.add('hidden');
@@ -894,60 +891,105 @@
 
 					messageCount++;
 
-					/*
-					if (messageCount > 5) {
-						alertPopup.classList.remove('hidden');
-					} */
-					// Fetch the bot response
-						try {
-							const response = await fetch('/bot', {
-								method: 'POST',
-								headers: {
-									'Content-Type': 'application/json',
-									'Authorization': token_jwt
-								},
-								body: JSON.stringify({ 
-									message: messageText, 
-									token_jwt, 
-									historyId: selectedChat.historyId 
-								})
-							});
-
-							if (!response.ok) {
-								console.error(`API error: ${response.status} ${response.statusText}`);
-								throw new Error(`API error: ${response.status}`);
-							}
-
-							const data = await response.json();
-							let botResponse = data.response || 'Maaf, terjadi kesalahan dalam mendapatkan respons dari server.';
-
-							botResponse = botResponse.replace(/\*(.*?)\*/g, "<em>$1</em>");
-
-							const botMessage = {
-								sender: 'bot',
-								text: botResponse
-							};
-							selectedChat.messages.push(botMessage);
-
-							const botMessageDiv = document.createElement('div');
-							botMessageDiv.classList.add('bg-[#2b2b2b]', 'text-[#e0e0e0]', 'self-start', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-xl', 'mb-3');
-
-							botMessageDiv.innerHTML = botResponse;
-							chatBox.appendChild(botMessageDiv);
-
-							chatBox.scrollTop = chatBox.scrollHeight;
-						} catch (error) {
-							console.error('Error fetching API:', error);
-
-							// Display error message
-							const errorDiv = document.createElement('div');
-							errorDiv.classList.add('bg-red-500', 'text-white', 'self-start', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-lg', 'mb-3');
-							errorDiv.textContent = 'Maaf, terjadi kesalahan saat menghubungi server.';
-							chatBox.appendChild(errorDiv);
-
-							chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
-						}
+					await showBotResponse(messageText, selectedChat)
 				}
+
+
+				async function showBotResponse(messageText, selectedChat){
+					try {
+						const response = await fetch('/bot', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+								'Authorization': token_jwt
+							},
+							body: JSON.stringify({
+								message: messageText,
+								token_jwt,
+								historyId: selectedChat.historyId
+							})
+						});
+
+						if (!response.ok) {
+							console.error(`API error: ${response.status} ${response.statusText}`);
+							throw new Error(`API error: ${response.status}`);
+						}
+
+						const data = await response.json();
+						let botResponse = data.response || 'Maaf, terjadi kesalahan dalam mendapatkan respons dari server.';
+
+						botResponse = botResponse.replace(/\*(.*?)\*/g, "<em>$1</em>");
+
+						const botMessage = {
+							sender: 'bot',
+							text: botResponse
+						};
+						selectedChat.messages.push(botMessage);
+						showBotMessage(botResponse);
+
+					} catch (error) {
+						console.error('Error fetching API:', error);
+						showErrorMessage();
+					}
+				}
+
+				function showUserMessage(messageText){
+					const userMessageDiv = document.createElement('div');
+					userMessageDiv.classList.add('bg-gray-200', 'text-black', 'self-end', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-xl', 'mb-3', 'border-[#2b2b2b]', 'border');
+					userMessageDiv.textContent = messageText;
+					chatBox.appendChild(userMessageDiv);
+					chatBox.scrollTop = chatBox.scrollHeight;
+				}
+
+				function showBotMessage(messageText){
+					const botMessageDiv = document.createElement('div');
+					botMessageDiv.classList.add('bg-[#2b2b2b]', 'text-[#e0e0e0]', 'self-start', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-xl', 'mb-3');
+
+					botMessageDiv.innerHTML = messageText;
+					chatBox.appendChild(botMessageDiv);
+
+					chatBox.scrollTop = chatBox.scrollHeight;
+				}
+
+				function showErrorMessage(){
+					const errorDiv = document.createElement('div');
+					errorDiv.classList.add('bg-red-500', 'text-white', 'self-start', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-lg', 'mb-3');
+					errorDiv.textContent = 'Maaf, terjadi kesalahan saat menghubungi server.';
+					chatBox.appendChild(errorDiv);
+
+					chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
+				}
+
+				async function showHistoryMessage(historyId){
+					chatBox.innerHTML = '';
+					greetingSection.classList.add('hidden');
+					try{
+						const response = await fetch(`/chat-history/${historyId}`,{
+							method: 'GET',
+							headers: {
+								'Content-Type': 'application/json',
+								'Authorization': token_jwt
+							}
+						})
+
+						const data = await response.json();
+						data.forEach(el => {
+							if(el.chat){
+								showUserMessage(el.chat)
+							}
+							if(el.response){
+								showBotMessage(el.response)
+							}
+						})
+
+						if (!response.ok) {
+							throw new Error('Gagal mengambil daftar chat');
+						}
+					}catch (error) {
+						console.log(error);
+					}
+				}
+
 				chatRecomSection.addEventListener('click', function (e) {
 					const chatItem = e.target.closest('.chat-recom-item');
 					if (chatItem) {

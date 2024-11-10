@@ -205,6 +205,29 @@ app.post('/api/login', async (req, res) => {
         res.status(500).json({ message: "Terjadi kesalahan saat melakukan masuk." });
     }
 });
+
+app.get('/chat-history/:historyId', async (req, res) =>{
+    try{
+        const chatHistory = process.env.CHATHISTORY_API_URL;
+        const token = req.headers.authorization;
+        const historyId = req.params.historyId;
+        const response = await fetch(`${chatHistory}${historyId}`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Gagal mengambil daftar chat');
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+    }catch (error) {
+        console.error(error);
+    }
+})
+
 app.get('/verify', (req, res) => {
     res.render('verify')
 })
