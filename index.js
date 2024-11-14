@@ -27,6 +27,10 @@ app.get('/', (req, res) => {
     res.render('test');
 });
 
+app.get('/dashboards', (req, res) => {
+    res.render('dashboards')
+})
+
 // API Chat
 app.post('/histories', async (req, res) => {
     try{
