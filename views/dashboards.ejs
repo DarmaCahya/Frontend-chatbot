@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Satria BIPA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+          rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css" />
+
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+        }
+    </script>
+
+    <script>
+
+
+        function toggleMode() {
+            const isDarkMode = document.documentElement.classList.toggle('dark');
+
+            // Update localStorage with the user's preference
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+
+            // Also update the checkbox based on the mode
+            document.getElementById('darkModeToggle').checked = isDarkMode;
+        }
+
+
+        window.onload = function () {
+            const theme = localStorage.getItem('theme');
+            const checkbox = document.getElementById('darkModeToggle');
+
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                checkbox.checked = true;  // Set the toggle to "checked" for dark mode
+            } else {
+                document.documentElement.classList.remove('dark');
+                checkbox.checked = false;  // Set the toggle to "unchecked" for light mode
+            }
+        };
+
+    </script>
+    <style>
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+        ;
+        }
+    </style>
+</head>
+
+<body class="overflow-x-hidden text-black transition duration-75 bg-gray-100 dark:bg-gray-700 dark:text-white">
+
+<%- include('partials/header') %>
+
+<main class="m-2 mt-20">
+
+    <section class="scroll-mt-50">
+
+        <div class="container px-6 mx-auto grid">
+            <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-white">
+                Dashboard
+            </h2>
+
+            <div class="grid gap-6 my-3 md:grid-cols-2 xl:grid-cols-4 lg:grid-cols-4 sm:grid-cols-2">
+                <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-xs">
+                    <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"> Total Chatbots</p>
+                        <p class="text-lg font-semibold text-gray-700 dark:text-gray-100"> 19238 </p>
+                    </div>
+                </div>
+
+                <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-xs">
+                    <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path  d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"> User active </p>
+                        <p class="text-lg font-semibold text-gray-700 dark:text-gray-100">120</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-xs">
+                    <div class="p-3 mr-4 text-red-500 bg-red-100 rounded-full">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path  d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"> </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"> History Created </p>
+                        <p class="text-lg font-semibold text-gray-700 dark:text-gray-100">6389</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-xs">
+                    <div class="p-3 mr-4 text-yellow-500 bg-yellow-100 rounded-full">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="7"></circle>
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"> Bot Response </p>
+                        <p class="text-lg font-semibold text-gray-700 dark:text-gray-100"> 828</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container px-6 mx-auto grid">
+
+            <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1">
+
+                <div class="relative flex flex-col my-3 bg-white dark:bg-gray-800 shadow-xs rounded-lg">
+                    <div class="mx-3 mb-0 border-b border-slate-200 dark:border-slate-200/10 py-5 px-5">
+                        <span class="text-md font-medium text-slate-600 text-gray-600 dark:text-gray-200">Header for the card</span>
+                    </div>
+
+                    <div class="p-4">
+                        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+                            <canvas id="chartjs-0" width="400" height="100" aria-label="Hello ARIA World" role="img"></canvas>
+                        </div>
+                    </div>
+
+
+                    <div class="mx-3 border-t border-slate-200 dark:border-slate-200/10 pb-3 pt-2 px-1">
+                        <span class="text-sm text-slate-600 font-medium text-gray-600 dark:text-gray-200"> Last updated: 4 hours ago </span>
+                    </div>
+                </div>
+
+                <div class="relative flex flex-col my-3 bg-white dark:bg-gray-800 shadow-xs rounded-lg">
+                    <div class="mx-3 mb-0 border-b border-slate-200 dark:border-slate-200/10 py-5 px-5">
+                        <span class="text-md font-medium text-slate-600 text-gray-600 dark:text-gray-200" >Recent Activities</span>
+                    </div>
+
+                    <nav class="flex min-w-[240px] flex-col gap-1 p-1.5">
+                        <div role="button"  class="text-slate-800 flex w-full items-center rounded-md p-3 transition-all hover:bg-slate-100 dark:hover:bg-slate-700 focus:bg-slate-100 dark:focus:bg-slate-700 active:bg-slate-100 dark:active:bg-slate-700"
+                        >
+                            <div class="mr-4 grid place-items-center">
+                                <img
+                                        alt="candice"
+                                        src="https://docs.material-tailwind.com/img/face-1.jpg"
+                                        class="relative inline-block h-12 w-12 !rounded-full  object-cover object-center"
+                                />
+                            </div>
+                            <div>
+                                <div class="flex flex-row justify-between">
+                                    <h6 class="text-slate-800 dark:text-slate-200 font-medium text-sm"> Tania Andrew</h6>
+                                    <div class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-gray-900 dark:text-gray-300 uppercase rounded-full select-none whitespace-nowrap bg-gray-900/10 dark:bg-gray-600">
+                                        <span class="">Now</span>
+                                    </div>
+                                </div>
+
+                                <p class="text-slate-500 dark:text-slate-400 text-xs"> Software Engineer @ Material Tailwind </p>
+                            </div>
+                        </div>
+                        <div  role="button"  class="text-slate-800 flex w-full items-center rounded-md p-3 transition-all hover:bg-slate-100 dark:hover:bg-slate-700 focus:bg-slate-100 dark:focus:bg-slate-700 active:bg-slate-100 dark:active:bg-slate-700"
+                        >
+                            <div class="mr-4 grid place-items-center">
+                                <img
+                                        alt="alexander"4
+                                        src="https://docs.material-tailwind.com/img/face-2.jpg"
+                                        class="relative inline-block h-12 w-12 !rounded-full  object-cover object-center"
+                                />
+                            </div>
+                            <div>
+                                <h6 class="text-slate-800 dark:text-slate-200 font-medium text-sm"> Alexander </h6>
+                                <p class="text-slate-500 dark:text-slate-400 text-xs"> Backend Developer @ Material Tailwind </p>
+                            </div>
+                        </div>
+                        <div  role="button"  class="text-slate-800 flex w-full items-center rounded-md p-3 transition-all hover:bg-slate-100 dark:hover:bg-slate-700 focus:bg-slate-100 dark:focus:bg-slate-700 active:bg-slate-100 dark:active:bg-slate-700">
+                            <div class="mr-4 grid place-items-center">
+                                <img
+                                        alt="emma"
+                                        src="https://docs.material-tailwind.com/img/face-3.jpg"
+                                        class="relative inline-block h-12 w-12 !rounded-full  object-cover object-center"
+                                />
+                            </div>
+                            <div>
+                                <h6 class="text-slate-800 dark:text-slate-200 font-medium text-sm"> Emma Willever </h6>
+                                <p class="text-slate-500 dark:text-slate-400 text-xs"> UI/UX Designer @ Material Tailwind </p>
+                            </div>
+                        </div>
+                    </nav>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="container px-6 mx-auto grid">
+
+            <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1">
+
+                <div class="relative flex flex-col my-3 bg-white dark:bg-gray-800 shadow-xs rounded-lg">
+                    <div class="mx-3 mb-0 border-b border-slate-200 dark:border-slate-200/10 py-5 px-5">
+                        <span class="text-md font-medium text-slate-600 text-gray-600 dark:text-gray-200">Header for the card</span>
+                    </div>
+
+                    <div class="p-4" style="width: auto; height: 350px">
+                        <div id="visitorMap" ></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+<div><%- include('partials/footer') %></div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
+<script>
+
+    const chartOptions = {
+        "scales": {
+            "yAxes": [{
+                "ticks": {
+                    "beginAtZero": true,
+                    callback: function(value, index, values) {
+                        return value.toLocaleString(
+                            "id-ID", {
+                                style: "currency",
+                                currency: "IDR"
+                            }
+                        );
+                    }
+                }
+            }]
+        },
+        "tooltips": {
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    return tooltipItem.yLabel
+                        .toLocaleString(
+                            "id-ID", {
+                                style: "currency",
+                                currency: "IDR"
+                            });
+                }
+            }
+        }
+    };
+
+    var paymentChart = new Chart(document.getElementById("chartjs-0"), {
+        "type": "bar",
+        "data": {
+            "labels": ['Januari', 'Februari', 'Maret', 'April', 'Mei'],
+            "datasets": [ //
+                {
+                    "label": "Revenue",
+                    "data": [10, 20, 30, 40, 50],
+                    "fill": true,
+                    "backgroundColor": "rgba(75, 192, 192, 0.2)",
+                    "borderColor": "rgb(75, 192, 192)",
+                    "borderWidth": 1
+                },
+                {
+                    "label": "Profit",
+                    "data": [10, 20, 30, 40, 50],
+                    "fill": true,
+                    "backgroundColor": "rgba(255, 99, 132, 0.2)",
+                    "borderColor": "rgb(255, 99, 132)",
+                    "borderWidth": 1
+                }
+            ]
+        },
+        "options": chartOptions
+    });
+
+    var map = new jsVectorMap({
+        selector: "#visitorMap",
+        map: "world",
+        backgroundColor: '#ffffff',
+        borderColor: '#f2f2f2',
+        borderOpacity: .8,
+        borderWidth: 1,
+        hoverColor: '#000',
+        hoverOpacity: .8,
+        color: '#ddd',
+        normalizeFunction: 'linear',
+        selectedRegions: false,
+        showTooltip: true,
+        series: {
+            regions: [{
+                attribute: "fill",
+                legend: {
+                    title: "Judul",
+                },
+                scale: {
+                    China: "#c79efd",
+                    Indonesia: "#ffc371",
+                    Rusia: "#08d191",
+                },
+                values: {
+                    // But when dealing with regions's series you should specify the region key.
+                    CN: "China",
+                    ID: "Indonesia",
+                    RU: "Rusia",
+                }
+            }]
+        }
+    });
+
+
+</script>
+
+</body>
