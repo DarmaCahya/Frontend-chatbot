@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Beranda Satria BIPA</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+		rel="stylesheet">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+
+	<script>
+		tailwind.config = {
+			darkMode: "class",
+		}
+	</script>
+
+	<script>
+		// Function to initialize and toggle dark mode
+		// function initMode() {
+		// 	if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+		// 		document.documentElement.classList.add('dark');
+		// 	} else {
+		// 		document.documentElement.classList.remove('dark');
+		// 	}
+		// }
+
+		// Toggle between dark and light mode
+		function toggleMode() {
+			const isDarkMode = document.documentElement.classList.toggle('dark');
+
+			// Update localStorage with the user's preference
+			localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+
+			// Also update the checkbox based on the mode
+			document.getElementById('darkModeToggle').checked = isDarkMode;
+		}
+
+		// On page load, apply the saved theme from localStorage and sync the toggle
+		window.onload = function () {
+			const theme = localStorage.getItem('theme');
+			const checkbox = document.getElementById('darkModeToggle');
+
+			if (theme === 'dark') {
+				document.documentElement.classList.add('dark');
+				checkbox.checked = true;  // Set the toggle to "checked" for dark mode
+			} else {
+				document.documentElement.classList.remove('dark');
+				checkbox.checked = false;  // Set the toggle to "unchecked" for light mode
+			}
+		};
+
+		document.addEventListener('DOMContentLoaded', function () {
+			const burgerMenu = document.getElementById('burger-menu');
+			const navLinks = document.getElementById('navbar-default');
+
+			if (burgerMenu && navLinks) {
+				burgerMenu.addEventListener('click', () => {
+					navLinks.classList.toggle('hidden');
+				});
+			} else {
+				console.error("Element with id 'burger-menu' or 'navbar-default' not found.");
+			}
+		});
+
+	</script>
+	<style>
+		body {
+			font-family: "Plus Jakarta Sans", sans-serif;
+			;
+		}
+	</style>
+</head>
+
+
+<body class="bg-white relative overflow-x-hidden dark:bg-gray-900 text-black dark:text-white transition duration-75">
+	<%- include('partials/header') %>
+		<main class="mb-24">
+			<section class="scroll-mt-56" id="beranda">
+				<div class="flex flex-col items-center justify-center min-h-screen dark:bg-none dark:bg-gray-800">
+                    <div class="text-center">
+                        <h1 class="text-4xl font-bold text-gray-700 dark:text-white mb-4">403 Unauthorized</h1>
+                        <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                            Maaf, Anda tidak memiliki izin untuk mengakses halaman ini.
+                        </p>
+                        <a href="/index" class="bg-blue-500 text-white px-6 py-2 rounded-md text-lg font-semibold hover:bg-blue-600 dark:hover:bg-blue-400 transition">
+                            Kembali ke Beranda
+                        </a>
+                    </div>
+                </div>
+			</section>
+		</main>
+	<%- include('partials/footer') %>
+</body>
+
+</html>

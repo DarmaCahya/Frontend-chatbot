@@ -25,6 +25,18 @@ app.get('/chats', (req, res) => {
     res.render('chatAI');
 });
 
+app.get('/verify', (req, res) => {
+    res.render('verify')
+})
+
+app.get('/unauthorized', (req, res) => {
+    res.render('unauthorized')
+})
+
+app.get('/not-found', (req, res) => {
+    res.render('notFound')
+})
+
 app.get('/', (req, res) => {
     res.render('test');
 });
@@ -242,14 +254,6 @@ app.get('/chat-history/:historyId', async (req, res) =>{
     }catch (error) {
         console.error(error);
     }
-})
-
-app.get('/verify', (req, res) => {
-    res.render('verify')
-})
-
-app.get('/response', (req, res) => {
-    res.render('response')
 })
 
 //Dashboard API
