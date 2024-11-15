@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const axios = require('axios');
 require('dotenv').config();
-const jwt_decode = require('jwt-decode');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 app.use(express.json());
@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
+
+let isAdmin = false;
 
 app.get('/index', (req, res) => {
     res.render('index');
@@ -28,7 +30,15 @@ app.get('/', (req, res) => {
 });
 
 app.get('/dashboards', (req, res) => {
-    res.render('dashboards')
+    try {
+        if(isAdmin){
+            res.render('dashboards');
+        } else {
+            res.status(401).json({ message: "Akses ditolak" });
+        }
+    } catch (e){
+        res.status(500).json({ message: "Terjadi kesalahan saat membuka dashbor." });
+    }
 })
 
 // API Chat
@@ -202,6 +212,8 @@ app.post('/api/login', async (req, res) => {
         if (contentType && contentType.includes("application/json")) {
             const data = await response.json();
             res.status(response.status).json(data);
+            const role = jwt.decode(data.token).role;
+            isAdmin = role === 'ADMIN';
         } else {
             res.status(response.status).json({ message: "Terjadi kesalahan saat melakukan masuk." });
         }
