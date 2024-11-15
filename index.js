@@ -240,6 +240,67 @@ app.get('/response', (req, res) => {
     res.render('response')
 })
 
+//Dashboard API
+app.get('/active-users', async (req, res) =>{
+    try{
+        const token = req.headers.authorization;
+        const response = await fetch(process.env.TOTAL_ACTIVE_USER,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Gagal mengambil jumlah user aktif');
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+    }catch (error) {
+        console.error(error);
+    }
+})
+
+app.get('/total-chats', async (req, res) =>{
+    try{
+        const response = await fetch(process.env.TOTAL_CHATS)
+        if (!response.ok) {
+            throw new Error('Gagal mengambil jumlah percakapan');
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+    }catch (error) {
+        console.error(error);
+    }
+})
+
+app.get('/total-response', async (req, res) =>{
+    try{
+        const response = await fetch(process.env.TOTAL_RESPONSE_BOT)
+        if (!response.ok) {
+            throw new Error('Gagal mengambil jumlah respon bot');
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+    }catch (error) {
+        console.error(error);
+    }
+})
+
+app.get('/total-history', async (req, res) =>{
+    try{
+        const response = await fetch(process.env.TOTAL_HISTORY)
+        if (!response.ok) {
+            throw new Error('Gagal mengambil jumlah History');
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+    }catch (error) {
+        console.error(error);
+    }
+})
+
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

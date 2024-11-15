@@ -79,7 +79,7 @@
                     </div>
                     <div>
                         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"> Total Pesan</p>
-                        <p class="text-lg font-semibold text-gray-700 dark:text-gray-100"> 19238 </p>
+                        <p id="total-chats" class="text-lg font-semibold text-gray-700 dark:text-gray-100"> memuat... </p>
                     </div>
                 </div>
 
@@ -91,7 +91,7 @@
                     </div>
                     <div>
                         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"> Pengguna Aktif </p>
-                        <p class="text-lg font-semibold text-gray-700 dark:text-gray-100">120</p>
+                        <p id="total-users" class="text-lg font-semibold text-gray-700 dark:text-gray-100"> memuat... </p>
                     </div>
                 </div>
 
@@ -103,7 +103,7 @@
                     </div>
                     <div>
                         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"> Histori yang dibuat </p>
-                        <p class="text-lg font-semibold text-gray-700 dark:text-gray-100">6389</p>
+                        <p id="total-historys" class="text-lg font-semibold text-gray-700 dark:text-gray-100"> memuat... </p>
                     </div>
                 </div>
 
@@ -117,7 +117,7 @@
                     </div>
                     <div>
                         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"> Jawaban Bot </p>
-                        <p class="text-lg font-semibold text-gray-700 dark:text-gray-100"> 828</p>
+                        <p id="total-bots-responses" class="text-lg font-semibold text-gray-700 dark:text-gray-100"> memuat... </p>
                     </div>
                 </div>
             </div>
@@ -131,7 +131,7 @@
 
                 <div class="relative flex flex-col my-3 bg-white dark:bg-gray-800 shadow-xs rounded-lg">
                     <div class="mx-3 mb-0 border-b border-slate-200 dark:border-slate-200/10 py-5 px-5">
-                        <span class="text-md font-medium text-slate-600 text-gray-600 dark:text-gray-200">Jumlah Pengguna</span>
+                        <span class="text-md font-medium text-gray-600 dark:text-gray-200">Jumlah Pengguna</span>
                     </div>
 
                     <div class="p-4">
@@ -142,13 +142,13 @@
 
 
                     <div class="mx-3 border-t border-slate-200 dark:border-slate-200/10 pb-3 pt-2 px-1">
-                        <span class="text-sm text-slate-600 font-medium text-gray-600 dark:text-gray-200"> Pembaruan terakhir: 4 jam lalu </span>
+                        <span class="text-sm font-medium text-gray-600 dark:text-gray-200"> Pembaruan terakhir: 4 jam lalu </span>
                     </div>
                 </div>
 
                 <div class="relative flex flex-col my-3 bg-white dark:bg-gray-800 shadow-xs rounded-lg">
                     <div class="mx-3 mb-0 border-b border-slate-200 dark:border-slate-200/10 py-5 px-5">
-                        <span class="text-md font-medium text-slate-600 text-gray-600 dark:text-gray-200" >Aktivitas baru - baru ini</span>
+                        <span class="text-md font-medium text-gray-600 dark:text-gray-200" >Aktivitas baru - baru ini</span>
                     </div>
 
                     <nav class="flex min-w-[240px] flex-col gap-1 p-1.5">
@@ -213,7 +213,7 @@
 
                 <div class="relative flex flex-col my-3 bg-white dark:bg-gray-800 shadow-xs rounded-lg">
                     <div class="mx-3 mb-0 border-b border-slate-200 dark:border-slate-200/10 py-5 px-5">
-                        <span class="text-md font-medium text-slate-600 text-gray-600 dark:text-gray-200">Peta Pengunjung</span>
+                        <span class="text-md font-medium text-gray-600 dark:text-gray-200">Peta Pengunjung</span>
                     </div>
 
                     <div class="p-4" style="width: auto; height: 350px">
@@ -237,6 +237,45 @@
 <script src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
 <script>
+    document.addEventListener('DOMContentLoaded', async function () {
+        const totalUsersElement = document.getElementById('total-users');
+        const totalPesan = document.getElementById('total-chats');
+        const totalRiwayat = document.getElementById('total-historys');
+        const totalBotResponse = document.getElementById('total-bots-responses');
+
+
+        const token_jwt = localStorage.getItem('token');        
+        try {
+            const [totalActive, totalResponse, TotalPesan, totalHistory] = await Promise.all([
+                fetch('/active-users',{
+                    method: 'GET',
+                    headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': token_jwt
+                    }
+                }),
+                fetch('/total-response'),
+                fetch('/total-chats'),
+                fetch('/total-history')
+            ])
+            
+            if (!totalActive.ok || !totalResponse.ok || !TotalPesan.ok || !totalHistory.ok) {
+                throw new Error('Failed to fetch one or more resources');
+            }
+            const activeUsersData = await totalActive.json();
+            const totalResponseData = await totalResponse.json();
+            const totalPesanData = await TotalPesan.json();
+            const totalHistoryData = await totalHistory.json();
+
+            totalUsersElement.textContent = activeUsersData; 
+            totalPesan.textContent = totalResponseData;
+            totalRiwayat.textContent = totalPesanData;
+            totalBotResponse.textContent = totalHistoryData;
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            document.getElementById('total-users').textContent = 'Error';
+        }
+    });
 
     const chartOptions = {
         "scales": {
