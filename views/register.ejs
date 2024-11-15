@@ -120,6 +120,9 @@
         <div class="mb-6">
           <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="password">Sandi</label>
           <input name="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="register-password" type="password" placeholder="********">
+          <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
+            * Sandi harus memiliki minimal 8 karakter, termasuk huruf besar, huruf kecil, angka, dan simbol.
+          </p>
         </div>
         <div class="mb-6">
           <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="confirm-password">Konfirmasi Sandi</label>
@@ -150,6 +153,18 @@
 
         if (!username || !email || !country || !password || !confirmPassword) {
           alert('Semua field harus diisi.');
+          return;
+        }
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        if (!passwordRegex.test(password)) {
+          alert('Password harus memiliki minimal 8 karakter, termasuk huruf besar, huruf kecil, angka, dan simbol.');
+          return;
+        }
+
+        if (password !== confirmPassword) {
+          alert('Password dan Konfirmasi Password harus sama.');
           return;
         }
 
