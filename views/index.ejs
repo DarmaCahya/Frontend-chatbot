@@ -76,7 +76,6 @@
 	</style>
 </head>
 
-
 <body class="bg-white relative overflow-x-hidden dark:bg-gray-900 text-black dark:text-white transition duration-75">
 	<%- include('partials/header') %>
 		<main class="mb-24">
@@ -100,9 +99,10 @@
 								<span class="text-xl md:text-xl text-red-600">Sahabat Tutur Berbahasa Indonesia</span>
 								<span>Bahasa Indonesia bagi Penutur Asing</span>
 							</div>
-							<button onclick="location.href='/login'"
-								class="hover:cursor-pointer px-4 py-2 flex text-black bg-white rounded hover:bg-neutral-800 font-semibold hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-white dark:hover:bg-white/80 dark:focus:ring-white dark:text-black">Coba
-								Sekarang</button>
+							<button onclick="redirectUser()"
+								class="hover:cursor-pointer px-4 py-2 flex text-black bg-white rounded hover:bg-neutral-800 font-semibold hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-white dark:hover:bg-white/80 dark:focus:ring-white dark:text-black">
+								Coba Sekarang
+							</button>
 						</div>
 						<div class="absolute top-0 left-0 w-full h-full object-cover bg-black/10 dark:hidden">
 							<img alt="background-batik" src="/images/batik-bg.jpg" class="h-full w-full opacity-20" />
@@ -216,8 +216,6 @@
 				</div>
 			</section>
 
-
-
 			<section class="flex w-full max-w-7xl mx-auto bg-neutral-800 mt-12 md:rounded-xl shadow-md md:p-8"
 				id="panduan">
 				<div class="w-full flex items-center justify-center flex-col-reverse md:flex-row gap-x-24">
@@ -246,6 +244,19 @@
 			</section>
 		</main>
 		<%- include('partials/footer') %>
+		<script>
+			function redirectUser() {
+				const token_jwt = localStorage.getItem('token');
+				
+				if (token_jwt) {
+					// Jika token ditemukan (sudah login), arahkan ke halaman /chats
+					location.href = '/chats';
+				} else {
+					// Jika belum login, arahkan ke halaman /login
+					location.href = '/login';
+				}
+			}
+		</script>
 </body>
 
 </html>
