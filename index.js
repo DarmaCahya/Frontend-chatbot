@@ -46,10 +46,10 @@ app.get('/dashboards', (req, res) => {
         if(isAdmin){
             res.render('dashboards');
         } else {
-            res.status(401).json({ message: "Akses ditolak" });
+            res.render('unauthorized');
         }
     } catch (e){
-        res.status(500).json({ message: "Terjadi kesalahan saat membuka dashbor." });
+        res.render('notFound');
     }
 })
 
@@ -260,7 +260,7 @@ app.get('/chat-history/:historyId', async (req, res) =>{
 app.get('/active-users', async (req, res) =>{
     try{
         const token = req.headers.authorization;
-        const response = await fetch(process.env.TOTAL_ACTIVE_USER,{
+        const response = await fetch(process.env.TOTAL_ACTIVE_USER_API_URL,{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -279,7 +279,14 @@ app.get('/active-users', async (req, res) =>{
 
 app.get('/total-chats', async (req, res) =>{
     try{
-        const response = await fetch(process.env.TOTAL_CHATS)
+        const token = req.headers.authorization;
+        const response = await fetch(process.env.TOTAL_CHATS_API_URL,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
         if (!response.ok) {
             throw new Error('Gagal mengambil jumlah percakapan');
         }
@@ -290,6 +297,7 @@ app.get('/total-chats', async (req, res) =>{
     }
 })
 
+/*
 app.get('/total-response', async (req, res) =>{
     try{
         const response = await fetch(process.env.TOTAL_RESPONSE_BOT)
@@ -301,13 +309,40 @@ app.get('/total-response', async (req, res) =>{
     }catch (error) {
         console.error(error);
     }
-})
+}) */
 
 app.get('/total-history', async (req, res) =>{
     try{
-        const response = await fetch(process.env.TOTAL_HISTORY)
+        const token = req.headers.authorization;
+        const response = await fetch(process.env.TOTAL_HISTORY_API_URL,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
         if (!response.ok) {
             throw new Error('Gagal mengambil jumlah History');
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+    }catch (error) {
+        console.error(error);
+    }
+})
+
+app.get('/recent-login', async (req, res) =>{
+    try{
+        const token = req.headers.authorization;
+        const response = await fetch(process.env.RECENT_LOGIN_API_URL,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Gagal mengambil data user yang baru saja login');
         }
         const data = await response.json();
         res.status(200).json(data);
