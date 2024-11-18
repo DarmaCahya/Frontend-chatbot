@@ -142,6 +142,11 @@
   <img src="/images/Gatot Kaca.png" class="hidden md:block h-auto w-36 md:w-96 absolute bottom-0 md:-bottom-24 right-0 md:right-0 md:fixed" alt="Maskot Satria BIPA">
 
   <script>
+    const token = localStorage.getItem('token');
+    if (token) {
+      window.location.href = '/index';
+      alert('Anda sudah login, akan diarahkan ke halaman utama.');
+    }
     document.getElementById('register-form').addEventListener('submit', async function (event) {
         event.preventDefault();
 

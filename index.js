@@ -25,6 +25,18 @@ app.get('/chats', (req, res) => {
     res.render('chatAI');
 });
 
+app.get('/verify', (req, res) => {
+    res.render('verify')
+})
+
+app.get('/unauthorized', (req, res) => {
+    res.render('unauthorized')
+})
+
+app.get('/not-found', (req, res) => {
+    res.render('notFound')
+})
+
 app.get('/', (req, res) => {
     res.render('test');
 });
@@ -34,10 +46,10 @@ app.get('/dashboards', (req, res) => {
         if(isAdmin){
             res.render('dashboards');
         } else {
-            res.status(401).json({ message: "Akses ditolak" });
+            res.render('unauthorized');
         }
     } catch (e){
-        res.status(500).json({ message: "Terjadi kesalahan saat membuka dashbor." });
+        res.render('notFound');
     }
 })
 
@@ -244,13 +256,121 @@ app.get('/chat-history/:historyId', async (req, res) =>{
     }
 })
 
-app.get('/verify', (req, res) => {
-    res.render('verify')
+//Dashboard API
+app.get('/active-users', async (req, res) =>{
+    try{
+        const token = req.headers.authorization;
+        const response = await fetch(process.env.TOTAL_ACTIVE_USER_API_URL,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Gagal mengambil jumlah user aktif');
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+    }catch (error) {
+        console.error(error);
+    }
 })
 
-app.get('/response', (req, res) => {
-    res.render('response')
+app.get('/total-chats', async (req, res) =>{
+    try{
+        const token = req.headers.authorization;
+        const response = await fetch(process.env.TOTAL_CHATS_API_URL,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Gagal mengambil jumlah percakapan');
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+    }catch (error) {
+        console.error(error);
+    }
 })
+
+/*
+app.get('/total-response', async (req, res) =>{
+    try{
+        const response = await fetch(process.env.TOTAL_RESPONSE_BOT)
+        if (!response.ok) {
+            throw new Error('Gagal mengambil jumlah respon bot');
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+    }catch (error) {
+        console.error(error);
+    }
+}) */
+
+app.get('/total-history', async (req, res) =>{
+    try{
+        const token = req.headers.authorization;
+        const response = await fetch(process.env.TOTAL_HISTORY_API_URL,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Gagal mengambil jumlah History');
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+    }catch (error) {
+        console.error(error);
+    }
+})
+
+app.get('/recent-login', async (req, res) =>{
+    try{
+        const token = req.headers.authorization;
+        const response = await fetch(process.env.RECENT_LOGIN_API_URL,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Gagal mengambil data user yang baru saja login');
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+    }catch (error) {
+        console.error(error);
+    }
+})
+
+app.get('/user-active', async (req, res) =>{
+    try{
+        const token = req.headers.authorization;
+        const response = await fetch(process.env.USER_COUNTRY_API_URL,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Gagal mengambil data user yang baru saja login');
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+    }catch (error) {
+        console.error(error);
+    }
+})
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
