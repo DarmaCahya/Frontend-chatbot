@@ -351,6 +351,26 @@ app.get('/recent-login', async (req, res) =>{
     }
 })
 
+app.get('/user-active', async (req, res) =>{
+    try{
+        const token = req.headers.authorization;
+        const response = await fetch(process.env.USER_COUNTRY_API_URL,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        if (!response.ok) {
+            throw new Error('Gagal mengambil data user yang baru saja login');
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+    }catch (error) {
+        console.error(error);
+    }
+})
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
