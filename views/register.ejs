@@ -201,10 +201,10 @@
           return;
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/;
 
         if (!passwordRegex.test(password)) {
-          alert('Password harus memiliki minimal 8 karakter, termasuk huruf besar, huruf kecil, angka, dan simbol.');
+          alert('Password harus memiliki minimal 8 karakter, termasuk huruf dan angka.');
           return;
         }
 
