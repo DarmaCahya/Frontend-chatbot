@@ -80,9 +80,25 @@
               <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline bg-white dark:bg-gray-700" id="email" type="text" placeholder="Email">
             </div>
             <div class="mb-6">
-              <label class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2" for="password">Sandi</label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline bg-white dark:bg-gray-700" id="password" type="password" placeholder="********">
-            </div>            
+              <label class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2" for="password">
+                  Sandi
+              </label>
+              <div class="relative">
+                  <input
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline bg-white dark:bg-gray-700"
+                      id="password"
+                      type="password"
+                      placeholder="********"
+                  >
+                  <!-- Icon Mata -->
+                  <img
+                      id="togglePassword"
+                      src="/images/eye-close.svg"
+                      alt="Toggle Password Visibility"
+                      class="absolute right-3 top-3 cursor-pointer w-5 h-5"
+                  />
+              </div>
+            </div>         
             <div class="flex items-center justify-between">
               <button class="bg-black dark:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">Masuk</button>
             </div>
@@ -102,6 +118,19 @@
     </main>
     <!-- <%- include('partials/footer') %> -->
     <script>
+      const passwordInput = document.getElementById("password");
+      const togglePasswordIcon = document.getElementById("togglePassword");
+
+      togglePasswordIcon.addEventListener("click", function () {
+        const isPassword = passwordInput.type === "password";
+        passwordInput.type = isPassword ? "text" : "password";
+
+        // Ubah ikon berdasarkan tipe input
+        togglePasswordIcon.src = isPassword
+          ? "/images/eye-open.svg" 
+          : "/images/eye-close.svg"; 
+      });
+
       const token = localStorage.getItem('token');
       if (token) {
         window.location.href = '/index';
