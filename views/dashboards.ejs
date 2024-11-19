@@ -125,11 +125,6 @@
                             <canvas id="chartjs-0" width="400" height="100" aria-label="Hello ARIA World" role="img"></canvas>
                         </div>
                     </div>
-
-
-                    <div class="mx-3 border-t border-slate-200 dark:border-slate-200/10 pb-3 pt-2 px-1">
-                        <span class="text-sm font-medium text-gray-600 dark:text-gray-200"> Pembaruan terakhir: 4 jam lalu </span>
-                    </div>
                 </div>
 
                 <div class="relative flex flex-col my-3 bg-white dark:bg-gray-800 shadow-xs rounded-lg">
@@ -201,6 +196,7 @@
 
         const token_jwt = localStorage.getItem('token');        
         try {
+            await runBarChart();
             await newActivity();
             await getCountryLeaderboard();
 
@@ -258,9 +254,11 @@
                 let html = '';
                 data.forEach((item, index) => {
                     const loginAt = item.loginAt
-                    const date = new Date(loginAt[0],loginAt[1],loginAt[2], loginAt[3], loginAt[4], loginAt[5]);
-                    const hours = date.getHours();
-                    const minutes = date.getMinutes();
+                    const hours = loginAt[3] < 10 ? '0' + loginAt[3] : loginAt[3]
+                    const minutes = loginAt[4] < 10 ? '0' + loginAt[4] : loginAt[4]
+                    const seconds = loginAt[5] < 10 ? '0' + loginAt[5] : loginAt[5]
+                    const strDate = `${loginAt[0]}-${loginAt[1]}-${loginAt[2]} ${hours}:${minutes}:${seconds}`
+                    const date = new Date(strDate);
                     const dateOptions = {
                         year: 'numeric',
                         month: 'short',
@@ -283,7 +281,7 @@
                                     </div>
                                 </div>
 
-                                <p class="text-slate-500 dark:text-slate-400 text-xs"> Aktif sejak ${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes} </p>
+                                <p class="text-slate-500 dark:text-slate-400 text-xs"> Aktif sejak ${hours}:${minutes} </p>
                             </div>
                         </div>`
                 })
@@ -374,6 +372,52 @@
             });
         }
 
+        async function getUserCreated(year, month){
+            try{
+                const response = await fetch(`/user-register-count?year=${year}&month=${month}`,{
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token_jwt
+                    }
+                })
+                const data = await response.json();
+                return data;
+                if (!response.ok) {
+                    throw new Error('Gagal mengambil daftar chat');
+                }
+            }catch (error) {
+                console.error(error);
+            }
+        }
+
+        async function runBarChart(){
+            const year = new Date().getFullYear()
+            let dataArr = [];
+            for(let i=0; i<12; i++){
+                dataArr[i] = await getUserCreated(year, i+1)
+            }
+            new Chart(document.getElementById("chartjs-0"), {
+                "type": "bar",
+                "data": {
+                    "labels": ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                    'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+                    ],
+                    "datasets": [ //
+                        {
+                            "label": "Pengguna",
+                            "data": dataArr,
+                            "fill": true,
+                            "backgroundColor": "rgba(255, 99, 132, 0.2)",
+                            "borderColor": "rgb(255, 99, 132)",
+                            "borderWidth": 1
+                        }
+                    ]
+                },
+                "options": chartOptions
+            });
+        }
+
     });
 
     function findCountryCodeByName (name){
@@ -409,32 +453,6 @@
             }
         }
     };
-
-    var paymentChart = new Chart(document.getElementById("chartjs-0"), {
-        "type": "bar",
-        "data": {
-            "labels": ['Januari', 'Februari', 'Maret', 'April', 'Mei'],
-            "datasets": [ //
-                {
-                    "label": "Revenue",
-                    "data": [10, 20, 30, 40, 50],
-                    "fill": true,
-                    "backgroundColor": "rgba(75, 192, 192, 0.2)",
-                    "borderColor": "rgb(75, 192, 192)",
-                    "borderWidth": 1
-                },
-                {
-                    "label": "Profit",
-                    "data": [10, 20, 30, 40, 50],
-                    "fill": true,
-                    "backgroundColor": "rgba(255, 99, 132, 0.2)",
-                    "borderColor": "rgb(255, 99, 132)",
-                    "borderWidth": 1
-                }
-            ]
-        },
-        "options": chartOptions
-    });
 
 
     const countryCodes = {
