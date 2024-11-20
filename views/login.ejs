@@ -102,7 +102,7 @@
     </main>
     <!-- <%- include('partials/footer') %> -->
     <script>
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
       if (token) {
         window.location.href = '/index';
         alert('Anda sudah login, akan diarahkan ke halaman utama.');
@@ -135,6 +135,7 @@
           if (response.ok) {
             const responseData = await response.json();
             localStorage.setItem('token', responseData.token);
+            sessionStorage.setItem('token', responseData.token);
             window.location.href = '/chats';
           } else {
             console.error('Response error:', response);

@@ -199,7 +199,7 @@
         let codeAndCountry = {};
         let countryAndColor = {};
 
-        const token_jwt = localStorage.getItem('token');        
+        const token_jwt = sessionStorage.getItem('token');
         try {
             await newActivity();
             await getCountryLeaderboard();
