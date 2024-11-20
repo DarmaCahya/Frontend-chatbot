@@ -132,7 +132,7 @@
           : "/images/eye-close.svg";
       });
 
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
       if (token) {
         window.location.href = '/index';
         alert('Anda sudah login, akan diarahkan ke halaman utama.');
