@@ -53,6 +53,22 @@ app.get('/dashboards', (req, res) => {
     }
 })
 
+app.get('/forgot-password', (req, res) => {
+    try {
+        res.render('forgot-password');
+    } catch (e){
+        res.render('notFound');
+    }
+})
+
+app.get('/reset-password', (req, res) => {
+    try {
+        res.render('reset-password');
+    } catch (e){
+        res.render('notFound');
+    }
+})
+
 // API Chat
 app.post('/histories', async (req, res) => {
     try{
