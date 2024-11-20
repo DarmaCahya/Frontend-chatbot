@@ -52,6 +52,22 @@ app.get('/dashboards', (req, res) => {
         res.render('notFound');
     }
 })
+/*
+app.get('/forgot-password', (req, res) => {
+    try {
+        res.render('forgot-password');
+    } catch (e){
+        res.render('notFound');
+    }
+})
+
+app.get('/reset-password', (req, res) => {
+    try {
+        res.render('reset-password');
+    } catch (e){
+        res.render('notFound');
+    }
+}) */
 
 // API Chat
 app.post('/histories', async (req, res) => {
@@ -297,19 +313,29 @@ app.get('/total-chats', async (req, res) =>{
     }
 })
 
-/*
-app.get('/total-response', async (req, res) =>{
+app.get('/user-register-count', async (req, res) =>{
     try{
-        const response = await fetch(process.env.TOTAL_RESPONSE_BOT)
+        const apiUrl = process.env.USER_REGISTER_COUNT_API_URL;
+        const year = req.query.year;
+        const month = req.query.month;
+        const token = req.headers.authorization;
+        const response = await fetch(`${apiUrl}?year=${year}&month=${month}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        console.log(response);
         if (!response.ok) {
-            throw new Error('Gagal mengambil jumlah respon bot');
+            throw new Error('Gagal mengambil jumlah user terdaftar');
         }
         const data = await response.json();
         res.status(200).json(data);
     }catch (error) {
         console.error(error);
     }
-}) */
+})
 
 app.get('/total-history', async (req, res) =>{
     try{

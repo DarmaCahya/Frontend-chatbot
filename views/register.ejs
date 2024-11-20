@@ -119,14 +119,35 @@
         </div>
         <div class="mb-6">
           <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="password">Sandi</label>
-          <input name="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="register-password" type="password" placeholder="********">
+          <div class="relative">
+              <input name="password"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                  id="register-password"
+                  type="password"
+                  placeholder="********">
+              <!-- Icon Mata -->
+              <img id="toggle-password"
+                  src="/images/eye-close.svg"
+                  alt="Toggle Password"
+                  class="absolute right-3 top-3 cursor-pointer w-5 h-5">
+          </div>
           <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
-            * Sandi harus memiliki minimal 8 karakter, termasuk huruf besar, huruf kecil, angka, dan simbol.
+              * Sandi harus memiliki minimal 8 karakter, termasuk huruf besar, huruf kecil, angka, dan simbol.
           </p>
         </div>
         <div class="mb-6">
-          <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="confirm-password">Konfirmasi Sandi</label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="confirm-password" type="password" placeholder="********">
+            <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="confirm-password">Konfirmasi Sandi</label>
+            <div class="relative">
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                    id="confirm-password"
+                    type="password"
+                    placeholder="********">
+                <!-- Icon Mata -->
+                <img id="toggle-confirm-password"
+                    src="/images/eye-close.svg"
+                    alt="Toggle Confirm Password"
+                    class="absolute right-3 top-3 cursor-pointer w-5 h-5">
+            </div>
         </div>
         <div class="flex items-center justify-between">
           <button class="bg-black text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">Daftar</button>
@@ -142,7 +163,26 @@
   <img src="/images/Gatot Kaca.png" class="hidden md:block h-auto w-36 md:w-96 absolute bottom-0 md:-bottom-24 right-0 md:right-0 md:fixed" alt="Maskot Satria BIPA">
 
   <script>
-    const token = sessionStorage.getItem('token');
+    function togglePasswordVisibility(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById(iconId);
+
+      // Toggle input type between password and text
+      const isPassword = input.type === "password";
+      input.type = isPassword ? "text" : "password";
+
+      // Change icon based on input type
+      icon.src = isPassword ? "/images/eye-open.svg" : "/images/eye-close.svg";
+    }
+
+    document.getElementById("toggle-password").addEventListener("click", function () {
+        togglePasswordVisibility("register-password", "toggle-password");
+    });
+
+    document.getElementById("toggle-confirm-password").addEventListener("click", function () {
+        togglePasswordVisibility("confirm-password", "toggle-confirm-password");
+    });
+    const token = localStorage.getItem('token');
     if (token) {
       window.location.href = '/index';
       alert('Anda sudah login, akan diarahkan ke halaman utama.');
@@ -161,10 +201,10 @@
           return;
         }
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/;
 
         if (!passwordRegex.test(password)) {
-          alert('Password harus memiliki minimal 8 karakter, termasuk huruf besar, huruf kecil, angka, dan simbol.');
+          alert('Password harus memiliki minimal 8 karakter, termasuk huruf dan angka.');
           return;
         }
 
