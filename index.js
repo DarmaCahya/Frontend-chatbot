@@ -52,7 +52,7 @@ app.get('/dashboards', (req, res) => {
         res.render('notFound');
     }
 })
-
+/*
 app.get('/forgot-password', (req, res) => {
     try {
         res.render('forgot-password');
@@ -67,7 +67,7 @@ app.get('/reset-password', (req, res) => {
     } catch (e){
         res.render('notFound');
     }
-})
+}) */
 
 // API Chat
 app.post('/histories', async (req, res) => {
