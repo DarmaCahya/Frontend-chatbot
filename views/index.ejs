@@ -246,7 +246,7 @@
 		<%- include('partials/footer') %>
 		<script>
 			function redirectUser() {
-				const token_jwt = localStorage.getItem('token');
+				const token_jwt = sessionStorage.getItem('token');
 				
 				if (token_jwt) {
 					location.href = '/chats';

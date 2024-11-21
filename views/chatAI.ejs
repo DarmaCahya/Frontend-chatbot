@@ -488,7 +488,7 @@
 			});
 
 			let chats = [];
-			const token_jwt = localStorage.getItem('token');
+			const token_jwt = sessionStorage.getItem('token');
 			function getUserDataFromToken() {
 				if (!token_jwt) {
 					return null;
