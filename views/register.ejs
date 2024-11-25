@@ -131,9 +131,10 @@
                   alt="Toggle Password"
                   class="absolute right-3 top-3 cursor-pointer w-5 h-5">
           </div>
-          <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
-              * Sandi harus memiliki minimal 8 karakter, termasuk huruf besar, huruf kecil, angka, dan simbol.
-          </p>
+          <p class="text-red-500 dark:text-gray-400 text-sm mt-1">
+             Kata sandi harus memiliki minimal 8 karakter, terdiri atas huruf kapital, huruf kecil, angka, dan salah satu simbol berikut:  
+             ! @ # $ % ^ & *
+          </p>          
         </div>
         <div class="mb-6">
             <label class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" for="confirm-password">Konfirmasi Sandi</label>
@@ -201,7 +202,7 @@
           return;
         }
 
-        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 
         if (!passwordRegex.test(password)) {
           alert('Password harus memiliki minimal 8 karakter, termasuk huruf dan angka.');
