@@ -204,11 +204,30 @@
 
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 
-        if (!passwordRegex.test(password)) {
-          alert('Password harus memiliki minimal 8 karakter, termasuk huruf dan angka.');
+        if (password.length < 8) {
+          alert('Password harus memiliki minimal 8 karakter.');
           return;
         }
-
+        if (!/[a-z]/.test(password)) {
+          alert('Password harus mengandung minimal satu huruf kecil.');
+          return;
+        }
+        if (!/[A-Z]/.test(password)) {
+          alert('Password harus mengandung minimal satu huruf kapital.');
+          return;
+        }
+        if (!/\d/.test(password)) {
+          alert('Password harus mengandung minimal satu angka.');
+          return;
+        }
+        if (!/[!@#$%^&*]/.test(password)) {
+          alert('Password harus mengandung minimal satu simbol: ! @ # $ % ^ & *');
+          return;
+        }
+        if (!passwordRegex.test(password)) {
+          alert('Password tidak valid.');
+          return;
+        }
         if (password !== confirmPassword) {
           alert('Password dan Konfirmasi Password harus sama.');
           return;
