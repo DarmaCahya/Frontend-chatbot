@@ -488,7 +488,7 @@
 			});
 
 			let chats = [];
-			const token_jwt = localStorage.getItem('token');
+			const token_jwt = sessionStorage.getItem('token');
 			function getUserDataFromToken() {
 				if (!token_jwt) {
 					return null;
@@ -584,6 +584,12 @@
 				let isShowingMore = false;
 				await getAllHistory();
 				renderChatList();
+
+				function resetBgChatList(){
+					chats.forEach((chat, index) => {
+						document.getElementById(`chat-list-${index}`).className = 'chat-item dark:hover:bg-white/10 hover:bg-black/10 block p-3 rounded-md cursor-pointer flex justify-between items-center'
+					})
+				}
 				
 				// Fungsi untuk merender daftar chat
 				function renderChatList() {
@@ -592,12 +598,15 @@
 						const li = document.createElement('li');
 						li.className = 'relative';
 						const a = document.createElement('a');
+						a.id = `chat-list-${index}`
 						a.href = '#';
 						a.className = 'chat-item dark:hover:bg-white/10 hover:bg-black/10 block p-3 rounded-md cursor-pointer flex justify-between items-center';
 						a.dataset.chatIndex = index;
 						a.textContent = chat.historyName ?? chat.name;
 						a.addEventListener('click', function (e) {
 							e.preventDefault();
+							resetBgChatList();
+							this.className = 'chat-item dark:bg-white/10 bg-black/10 block p-3 rounded-md cursor-pointer flex justify-between items-center';
 							const chatIndex = parseInt(this.dataset.chatIndex);
 							// switchToChat(chatIndex);
 							showHistoryMessage(chat, chatIndex);
@@ -945,6 +954,7 @@
 				}
 
 				function showUserMessage(messageText){
+					messageText = messageText.replace(/\*(.*?)\*/g, "<em>$1</em>");
 					const userMessageDiv = document.createElement('div');
 					userMessageDiv.classList.add('bg-gray-200', 'text-black', 'self-end', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-xl', 'mb-3', 'border-[#2b2b2b]', 'border');
 					userMessageDiv.textContent = messageText;
@@ -953,6 +963,7 @@
 				}
 
 				function showBotMessage(messageText){
+					messageText = messageText.replace(/\*(.*?)\*/g, "<em>$1</em>");
 					const botMessageDiv = document.createElement('div');
 					botMessageDiv.classList.add('bg-[#2b2b2b]', 'text-[#e0e0e0]', 'self-start', 'text-justify', 'leading-relaxed', 'max-w-xl', 'p-4', 'rounded-md', 'w-fit', 'shadow-xl', 'mb-3');
 

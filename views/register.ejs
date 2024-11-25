@@ -24,7 +24,7 @@
         "Canada", "Central African Republic", "Chad", "Chile", "China",
         "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia",
         "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti",
-        "Dominica", "Dominican Republic", "East Timor", "Ecuador", "Egypt",
+        "Dominica", "Dominican Republic", "Ecuador", "Egypt",
         "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini",
         "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia",
         "Georgia", "Germany", "Ghana", "Greece", "Grenada",
@@ -49,7 +49,7 @@
         "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan",
         "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden",
         "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania",
-        "Thailand", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia",
+        "Thailand", "Timor Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia",
         "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine",
         "United Arab Emirates", "United Kingdom", "United States", "Uruguay",
         "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam",
@@ -183,7 +183,7 @@
     document.getElementById("toggle-confirm-password").addEventListener("click", function () {
         togglePasswordVisibility("confirm-password", "toggle-confirm-password");
     });
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     if (token) {
       window.location.href = '/index';
       alert('Anda sudah login, akan diarahkan ke halaman utama.');
