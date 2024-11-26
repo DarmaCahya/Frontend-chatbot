@@ -26,16 +26,16 @@ app.get('/chats', (req, res) => {
 });
 
 app.get('/verify', (req, res) => {
-    res.render('verify')
-})
+    res.render('verify');
+});
 
 app.get('/unauthorized', (req, res) => {
-    res.render('unauthorized')
-})
+    res.render('unauthorized');
+});
 
 app.get('/not-found', (req, res) => {
-    res.render('notFound')
-})
+    res.render('notFound');
+});
 
 app.get('/', (req, res) => {
     res.render('test');
@@ -51,23 +51,92 @@ app.get('/dashboards', (req, res) => {
     } catch (e){
         res.render('notFound');
     }
-})
-/*
+});
+
 app.get('/forgot-password', (req, res) => {
     try {
         res.render('forgot-password');
     } catch (e){
         res.render('notFound');
     }
-})
+});
 
-app.get('/reset-password', (req, res) => {
+app.get('/lupa-password', (req, res) => {
     try {
-        res.render('reset-password');
+        res.render('reset-password', {token : req.query.token});
     } catch (e){
         res.render('notFound');
     }
-}) */
+});
+
+app.post('/forgot-password-post', async (req, res) => {
+    try {
+        const response = await fetch(`${process.env.FORGOT_PASSWORD_API_URL}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(req.body),
+        });
+
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            const data = await response.json();
+            res.status(response.status).json(data);
+        } else {
+            const text = await response.text();
+            res.status(response.status).json({ message: text });
+        }
+    } catch (e){
+        res.render('notFound');
+    }
+});
+
+app.get('/verify-change-password-token', async (req, res) =>{
+    try{
+        const verifyTokenApi = process.env.TOKEN_FORGOT_API_URL;
+        const token = req.query.token;
+        const response = await fetch(`${verifyTokenApi}?token=${token}`,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        if (!response.ok) {
+            const data = await response.text();
+            res.status(400).json({ message: data });
+        } else {
+            const data = await response.text();
+            res.status(200).json(data);
+        }
+    }catch (error) {
+        console.error(error);
+    }
+});
+
+app.post('/reset-password-post', async (req, res) => {
+    try {
+        const resetPasswordApi = process.env.RESET_PASSWORD_API_URL;
+        const response = await fetch(`${resetPasswordApi}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(req.body),
+        });
+
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            const data = await response.json();
+            res.status(response.status).json(data);
+        } else {
+            const text = await response.text();
+            res.status(response.status).json({ message: text });
+        }
+    } catch (e){
+        res.status(500).json({ message: "Terjadi kesalahan saat melakukan set ulang sandi" });
+    }
+});
 
 // API Chat
 app.post('/histories', async (req, res) => {

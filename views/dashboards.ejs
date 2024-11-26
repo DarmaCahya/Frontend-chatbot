@@ -319,8 +319,8 @@
                 }, {});
 
                 countryAndColor = data.reduce((item, {country}) => {
-                    const randomColor = Math.floor(Math.random()*16777215).toString(16);
-                    item[country] = item[country] || `#${randomColor}`;
+                    const randomColor = '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+                    item[country] = item[country] || `${randomColor}`;
                     return item
                 }, {});
 
@@ -674,7 +674,7 @@
         "TJ": "Tajikistan",
         "TZ": "Tanzania",
         "TH": "Thailand",
-        "TL": "East Timor",
+        "TL": "Timor Leste",
         "TG": "Togo",
         "TK": "Tokelau",
         "TO": "Tonga",

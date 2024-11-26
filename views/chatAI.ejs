@@ -584,6 +584,12 @@
 				let isShowingMore = false;
 				await getAllHistory();
 				renderChatList();
+
+				function resetBgChatList(){
+					chats.forEach((chat, index) => {
+						document.getElementById(`chat-list-${index}`).className = 'chat-item dark:hover:bg-white/10 hover:bg-black/10 block p-3 rounded-md cursor-pointer flex justify-between items-center'
+					})
+				}
 				
 				// Fungsi untuk merender daftar chat
 				function renderChatList() {
@@ -592,12 +598,15 @@
 						const li = document.createElement('li');
 						li.className = 'relative';
 						const a = document.createElement('a');
+						a.id = `chat-list-${index}`
 						a.href = '#';
 						a.className = 'chat-item dark:hover:bg-white/10 hover:bg-black/10 block p-3 rounded-md cursor-pointer flex justify-between items-center';
 						a.dataset.chatIndex = index;
 						a.textContent = chat.historyName ?? chat.name;
 						a.addEventListener('click', function (e) {
 							e.preventDefault();
+							resetBgChatList();
+							this.className = 'chat-item dark:bg-white/10 bg-black/10 block p-3 rounded-md cursor-pointer flex justify-between items-center';
 							const chatIndex = parseInt(this.dataset.chatIndex);
 							// switchToChat(chatIndex);
 							showHistoryMessage(chat, chatIndex);
