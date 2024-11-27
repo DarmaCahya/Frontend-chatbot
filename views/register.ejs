@@ -202,6 +202,26 @@
           return;
         }
 
+        try {
+          const response = await fetch(`/verify-email?email=${email}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          const data = await response.json();
+          const status = data.data.status;
+
+          if (status=="valid") {
+                alert('Email verified successfully!');
+            } else {
+                alert('Email verification failed.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('There was an error with the email verification.');
+        }
+
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 
         if (password.length < 8) {
@@ -239,6 +259,7 @@
           password: password,
           country: country,
         };
+
         try {
           const response = await fetch('/api/register', {
             method: 'POST',
