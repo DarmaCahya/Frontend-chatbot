@@ -193,10 +193,20 @@
                 </div>
             </div>
         </div>
+        <div class="container px-6 mx-auto grid">
+            <div class="my-6">
+                <button onclick="window.location.href = '/chats'" class="flex items-center rounded-md border border-slate-300 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-700 dark:text-slate-300 hover:text-white dark:hover:text-slate-800 hover:bg-slate-800 dark:bg-gray-800 bg-white dark:hover:bg-slate-200 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                    </svg>
+                    Kembali
+                </button>
+            </div>
+        </div>
     </section>
 </main>
 
-<div><%- include('partials/footer') %></div>
+<%- include('partials/footer') %>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
