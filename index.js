@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
-require('dotenv').config();
+const env = require('dotenv').config();
+require('dotenv-expand').expand(env);
 const jwt = require('jsonwebtoken');
 
 const app = express();
