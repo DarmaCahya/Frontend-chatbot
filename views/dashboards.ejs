@@ -52,7 +52,11 @@
     <style>
         body {
             font-family: "Plus Jakarta Sans", sans-serif;
-        ;
+        }
+
+        #visitorMap .jvm-legend-inner {
+            height:120px;
+            overflow-y: scroll;
         }
     </style>
 </head>
@@ -171,6 +175,20 @@
                             </thead>
                             <tbody id="leaderboard-body" class="text-gray-700 dark:text-gray-100"></tbody>
                         </table>
+
+                        <div class="flex justify-between items-center px-4 py-3">
+                            <div class="text-sm text-gray-700 dark:text-gray-100" id="datatable-page-number"></div>
+
+                            <div class="flex space-x-1">
+                                <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal dark:text-gray-300 text-gray-600 dark:bg-slate-700 bg-slate-100 hover:bg-slate-300 dark:hover:bg-slate-600 border dark:border-slate-800 rounded  dark:hover:border-slate-600 transition duration-200 ease">
+                                    Prev
+                                </button>
+                                <div id="datatable-navigation" class="flex space-x-1"></div>
+                                <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal dark:text-gray-300 text-gray-600 dark:bg-slate-700 bg-slate-100 hover:bg-slate-300 dark:hover:bg-slate-600 border dark:border-slate-800 rounded  dark:hover:border-slate-600 transition duration-200 ease">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -191,6 +209,7 @@
         const totalBotResponse = document.getElementById('total-bots-responses');
         const userActivity = document.getElementById('user-new-activity');
         const leaderboardBody = document.getElementById('leaderboard-body');
+        let leaderboardData = null;
         let codeAndCountry = {};
         let countryAndColor = {};
 
@@ -198,7 +217,9 @@
         try {
             await runBarChart();
             await newActivity();
-            await getCountryLeaderboard();
+            await getCountryLeaderboard(0);
+            implementDatatable(leaderboardData);
+            await renderMap();
 
             const [totalActive, TotalPesan, totalHistory] = await Promise.all([
                 fetch('/active-users',{
@@ -294,24 +315,81 @@
             }
         }
 
-        async function getCountryLeaderboard(){
+        function resetDatatableBtn(){
+            leaderboardData.content.forEach((item, index) => {
+                document.getElementById(`datatable-nav-btn-${index}`).className = 'px-3 py-1 min-w-9 min-h-9 text-sm font-normal dark:text-gray-300 text-gray-600 dark:bg-slate-700 bg-slate-100 hover:bg-slate-300 dark:hover:bg-slate-600 border dark:border-slate-800 rounded  dark:hover:border-slate-600 transition duration-200 ease';
+            })
+        }
+
+        function implementDatatable(data){
+            const datatableNav = document.getElementById('datatable-navigation');
+            datatableNav.innerHTML = '';
+            for(let i=0; i<data.totalPages; i++){
+                const btn = document.createElement('button');
+                btn.className = 'px-3 py-1 min-w-9 min-h-9 text-sm font-normal dark:text-gray-300 text-gray-600 dark:bg-slate-700 bg-slate-100 hover:bg-slate-300 dark:hover:bg-slate-600 border dark:border-slate-800 rounded  dark:hover:border-slate-600 transition duration-200 ease';
+                btn.id = `datatable-nav-btn-${i}`;
+                btn.textContent = `${i+1}`;
+                btn.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    getCountryLeaderboard(i);
+                });
+                datatableNav.appendChild(btn);
+            }
+        }
+
+        async function getCountryLeaderboard(page){
             try{
-                const response = await fetch(`/user-active`,{
+                const response = await fetch(`/user-active?sortBy=count&direction=desc&page=${page}&size=5`,{
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': token_jwt
                     }
                 })
-                const data = await response.json();
+                leaderboardData = await response.json();
+                updateTableLeaderboard(leaderboardData);
 
-                const countData = data.reduce((item, {country}) => {
-                    item[country] = item[country] || {countryName: country, count: 0};
-                    item[country]['count'] += 1;
-                    return item;
-                }, {});
+                if (!response.ok) {
+                    throw new Error('Gagal mengambil daftar chat');
+                }
+            }catch (error) {
+                console.error(error);
+            }
+        }
 
-                //map.series.regions[0].values
+        function updateTableLeaderboard(data){
+            let html = '';
+            const countData = data.content;
+            const pageNumber = data.pageable.pageNumber;
+            const pageSize = data.pageable.pageSize;
+            const totalEl = data.totalElements;
+
+            const min = pageNumber*pageSize + 1;
+            let max = min + pageSize - 1;
+            max = max > totalEl ? totalEl : max;
+            document.getElementById('datatable-page-number').innerHTML = `Showing ${min}-${max} of ${data.totalElements}`;
+
+            countData.forEach((item, index) => {
+                html += `<tr class="border-b dark:border-slate-600">
+                                    <td class="px-4 py-2 text-xs">${index+1 + pageNumber*pageSize}</td>
+                                    <td class="px-4 py-2 text-xs">${item.country}</td>
+                                    <td class="px-4 py-2 text-xs">${item.count}</td>
+                                </tr>`
+            })
+            return leaderboardBody.innerHTML = html;
+        };
+
+        async function renderMap(){
+            try{
+                const response = await fetch(`/user-active?sortBy=country&direction=asc&page=0&size=500`,{
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token_jwt
+                    }
+                })
+                let data = await response.json();
+                data = data.content;
                 codeAndCountry = data.reduce((item, {country}) => {
                     let code = findCountryCodeByName(country);
                     item[code] = item[country] || country;
@@ -324,17 +402,7 @@
                     return item
                 }, {});
 
-                await runMap(countryAndColor, codeAndCountry);
-
-                let html = '';
-                Object.values(countData).forEach((item, index) => {
-                    html += `<tr class="border-b dark:border-slate-600">
-                                    <td class="px-4 py-2 text-xs">${index+1}</td>
-                                    <td class="px-4 py-2 text-xs">${item.countryName}</td>
-                                    <td class="px-4 py-2 text-xs">${item.count}</td>
-                                </tr>`
-                })
-                return leaderboardBody.innerHTML = html;
+                await viewMap(countryAndColor, codeAndCountry);
                 if (!response.ok) {
                     throw new Error('Gagal mengambil daftar chat');
                 }
@@ -343,8 +411,7 @@
             }
         }
 
-        async function runMap(countryAndColor = {}, codeAndCountry = {}){
-            //document.querySelector('jvm-legend').innerHTML = ""
+        async function viewMap(countryAndColor = {}, codeAndCountry = {}){
             return new jsVectorMap({
                 selector: "#visitorMap",
                 map: "world",

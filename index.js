@@ -449,7 +449,12 @@ app.get('/recent-login', async (req, res) =>{
 app.get('/user-active', async (req, res) =>{
     try{
         const token = req.headers.authorization;
-        const response = await fetch(process.env.USER_COUNTRY_API_URL,{
+        const apiUrl = process.env.USER_COUNTRY_API_URL;
+        const sortBy = req.query.sortBy ?? 'count';
+        const direction = req.query.direction ?? 'desc';
+        const page = req.query.page;
+        const size = req.query.size;
+        const response = await fetch(`${apiUrl}?sortBy=${sortBy}&direction=${direction}&page=${page}&size=${size}`,{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
