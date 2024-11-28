@@ -26,6 +26,15 @@
 			} else {
 				document.documentElement.classList.remove('dark');
 			}
+			applyTheme();
+		}
+
+		function applyTheme(){
+			const icon = document.getElementById('icon-light');
+			const svgLightIcon = `	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`
+			const svgDarkIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>`;
+			icon.innerHTML = localStorage.getItem('theme') === 'dark' ? svgDarkIcon : svgLightIcon;
 		}
 
 		function toggleMode() {
@@ -36,6 +45,7 @@
 				document.documentElement.classList.add('dark');
 				localStorage.theme = 'dark';
 			}
+			applyTheme();
 		}
 
 		document.addEventListener('DOMContentLoaded', initMode);
@@ -311,13 +321,11 @@
 						</svg>
 						<p class="ml-3">Pengaturan</p>
 					</a>
-					<a class="flex items-center p-3 rounded-md hover:bg-white/10 icon">
+					<a onclick="toggleMode()" class="flex items-center p-3 rounded-md hover:bg-white/10 hover:cursor-pointer icon">
 						<!-- Toggle Dark Mode -->
 						<div class="flex items-center">
 							<!-- Light theme icon SVG -->
-							<span id="icon-light" onclick="toggleMode()" class="text-black hover:cursor-pointer dark:text-white">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-							</span>
+							<span id="icon-light" class="text-black  dark:text-white"></span>
 						</div>
 					</a>
 					<a href="#" class="flex items-center p-3 rounded-md hover:bg-white/10 icon" id="logout-button">

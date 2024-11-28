@@ -9,33 +9,25 @@
     <script>
         function checkDark() {
 			const theme = localStorage.getItem('theme');
-			const checkbox = document.getElementById('darkModeToggle');
 
 			if (theme === 'dark') {
-			document.documentElement.classList.add('dark');
-			if(checkbox) checkbox.checked = true;
+                document.documentElement.classList.add('dark');
 			} else {
-			document.documentElement.classList.remove('dark');
-			if(checkbox) checkbox.checked = false;
+                document.documentElement.classList.remove('dark');
 			}
-		};
+            applyTheme();
+		}
         function toggleMode() {
 			const isDarkMode = document.documentElement.classList.toggle('dark');
 			
 			// Update localStorage with the user's preference
 			localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-
-			// Also update the checkbox based on the mode
-            document.addEventListener("DOMContentLoaded", function() {
-                document.getElementById('darkModeToggle').checked = isDarkMode;
-            });
+            applyTheme();
 		}
 
 		// On page load, apply the saved theme from localStorage and sync the toggle
 		window.onload = () => {
 			checkDark();
-			const checkbox = document.getElementById('darkModeToggle');
-			if(checkbox) checkbox.checked = document.documentElement.classList.contains('dark');
 		}; 
 
 
@@ -44,36 +36,12 @@
             const theme = localStorage.getItem('theme') || 'light';  // Default to 'light' if not set
 
             const iconLight = document.getElementById('icon-light');
-            const iconDark = document.getElementById('icon-dark');
-
-            if (theme === 'dark') {
-                console.log('Dark theme applied');
-                document.addEventListener("DOMContentLoaded", function() {
-                    document.getElementById('icon-light').style.display = 'none';
-                    document.getElementById('icon-dark').style.display = 'inline';
-                });
-            } else {
-                console.log('Light theme applied');
-                document.addEventListener("DOMContentLoaded", function() {
-                    document.getElementById('icon-light').style.display = 'inline';
-                    document.getElementById('icon-dark').style.display = 'none';
-                });
-            }
+            const svgDarkIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>
+`;
+            const svgLightIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`
+            iconLight.innerHTML = theme === 'dark' ? svgDarkIcon : svgLightIcon;
         }
-
-        // Toggle between dark and light theme
-        function toggleTheme() {
-            const currentTheme = localStorage.getItem('theme') || 'light';  // Default to 'light'
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            localStorage.setItem('theme', newTheme);
-            applyTheme();
-        }
-
-        // Add event listener to the button
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById('theme-toggle-btn').addEventListener('click', toggleTheme);
-        });
-        // Apply theme on page load
         document.addEventListener('DOMContentLoaded', applyTheme);
     </script>
 
@@ -97,13 +65,7 @@
                 <div class="flex flex-row w-full items-center justify-between md:hidden">
                     <%- include('logo-header') %>
                     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse w-full justify-end p-4 gap-x-4">
-                        <!-- Toggle Dark Mode -->
-                        <!-- <div class="items-center hidden md:flex">
-                            <label class="flex items-center">
-                                <input type="checkbox" value="" id="darkModeToggle" class="sr-only peer" onclick="toggleMode()">
-                                <div class="relative flex items-center justify-center mx-3 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[' '] dark:after:content-[' '] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                            </label>
-                        </div> -->
+
                         <!-- Button Mengarah ke Login -->
                         <button onclick="location.href='/login'" class="hover:cursor-pointer px-4 py-2 hidden md:flex text-white bg-neutral-700 rounded hover:bg-neutral-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Coba Sekarang</button>
                         </div>
@@ -127,13 +89,6 @@
                         </li>
                     </ul>
                     <div class="flex md:flex-row-reverse flex-row gap-x-4 pt-4 md:pt-0 h-full w-full items-center justify-between md:justify-center">
-                        <!-- <div class="flex items-center">
-                            <label class="flex items-center">
-                                <input type="checkbox" value="" id="darkModeToggle" class="sr-only peer" onclick="toggleMode()">
-                                <div class="relative mx-3 w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[' '] dark:after:content-[' '] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                            </label>
-                        </div> -->
-                        <!-- <button onclick="toggleMode()" class="hover:cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></button> -->
                         <button onclick="redirectUser()"
 							class="hover:cursor-pointer px-4 py-2 flex text-black bg-white rounded hover:bg-neutral-800 font-semibold hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-white dark:hover:bg-white/80 dark:focus:ring-white dark:text-black">
 							Coba Sekarang
@@ -141,7 +96,7 @@
                         <button id="theme-toggle-btn" onclick="toggleMode()" class="hover:cursor-pointer p-2 rounded-xl dark:bg-neutral-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200">
                             <span id="icon-light" class="text-black dark:text-white">
                                 <!-- Light theme icon SVG -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+
                             </span>
                         </button>
                     </div>
