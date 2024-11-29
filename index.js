@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
-require('dotenv').config();
+const env = require('dotenv').config();
+require('dotenv-expand').expand(env);
 const jwt = require('jsonwebtoken');
 
 const app = express();
@@ -449,7 +450,12 @@ app.get('/recent-login', async (req, res) =>{
 app.get('/user-active', async (req, res) =>{
     try{
         const token = req.headers.authorization;
-        const response = await fetch(process.env.USER_COUNTRY_API_URL,{
+        const apiUrl = process.env.USER_COUNTRY_API_URL;
+        const sortBy = req.query.sortBy ?? 'count';
+        const direction = req.query.direction ?? 'desc';
+        const page = req.query.page;
+        const size = req.query.size;
+        const response = await fetch(`${apiUrl}?sortBy=${sortBy}&direction=${direction}&page=${page}&size=${size}`,{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -466,6 +472,32 @@ app.get('/user-active', async (req, res) =>{
     }
 })
 
+app.get('/verify-email', async (req, res) =>{
+    try{
+        const urlEmailVerify = process.env.URL_VERIFICATION_EMAIL;
+        const verifyEmailToken = process.env.KEY_HUNTER;
+        const email = req.query.email;
+        if (!email) {
+            return res.status(400).json({ error: 'Email query parameter is required' });
+        }
+        const verifyEmail = `${urlEmailVerify}?email=${email}&api_key=${verifyEmailToken}`
+        const response = await fetch( verifyEmail,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        if (!response.ok) {
+            const errorData = await response.json();
+            return res.status(response.status).json({ error: errorData });
+        }
+        const data = await response.json();
+        res.status(200).json(data);
+
+    }catch (error) {
+        console.error(error);
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

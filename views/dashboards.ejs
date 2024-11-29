@@ -52,7 +52,11 @@
     <style>
         body {
             font-family: "Plus Jakarta Sans", sans-serif;
-        ;
+        }
+
+        #visitorMap .jvm-legend-inner {
+            height:120px;
+            overflow-y: scroll;
         }
     </style>
 </head>
@@ -171,14 +175,38 @@
                             </thead>
                             <tbody id="leaderboard-body" class="text-gray-700 dark:text-gray-100"></tbody>
                         </table>
+
+                        <div class="flex justify-between items-center px-4 py-3">
+                            <div class="text-sm text-gray-700 dark:text-gray-100" id="datatable-page-number"></div>
+
+                            <div class="flex space-x-1">
+                                <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal dark:text-gray-300 text-gray-600 dark:bg-slate-700 bg-slate-100 hover:bg-slate-300 dark:hover:bg-slate-600 border dark:border-slate-800 rounded  dark:hover:border-slate-600 transition duration-200 ease">
+                                    Prev
+                                </button>
+                                <div id="datatable-navigation" class="flex space-x-1"></div>
+                                <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal dark:text-gray-300 text-gray-600 dark:bg-slate-700 bg-slate-100 hover:bg-slate-300 dark:hover:bg-slate-600 border dark:border-slate-800 rounded  dark:hover:border-slate-600 transition duration-200 ease">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="container px-6 mx-auto grid">
+            <div class="my-6">
+                <button onclick="window.location.href = '/chats'" class="flex items-center rounded-md border border-slate-300 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-700 dark:text-slate-300 hover:text-white dark:hover:text-slate-800 hover:bg-slate-800 dark:bg-gray-800 bg-white dark:hover:bg-slate-200 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                    </svg>
+                    Kembali
+                </button>
             </div>
         </div>
     </section>
 </main>
 
-<div><%- include('partials/footer') %></div>
+<%- include('partials/footer') %>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
@@ -191,6 +219,7 @@
         const totalBotResponse = document.getElementById('total-bots-responses');
         const userActivity = document.getElementById('user-new-activity');
         const leaderboardBody = document.getElementById('leaderboard-body');
+        let leaderboardData = null;
         let codeAndCountry = {};
         let countryAndColor = {};
 
@@ -198,7 +227,9 @@
         try {
             await runBarChart();
             await newActivity();
-            await getCountryLeaderboard();
+            await getCountryLeaderboard(0);
+            implementDatatable(leaderboardData);
+            await renderMap();
 
             const [totalActive, TotalPesan, totalHistory] = await Promise.all([
                 fetch('/active-users',{
@@ -294,24 +325,81 @@
             }
         }
 
-        async function getCountryLeaderboard(){
+        function resetDatatableBtn(){
+            leaderboardData.content.forEach((item, index) => {
+                document.getElementById(`datatable-nav-btn-${index}`).className = 'px-3 py-1 min-w-9 min-h-9 text-sm font-normal dark:text-gray-300 text-gray-600 dark:bg-slate-700 bg-slate-100 hover:bg-slate-300 dark:hover:bg-slate-600 border dark:border-slate-800 rounded  dark:hover:border-slate-600 transition duration-200 ease';
+            })
+        }
+
+        function implementDatatable(data){
+            const datatableNav = document.getElementById('datatable-navigation');
+            datatableNav.innerHTML = '';
+            for(let i=0; i<data.totalPages; i++){
+                const btn = document.createElement('button');
+                btn.className = 'px-3 py-1 min-w-9 min-h-9 text-sm font-normal dark:text-gray-300 text-gray-600 dark:bg-slate-700 bg-slate-100 hover:bg-slate-300 dark:hover:bg-slate-600 border dark:border-slate-800 rounded  dark:hover:border-slate-600 transition duration-200 ease';
+                btn.id = `datatable-nav-btn-${i}`;
+                btn.textContent = `${i+1}`;
+                btn.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    getCountryLeaderboard(i);
+                });
+                datatableNav.appendChild(btn);
+            }
+        }
+
+        async function getCountryLeaderboard(page){
             try{
-                const response = await fetch(`/user-active`,{
+                const response = await fetch(`/user-active?sortBy=count&direction=desc&page=${page}&size=5`,{
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': token_jwt
                     }
                 })
-                const data = await response.json();
+                leaderboardData = await response.json();
+                updateTableLeaderboard(leaderboardData);
 
-                const countData = data.reduce((item, {country}) => {
-                    item[country] = item[country] || {countryName: country, count: 0};
-                    item[country]['count'] += 1;
-                    return item;
-                }, {});
+                if (!response.ok) {
+                    throw new Error('Gagal mengambil daftar chat');
+                }
+            }catch (error) {
+                console.error(error);
+            }
+        }
 
-                //map.series.regions[0].values
+        function updateTableLeaderboard(data){
+            let html = '';
+            const countData = data.content;
+            const pageNumber = data.pageable.pageNumber;
+            const pageSize = data.pageable.pageSize;
+            const totalEl = data.totalElements;
+
+            const min = pageNumber*pageSize + 1;
+            let max = min + pageSize - 1;
+            max = max > totalEl ? totalEl : max;
+            document.getElementById('datatable-page-number').innerHTML = `Showing ${min}-${max} of ${data.totalElements}`;
+
+            countData.forEach((item, index) => {
+                html += `<tr class="border-b dark:border-slate-600">
+                                    <td class="px-4 py-2 text-xs">${index+1 + pageNumber*pageSize}</td>
+                                    <td class="px-4 py-2 text-xs">${item.country}</td>
+                                    <td class="px-4 py-2 text-xs">${item.count}</td>
+                                </tr>`
+            })
+            return leaderboardBody.innerHTML = html;
+        };
+
+        async function renderMap(){
+            try{
+                const response = await fetch(`/user-active?sortBy=country&direction=asc&page=0&size=500`,{
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token_jwt
+                    }
+                })
+                let data = await response.json();
+                data = data.content;
                 codeAndCountry = data.reduce((item, {country}) => {
                     let code = findCountryCodeByName(country);
                     item[code] = item[country] || country;
@@ -324,17 +412,7 @@
                     return item
                 }, {});
 
-                await runMap(countryAndColor, codeAndCountry);
-
-                let html = '';
-                Object.values(countData).forEach((item, index) => {
-                    html += `<tr class="border-b dark:border-slate-600">
-                                    <td class="px-4 py-2 text-xs">${index+1}</td>
-                                    <td class="px-4 py-2 text-xs">${item.countryName}</td>
-                                    <td class="px-4 py-2 text-xs">${item.count}</td>
-                                </tr>`
-                })
-                return leaderboardBody.innerHTML = html;
+                await viewMap(countryAndColor, codeAndCountry);
                 if (!response.ok) {
                     throw new Error('Gagal mengambil daftar chat');
                 }
@@ -343,8 +421,7 @@
             }
         }
 
-        async function runMap(countryAndColor = {}, codeAndCountry = {}){
-            //document.querySelector('jvm-legend').innerHTML = ""
+        async function viewMap(countryAndColor = {}, codeAndCountry = {}){
             return new jsVectorMap({
                 selector: "#visitorMap",
                 map: "world",
@@ -495,7 +572,7 @@
         "KH": "Cambodia",
         "CM": "Cameroon",
         "CA": "Canada",
-        "CV": "Cape Verde",
+        "CV": "Cabo Verde",
         "KY": "Cayman Islands",
         "CF": "Central African Republic",
         "TD": "Chad",
@@ -551,14 +628,14 @@
         "GY": "Guyana",
         "HT": "Haiti",
         "HM": "Heard Island & Mcdonald Islands",
-        "VA": "Holy See (Vatican City State)",
+        "VA": "Vatican City",
         "HN": "Honduras",
         "HK": "Hong Kong",
         "HU": "Hungary",
         "IS": "Iceland",
         "IN": "India",
         "ID": "Indonesia",
-        "IR": "Iran, Islamic Republic Of",
+        "IR": "Iran",
         "IQ": "Iraq",
         "IE": "Ireland",
         "IM": "Isle Of Man",
@@ -575,17 +652,17 @@
         "KP": "North Korea",
         "KW": "Kuwait",
         "KG": "Kyrgyzstan",
-        "LA": "Lao People\"s Democratic Republic",
+        "LA": "Laos",
         "LV": "Latvia",
         "LB": "Lebanon",
         "LS": "Lesotho",
         "LR": "Liberia",
-        "LY": "Libyan Arab Jamahiriya",
+        "LY": "Libya",
         "LI": "Liechtenstein",
         "LT": "Lithuania",
         "LU": "Luxembourg",
         "MO": "Macao",
-        "MK": "Macedonia",
+        "MK": "North Macedonia",
         "MG": "Madagascar",
         "MW": "Malawi",
         "MY": "Malaysia",
@@ -598,7 +675,7 @@
         "MU": "Mauritius",
         "YT": "Mayotte",
         "MX": "Mexico",
-        "FM": "Micronesia, Federated States Of",
+        "FM": "Micronesia",
         "MD": "Moldova",
         "MC": "Monaco",
         "MN": "Mongolia",
@@ -624,7 +701,7 @@
         "OM": "Oman",
         "PK": "Pakistan",
         "PW": "Palau",
-        "PS": "Palestinian Territory, Occupied",
+        "PS": "Palestine",
         "PA": "Panama",
         "PG": "Papua New Guinea",
         "PY": "Paraguay",
@@ -645,7 +722,7 @@
         "LC": "Saint Lucia",
         "MF": "Saint Martin",
         "PM": "Saint Pierre And Miquelon",
-        "VC": "Saint Vincent And Grenadines",
+        "VC": "Saint Vincent And the Grenadines",
         "WS": "Samoa",
         "SM": "San Marino",
         "ST": "Sao Tome And Principe",
@@ -664,12 +741,13 @@
         "ES": "Spain",
         "LK": "Sri Lanka",
         "SD": "Sudan",
+        "SS": "South Sudan",
         "SR": "Suriname",
         "SJ": "Svalbard And Jan Mayen",
-        "SZ": "Swaziland",
+        "SZ": "Eswatini",
         "SE": "Sweden",
         "CH": "Switzerland",
-        "SY": "Syrian Arab Republic",
+        "SY": "Syria",
         "TW": "Taiwan",
         "TJ": "Tajikistan",
         "TZ": "Tanzania",
@@ -680,7 +758,7 @@
         "TO": "Tonga",
         "TT": "Trinidad And Tobago",
         "TN": "Tunisia",
-        "TR": "Turkey",
+        "TR": "Turkiye",
         "TM": "Turkmenistan",
         "TC": "Turks And Caicos Islands",
         "TV": "Tuvalu",
