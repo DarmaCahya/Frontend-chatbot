@@ -191,6 +191,7 @@
     document.getElementById('register-form').addEventListener('submit', async function (event) {
         event.preventDefault();
 
+        let valid = false;
         const username = document.getElementById('username').value;
         const email = document.getElementById('register-email').value;
         const country = document.getElementById('country').value;
@@ -213,13 +214,14 @@
           const status = data.data.status;
 
           if (status=="valid") {
-                alert('Email verified successfully!');
+              valid = true;
+              alert('Email berhasil diverifikasi!');
             } else {
-                alert('Email verification failed.');
+              alert('Verifikasi email gagal.');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('There was an error with the email verification.');
+            alert('Terjadi kesalahan pada verifikasi email.');
         }
 
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
@@ -260,24 +262,28 @@
           country: country,
         };
 
-        try {
-          const response = await fetch('/api/register', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          });
-          if (response.ok) {
-              const responseData = await response.json();
-              console.log('Pendaftaran berhasil:', responseData);
-              window.location.href = '/verify';
-          } else {
-              const errorData = await response.json();
-              alert(errorData.message)
+        if (valid == true) {
+          try {
+            const response = await fetch('/api/register', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data),
+            });
+            if (response.ok) {
+                const responseData = await response.json();
+                console.log('Pendaftaran berhasil:', responseData);
+                window.location.href = '/verify';
+            } else {
+                const errorData = await response.json();
+                alert(errorData.message)
+            }
+          } catch (error) {
+            alert('Terjadi kesalahan dalam melakukan pendaftaran, coba lagi nanti.');
           }
-        } catch (error) {
-          alert('Terjadi kesalahan dalam melakukan pendaftaran, coba lagi nanti.');
+        } else {
+            alert('Email tidak valid, tolong memasukkan email yang valid');
         }
       });
   </script>
