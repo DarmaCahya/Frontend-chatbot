@@ -10,7 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       // List of countries
@@ -185,8 +186,14 @@
     });
     const token = sessionStorage.getItem('token');
     if (token) {
-      window.location.href = '/index';
-      alert('Anda sudah login, akan diarahkan ke halaman utama.');
+      Swal.fire({
+        title: 'Berhasil Login!',
+        text: 'Anda akan diarahkan ke halaman utama.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        window.location.href = '/index';
+      });
     }
     document.getElementById('register-form').addEventListener('submit', async function (event) {
         event.preventDefault();
@@ -199,7 +206,10 @@
         const confirmPassword = document.getElementById('confirm-password').value;
 
         if (!username || !email || !country || !password || !confirmPassword) {
-          alert('Semua field harus diisi.');
+          Swal.fire({
+            text: "Semua field harus diisi.",
+            icon: "warning"
+          });
           return;
         }
 
@@ -215,43 +225,73 @@
 
           if (status=="valid") {
               valid = true;
-              alert('Email berhasil diverifikasi!');
+              Swal.fire({
+                text: "Email berhasil diverifikasi!",
+                icon: "success"
+              });
             } else {
-              alert('Verifikasi email gagal.');
+              Swal.fire({
+                text: "Verifikasi email gagal.",
+                icon: "error"
+              });
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Terjadi kesalahan pada verifikasi email.');
+            Swal.fire({
+              text: "Terjadi kesalahan pada verifikasi email.",
+              icon: "error"
+            });
         }
 
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 
         if (password.length < 8) {
-          alert('Password harus memiliki minimal 8 karakter.');
+          Swal.fire({
+            text: "Password harus memiliki minimal 8 karakter.",
+            icon: "warning"
+          });
           return;
         }
         if (!/[a-z]/.test(password)) {
-          alert('Password harus mengandung minimal satu huruf kecil.');
+          Swal.fire({
+            text: "Password harus mengandung minimal satu huruf kecil.",
+            icon: "warning"
+          });
           return;
         }
         if (!/[A-Z]/.test(password)) {
-          alert('Password harus mengandung minimal satu huruf kapital.');
+          Swal.fire({
+            text: "Password harus mengandung minimal satu huruf kapital.",
+            icon: "warning"
+          });
           return;
         }
         if (!/\d/.test(password)) {
-          alert('Password harus mengandung minimal satu angka.');
+          Swal.fire({
+            text: "Password harus mengandung minimal satu angka.",
+            icon: "warning"
+          });
           return;
         }
         if (!/[!@#$%^&*]/.test(password)) {
-          alert('Password harus mengandung minimal satu simbol: ! @ # $ % ^ & *');
+          Swal.fire({
+            text: "Password harus mengandung minimal satu simbol: ! @ # $ % ^ & *",
+            icon: "warning"
+          });
           return;
         }
         if (!passwordRegex.test(password)) {
-          alert('Password tidak valid.');
+          Swal.fire({
+            text: "Password tidak valid.",
+            icon: "warning"
+          });
           return;
         }
         if (password !== confirmPassword) {
-          alert('Password dan Konfirmasi Password harus sama.');
+          Swal.fire({
+            text: "Password dan Konfirmasi Password harus sama.",
+            icon: "error"
+          });
           return;
         }
 
@@ -277,13 +317,22 @@
                 window.location.href = '/verify';
             } else {
                 const errorData = await response.json();
-                alert(errorData.message)
+                Swal.fire({
+                  text: errorData.message,
+                  icon: "error"
+                });
             }
           } catch (error) {
-            alert('Terjadi kesalahan dalam melakukan pendaftaran, coba lagi nanti.');
+            Swal.fire({
+              text: "Terjadi kesalahan dalam melakukan pendaftaran, coba lagi nanti.",
+              icon: "error"
+            });
           }
         } else {
-            alert('Email tidak valid, tolong memasukkan email yang valid');
+          Swal.fire({
+            text: "Email tidak valid, tolong memasukkan email yang valid",
+            icon: "error"
+          });
         }
       });
   </script>

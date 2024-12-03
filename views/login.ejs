@@ -11,6 +11,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
       tailwind.config = {
@@ -135,7 +136,10 @@
       const token = sessionStorage.getItem('token');
       if (token) {
         window.location.href = '/index';
-        alert('Anda sudah login, akan diarahkan ke halaman utama.');
+        Swal.fire({
+					text: "Anda sudah login, akan diarahkan ke halaman utama.",
+					icon: "success"
+				});
       }
 
       document.getElementById('login-form').addEventListener('submit', async function (event) {
@@ -145,8 +149,11 @@
         const password = document.getElementById('password').value;
 
         if (!email || !password) {
-            alert('Email dan password harus diisi.');
-            return;
+          Swal.fire({
+            text: "Email dan password harus diisi.",
+            icon: "warning"
+          });
+          return;
         }
     
         const data = {
@@ -170,10 +177,16 @@
           } else {
             console.error('Response error:', response);
             const errorData = await response.json();
-            alert('Masuk gagal: ' + (errorData.message || 'Kesalahan tidak diketahui.'));
+            Swal.fire({
+              text: 'Masuk gagal: ' + (errorData.message || 'Kesalahan tidak diketahui.'),
+              icon: "error"
+            });
           }
         } catch (error) {
-          alert('Terjadi kesalahan, coba lagi nanti.');
+          Swal.fire({
+            text: "Terjadi kesalahan, coba lagi nanti.",
+            icon: "error"
+          });
         }
       });
     </script>    

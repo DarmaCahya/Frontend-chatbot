@@ -45,6 +45,7 @@
     "owl.carousel": "^2.3.4",
     "path": "^0.12.7",
     "postcss-cli": "^11.0.0",
-    "remixicon": "^4.3.0"
+    "remixicon": "^4.3.0",
+    "sweetalert2": "^11.14.5"
   }
 }
