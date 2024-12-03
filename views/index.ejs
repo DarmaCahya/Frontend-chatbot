@@ -73,10 +73,17 @@
 			font-family: "Plus Jakarta Sans", sans-serif;
 			;
 		}
+
+		body[lang=en-GB]  [lang]:not([lang=en-GB]),
+		body[lang=id-ID] [lang]:not([lang=id-ID]),
+		body[lang=zh-CN] [lang]:not([lang=zh-CN])
+		{
+			display: none;
+		}
 	</style>
 </head>
 
-<body class="bg-white relative overflow-x-hidden dark:bg-gray-900 text-black dark:text-white transition duration-75">
+<body lang="id-ID" class="bg-white relative overflow-x-hidden dark:bg-gray-900 text-black dark:text-white transition duration-75">
 	<%- include('partials/header') %>
 		<main class="mb-24">
 			<section class="scroll-mt-56" id="beranda">
@@ -99,9 +106,17 @@
 								<span class="text-xl md:text-xl text-red-600">Sahabat Tutur Berbahasa Indonesia</span>
 								<span>Bahasa Indonesia bagi Penutur Asing</span>
 							</div>
-							<button onclick="redirectUser()"
+							<button lang="id-ID" onclick="redirectUser()"
 								class="hover:cursor-pointer px-4 py-2 flex text-black bg-white rounded hover:bg-neutral-800 font-semibold hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-white dark:hover:bg-white/80 dark:focus:ring-white dark:text-black">
 								Coba Sekarang
+							</button>
+							<button lang="en-GB" onclick="redirectUser()"
+									class="hover:cursor-pointer px-4 py-2 flex text-black bg-white rounded hover:bg-neutral-800 font-semibold hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-white dark:hover:bg-white/80 dark:focus:ring-white dark:text-black">
+								Try it Now
+							</button>
+							<button lang="zh-CN" onclick="redirectUser()"
+								class="hover:cursor-pointer px-4 py-2 flex text-black bg-white rounded hover:bg-neutral-800 font-semibold hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-white dark:hover:bg-white/80 dark:focus:ring-white dark:text-black">
+								開始使用
 							</button>
 						</div>
 						<div class="absolute top-0 left-0 w-full h-full object-cover bg-black/10 dark:hidden">
@@ -130,13 +145,21 @@
 						</div>
 						<div class="w-full md:w-1/2 p-4 md:p-8 flex items-center justify-center">
 							<div class="flex flex-col pt-4 md:pt-0 gap-y-4 w-full items-start justify-center">
-								<div class="text-2xl md:text-5xl font-extrabold">Pembelajaran BIPA dengan Muatan Konten
-									Budaya</div>
-								<span
-									class="text-base md:text-xl dark:text-gray-300 font-semibold text-justify">Satria
-									BIPA memberikan pembelajaran bahasa Indonesia dengan konteks budaya sebagai wawasan
+								<p lang="id-ID" class="text-2xl md:text-5xl font-extrabold">Pembelajaran BIPA dengan Muatan Konten Budaya</p>
+								<span lang="id-ID" class="text-base md:text-xl dark:text-gray-300 font-semibold text-justify">
+									Satria BIPA memberikan pembelajaran bahasa Indonesia dengan konteks budaya sebagai wawasan
 									dan informasi tentang berbagai tradisi, adat istiadat, dan nilai-nilai budaya
-									Indonesia.</span>
+									Indonesia.
+								</span>
+								<p lang="en-GB" class="text-2xl md:text-5xl font-extrabold">BIPA Learning with Cultural Content</p>
+								<span lang="en-GB" class="text-base md:text-xl dark:text-gray-300 font-semibold text-justify">
+									Satria BIPA provides Indonesian learning with a cultural context as insight and
+									information about various Indonesian traditions, customs and cultural values.
+								</span>
+								<p lang="zh-CN" class="text-2xl md:text-5xl font-extrabold">BIPA 學習以文化內容</p>
+								<span lang="zh-CN" class="text-base md:text-xl dark:text-gray-300 font-semibold text-justify">
+									Satria BIPA 為印尼語學習提供文化背景，作為印尼各種傳統、習俗和文化價值觀的見解和資訊。
+								</span>
 							</div>
 						</div>
 					</div>
@@ -151,12 +174,19 @@
 						</div>
 						<div class="w-full md:w-1/2 p-4 md:p-8 flex items-center justify-center">
 							<div class="flex flex-col pt-4 md:pt-0 gap-y-4 w-full items-start justify-center">
-								<div class="text-2xl md:text-5xl font-extrabold">Rekomendasi Materi Pembelajaran</div>
-								<span
-									class="text-base text-justify md:text-xl text-gray-400 dark:text-gray-300 font-semibold"> Satria BIPA menyarankan
-									materi
-									pembelajaran bahasa Indonesia yang terkait dengan pertanyaan pengguna, penyesuaian
-									tingkat kesulitan, dan kiat-kiat belajar bahasa Indonesia.</span>
+								<p lang="id-ID" class="text-2xl md:text-5xl font-extrabold">Rekomendasi Materi Pembelajaran</p>
+								<span lang="id-ID" class="text-base text-justify md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
+									Satria BIPA menyarankan materi pembelajaran bahasa Indonesia yang terkait dengan pertanyaan pengguna, penyesuaian
+									tingkat kesulitan, dan kiat-kiat belajar bahasa Indonesia.
+								</span>
+								<p lang="en-GB" class="text-2xl md:text-5xl font-extrabold">Recommended Learning Subjects</p>
+								<span lang="en-GB" class="text-base text-justify md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
+									Satria BIPA recommends Indonesian learning subjects related to user questions, difficulty level adjustments, and tips for learning Indonesian.
+								</span>
+								<p lang="zh-CN" class="text-2xl md:text-5xl font-extrabold">推薦學習材料</p>
+								<span lang="zh-CN" class="text-base text-justify md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
+									Satria BIPA 推薦與使用者問題、難度調整和印尼語學習技巧相關的印尼語學習材料。
+								</span>
 							</div>
 						</div>
 					</div>
@@ -171,12 +201,20 @@
 						</div>
 						<div class="w-full md:w-1/2 p-4 md:p-8 flex items-center justify-center">
 							<div class="flex flex-col pt-4 md:pt-0 gap-y-4 w-full items-start justify-center">
-								<div class="text-2xl md:text-5xl font-extrabold">Percakapan Bahasa Indonesia</div>
-								<span
-									class="text-base md:text-xl text-gray-400 dark:text-gray-300 font-semibold">Latihan
-									berbicara melalui
-									teks berbentuk percakapan alami dalam Bahasa Indonesia untuk meningkatkan
-									kepercayaan diri dan kelancaran berbicara dalam berbahasa Indonesia.</span>
+								<p lang="id-ID" class="text-2xl md:text-5xl font-extrabold">Percakapan Bahasa Indonesia</p>
+								<span lang="id-ID" class="text-base md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
+									Latihan berbicara melalui teks berbentuk percakapan alami dalam Bahasa Indonesia untuk meningkatkan
+									kepercayaan diri dan kelancaran berbicara dalam berbahasa Indonesia.
+								</span>
+								<p lang="en-GB" class="text-2xl md:text-5xl font-extrabold">Indonesian Conversation</p>
+								<span lang="en-GB" class="text-base md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
+									Practice speaking through text in the form of natural conversation in Indonesian to
+									enhance self-confidence and fluency in speaking Indonesian.
+								</span>
+								<p lang="zh-CN" class="text-2xl md:text-5xl font-extrabold">印尼語會話</p>
+								<span lang="zh-CN" class="text-base md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
+									透過印尼語地道會話文本進行口語練習，以提高印尼語口語的信心和流利程度。
+								</span>
 							</div>
 						</div>
 					</div>

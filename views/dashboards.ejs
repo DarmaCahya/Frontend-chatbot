@@ -58,6 +58,13 @@
             height:120px;
             overflow-y: scroll;
         }
+
+        body[lang=en-GB]  [lang]:not([lang=en-GB]),
+        body[lang=id-ID] [lang]:not([lang=id-ID]),
+        body[lang=zh-CN] [lang]:not([lang=zh-CN])
+        {
+            display: none;
+        }
     </style>
 </head>
 

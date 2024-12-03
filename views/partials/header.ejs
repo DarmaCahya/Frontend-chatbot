@@ -42,7 +42,23 @@
             const svgLightIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>`
             iconLight.innerHTML = theme === 'dark' ? svgDarkIcon : svgLightIcon;
         }
-        document.addEventListener('DOMContentLoaded', applyTheme);
+
+        function applyLanguage(){
+            const lang = localStorage.getItem('language');
+            document.getElementById('language-select').value = lang;
+            document.getElementsByTagName('body')[0].setAttribute('lang', lang);
+        }
+
+        function changeLanguage(){
+            const lang = document.getElementById('language-select').value ?? 'id-ID';
+            localStorage.setItem('language', lang);
+            applyLanguage();
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            applyTheme();
+            applyLanguage();
+        });
     </script>
 
 <style>
@@ -79,19 +95,33 @@
                 <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 gap-x-4" id="navbar-sticky">
                     <ul class="flex flex-col p-4 md:p-0 mt-4 md:pr-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-14 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
-                            <a href="/index#beranda" class="flex w-full items-center justify-start py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline hover:underline-offset-8 hover:duration-75">Beranda</a>
+                            <a href="/index#beranda" class="flex w-full items-center justify-start py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline hover:underline-offset-8 hover:duration-75">
+                                <p lang="id-ID">Beranda</p>
+                                <p lang="en-GB">Home</p>
+                                <p lang="zh-CN" class="text-nowrap">主页</p>
+                            </a>
+                       </li>
+                        <li>
+                            <a href="/index#fitur" class="flex w-full items-center justify-start py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline hover:underline-offset-8 hover:duration-75">
+                                <p lang="id-ID">Fitur</p>
+                                <p lang="en-GB">Feature</p>
+                                <p lang="zh-CN" class="text-nowrap">特征</p>
+                            </a>
                         </li>
                         <li>
-                            <a href="/index#fitur" class="flex w-full items-center justify-start py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline hover:underline-offset-8 hover:duration-75">Fitur</a>
-                        </li>
-                        <li>
-                            <a href="/index#panduan" class="flex w-full items-center justify-start py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline hover:underline-offset-8 hover:duration-75">Panduan</a>
+                            <a  href="/index#panduan" class="flex w-full items-center justify-start py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent hover:underline hover:underline-offset-8 hover:duration-75">
+                                <p lang="id-ID">Panduan</p>
+                                <p lang="en-GB">Guide</p>
+                                <p lang="zh-CN" class="text-nowrap">指导</p>
+                            </a>
                         </li>
                     </ul>
                     <div class="flex md:flex-row-reverse flex-row gap-x-4 pt-4 md:pt-0 h-full w-full items-center justify-between md:justify-center">
                         <button onclick="redirectUser()"
 							class="hover:cursor-pointer px-4 py-2 flex text-black bg-white rounded hover:bg-neutral-800 font-semibold hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-white dark:hover:bg-white/80 dark:focus:ring-white dark:text-black">
-							Coba Sekarang
+                            <label lang="id-ID">Coba Sekarang</label>
+                            <label lang="en-GB">Try it Now</label>
+                            <label lang="zh-CN">開始使用</label>
 						</button>
                         <button id="theme-toggle-btn" onclick="toggleMode()" class="hover:cursor-pointer p-2 rounded-xl dark:bg-neutral-800 dark:hover:bg-gray-700 bg-gray-100 hover:bg-gray-200">
                             <span id="icon-light" class="text-black dark:text-white">
@@ -99,6 +129,13 @@
 
                             </span>
                         </button>
+                        <div class="relative">
+                            <select id="language-select" onchange="changeLanguage()" class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-3 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer">
+                                <option value="id-ID">Indonesia</option>
+                                <option value="en-GB">English</option>
+                                <option value="zh-CN">中文</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>

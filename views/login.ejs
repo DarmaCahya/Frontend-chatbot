@@ -65,10 +65,17 @@
       .login-btn:hover svg path{
         fill: white;
       }
+
+      body[lang=en-GB]  [lang]:not([lang=en-GB]),
+      body[lang=id-ID] [lang]:not([lang=id-ID]),
+      body[lang=zh-CN] [lang]:not([lang=zh-CN])
+      {
+        display: none;
+      }
     </style>
   </head>
 
-  <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex items-center justify-center min-h-screen">
+  <body lang="id-ID" class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex items-center justify-center min-h-screen">
   <%- include('partials/header') %>
     <main class=" dark:bg-gray-800 flex items-center justify-center w-full h-600 p-0 dark:border-gray-700 mt-12">
       <div class="relative flex flex-col md:flex-row w-full h-full border-l border-r border-gray dark:border-gray-700 bg-[url(/images/batik-bg.jpg)] dark:bg-none bg-cover ">
