@@ -450,7 +450,15 @@
 						</button>
 					</div>
 
-					<div id="chat-topic" class="flex flex-row flex-wrap justify-center gap-2 my-3 px-[5rem]"></div>
+					<div id="chat-topic" class="flex flex-row flex-wrap justify-center gap-2 my-3 px-[5rem]">
+						<button id="chat-topic-other" class="flex order-last items-center rounded-md dark:bg-gray-800 bg-gray-200 py-2 px-3 border border-gray-800 dark:border-gray-400 text-center text-sm dark:text-white transition-all  focus:bg-black/10 dark:focus:bg-slate-700  active:bg-black/10 dark:active:bg-slate-700 hover:bg-black/10 dark:hover:bg-slate-700 disabled:pointer-events-none disabled:opacity-50" type="button">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-3">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+							</svg>
+							Lainnya
+						</button>
+					</div>
+
 					<div id="chat-subtopic" class="my-3 relative justify-center flex"></div>
 				</div>
 			</main>
@@ -612,18 +620,20 @@
 								{text: 'bagaimana cara memberikan pujian'}
 							]
 				},
-				{
-					num: 4,
-					icon: `<p class="mr-2 mb-2" style="font-size: 25px;">🛒</p>`,
-					topic: 'Berbelanja dan Makanan',
-					subtopic :
-							[
-								{text: 'bagaimana cara memesan makanan'},
-								{text: 'kosakata penting untuk memesan makanan di restoran'},
-								{text: 'bagaimana cara menolak tawaran makanan dengan sopan'},
-								{text: 'bagaimana cara bertanya tentang bahan makanan atau rasa'}
-							]
-				},
+			];
+
+			const dataTopicOther = [{
+				num: 4,
+				icon: `<p class="mr-2 mb-2" style="font-size: 25px;">🛒</p>`,
+				topic: 'Berbelanja dan Makanan',
+				subtopic :
+						[
+							{text: 'bagaimana cara memesan makanan'},
+							{text: 'kosakata penting untuk memesan makanan di restoran'},
+							{text: 'bagaimana cara menolak tawaran makanan dengan sopan'},
+							{text: 'bagaimana cara bertanya tentang bahan makanan atau rasa'}
+						]
+			},
 				{
 					num: 5,
 					icon: `<p class="mr-2 mb-2" style="font-size:25px;">🏥</p>`,
@@ -671,8 +681,7 @@
 								{text: 'bagaimana cara bertanya tentang jadwal kuliah atau sekolah'},
 								{text: 'bagaimana cara menjelaskan jadwal pelajaran atau mata kuliah dalam bahasa Indonesia'}
 							]
-				},
-			];
+				},]
 
 			document.addEventListener("DOMContentLoaded", async function () {
 				const newChatBtn = document.getElementById("new-chat-btn");
@@ -687,6 +696,7 @@
 				const alertPopup = document.getElementById("alert-popup");
 				const dashboardBtn = document.getElementById("dashboard-link");
 				const chatTopic = document.getElementById('chat-topic');
+				const chatSubTopic = document.getElementById('chat-subtopic');
 				const isAdmin = userData.role === 'ADMIN'
 
 				let messageCount = 0;
@@ -694,8 +704,8 @@
 				const maxVisibleChats = 4;
 				let chatCounter = 2;
 				let isShowingMore = false;
+				await renderChatTopic(dataTopic);
 				await getAllHistory();
-				await renderChatTopic();
 				renderChatList();
 
 				function resetBgChatList(){
@@ -704,43 +714,48 @@
 					})
 				}
 
-				async function renderChatTopic(){
+				async function renderChatTopic(dataTopic){
 					const chatTopic = document.getElementById('chat-topic');
 					dataTopic.forEach((item, index) => {
-						chatTopic.innerHTML += `<button id="chat-topic-${index}" class="flex items-center rounded-md dark:bg-gray-800 bg-gray-200 py-2 px-3 border border-gray-800 dark:border-gray-400 text-center text-sm dark:text-white transition-all  focus:bg-black/10 dark:focus:bg-slate-700  active:bg-black/10 dark:active:bg-slate-700 hover:bg-black/10 dark:hover:bg-slate-700 disabled:pointer-events-none disabled:opacity-50" type="button">
+						chatTopic.innerHTML += `<button id="chat-topic-${item.num}" class="flex items-center rounded-md dark:bg-gray-800 bg-gray-200 py-2 px-3 border border-gray-800 dark:border-gray-400 text-center text-sm dark:text-white transition-all  focus:bg-black/10 dark:focus:bg-slate-700  active:bg-black/10 dark:active:bg-slate-700 hover:bg-black/10 dark:hover:bg-slate-700 disabled:pointer-events-none disabled:opacity-50" type="button">
 							${item.icon}
 							${item.topic}
 						</button>`
 						const chatSubTopic = document.getElementById('chat-subtopic');
-						chatSubTopic.innerHTML += `	<nav id="chat-subtopic-${index}" class="hidden min-w-[400px] flex-col gap-1 p-1.5 rounded-lg shadow-sm border border-gray-800 dark:border-gray-400 relative">
-						<button id="chat-subtopic-closebtn-${index}" onclick="document.getElementById('chat-subtopic').classList.add('hidden')" class="flex flex-row items-center justify-center transition-all w-8 h-8 rounded-md dark:text-white text-gray-800 hover:bg-white/10 active:bg-white/10 absolute top-1.5 right-1.5" type="button">
+						chatSubTopic.innerHTML += `	<nav id="chat-subtopic-${item.num}" class="pt-10 hidden min-w-[400px] flex-col gap-1 p-1.5 rounded-lg shadow-sm border border-gray-800 dark:border-gray-400 relative">
+						<button id="chat-subtopic-closebtn-${item.num}" onclick="document.getElementById('chat-subtopic').classList.add('hidden')" class="flex flex-row items-center justify-center transition-all w-8 h-8 rounded-md dark:text-white text-gray-800 hover:bg-white/10 active:bg-white/10 absolute top-1.5 right-1.5" type="button">
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
 						</button>
 						</nav>`
 						item.subtopic.forEach((itemSubTopic, index) => {
-							document.getElementById(`chat-subtopic-${item.num - 1}`).innerHTML += `<div role="button" class="chat-subtopic-item text-slate-800 dark:text-gray-200 flex w-full items-center rounded-md p-3 transition-all duration-300 hover:bg-slate-100 dark:hover:bg-slate-600 focus:bg-slate-100 dark:focus:bg-slate-600 active:bg-slate-100 dark:active:bg-slate-600">${itemSubTopic.text}</div>`;
+							document.getElementById(`chat-subtopic-${item.num}`).innerHTML += `<div role="button" class="chat-subtopic-item text-slate-800 dark:text-gray-200 flex w-full items-center rounded-md p-3 transition-all duration-300 hover:bg-slate-100 dark:hover:bg-slate-600 focus:bg-slate-100 dark:focus:bg-slate-600 active:bg-slate-100 dark:active:bg-slate-600">${itemSubTopic.text}</div>`;
 						})
 					});
+					runAfter(dataTopic);
 				}
 
-				dataTopic.forEach((itemSubTopic, index) => {
-					toggleChatTopic(index);
-					inputTopic(index);
-				});
-
-				function resetChatTopic(){
+				function runAfter(dataTopic){
 					dataTopic.forEach((itemSubTopic, index) => {
-						document.getElementById(`chat-subtopic-${index}`).classList.add('hidden');
+						toggleChatTopic(itemSubTopic.num, dataTopic);
+						inputTopic(itemSubTopic.num);
 					});
 				}
 
-				function toggleChatTopic(id){
+
+				function resetChatTopic(topic){
+					topic.forEach((itemSubTopic, index) => {
+						document.getElementById(`chat-subtopic-${itemSubTopic.num}`).classList.add('hidden');
+					});
+				}
+
+				function toggleChatTopic(id, dataTopic){
 					document.getElementById(`chat-topic-${id}`).addEventListener('click', function(){
 						const chatSubtopic = document.getElementById(`chat-subtopic-${id}`);
-						resetChatTopic();
+						resetChatTopic(dataTopic);
 						document.getElementById('chat-subtopic').classList.remove('hidden');
 						chatSubtopic.classList.remove('hidden');
 						chatSubtopic.classList.add('flex');
+						chatSubtopic.scrollIntoView();
 					});
 				}
 
@@ -748,10 +763,17 @@
 					document.getElementById(`chat-subtopic-${id}`).addEventListener('click', function(e){
 						e.preventDefault();
 						const item = e.target.closest('.chat-subtopic-item');
-						messageInput.value = item.textContent;
+						messageInput.value = item ? item.textContent : '';
 						this.classList.toggle('hidden');
 					});
 				}
+
+				document.getElementById('chat-topic-other').addEventListener('click', function(e){
+					const newArr = dataTopic.concat(dataTopicOther);
+					chatTopic.innerHTML = '';
+					chatSubTopic.innerHTML = '';
+					renderChatTopic(newArr);
+				})
 				
 				// Fungsi untuk merender daftar chat
 				function renderChatList() {
