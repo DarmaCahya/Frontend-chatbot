@@ -63,6 +63,13 @@
 			margin: 0;
 		}
 
+		body[lang=en-GB] aside[lang=en-GB] [lang]:not([lang=en-GB]),
+		body[lang=id-ID] aside[lang=id-ID] [lang]:not([lang=id-ID]),
+		body[lang=zh-CN] aside[lang=zh-CN] [lang]:not([lang=zh-CN])
+		{
+			display: none;
+		}
+
 		.scrollbar-custom::-webkit-scrollbar {
 			width: 6px;
 		}
@@ -96,17 +103,6 @@
 			flex-shrink: 0;
 		}
 
-		main {
-			flex: 1;
-			display: flex;
-			flex-direction: column;
-		}
-
-		.chat-area {
-			flex: 1;
-			display: flex;
-			flex-direction: column;
-		}
 
 		.chat-box {
 			flex: 1;
@@ -205,7 +201,7 @@
 			/* Show text by default */
 		}
 	</style>
-	<script	script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+	<script	src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
 </head>
 
 <body class="overflow-x-hidden text-black transition duration-75 bg-gray-100 dark:bg-gray-700 dark:text-white">
@@ -384,7 +380,7 @@
 			</section>
 		</aside>
 
-		<div id="main-content" class="flex flex-col flex-1 transition-all">
+		<div id="main-content" class="flex flex-col flex-1 transition-all overflow-y-auto">
 			<!-- Header -->
 			<header class="sticky top-0 z-10 flex w-full p-5">
 				<div class="flex items-center justify-end flex-1">
@@ -400,7 +396,7 @@
 			</header>
 
 			<!-- Area Chat Utama -->
-			<main class="flex flex-col flex-1 lg:ml-12 xl:ml-0">
+			<main class="main-box flex flex-col flex-1 lg:ml-12 xl:ml-0 overflow-y-hidden">
 				<!-- Salam dan Rekomendasi Chat -->
 				<div class="flex flex-col items-center h-full p-5 greeting-section">
 					<div class="flex items-center">
@@ -428,8 +424,8 @@
 				</div>
 
 				<!-- Area Chat -->
-				<div class="flex flex-col flex-1 chat-area">
-					<div id="chat-box" class="chat-box flex flex-col max-h-[42rem] space-y-4 scrollbar-custom">
+				<div class="flex flex-col flex-1 chat-area overflow-y-auto scrollbar-custom">
+					<div id="chat-box" class="chat-box flex flex-col space-y-4">
 						<!-- Pesan chat akan ditambahkan di sini -->
 					</div>
 				</div>
@@ -459,7 +455,7 @@
 						</button>
 					</div>
 
-					<div id="chat-subtopic" class="my-3 relative justify-center flex"></div>
+					<div id="chat-subtopic" class="my-1 relative justify-center flex"></div>
 				</div>
 			</main>
 			<%- include('partials/footer') %>
