@@ -76,7 +76,8 @@
 
 		body[lang=en-GB]  [lang]:not([lang=en-GB]),
 		body[lang=id-ID] [lang]:not([lang=id-ID]),
-		body[lang=zh-CN] [lang]:not([lang=zh-CN])
+		body[lang=zh-HANT] [lang]:not([lang=zh-HANT]),
+		body[lang=zh-HANS] [lang]:not([lang=zh-HANS])
 		{
 			display: none;
 		}
@@ -112,11 +113,15 @@
 							</button>
 							<button lang="en-GB" onclick="redirectUser()"
 									class="hover:cursor-pointer px-4 py-2 flex text-black bg-white rounded hover:bg-neutral-800 font-semibold hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-white dark:hover:bg-white/80 dark:focus:ring-white dark:text-black">
-								Try it Now
+								Get Started
 							</button>
-							<button lang="zh-CN" onclick="redirectUser()"
+							<button lang="zh-HANT" onclick="redirectUser()"
 								class="hover:cursor-pointer px-4 py-2 flex text-black bg-white rounded hover:bg-neutral-800 font-semibold hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-white dark:hover:bg-white/80 dark:focus:ring-white dark:text-black">
 								開始使用
+							</button>
+							<button lang="zh-HANS" onclick="redirectUser()"
+									class="hover:cursor-pointer px-4 py-2 flex text-black bg-white rounded hover:bg-neutral-800 font-semibold hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-white dark:hover:bg-white/80 dark:focus:ring-white dark:text-black">
+								开始使用
 							</button>
 						</div>
 						<div class="absolute top-0 left-0 w-full h-full object-cover bg-black/10 dark:hidden">
@@ -156,9 +161,13 @@
 									Satria BIPA provides Indonesian learning with a cultural context as insight and
 									information about various Indonesian traditions, customs and cultural values.
 								</span>
-								<p lang="zh-CN" class="text-2xl md:text-5xl font-extrabold">BIPA 學習以文化內容</p>
-								<span lang="zh-CN" class="text-base md:text-xl dark:text-gray-300 font-semibold text-justify">
+								<p lang="zh-HANT" class="text-2xl md:text-5xl font-extrabold">BIPA 學習以文化內容</p>
+								<span lang="zh-HANT" class="text-base md:text-xl dark:text-gray-300 font-semibold text-justify">
 									Satria BIPA 為印尼語學習提供文化背景，作為印尼各種傳統、習俗和文化價值觀的見解和資訊。
+								</span>
+								<p lang="zh-HANS" class="text-2xl md:text-5xl font-extrabold">BIPA 学习以文化内容</p>
+								<span lang="zh-HANS" class="text-base md:text-xl dark:text-gray-300 font-semibold text-justify">
+									Satria BIPA 为印尼语学习提供文化背景，作为印尼各种传统、习俗和文化价值观的见解和资讯。
 								</span>
 							</div>
 						</div>
@@ -183,9 +192,13 @@
 								<span lang="en-GB" class="text-base text-justify md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
 									Satria BIPA recommends Indonesian learning subjects related to user questions, difficulty level adjustments, and tips for learning Indonesian.
 								</span>
-								<p lang="zh-CN" class="text-2xl md:text-5xl font-extrabold">推薦學習材料</p>
-								<span lang="zh-CN" class="text-base text-justify md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
+								<p lang="zh-HANT" class="text-2xl md:text-5xl font-extrabold">推薦學習材料</p>
+								<span lang="zh-HANT" class="text-base text-justify md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
 									Satria BIPA 推薦與使用者問題、難度調整和印尼語學習技巧相關的印尼語學習材料。
+								</span>
+								<p lang="zh-HANS" class="text-2xl md:text-5xl font-extrabold">推荐学习材料</p>
+								<span lang="zh-HANS" class="text-base text-justify md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
+									Satria BIPA 推荐与使用者问题、难度调整和印尼语学习技巧相关的印尼语学习材料。
 								</span>
 							</div>
 						</div>
@@ -211,9 +224,13 @@
 									Practice speaking through text in the form of natural conversation in Indonesian to
 									enhance self-confidence and fluency in speaking Indonesian.
 								</span>
-								<p lang="zh-CN" class="text-2xl md:text-5xl font-extrabold">印尼語會話</p>
-								<span lang="zh-CN" class="text-base md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
+								<p lang="zh-HANT" class="text-2xl md:text-5xl font-extrabold">印尼語會話</p>
+								<span lang="zh-HANT" class="text-base md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
 									透過印尼語地道會話文本進行口語練習，以提高印尼語口語的信心和流利程度。
+								</span>
+								<p lang="zh-HANS" class="text-2xl md:text-5xl font-extrabold">印尼语会话</p>
+								<span lang="zh-HANS" class="text-base md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
+									透过印尼语地道会话文本进行口语练习，以提高印尼语口语的信心和流利程度。
 								</span>
 							</div>
 						</div>
@@ -262,19 +279,22 @@
 							<div class="text-xl md:text-4xl font-extrabold text-white">
 								<p lang="id-ID">Pelajari lebih lanjut</p>
 								<p lang="en-GB">Learn More</p>
-								<p lang="zh-CN">了解更多</p>
+								<p lang="zh-HANT">了解更多</p>
+								<p lang="zh-HANS">了解更多</p>
 							</div>
 							<div class="text-sm md:text-xl text-neutral-100 font-semibold">
 								<p lang="id-ID">Tonton video tutorial berikut untuk menggunakan Satria BIPA</p>
 								<p lang="en-GB">Watch the following video tutorial to use Satria BIPA</p>
-								<p lang="zh-CN">观看以下有关使用 Satria BIPA 的视频教程</p>
+								<p lang="zh-HANT">觀看以下有關使用 Satria BIPA 的影片教學</p>
+								<p lang="zh-HANS">观看以下有关使用 Satria BIPA 的视频教程</p>
 							</div>
 							<a href="/login"
 								class="flex flex-col items-center justify-center gap-y-8 py-4 rounded-xl w-full">
 								<button onclick="location.href='/login'" class="px-4 py-3 rounded-xl bg-red-600 text-white flex w-full gap-x-2 items-center justify-center group">
 									<label lang="id-ID">Mulai</label>
 									<label lang="en-GB">Start</label>
-									<label lang="zh-CN">开始</label>
+									<label lang="zh-HANT">開始</label>
+									<label lang="zh-HANS">开始</label>
 									<span class="group-hover:translate-x-2 transition-all duration-300 ease-in-out">→</span>
 								</button>
 							</a>
