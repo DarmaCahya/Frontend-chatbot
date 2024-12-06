@@ -235,15 +235,13 @@
 			<div class="flex flex-col flex-1 w-full space-y-6">
 
 				<!-- Konten Sidebar -->
-				<button id="new-chat-btn" class="flex px-3 py-2 w-fit bg-white/10 rounded-xl">
-					<div>
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-							stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-							class="lucide lucide-plus">
-							<path d="M5 12h14" />
-							<path d="M12 5v14" />
-						</svg>
-					</div>
+				<button id="new-chat-btn" class="flex px-3 py-2 w-fit bg-white/10 dark:hover:bg-white/20 rounded-xl bg-gray-200 hover:bg-gray-300 active:bg-gray-300">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+						 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+						 class="lucide lucide-plus">
+						<path d="M5 12h14" />
+						<path d="M12 5v14" />
+					</svg>
 					<span class="ml-2 sidebar-text">Mulai Percakapan Baru</span>
 				</button>
 				<div class="sidebar-content-wrapper minimized">
@@ -397,7 +395,7 @@
 			</header>
 
 			<!-- Area Chat Utama -->
-			<main class="main-box flex flex-col flex-1 lg:ml-12 xl:ml-0 overflow-y-hidden">
+			<main class="main-box flex flex-col flex-1 lg:ml-12 xl:ml-0 overflow-y-auto scrollbar-custom">
 				<!-- Salam dan Rekomendasi Chat -->
 				<div class="flex flex-col items-center h-full p-5 greeting-section">
 					<div class="flex items-center">
@@ -723,7 +721,7 @@
 							${item.topic}
 						</button>`
 						const chatSubTopic = document.getElementById('chat-subtopic');
-						chatSubTopic.innerHTML += `	<nav id="chat-subtopic-${item.num}" class="pt-10 hidden min-w-[400px] flex-col gap-1 p-1.5 rounded-lg shadow-sm border border-gray-800 dark:border-gray-400 relative">
+						chatSubTopic.innerHTML += `	<nav id="chat-subtopic-${item.num}" class="pt-10 hidden min-w-[10rem] flex-col gap-1 p-1.5 rounded-lg shadow-sm border border-gray-800 dark:border-gray-400 relative">
 						<button id="chat-subtopic-closebtn-${item.num}" onclick="document.getElementById('chat-subtopic').classList.add('hidden')" class="flex flex-row items-center justify-center transition-all w-8 h-8 rounded-md dark:text-white text-gray-800 hover:bg-white/10 active:bg-white/10 absolute top-1.5 right-1.5" type="button">
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
 						</button>
@@ -819,10 +817,10 @@
 						optionRename.addEventListener('click', function () {
 							const input = document.createElement('input');
 							input.type = 'text';
-							input.value = chat.historyName; 
+							input.value = chat.historyName ?? chat.name;
 							input.className = 'p-2 border-none bg-transparent outline-none'; 
 								
-							input.style.width = `${chat.historyName.length + 1}ch`;
+							input.style.width = chat.historyName ?  `${chat.historyName.length + 1}` : `${chat.name.length + 1}`;
 								
 							a.innerHTML = ''; 
 							a.appendChild(input); 
@@ -832,33 +830,41 @@
 								const newHistoryName = input.value;
 								chat.historyName = newHistoryName;
 								a.textContent = newHistoryName ;
-								try {
-									const historyId = chat.id;
-									const response = await fetch(`/histories/${historyId}`, {
-										method: 'PUT',
-										headers: {
-											'Content-Type': 'application/json',
-											'Authorization': token_jwt 
-										},
-										body: JSON.stringify({ historyName: newHistoryName, status: chat.status, userId: `${userData.userId}` }) 
-									});
-									if (!response.ok) {
-										throw new Error('Gagal memperbarui nama chat di server');
-									}
-									const data = await response.json();
-									const chatIndex = chats.indexOf(chat);
-									if (chatIndex > -1) {
-										chats.splice(chatIndex, 1);
-									}
+								if(chat.id){
+									try {
+										const historyId = chat.id;
+										const response = await fetch(`/histories/${historyId}`, {
+											method: 'PUT',
+											headers: {
+												'Content-Type': 'application/json',
+												'Authorization': token_jwt
+											},
+											body: JSON.stringify({ historyName: newHistoryName, status: chat.status, userId: `${userData.userId}` })
+										});
+										if (!response.ok) {
+											throw new Error('Gagal memperbarui nama chat di server');
+										}
 
-									chats.unshift(chat);
+										const data = await response.json();
+										const chatIndex = chats.indexOf(chat);
+										if (chatIndex > -1) {
+											chats.splice(chatIndex, 1);
+										}
 
-									renderChatList();
-								} catch (error) {
-									console.error("Error:", error);
+										chats.unshift(chat);
+
+										renderChatList();
+									} catch (error) {
+										console.error("Error:", error);
+										Swal.fire({
+											text: "Gagal memperbarui nama chat di server.",
+											icon: "error"
+										});
+									}
+								} else {
 									Swal.fire({
-										text: "Gagal memperbarui nama chat di server.",
-										icon: "error"
+										text: "Kirim pesan terlebih dahulu untuk memperbarui nama percakapan",
+										icon: "warning"
 									});
 								}
 								a.appendChild(ellipsisButton);
@@ -896,7 +902,7 @@
 											}
 										});
 
-										if (!response.ok) {
+										if (response && !response.ok && historyId) {
 											throw new Error('Gagal menghapus chat');
 										}
 
@@ -976,6 +982,7 @@
 					});
 					showMoreBtn.classList.add('hidden');
 					showLessBtn.classList.remove('hidden');
+					sidebar.scrollTop = sidebar.scrollHeight;
 				});
 
 				// Logika untuk tombol show less
@@ -1044,7 +1051,13 @@
 					await getAllHistory();
 					chats.push(newChat);
 					currentChatIndex = chats.length - 1;
+					isShowingMore = true;
 					renderChatList();
+					sidebar.scrollTop = sidebar.scrollHeight;
+
+					const chatIndex = currentChatIndex;
+					document.getElementById(`chat-list-${chatIndex}`).className = 'chat-item dark:bg-white/10 bg-black/10 block p-3 rounded-md cursor-pointer flex justify-between items-center';
+					await showHistoryMessage(chats, chatIndex);
 					// switchToChat(chats.length - 1); 
 					if (!userData) {
 						console.error("User not authenticated.");
@@ -1189,33 +1202,39 @@
 				}
 
 				async function showHistoryMessage(chat, chatIndex){
-					historyId = chat.id;
+					const historyId = chat.id;
 					currentChatIndex = chatIndex;
 					chatBox.innerHTML = '';
-					greetingSection.classList.add('hidden');
-					chatTopic.classList.add('hidden');
 					try{
-						const response = await fetch(`/chat-history/${historyId}`,{
-							method: 'GET',
-							headers: {
-								'Content-Type': 'application/json',
-								'Authorization': token_jwt
-							}
-						})
+						if(historyId){
+							greetingSection.classList.add('hidden');
+							chatTopic.classList.add('hidden');
+							const response = await fetch(`/chat-history/${historyId}`,{
+								method: 'GET',
+								headers: {
+									'Content-Type': 'application/json',
+									'Authorization': token_jwt
+								}
+							})
 
-						const data = await response.json();
-						data.forEach(el => {
-							if(el.chat){
-								showUserMessage(el.chat)
-							}
-							if(el.response){
-								showBotMessage(el.response)
-							}
-						})
+							const data = await response.json();
+							data.forEach(el => {
+								if(el.chat){
+									showUserMessage(el.chat)
+								}
+								if(el.response){
+									showBotMessage(el.response)
+								}
+							})
 
-						if (!response.ok) {
-							throw new Error('Gagal mengambil daftar chat');
+							if (!response.ok) {
+								throw new Error('Gagal mengambil daftar chat');
+							}
+						} else {
+							greetingSection.classList.remove('hidden');
+							chatTopic.classList.remove('hidden');
 						}
+
 					}catch (error) {
 						console.log(error);
 					}
