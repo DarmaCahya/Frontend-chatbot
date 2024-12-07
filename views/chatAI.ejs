@@ -13,6 +13,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<link id="sweetalert2-theme" rel="stylesheet">
 
 	<script>
 		tailwind.config = {
@@ -47,9 +48,21 @@
 				localStorage.theme = 'dark';
 			}
 			applyTheme();
+			setSweetAlertTheme();
 		}
 
 		document.addEventListener('DOMContentLoaded', initMode);
+
+		const setSweetAlertTheme = () => {
+			const isDark = localStorage.getItem("theme");
+			const themeLink = document.getElementById('sweetalert2-theme');
+
+			if (isDark === "dark") {
+				themeLink.href = "https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css";
+			} else {
+				themeLink.href = "";  // Tema default
+			}
+		};
 	</script>
 
 	<style>
@@ -860,13 +873,15 @@
 										console.error("Error:", error);
 										Swal.fire({
 											text: "Gagal memperbarui nama chat di server.",
-											icon: "error"
+											icon: "error",
+											confirmButtonColor: '#7066e0'
 										});
 									}
 								} else {
 									Swal.fire({
 										text: "Kirim pesan terlebih dahulu untuk memperbarui nama percakapan",
-										icon: "warning"
+										icon: "warning",
+										confirmButtonColor: '#7066e0'
 									});
 								}
 								a.appendChild(ellipsisButton);
@@ -912,7 +927,8 @@
 										currentChatIndex = null;
 										Swal.fire({
 											text: "Percakapan berhasil dihapus",
-											icon: "success"
+											icon: "success",
+											confirmButtonColor: '#7066e0'
 										});
 
 										renderChatList();
@@ -923,7 +939,8 @@
 									} catch (error) {
 										Swal.fire({
 											text: "Gagal menghapus chat dari server.",
-											icon: "error"
+											icon: "error",
+											confirmButtonColor: '#7066e0'
 										});
 										console.error("Error:", error);
 									}

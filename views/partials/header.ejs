@@ -9,11 +9,13 @@
     <script>
         function checkDark() {
 			const theme = localStorage.getItem('theme');
-
+            const themeLink = document.getElementById('sweetalert2-theme');
 			if (theme === 'dark') {
                 document.documentElement.classList.add('dark');
+                themeLink.href = "https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css";
 			} else {
                 document.documentElement.classList.remove('dark');
+                themeLink.href = "";
 			}
             applyTheme();
 		}
@@ -23,6 +25,7 @@
 			// Update localStorage with the user's preference
 			localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
             applyTheme();
+            setSweetAlertTheme();
 		}
 
 		// On page load, apply the saved theme from localStorage and sync the toggle
