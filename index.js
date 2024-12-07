@@ -5,7 +5,34 @@ const env = require('dotenv').config();
 require('dotenv-expand').expand(env);
 const jwt = require('jsonwebtoken');
 
+const i18n = require('i18next');
+const Backend = require('i18next-node-fs-backend');
+const middleware = require('i18next-http-middleware');
+
+i18n.use(Backend).use(middleware.LanguageDetector).init({
+    backend: {
+        loadPath: __dirname + '/locales/{{lng}}/{{ns}}.json'
+    },
+    detection: {
+        order: ['querystring', 'cookie', 'header'],
+        caches: ['localStorage'],
+        lookupQuerystring: 'lng',
+        lookupCookie: 'i18next',
+        lookupHeader: 'accept-language',
+        lookupSession: 'lng',
+        lookupPath: 'lng',
+        lookupFromPathIndex: 0,
+    },
+    saveMissing: true,
+    debug: true,
+    fallbackLng: 'id',
+    preload: ['en', 'id', 'zh', 'zh-HANT'],
+    });
+
 const app = express();
+app.use(
+    middleware.handle(i18n)
+);
 app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
@@ -15,7 +42,7 @@ app.set('view engine', 'ejs');
 let isAdmin = false;
 
 app.get('/index', (req, res) => {
-    res.render('index');
+    res.render('index', {t: i18n.t.bind(i18n.t)});
 });
 
 app.get('/opening', (req, res) => {
@@ -23,7 +50,7 @@ app.get('/opening', (req, res) => {
 });
 
 app.get('/chats', (req, res) => {
-    res.render('chatAI');
+    res.render('chatAI', {t: i18n.t.bind(i18n.t)});
 });
 
 app.get('/verify', (req, res) => {
@@ -295,7 +322,7 @@ app.post('/api/register', async (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login', {t: i18n.t.bind(i18n.t)});
 });
 app.post('/api/login', async (req, res) => {
     try {

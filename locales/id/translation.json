@@ -1,0 +1,47 @@
+{
+  "header" : {
+    "home": "Beranda",
+    "feature" : "Fitur",
+    "guide" : "Panduan"
+  },
+  "index" : {
+    "btn-try-now": "Coba Sekarang",
+    "feature-1-title": "Pembelajaran BIPA dengan Muatan Konten Budaya",
+    "feature-1-text": "Satria BIPA memberikan pembelajaran bahasa Indonesia dengan konteks budaya sebagai wawasan dan informasi tentang berbagai tradisi, adat istiadat, dan nilai-nilai budaya ndonesia.",
+    "feature-2-title": "Rekomendasi Materi Pembelajaran",
+    "feature-2-text": "Satria BIPA menyarankan materi pembelajaran bahasa Indonesia yang terkait dengan pertanyaan pengguna, penyesuaian tingkat kesulitan, dan kiat-kiat belajar bahasa Indonesia.",
+    "feature-3-title": "Percakapan Bahasa Indonesia",
+    "feature-3-text": "Latihan berbicara melalui teks berbentuk percakapan alami dalam Bahasa Indonesia untuk meningkatkan kepercayaan diri dan kelancaran berbicara dalam berbahasa Indonesia.",
+    "learn-more" : "Pelajari lebih lanjut",
+    "watch-video" : "Tonton video tutorial berikut untuk menggunakan Satria BIPA",
+    "start" : "Mulai"
+  },
+  "login" : {
+    "title" : "Masuk",
+    "email" : "Pos-el(Email)",
+    "password" : "Sandi",
+    "dont-have-account" : "Belum punya akun ? Daftar disini",
+    "forgot-password" : "Lupa sandi",
+    "fill-email-password" : "Pos-el dan sandi harus diisi.",
+    "still-logged-in" : "Anda sudah masuk, akan diarahkan ke halaman utama."
+  },
+  "chats" : {
+    "start-new-chat" : "Mulai Percakapan Baru",
+    "chat-history" : "Riwayat Percakapan",
+    "yesterday" : "Kemarin",
+    "show-more" : "Tampilkan lebih banyak",
+    "show-less" : "Tampilkan lebih sedikit",
+    "dashboard" : "Dasbor",
+    "help" : "Bantuan",
+    "settings" : "Pengaturan",
+    "logout" : "Keluar",
+    "greeting" : "Halo",
+    "greeting-question" : "Mau belajar apa hari ini?",
+    "question-1" : "Bagaimana cara bertanya tentang harga?",
+    "question-2" : "Cara bertanya tentang arah",
+    "question-3" : "Ayo, ngobrol!",
+    "question-4" : "Perbedaan kata 'kami' dengan 'kita'",
+    "rename" : "Ubah Nama",
+    "delete" : "Hapus"
+  }
+}

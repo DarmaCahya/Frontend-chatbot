@@ -1,0 +1,47 @@
+{
+  "header" : {
+    "home": "首頁",
+    "feature" : "特徵",
+    "guide" : "指導"
+  },
+  "index" : {
+    "btn-try-now": "開始使用",
+    "feature-1-title": "BIPA 學習以文化內容",
+    "feature-1-text": "Satria BIPA 為印尼語學習提供文化背景，作為印尼各種傳統、習俗和文化價值觀的見解和資訊。",
+    "feature-2-title": "推薦學習材料",
+    "feature-2-text": "Satria BIPA 推薦與使用者問題、難度調整和印尼語學習技巧相關的印尼語學習材料。",
+    "feature-3-title": "印尼語會話",
+    "feature-3-text": "透過印尼語地道會話文本進行口語練習，以提高印尼語口語的信心和流利程度。",
+    "learn-more" : "了解更多",
+    "watch-video" : "觀看以下有關使用 Satria BIPA 的影片教學",
+    "start" : "開始"
+  },
+  "login" : {
+    "title" : "登入",
+    "email" : "電子郵件",
+    "password" : "密碼",
+    "dont-have-account" : "還沒有帳號？在這裡註冊",
+    "forgot-password" : "忘記密碼",
+    "fill-email-password" : "电子邮件和密码必须填写。",
+    "still-logged-in" : "您已登入，將被重定向到主頁。"
+  },
+  "chats" : {
+    "start-new-chat" : "開始新聊天",
+    "chat-history" : "聊天記錄",
+    "yesterday" : "昨天",
+    "show-more" : "顯示更多",
+    "show-less" : "顯示更少",
+    "dashboard" : "儀表板",
+    "help" : "幫助",
+    "settings" : "設置",
+    "logout" : "登出",
+    "greeting" : "你好",
+    "greeting-question" : "今天你想學什麼？",
+    "question-1" : "如何詢問價格？",
+    "question-2" : "如何問路",
+    "question-3" : "讓我們聊天！",
+    "question-4" : "'我們'和'我們'的區別",
+    "rename" : "重新命名",
+    "delete" : "刪除"
+  }
+}

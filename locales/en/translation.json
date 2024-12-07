@@ -1,0 +1,48 @@
+{
+  "header" : {
+    "home": "Home",
+    "feature" : "Feature",
+    "guide" : "Guide"
+  },
+  "index" : {
+    "btn-try-now": "Get Started",
+    "feature-1-title": "BIPA Learning with Cultural Content",
+    "feature-1-text": "Satria BIPA provides Indonesian learning with a cultural context as insight and information about various Indonesian traditions, customs and cultural values.",
+    "feature-2-title": "Recommended Learning Subjects",
+    "feature-2-text": "Satria BIPA recommends Indonesian learning subjects related to user questions, difficulty level adjustments, and tips for learning Indonesian.",
+    "feature-3-title": "Indonesian Conversation",
+    "feature-3-text": "Practice speaking through text in the form of natural conversation in Indonesian to enhance self-confidence and fluency in speaking Indonesian.",
+    "learn-more" : "Learn More",
+    "watch-video" :  "Watch the following video tutorial to use Satria BIPA",
+    "start" : "Start"
+  },
+  "login" : {
+    "title" : "Login",
+    "email" : "Email",
+    "password" : "Password",
+    "dont-have-account" : "Don't have an account? Sign up here",
+    "forgot-password" : "Forgot password",
+    "fill-email-password" : "Email and password must be filled.",
+    "still-logged-in" : "You are logged in, you will be redirected to the main page."
+  },
+  "chats" : {
+    "start-new-chat" : "Start New Chat",
+    "chat-history" : "Chat History",
+    "yesterday" : "Yesterday",
+    "show-more" : "Show more",
+    "show-less" : "Show less",
+    "dashboard" : "Dashboard",
+    "help" : "Help",
+    "settings" : "Settings",
+    "logout" : "Logout",
+    "greeting" : "Hello",
+    "greeting-question" : "What do you want to learn today?",
+    "question-1" : "How to ask about prices?",
+    "question-2" : "How to ask for directions",
+    "question-3" : "Let's chat!",
+    "question-4" : "Difference between 'kami' and 'kita'",
+    "rename" : "Rename",
+    "delete" : "Delete"
+
+  }
+}
