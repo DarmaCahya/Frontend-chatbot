@@ -330,7 +330,7 @@
 							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
 						</svg>
 					</button>
-					<div id="dropdownNavbar" class="z-10 w-auto hidden bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
+					<div id="dropdownNavbar" class="z-10 w-auto border hidden bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
 						<div class="py-1">
 							<a href="#" class="block px-4 py-2 text-sm text-gray-700  dark:text-gray-200 "><%= i18n.t("chats.settings")%></a>
 						</div>
@@ -860,11 +860,11 @@
 						a.appendChild(ellipsisButton);
 
 						const dropdownMenu = document.createElement('div');
-						dropdownMenu.className = 'z-10 absolute border bg-gray-500 right-0 top-full mt-2 w-32 text-white shadow-lg rounded-lg p-2 hidden';
+						dropdownMenu.className = 'z-10 absolute border bg-white dark:bg-gray-700 right-0 top-full mt-2 w-32 text-gray-700 dark:text-gray-200 rounded-lg p-2 hidden';
 						dropdownMenu.id = `dropdown-${index}`;
 
 						const optionRename = document.createElement('div');
-						optionRename.className = 'p-2 hover:bg-gray-100 cursor-pointer';
+						optionRename.className = 'p-2 hover:bg-gray-200 dark:hover:bg-white/10 cursor-pointer rounded-md';
 						optionRename.textContent = '<%= i18n.t("chats.rename")%>';
 						optionRename.addEventListener('click', function () {
 							const input = document.createElement('input');
@@ -933,7 +933,7 @@
 						dropdownMenu.appendChild(optionRename);
 						
 						const optionDelete = document.createElement('div');
-						optionDelete.className = 'p-2 hover:bg-gray-100 cursor-pointer';
+						optionDelete.className = 'p-2 hover:bg-gray-200 dark:hover:bg-white/10 cursor-pointer rounded-md';
 						optionDelete.textContent = '<%= i18n.t("chats.delete")%>';
 						optionDelete.addEventListener('click', async function () {
 							Swal.fire({
