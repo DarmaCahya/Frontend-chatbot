@@ -434,30 +434,7 @@
 							class="text-3xl xl:mb-2 md:text-left text-center xl:text-6xl font-bold text-[#AE020B] dark:bg-clip-text dark:text-transparent pb-2 dark:bg-gradient-to-r from-yellow-500 via-yellow-200 to-yellow-500">
 							<%= i18n.t("chats.greeting")%></h1>
 					</div>
-					<p class="font-bold"><%= i18n.t("chats.greeting-question")%></p>
-					<div class="grid grid-cols-2 gap-4 my-3 chat-recom lg:grid-cols-4">
-						<a href="#" data-message="Bagaimana cara bertanya tentang harga?"
-						   class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
-<!--							<p class="text-sm font-normal">Bagaimana <span class="font-bold">cara bertanya tentang harga? </span></p>-->
-							<p class="text-sm font-normal"><%= i18n.t("chats.question-1")%></p>
-						</a>
-						<a href="#" data-message="Cara bertanya tentang arah"
-						   class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
-<!--							<p class="text-sm font-normal">Cara <span class="font-bold">bertanya tentang-->
-<!--									arah</span></p>-->
-							<p class="text-sm font-normal"><%= i18n.t("chats.question-2")%></p>
-						</a>
-						<a href="#" data-message="Ayo, ngobrol!"
-						   class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
-<!--							<p class="text-sm font-normal"><span class="font-normal">Ayo, <span class="font-bold italic">ngobrol!</span></span></p>-->
-							<p class="text-sm font-normal"><%= i18n.t("chats.question-3")%></p>
-						</a>
-						<a href="#" data-message="Perbedaan kata kami dengan kita"
-						   class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
-<!--							<p class="text-sm font-normal"><span class="font-normal">Perbedaan kata <span class="font-bold">kami</span> dengan <span class="font-bold">kita</span> </span></p>-->
-							<p class="text-sm font-normal"><%= i18n.t("chats.question-4")%></p>
-						</a>
-					</div>
+					<p class="font-bold text-lg xl:text-xl"><%= i18n.t("chats.greeting-question")%></p>
 				</div>
 
 				<!-- Area Chat -->
@@ -741,7 +718,6 @@
 				const chatBox = document.getElementById("chat-box");
 				const greetingSection = document.querySelector(".greeting-section");
 				const chatList = document.getElementById("chat-list");
-				const chatRecomSection = document.querySelector(".chat-recom");
 				const showMoreBtn = document.getElementById("show-more-btn");
 				const showLessBtn = document.getElementById("show-less-btn");
 				const alertPopup = document.getElementById("alert-popup");
@@ -1295,14 +1271,6 @@
 						console.log(error);
 					}
 				}
-
-				chatRecomSection.addEventListener('click', function (e) {
-					const chatItem = e.target.closest('.chat-recom-item');
-					if (chatItem) {
-						const messageText = chatItem.getAttribute('data-message');
-						sendMessage(messageText);
-					}
-				});
 
 				// Event listener untuk tombol New Chat dan kirim pesan
 				newChatBtn.addEventListener('click', function () {
