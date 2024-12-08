@@ -36,6 +36,7 @@
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "i18next": "^24.0.5",
+    "i18next-browser-languagedetector": "^8.0.1",
     "i18next-express-middleware": "^2.0.0",
     "i18next-http-middleware": "^3.7.0",
     "i18next-node-fs-backend": "^2.1.3",

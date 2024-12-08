@@ -42,7 +42,81 @@
     "question-3" : "Let's chat!",
     "question-4" : "Difference between 'kami' and 'kita'",
     "rename" : "Rename",
-    "delete" : "Delete"
-
+    "delete" : "Delete",
+    "language" : "Language",
+    "ask-anything" : "Ask anything ...",
+    "datatopic-1": {
+      "title": "Greetings and Introductions",
+      "subtopic": {
+        "text-1": "how to ask about someone's origin",
+        "text-2": "how to ask for permission in a formal situation",
+        "text-3": "how to introduce yourself in formal and informal situations",
+        "text-4": "how to start a light conversation in Indonesian"
+      }
+    },
+    "datatopic-2": {
+      "title": "Daily Activities",
+      "subtopic": {
+        "text-1": "how to mention numbers",
+        "text-2": "how to ask and mention time",
+        "text-3": "how to ask about directions and locations",
+        "text-4": "how to ask and bargain about prices in the market"
+      }
+    },
+    "datatopic-3": {
+      "title": "Family and Friends",
+      "subtopic": {
+        "text-1": "how to introduce family members",
+        "text-2": "how to ask about someone's hobbies",
+        "text-3": "how to say happy birthday",
+        "text-4": "how to give compliments"
+      }
+    },
+    "datatopic-4": {
+      "title": "Shopping and Food",
+      "subtopic": {
+        "text-1": "how to order food",
+        "text-2": "important vocabulary for ordering food in a restaurant",
+        "text-3": "how to politely refuse food offers",
+        "text-4": "how to ask about food ingredients or taste"
+      }
+    },
+    "datatopic-5": {
+      "title": "Health",
+      "subtopic": {
+        "text-1": "how to ask for medicine",
+        "text-2": "how to explain symptoms",
+        "text-3": "how to make an appointment with a doctor",
+        "text-4": "how to ask about someone's health condition"
+      }
+    },
+    "datatopic-6": {
+      "title": "Travel and Transportation",
+      "subtopic": {
+        "text-1": "how to find accommodation",
+        "text-2": "how to book a flight or train ticket",
+        "text-3": "how to ask about departure times",
+        "text-4": "important vocabulary for talking about public transportation"
+      }
+    },
+    "datatopic-7": {
+      "title": "Emergency Situations",
+      "subtopic": {
+        "text-1": "how to report lost items",
+        "text-2": "how to ask for help in an emergency",
+        "text-3": "important phone numbers to know in an emergency",
+        "text-4": "how to explain emergency health conditions"
+      }
+    },
+    "datatopic-8": {
+      "title": "Education",
+      "subtopic": {
+        "text-1": "how to ask for permission to miss class",
+        "text-2": "how to participate in class discussions",
+        "text-3": "how to ask about class or school schedules",
+        "text-4": "how to explain lesson or course schedules in Indonesian"
+      }
+    },
+    "other" : "Other"
   }
 }

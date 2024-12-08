@@ -56,7 +56,8 @@
         function changeLanguage(){
             const lang = document.getElementById('language-select').value ?? 'id';
             localStorage.setItem('language', lang);
-            window.location.href = window.location.origin + window.location.pathname + '?lng=' + lang;
+            document.cookie = `i18next=${lang}`;
+            window.location.href = window.location.origin + window.location.pathname;
             applyLanguage();
 
             /*

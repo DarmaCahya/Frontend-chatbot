@@ -297,15 +297,14 @@
 						<p class="ml-3 [&_.minimized_&_.flex]:hidden"><%= i18n.t("chats.help")%></p>
 					</a>
 
-					<a href="#" class="flex items-center p-3 rounded-md hover:bg-white/10 icon">
-						<!-- Icon Pengaturan dan Teks -->
+					<button data-dropdown-toggle="dropdownNavbar" id="dropdownNavbarLink" class="flex items-center p-3 rounded-md hover:bg-white/10 icon">
 						<svg width="24" height="24" class="text-gray-800 fill-current dark:text-white"
-							viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							 viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g clip-path="url(#clip0_401_332)">
 								<path fill-rule="evenodd" clip-rule="evenodd"
-									d="M9.16977 14.83C9.92977 15.58 10.9298 16 11.9998 16C13.0698 16 14.0798 15.59 14.8298 14.83C15.5798 14.07 15.9998 13.07 15.9998 12C15.9998 10.93 15.5898 9.93 14.8298 9.17C14.0698 8.42 13.0698 8 11.9998 8C10.9298 8 9.92977 8.42 9.16977 9.17C8.41977 9.93 7.99977 10.93 7.99977 12C7.99977 13.07 8.40977 14.08 9.16977 14.83ZM10.5898 10.59C10.9598 10.21 11.4698 10 11.9998 10H12.0098C12.5298 10 13.0398 10.22 13.4198 10.59C13.7998 10.96 14.0098 11.48 14.0098 12C14.0098 12.52 13.7898 13.04 13.4198 13.41C12.6698 14.15 11.3398 14.15 10.5898 13.41C10.2098 13.04 9.99977 12.53 9.99977 12C9.99977 11.47 10.2198 10.97 10.5898 10.59Z" />
+									  d="M9.16977 14.83C9.92977 15.58 10.9298 16 11.9998 16C13.0698 16 14.0798 15.59 14.8298 14.83C15.5798 14.07 15.9998 13.07 15.9998 12C15.9998 10.93 15.5898 9.93 14.8298 9.17C14.0698 8.42 13.0698 8 11.9998 8C10.9298 8 9.92977 8.42 9.16977 9.17C8.41977 9.93 7.99977 10.93 7.99977 12C7.99977 13.07 8.40977 14.08 9.16977 14.83ZM10.5898 10.59C10.9598 10.21 11.4698 10 11.9998 10H12.0098C12.5298 10 13.0398 10.22 13.4198 10.59C13.7998 10.96 14.0098 11.48 14.0098 12C14.0098 12.52 13.7898 13.04 13.4198 13.41C12.6698 14.15 11.3398 14.15 10.5898 13.41C10.2098 13.04 9.99977 12.53 9.99977 12C9.99977 11.47 10.2198 10.97 10.5898 10.59Z" />
 								<path fill-rule="evenodd" clip-rule="evenodd"
-									d="M9.34976 19.92C9.65977 21.16 10.7198 22 11.9998 22L12.0098 21.98C13.2898 21.98 14.3598 21.14 14.6598 19.9C14.6798 19.79 14.7398 19.69 14.8098 19.6C14.8798 19.51 14.9798 19.44 15.0798 19.4C15.1798 19.35 15.2998 19.34 15.4098 19.35C15.5198 19.35 15.6298 19.39 15.7298 19.45C16.8198 20.12 18.1598 19.95 19.0698 19.05C19.9798 18.15 20.1398 16.8 19.4698 15.71C19.4098 15.62 19.3698 15.51 19.3698 15.39C19.3598 15.28 19.3798 15.16 19.4198 15.06C19.4698 14.96 19.5398 14.86 19.6198 14.79C19.7098 14.72 19.8098 14.67 19.9198 14.64C21.1598 14.33 21.9998 13.27 21.9998 11.99C21.9998 10.71 21.1698 9.64 19.9198 9.34C19.8098 9.32 19.6998 9.26 19.6198 9.19C19.5298 9.12 19.4598 9.02 19.4198 8.92C19.3698 8.82 19.3698 8.7 19.3698 8.59C19.3698 8.48 19.4098 8.37 19.4698 8.27C20.1398 7.18 19.9798 5.84 19.0698 4.93C18.1698 4.02 16.8198 3.86 15.7298 4.53C15.6298 4.59 15.5198 4.63 15.4098 4.63C15.2998 4.64 15.1898 4.62 15.0798 4.58C14.9798 4.54 14.8898 4.47 14.8098 4.38C14.7398 4.29 14.6898 4.19 14.6598 4.08C14.3498 2.84 13.2898 2 12.0098 2C10.7298 2 9.65977 2.84 9.35977 4.08C9.29977 4.31 9.13976 4.49 8.92976 4.58C8.71976 4.67 8.47976 4.65 8.27977 4.53C7.18977 3.86 5.84977 4.02 4.93977 4.93C4.02977 5.84 3.86977 7.18 4.53977 8.28C4.59977 8.38 4.63977 8.49 4.63977 8.6C4.64977 8.71 4.62977 8.83 4.58977 8.93C4.53977 9.03 4.47977 9.13 4.38977 9.2C4.29977 9.27 4.19977 9.32 4.08977 9.35C2.84977 9.65 2.00977 10.72 2.00977 12C2.00977 13.28 2.84977 14.35 4.08977 14.65C4.19977 14.68 4.29977 14.73 4.38977 14.81C4.47977 14.88 4.54977 14.97 4.58977 15.08C4.63977 15.18 4.63977 15.3 4.63977 15.41C4.62977 15.52 4.59977 15.63 4.53977 15.73C3.86977 16.82 4.02977 18.16 4.93977 19.07C5.83977 19.97 7.17977 20.14 8.27977 19.47C8.36977 19.41 8.48977 19.37 8.59976 19.37C8.70977 19.35 8.81977 19.38 8.92976 19.42C9.02977 19.46 9.12976 19.53 9.19977 19.62C9.26976 19.71 9.31977 19.81 9.34976 19.92ZM9.68976 17.57C9.35977 17.43 8.99977 17.36 8.64977 17.36V17.38H8.43976C8.00977 17.41 7.58977 17.55 7.22977 17.77C6.77977 18.04 6.43977 17.75 6.33977 17.66C6.23977 17.57 5.94977 17.22 6.22977 16.77C6.44977 16.4 6.58977 15.98 6.61977 15.56C6.64977 15.14 6.57977 14.7 6.41977 14.31C6.25977 13.91 5.99977 13.56 5.67977 13.28C5.35977 13 4.96977 12.8 4.54977 12.7C4.03977 12.58 3.99977 12.13 3.99977 12C3.99977 11.87 4.03977 11.42 4.54977 11.3C4.96977 11.2 5.35977 11 5.67977 10.72C6.00977 10.44 6.26977 10.09 6.42977 9.69C6.58977 9.3 6.65977 8.86 6.62977 8.44C6.59977 8.01 6.45976 7.59 6.23977 7.23C5.96977 6.78 6.25977 6.44 6.34977 6.34C6.43977 6.24 6.78977 5.95 7.23977 6.23C7.98977 6.69 8.88976 6.76 9.69977 6.42C10.5098 6.09 11.0898 5.4 11.2998 4.55C11.4198 4.04 11.8698 4 11.9998 4C12.1298 4 12.5798 4.04 12.6998 4.55C12.8098 4.97 13.0098 5.36 13.2798 5.68C13.5598 6.01 13.9198 6.27 14.3098 6.43C14.6998 6.59 15.1398 6.67 15.5598 6.63C15.9898 6.6 16.4098 6.46 16.7698 6.24C17.2198 5.97 17.5698 6.26 17.6598 6.35C17.7598 6.45 18.0398 6.79 17.7698 7.24C17.5498 7.6 17.4098 8.02 17.3798 8.45C17.3498 8.87 17.4198 9.3 17.5798 9.7C17.7398 10.09 17.9998 10.44 18.3198 10.72C18.6498 11 19.0398 11.2 19.4498 11.3C19.9598 11.42 19.9998 11.87 19.9998 12C19.9998 12.13 19.9598 12.58 19.4498 12.7C19.0398 12.8 18.6498 13 18.3198 13.28C17.9898 13.56 17.7398 13.91 17.5698 14.31C17.4098 14.71 17.3398 15.14 17.3698 15.56C17.3998 15.99 17.5398 16.4 17.7598 16.77C18.0298 17.22 17.7398 17.57 17.6498 17.66C17.5498 17.76 17.2098 18.04 16.7598 17.77C16.3998 17.55 15.9798 17.41 15.5498 17.38C15.1298 17.35 14.6998 17.42 14.2998 17.58C13.9098 17.74 13.5598 18 13.2798 18.32C12.9998 18.64 12.7998 19.03 12.6998 19.45C12.5798 19.96 12.1298 20 11.9998 20C11.8698 20 11.4198 19.96 11.2998 19.45C11.1998 19.04 10.9998 18.65 10.7198 18.32C10.4398 17.99 10.0798 17.73 9.68976 17.57Z" />
+									  d="M9.34976 19.92C9.65977 21.16 10.7198 22 11.9998 22L12.0098 21.98C13.2898 21.98 14.3598 21.14 14.6598 19.9C14.6798 19.79 14.7398 19.69 14.8098 19.6C14.8798 19.51 14.9798 19.44 15.0798 19.4C15.1798 19.35 15.2998 19.34 15.4098 19.35C15.5198 19.35 15.6298 19.39 15.7298 19.45C16.8198 20.12 18.1598 19.95 19.0698 19.05C19.9798 18.15 20.1398 16.8 19.4698 15.71C19.4098 15.62 19.3698 15.51 19.3698 15.39C19.3598 15.28 19.3798 15.16 19.4198 15.06C19.4698 14.96 19.5398 14.86 19.6198 14.79C19.7098 14.72 19.8098 14.67 19.9198 14.64C21.1598 14.33 21.9998 13.27 21.9998 11.99C21.9998 10.71 21.1698 9.64 19.9198 9.34C19.8098 9.32 19.6998 9.26 19.6198 9.19C19.5298 9.12 19.4598 9.02 19.4198 8.92C19.3698 8.82 19.3698 8.7 19.3698 8.59C19.3698 8.48 19.4098 8.37 19.4698 8.27C20.1398 7.18 19.9798 5.84 19.0698 4.93C18.1698 4.02 16.8198 3.86 15.7298 4.53C15.6298 4.59 15.5198 4.63 15.4098 4.63C15.2998 4.64 15.1898 4.62 15.0798 4.58C14.9798 4.54 14.8898 4.47 14.8098 4.38C14.7398 4.29 14.6898 4.19 14.6598 4.08C14.3498 2.84 13.2898 2 12.0098 2C10.7298 2 9.65977 2.84 9.35977 4.08C9.29977 4.31 9.13976 4.49 8.92976 4.58C8.71976 4.67 8.47976 4.65 8.27977 4.53C7.18977 3.86 5.84977 4.02 4.93977 4.93C4.02977 5.84 3.86977 7.18 4.53977 8.28C4.59977 8.38 4.63977 8.49 4.63977 8.6C4.64977 8.71 4.62977 8.83 4.58977 8.93C4.53977 9.03 4.47977 9.13 4.38977 9.2C4.29977 9.27 4.19977 9.32 4.08977 9.35C2.84977 9.65 2.00977 10.72 2.00977 12C2.00977 13.28 2.84977 14.35 4.08977 14.65C4.19977 14.68 4.29977 14.73 4.38977 14.81C4.47977 14.88 4.54977 14.97 4.58977 15.08C4.63977 15.18 4.63977 15.3 4.63977 15.41C4.62977 15.52 4.59977 15.63 4.53977 15.73C3.86977 16.82 4.02977 18.16 4.93977 19.07C5.83977 19.97 7.17977 20.14 8.27977 19.47C8.36977 19.41 8.48977 19.37 8.59976 19.37C8.70977 19.35 8.81977 19.38 8.92976 19.42C9.02977 19.46 9.12976 19.53 9.19977 19.62C9.26976 19.71 9.31977 19.81 9.34976 19.92ZM9.68976 17.57C9.35977 17.43 8.99977 17.36 8.64977 17.36V17.38H8.43976C8.00977 17.41 7.58977 17.55 7.22977 17.77C6.77977 18.04 6.43977 17.75 6.33977 17.66C6.23977 17.57 5.94977 17.22 6.22977 16.77C6.44977 16.4 6.58977 15.98 6.61977 15.56C6.64977 15.14 6.57977 14.7 6.41977 14.31C6.25977 13.91 5.99977 13.56 5.67977 13.28C5.35977 13 4.96977 12.8 4.54977 12.7C4.03977 12.58 3.99977 12.13 3.99977 12C3.99977 11.87 4.03977 11.42 4.54977 11.3C4.96977 11.2 5.35977 11 5.67977 10.72C6.00977 10.44 6.26977 10.09 6.42977 9.69C6.58977 9.3 6.65977 8.86 6.62977 8.44C6.59977 8.01 6.45976 7.59 6.23977 7.23C5.96977 6.78 6.25977 6.44 6.34977 6.34C6.43977 6.24 6.78977 5.95 7.23977 6.23C7.98977 6.69 8.88976 6.76 9.69977 6.42C10.5098 6.09 11.0898 5.4 11.2998 4.55C11.4198 4.04 11.8698 4 11.9998 4C12.1298 4 12.5798 4.04 12.6998 4.55C12.8098 4.97 13.0098 5.36 13.2798 5.68C13.5598 6.01 13.9198 6.27 14.3098 6.43C14.6998 6.59 15.1398 6.67 15.5598 6.63C15.9898 6.6 16.4098 6.46 16.7698 6.24C17.2198 5.97 17.5698 6.26 17.6598 6.35C17.7598 6.45 18.0398 6.79 17.7698 7.24C17.5498 7.6 17.4098 8.02 17.3798 8.45C17.3498 8.87 17.4198 9.3 17.5798 9.7C17.7398 10.09 17.9998 10.44 18.3198 10.72C18.6498 11 19.0398 11.2 19.4498 11.3C19.9598 11.42 19.9998 11.87 19.9998 12C19.9998 12.13 19.9598 12.58 19.4498 12.7C19.0398 12.8 18.6498 13 18.3198 13.28C17.9898 13.56 17.7398 13.91 17.5698 14.31C17.4098 14.71 17.3398 15.14 17.3698 15.56C17.3998 15.99 17.5398 16.4 17.7598 16.77C18.0298 17.22 17.7398 17.57 17.6498 17.66C17.5498 17.76 17.2098 18.04 16.7598 17.77C16.3998 17.55 15.9798 17.41 15.5498 17.38C15.1298 17.35 14.6998 17.42 14.2998 17.58C13.9098 17.74 13.5598 18 13.2798 18.32C12.9998 18.64 12.7998 19.03 12.6998 19.45C12.5798 19.96 12.1298 20 11.9998 20C11.8698 20 11.4198 19.96 11.2998 19.45C11.1998 19.04 10.9998 18.65 10.7198 18.32C10.4398 17.99 10.0798 17.73 9.68976 17.57Z" />
 							</g>
 							<defs>
 								<clipPath id="clip0_401_332">
@@ -313,8 +312,28 @@
 								</clipPath>
 							</defs>
 						</svg>
-						<p class="ml-3"><%= i18n.t("chats.settings")%></p>
-					</a>
+						<p class="ml-3 [&_.minimized_&_.flex]:hidden"><%= i18n.t("chats.settings")%></p>
+						<svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+						</svg>
+					</button>
+					<div id="dropdownNavbar" class="z-10 w-auto hidden bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
+						<div class="py-1">
+							<a href="#" class="block px-4 py-2 text-sm text-gray-700  dark:text-gray-200 "><%= i18n.t("chats.settings")%></a>
+						</div>
+						<ul class="px-4 py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+							<li class="relative">
+								<label for="language-select-chats"><%= i18n.t("chats.language")%></label>
+								<select id="language-select-chats" onchange="changeLanguage()" class="my-2 w-full bg-transparent placeholder:text-slate-400 text-slate-700 dark:text-white text-sm border border-slate-200 rounded pl-3 pr-8 py-3 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer">
+									<option class="dark:bg-gray-800" value="id">Indonesia</option>
+									<option class="dark:bg-gray-800" value="en">English</option>
+									<option class="dark:bg-gray-800" value="zh-HANT">中文 (Traditional)</option>
+									<option class="dark:bg-gray-800" value="zh">中文 (Simplified)</option>
+								</select>
+							</li>
+						</ul>
+					</div>
+
 					<a onclick="toggleMode()" class="flex items-center p-3 rounded-md hover:bg-white/10 hover:cursor-pointer icon">
 						<!-- Toggle Dark Mode -->
 						<div class="flex items-center">
@@ -438,7 +457,7 @@
 				<!-- Input Chat -->
 				<div class="bg-gray-100 input-area dark:bg-gray-700">
 					<div class="relative flex items-center w-full">
-						<input id="message-input" placeholder="Tanya apa saja dalam bahasa Indonesia...." type="text"
+						<input id="message-input" placeholder="<%= i18n.t("chats.ask-anything")%>" type="text"
 							class="flex-1 px-4 py-3 pr-10 text-sm bg-gray-200 border border-gray-800 rounded-2xl dark:bg-gray-800 dark:border-gray-100" />
 						<button id="send-btn" class="absolute transform -translate-y-1/2 right-5 top-1/2">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -456,7 +475,7 @@
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-3">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
 							</svg>
-							Lainnya
+							<%= i18n.t("chats.other")%>
 						</button>
 					</div>
 
@@ -535,6 +554,24 @@
 			}
 			const userData = getUserDataFromToken();
 
+			function applyLanguage(){
+				let lang = localStorage.getItem('language');
+				if(!lang){
+					localStorage.setItem('language', 'id');
+					lang = localStorage.getItem('language');
+				}
+				document.getElementById('language-select-chats').value = lang;
+				//document.getElementsByTagName('body')[0].setAttribute('lang', lang);
+			}
+
+			function changeLanguage(){
+				const lang = document.getElementById('language-select-chats').value ?? 'id';
+				localStorage.setItem('language', lang);
+				document.cookie = `i18next=${lang}`;
+				window.location.href = window.location.origin + window.location.pathname;
+				applyLanguage();
+			}
+
 			async function getAllHistory() {
 				try{
 					const response = await fetch(`/history-lists/${userData.userId}`,{
@@ -588,37 +625,37 @@
 				{
 					num: 1,
 					icon: `<p class="mr-2 mb-2" style="font-size: 25px;">🙏</p>`,
-					topic: 'Salam dan Perkenalan',
+					topic: `<%= i18n.t("chats.datatopic-1.title")%>`,
 					subtopic :
 							[
-							{text: 'bagaimana cara bertanya tentang asal seseorang'},
-							{text: 'bagaimana cara meminta izin dalam situasi formal'},
-							{text: 'bagaimana cara berkenalan dalam situasi formal dan informal'},
-							{text: 'bagaimana cara memulai percakapan ringan dalam bahasa Indonesia'}
+							{text: `<%= i18n.t("chats.datatopic-1.subtopic.text-1")%>`},
+							{text: `<%= i18n.t("chats.datatopic-1.subtopic.text-2")%>`},
+							{text: `<%= i18n.t("chats.datatopic-1.subtopic.text-3")%>`},
+							{text: `<%= i18n.t("chats.datatopic-1.subtopic.text-4")%>`},
 							]
 				},
 				{
 					num: 2,
 					icon: `<p class="mr-2 mb-2" style="font-size: 25px;">🏠</p>`,
-					topic: 'Aktivitas Sehari-hari',
+					topic: `<%= i18n.t("chats.datatopic-2.title")%>`,
 					subtopic :
 							[
-								{text: 'bagaimana cara menyebutkan angka'},
-								{text: 'bagaimana cara bertanya dan menyebutkan waktu'},
-								{text: 'bagaimana cara bertanya tentang arah dan lokasi'},
-								{text: 'bagaimana cara bertanya dan menawar tentang harga di pasar'}
+								{text: `<%= i18n.t("chats.datatopic-2.subtopic.text-1")%>`},
+								{text: `<%= i18n.t("chats.datatopic-2.subtopic.text-2")%>`},
+								{text: `<%= i18n.t("chats.datatopic-2.subtopic.text-3")%>`},
+								{text: `<%= i18n.t("chats.datatopic-2.subtopic.text-4")%>`},
 							]
 				},
 				{
 					num: 3,
 					icon: `<p class="mr-2 mb-2" style="font-size: 25px;">👨‍👩‍👧‍👦</p>`,
-					topic: 'Keluarga dan Teman',
+					topic: `<%= i18n.t("chats.datatopic-3.title")%>`,
 					subtopic :
 							[
-								{text: 'bagaimana cara memperkenalkan anggota keluarga'},
-								{text: 'bagaimana cara bertanya tentang hobi seseorang'},
-								{text: 'bagaimana cara mengucapkan selamat ulang tahun'},
-								{text: 'bagaimana cara memberikan pujian'}
+								{text: `<%= i18n.t("chats.datatopic-3.subtopic.text-1")%>`},
+								{text: `<%= i18n.t("chats.datatopic-3.subtopic.text-2")%>`},
+								{text: `<%= i18n.t("chats.datatopic-3.subtopic.text-3")%>`},
+								{text: `<%= i18n.t("chats.datatopic-3.subtopic.text-4")%>`},
 							]
 				},
 			];
@@ -626,61 +663,61 @@
 			const dataTopicOther = [{
 				num: 4,
 				icon: `<p class="mr-2 mb-2" style="font-size: 25px;">🛒</p>`,
-				topic: 'Berbelanja dan Makanan',
+				topic: `<%= i18n.t("chats.datatopic-4.title")%>`,
 				subtopic :
 						[
-							{text: 'bagaimana cara memesan makanan'},
-							{text: 'kosakata penting untuk memesan makanan di restoran'},
-							{text: 'bagaimana cara menolak tawaran makanan dengan sopan'},
-							{text: 'bagaimana cara bertanya tentang bahan makanan atau rasa'}
+							{text: `<%= i18n.t("chats.datatopic-4.subtopic.text-1")%>`},
+							{text: `<%= i18n.t("chats.datatopic-4.subtopic.text-2")%>`},
+							{text: `<%= i18n.t("chats.datatopic-4.subtopic.text-3")%>`},
+							{text: `<%= i18n.t("chats.datatopic-4.subtopic.text-4")%>`},
 						]
 			},
 				{
 					num: 5,
 					icon: `<p class="mr-2 mb-2" style="font-size:25px;">🏥</p>`,
-					topic: 'Kesehatan',
+					topic: `<%= i18n.t("chats.datatopic-5.title")%>`,
 					subtopic :
 							[
-								{text: 'bagaimana cara meminta obat'},
-								{text: 'bagaimana cara menjelaskan gejala sakit'},
-								{text: 'bagaimana cara membuat janji temu dengan dokter'},
-								{text: 'bagaimana cara bertanya tentang kondisi kesehatan seseorang'}
+								{text: `<%= i18n.t("chats.datatopic-5.subtopic.text-1")%>`},
+								{text: `<%= i18n.t("chats.datatopic-5.subtopic.text-2")%>`},
+								{text: `<%= i18n.t("chats.datatopic-5.subtopic.text-3")%>`},
+								{text: `<%= i18n.t("chats.datatopic-5.subtopic.text-4")%>`},
 							]
 				},
 				{
 					num: 6,
 					icon: `<p class="mr-2 mb-2" style="font-size: 25px;">🚗</p>`,
-					topic: 'Perjalanan dan Transportasi',
+					topic: `<%= i18n.t("chats.datatopic-6.title")%>`,
 					subtopic :
 							[
-								{text: 'bagaimana cara mencari akomodasi'},
-								{text: 'bagaimana cara memesan tiket pesawat atau kereta'},
-								{text: 'bagaimana cara bertanya tentang waktu keberangkatan'},
-								{text: 'kosakata penting untuk berbicara tentang transportasi umum'}
+								{text: `<%= i18n.t("chats.datatopic-6.subtopic.text-1")%>`},
+								{text: `<%= i18n.t("chats.datatopic-6.subtopic.text-2")%>`},
+								{text: `<%= i18n.t("chats.datatopic-6.subtopic.text-3")%>`},
+								{text: `<%= i18n.t("chats.datatopic-6.subtopic.text-4")%>`},
 							]
 				},
 				{
 					num: 7,
 					icon: `<p class="mr-2 mb-2" style="font-size: 25px;">⚠️</p>`,
-					topic: 'Situasi Darurat',
+					topic: `<%= i18n.t("chats.datatopic-7.title")%>`,
 					subtopic :
 							[
-								{text: 'bagaimana cara melaporkan kehilangan barang'},
-								{text: 'bagaimana cara meminta pertolongan dalam keadaan darurat'},
-								{text: 'nomor telepon penting yang harus diketahui dalam keadaan darurat'},
-								{text: 'bagaimana cara menjelaskan kondisi kesehatan darurat'}
+								{text: `<%= i18n.t("chats.datatopic-7.subtopic.text-1")%>`},
+								{text: `<%= i18n.t("chats.datatopic-7.subtopic.text-2")%>`},
+								{text: `<%= i18n.t("chats.datatopic-7.subtopic.text-3")%>`},
+								{text: `<%= i18n.t("chats.datatopic-7.subtopic.text-4")%>`},
 							]
 				},
 				{
 					num: 8,
 					icon: `<p class="mr-2 mb-2" style="font-size: 25px;">🎓</p>`,
-					topic: 'Pendidikan',
+					topic: `<%= i18n.t("chats.datatopic-8.title")%>`,
 					subtopic :
 							[
-								{text: 'bagaimana cara meminta izin tidak masuk kelas'},
-								{text: 'bagaimana cara berpartisipasi dalam diskusi di kelas'},
-								{text: 'bagaimana cara bertanya tentang jadwal kuliah atau sekolah'},
-								{text: 'bagaimana cara menjelaskan jadwal pelajaran atau mata kuliah dalam bahasa Indonesia'}
+								{text: `<%= i18n.t("chats.datatopic-8.subtopic.text-1")%>`},
+								{text: `<%= i18n.t("chats.datatopic-8.subtopic.text-2")%>`},
+								{text: `<%= i18n.t("chats.datatopic-8.subtopic.text-3")%>`},
+								{text: `<%= i18n.t("chats.datatopic-8.subtopic.text-4")%>`},
 							]
 				},]
 
@@ -729,7 +766,7 @@
 						</button>
 						</nav>`
 						item.subtopic.forEach((itemSubTopic, index) => {
-							document.getElementById(`chat-subtopic-${item.num}`).innerHTML += `<div role="button" class="chat-subtopic-item text-slate-800 dark:text-gray-200 flex w-full items-center rounded-md p-3 transition-all duration-300 hover:bg-slate-100 dark:hover:bg-slate-600 focus:bg-slate-100 dark:focus:bg-slate-600 active:bg-slate-100 dark:active:bg-slate-600">${itemSubTopic.text}</div>`;
+							document.getElementById(`chat-subtopic-${item.num}`).innerHTML += `<div role="button" class="chat-subtopic-item text-slate-800 dark:text-gray-200 flex w-full items-center rounded-md p-3 transition-all duration-300 hover:bg-slate-200 dark:hover:bg-slate-600 focus:bg-slate-200 dark:focus:bg-slate-600 active:bg-slate-200 dark:active:bg-slate-600">${itemSubTopic.text}</div>`;
 						})
 					});
 					runAfter(dataTopic);
@@ -1266,6 +1303,7 @@
 				// Inisialisasi dengan chat pertama
 				renderChatList();
 				onLoadDashboard(userData);
+				applyLanguage();
 
 				dashboardBtn.addEventListener('click', function(evt){
 					evt.preventDefault();

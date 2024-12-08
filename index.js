@@ -8,20 +8,27 @@ const jwt = require('jsonwebtoken');
 const i18n = require('i18next');
 const Backend = require('i18next-node-fs-backend');
 const middleware = require('i18next-http-middleware');
+const LanguageDetector = require('i18next-browser-languagedetector');
 
 i18n.use(Backend).use(middleware.LanguageDetector).init({
     backend: {
         loadPath: __dirname + '/locales/{{lng}}/{{ns}}.json'
     },
     detection: {
-        order: ['querystring', 'cookie', 'header'],
-        caches: ['localStorage'],
+        order: ['cookie','localStorage','querystring', 'header'],
+
         lookupQuerystring: 'lng',
         lookupCookie: 'i18next',
         lookupHeader: 'accept-language',
+        lookupLocalStorage: 'i18nextLng',
+        lookupSessionStorage: 'i18nextLng',
         lookupSession: 'lng',
         lookupPath: 'lng',
         lookupFromPathIndex: 0,
+        lookupFromSubdomainIndex: 0,
+
+        caches: ['localStorage', 'cookie'],
+        excludeCacheFor: ['cimode'],
     },
     saveMissing: true,
     debug: true,

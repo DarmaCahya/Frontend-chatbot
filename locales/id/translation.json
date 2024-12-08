@@ -42,6 +42,81 @@
     "question-3" : "Ayo, ngobrol!",
     "question-4" : "Perbedaan kata 'kami' dengan 'kita'",
     "rename" : "Ubah Nama",
-    "delete" : "Hapus"
+    "delete" : "Hapus",
+    "language" : "Bahasa",
+    "ask-anything" : "Tanya apa saja dalam bahasa Indonesia....",
+    "datatopic-1" : {
+      "title" : "Salam dan Perkenalan",
+      "subtopic" : {
+        "text-1" : "bagaimana cara bertanya tentang asal seseorang",
+        "text-2" : "bagaimana cara meminta izin dalam situasi formal",
+        "text-3" : "bagaimana cara berkenalan dalam situasi formal dan informal",
+        "text-4" : "bagaimana cara memulai percakapan ringan dalam bahasa Indonesia"
+      }
+    },
+    "datatopic-2" : {
+      "title" : "Aktivitas Sehari-hari",
+      "subtopic" : {
+        "text-1" : "bagaimana cara menyebutkan angka",
+        "text-2" : "bagaimana cara bertanya dan menyebutkan waktu",
+        "text-3" : "bagaimana cara bertanya tentang arah dan lokasi",
+        "text-4" : "bagaimana cara bertanya dan menawar tentang harga di pasar"
+      }
+    },
+    "datatopic-3" : {
+      "title" : "Keluarga dan Teman",
+      "subtopic" : {
+        "text-1" : "bagaimana cara memperkenalkan anggota keluarga",
+        "text-2" : "bagaimana cara bertanya tentang hobi seseorang",
+        "text-3" : "bagaimana cara mengucapkan selamat ulang tahun",
+        "text-4" : "bagaimana cara memberikan pujian"
+      }
+    },
+    "datatopic-4" : {
+      "title" : "Berbelanja dan Makanan",
+      "subtopic" : {
+        "text-1" : "bagaimana cara memesan makanan",
+        "text-2" : "kosakata penting untuk memesan makanan di restoran",
+        "text-3" : "bagaimana cara menolak tawaran makanan dengan sopan",
+        "text-4" : "bagaimana cara bertanya tentang bahan makanan atau rasa"
+      }
+    },
+    "datatopic-5" : {
+      "title" : "Kesehatan",
+      "subtopic" : {
+        "text-1" : "bagaimana cara meminta obat",
+        "text-2" : "bagaimana cara menjelaskan gejala sakit",
+        "text-3" : "bagaimana cara membuat janji temu dengan dokter",
+        "text-4" : "bagaimana cara bertanya tentang kondisi kesehatan seseorang"
+      }
+    },
+    "datatopic-6" : {
+      "title" : "Perjalanan dan Transportasi",
+      "subtopic" : {
+        "text-1" : "bagaimana cara mencari akomodasi",
+        "text-2" : "bagaimana cara memesan tiket pesawat atau kereta",
+        "text-3" : "bagaimana cara bertanya tentang waktu keberangkatan",
+        "text-4" : "kosakata penting untuk berbicara tentang transportasi umum"
+      }
+    },
+    "datatopic-7" : {
+      "title" : "Situasi Darurat",
+      "subtopic" : {
+        "text-1" : "bagaimana cara melaporkan kehilangan barang",
+        "text-2" : "bagaimana cara meminta pertolongan dalam keadaan darurat",
+        "text-3" : "nomor telepon penting yang harus diketahui dalam keadaan darurat",
+        "text-4" : "bagaimana cara menjelaskan kondisi kesehatan darurat"
+      }
+    },
+    "datatopic-8" : {
+      "title" : "Pendidikan",
+      "subtopic" : {
+        "text-1" : "bagaimana cara meminta izin tidak masuk kelas",
+        "text-2" : "bagaimana cara berpartisipasi dalam diskusi di kelas",
+        "text-3" : "bagaimana cara bertanya tentang jadwal kuliah atau sekolah",
+        "text-4" : "bagaimana cara menjelaskan jadwal pelajaran atau mata kuliah dalam bahasa Indonesia"
+      }
+    },
+    "other" : "Lainnya"
   }
 }
