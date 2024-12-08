@@ -23,9 +23,12 @@
     "dont-have-account" : "Don't have an account? Sign up here",
     "forgot-password" : "Forgot password",
     "fill-email-password" : "Email and password must be filled.",
-    "still-logged-in" : "You are logged in, you will be redirected to the main page."
+    "still-logged-in" : "You are logged in, you will be redirected to the main page.",
+    "failed-login": "Login failed. Unknown error.",
+    "error-login": "An error occurred, please try again later."
   },
   "chats" : {
+    "chat-label" : "Chat",
     "start-new-chat" : "Start New Chat",
     "chat-history" : "Chat History",
     "yesterday" : "Yesterday",
@@ -117,6 +120,17 @@
         "text-4": "how to explain lesson or course schedules in Indonesian"
       }
     },
-    "other" : "Other"
+    "other" : "Other",
+    "err-msg": {
+      "failed-rename": "Failed to update chat name on the server",
+      "send-first-rename": "Send a message first to update the conversation name",
+      "confirm-delete-history": "Are you sure you want to delete this conversation?",
+      "success-delete-history": "Conversation successfully deleted",
+      "failed-delete-history": "Failed to delete chat from the server."
+    }
+  },
+  "confirm": {
+    "ok": "OK",
+    "cancel": "Cancel"
   }
 }

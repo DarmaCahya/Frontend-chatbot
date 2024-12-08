@@ -199,14 +199,14 @@
             console.error('Response error:', response);
             const errorData = await response.json();
             Swal.fire({
-              text: 'Masuk gagal: ' + (errorData.message || 'Kesalahan tidak diketahui.'),
+              text: `<%= i18n.t("login.failed-login")%>`,
               icon: "error",
               confirmButtonColor: '#7066e0'
             });
           }
         } catch (error) {
           Swal.fire({
-            text: "Terjadi kesalahan, coba lagi nanti.",
+            text: `<%= i18n.t("login.error-login")%>`,
             icon: "error",
             confirmButtonColor: '#7066e0'
           });

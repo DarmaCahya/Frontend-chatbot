@@ -894,7 +894,7 @@
 											body: JSON.stringify({ historyName: newHistoryName, status: chat.status, userId: `${userData.userId}` })
 										});
 										if (!response.ok) {
-											throw new Error('Gagal memperbarui nama chat di server');
+											throw new Error(`<%= i18n.t("chats.err-msg.failed-rename")%>`);
 										}
 
 										const data = await response.json();
@@ -909,14 +909,14 @@
 									} catch (error) {
 										console.error("Error:", error);
 										Swal.fire({
-											text: "Gagal memperbarui nama chat di server.",
+											text: `<%= i18n.t("chats.err-msg.failed-rename")%>`,
 											icon: "error",
 											confirmButtonColor: '#7066e0'
 										});
 									}
 								} else {
 									Swal.fire({
-										text: "Kirim pesan terlebih dahulu untuk memperbarui nama percakapan",
+										text: `<%= i18n.t("chats.err-msg.send-first-rename")%>`,
 										icon: "warning",
 										confirmButtonColor: '#7066e0'
 									});
@@ -937,13 +937,13 @@
 						optionDelete.textContent = '<%= i18n.t("chats.delete")%>';
 						optionDelete.addEventListener('click', async function () {
 							Swal.fire({
-								text: "Apakah kamu yakin akan menghapus percakapan ini?",
+								text: `<%= i18n.t("chats.err-msg.confirm-delete-history")%>`,
 								icon: "warning",
 								showCancelButton: true,
 								confirmButtonColor: "#3085d6",
 								cancelButtonColor: "#d33",
-								confirmButtonText: "OK",
-								cancelButtonText: "Batal"
+								confirmButtonText: `<%= i18n.t("confirm.ok")%>`,
+								cancelButtonText: `<%= i18n.t("confirm.cancel")%>`
 							}).then(async (result) => {
 								if (result.isConfirmed) {
 									try {
@@ -963,7 +963,7 @@
 										chats.splice(index, 1);
 										currentChatIndex = null;
 										Swal.fire({
-											text: "Percakapan berhasil dihapus",
+											text: `<%= i18n.t("chats.err-msg.success-delete-history")%>`,
 											icon: "success",
 											confirmButtonColor: '#7066e0'
 										});
@@ -975,7 +975,7 @@
 										chatTopic.classList.remove('hidden');
 									} catch (error) {
 										Swal.fire({
-											text: "Gagal menghapus chat dari server.",
+											text: `<%= i18n.t("chats.err-msg.failed-delete-history")%>`,
 											icon: "error",
 											confirmButtonColor: '#7066e0'
 										});
@@ -1099,7 +1099,7 @@
 				// Fungsi untuk membuat chat baru
 				async function createNewChat() {
 					const chatId = `chat-${Date.now()}`;
-					const chatName = `Percakapan ${chatCounter++}`;
+					const chatName = `<%= i18n.t("chats.chat-label")%> ${chatCounter++}`;
 					const newChat = {
 						name: chatName,
 						messages: []

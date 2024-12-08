@@ -23,9 +23,12 @@
     "dont-have-account" : "Belum punya akun ? Daftar disini",
     "forgot-password" : "Lupa sandi",
     "fill-email-password" : "Pos-el dan sandi harus diisi.",
-    "still-logged-in" : "Anda sudah masuk, akan diarahkan ke halaman utama."
+    "still-logged-in" : "Anda sudah masuk, akan diarahkan ke halaman utama.",
+    "failed-login" : "Masuk gagal. 'Kesalahan tidak diketahui.",
+    "error-login" : "Terjadi kesalahan, coba lagi nanti."
   },
   "chats" : {
+    "chat-label" : "Percakapan",
     "start-new-chat" : "Mulai Percakapan Baru",
     "chat-history" : "Riwayat Percakapan",
     "yesterday" : "Kemarin",
@@ -117,6 +120,17 @@
         "text-4" : "bagaimana cara menjelaskan jadwal pelajaran atau mata kuliah dalam bahasa Indonesia"
       }
     },
-    "other" : "Lainnya"
+    "other" : "Lainnya",
+    "err-msg" : {
+      "failed-rename" : "Gagal memperbarui nama chat di server",
+      "send-first-rename" : "Kirim pesan terlebih dahulu untuk memperbarui nama percakapan",
+      "confirm-delete-history" : "Apakah kamu yakin akan menghapus percakapan ini?",
+      "success-delete-history" : "Percakapan berhasil dihapus",
+      "failed-delete-history" : "Gagal menghapus chat dari server."
+    }
+  },
+  "confirm" : {
+    "ok" : "OK",
+    "cancel" : "Batal"
   }
 }

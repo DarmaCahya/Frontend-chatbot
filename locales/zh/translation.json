@@ -23,9 +23,12 @@
     "dont-have-account" : "还没有账号？在这里注册",
     "forgot-password" : "忘记密码",
     "fill-email-password": "电子邮件和密码必须填写。",
-    "still-logged-in" : "您已登录，将被重定向到主页。"
+    "still-logged-in" : "您已登录，将被重定向到主页。",
+    "failed-login": "登录失败。未知错误。",
+    "error-login": "发生错误，请稍后再试。"
   },
   "chats" : {
+    "chat-label" : "对话",
     "start-new-chat" : "开始新聊天",
     "chat-history" : "聊天记录",
     "yesterday" : "昨天",
@@ -117,6 +120,17 @@
         "text-4": "如何用印尼语解释课程或课程时间表"
       }
     },
-    "other" : "其他"
+    "other" : "其他",
+    "err-msg": {
+      "failed-rename": "无法更新服务器上的聊天名称",
+      "send-first-rename": "请先发送消息以更新对话名称",
+      "confirm-delete-history": "你确定要删除这个对话吗？",
+      "success-delete-history": "对话已成功删除",
+      "failed-delete-history": "无法从服务器删除聊天。"
+    }
+  },
+  "confirm": {
+    "ok": "OK",
+    "cancel": "取消"
   }
 }
