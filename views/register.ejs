@@ -10,6 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link id="sweetalert2-theme" rel="stylesheet">
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -83,6 +85,18 @@
       });
       
     });
+
+    const setSweetAlertTheme = () => {
+      const isDark = localStorage.getItem("theme");
+      const themeLink = document.getElementById('sweetalert2-theme');
+
+      if (isDark === "dark") {
+        themeLink.href = "https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css";
+      } else {
+        themeLink.href = "";  // Tema default
+      }
+    };
+
   </script>
 
   <style>
@@ -92,6 +106,14 @@
     /* Custom styles for the select element */
     #country {
       height: 40px; /* Adjust the height as needed */
+    }
+
+    body[lang=en-GB]  [lang]:not([lang=en-GB]),
+    body[lang=id-ID] [lang]:not([lang=id-ID]),
+    body[lang=zh-HANT] [lang]:not([lang=zh-HANT]),
+    body[lang=zh-HANS] [lang]:not([lang=zh-HANS])
+    {
+      display: none;
     }
   </style>
 </head>
@@ -163,6 +185,7 @@
   <!-- Gambar versi desktop yang hanya muncul di layar md ke atas -->
   <img src="/images/Gatot Kaca.png" class="hidden md:block h-auto w-36 md:w-96 absolute bottom-0 md:-bottom-24 right-0 md:right-0 md:fixed" alt="Maskot Satria BIPA">
 
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
   <script>
     function togglePasswordVisibility(inputId, iconId) {
       const input = document.getElementById(inputId);
@@ -185,8 +208,14 @@
     });
     const token = sessionStorage.getItem('token');
     if (token) {
-      window.location.href = '/index';
-      alert('Anda sudah login, akan diarahkan ke halaman utama.');
+      Swal.fire({
+        title: 'Berhasil Login!',
+        text: 'Anda akan diarahkan ke halaman utama.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        window.location.href = '/index';
+      });
     }
     document.getElementById('register-form').addEventListener('submit', async function (event) {
         event.preventDefault();
@@ -199,7 +228,10 @@
         const confirmPassword = document.getElementById('confirm-password').value;
 
         if (!username || !email || !country || !password || !confirmPassword) {
-          alert('Semua field harus diisi.');
+          Swal.fire({
+            text: "Semua field harus diisi.",
+            icon: "warning"
+          });
           return;
         }
 
@@ -215,43 +247,83 @@
 
           if (status=="valid") {
               valid = true;
-              alert('Email berhasil diverifikasi!');
+              Swal.fire({
+                text: "Pos-el berhasil diverifikasi!",
+                icon: "success",
+                confirmButtonColor: '#7066e0'
+              });
             } else {
-              alert('Verifikasi email gagal.');
+              Swal.fire({
+                text: "Verifikasi gagal.",
+                icon: "error",
+                confirmButtonColor: '#7066e0'
+              });
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Terjadi kesalahan pada verifikasi email.');
+            Swal.fire({
+              text: "Terjadi kesalahan pada verifikasi pos-el.",
+              icon: "error",
+              confirmButtonColor: '#7066e0'
+            });
         }
 
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
 
         if (password.length < 8) {
-          alert('Password harus memiliki minimal 8 karakter.');
+          Swal.fire({
+            text: "Sandi harus memiliki minimal 8 karakter.",
+            icon: "warning",
+            confirmButtonColor: '#7066e0'
+          });
           return;
         }
         if (!/[a-z]/.test(password)) {
-          alert('Password harus mengandung minimal satu huruf kecil.');
+          Swal.fire({
+            text: "Sandi harus mengandung minimal satu huruf kecil.",
+            icon: "warning",
+            confirmButtonColor: '#7066e0'
+          });
           return;
         }
         if (!/[A-Z]/.test(password)) {
-          alert('Password harus mengandung minimal satu huruf kapital.');
+          Swal.fire({
+            text: "Sandi harus mengandung minimal satu huruf kapital.",
+            icon: "warning",
+            confirmButtonColor: '#7066e0'
+          });
           return;
         }
         if (!/\d/.test(password)) {
-          alert('Password harus mengandung minimal satu angka.');
+          Swal.fire({
+            text: "Sandi harus mengandung minimal satu angka.",
+            icon: "warning",
+            confirmButtonColor: '#7066e0'
+          });
           return;
         }
         if (!/[!@#$%^&*]/.test(password)) {
-          alert('Password harus mengandung minimal satu simbol: ! @ # $ % ^ & *');
+          Swal.fire({
+            text: "Sandi harus mengandung minimal satu simbol: ! @ # $ % ^ & *",
+            icon: "warning",
+            confirmButtonColor: '#7066e0'
+          });
           return;
         }
         if (!passwordRegex.test(password)) {
-          alert('Password tidak valid.');
+          Swal.fire({
+            text: "Sandi tidak valid.",
+            icon: "warning",
+            confirmButtonColor: '#7066e0'
+          });
           return;
         }
         if (password !== confirmPassword) {
-          alert('Password dan Konfirmasi Password harus sama.');
+          Swal.fire({
+            text: "Sandi dan Konfirmasi Sandi harus sama.",
+            icon: "error",
+            confirmButtonColor: '#7066e0'
+          });
           return;
         }
 
@@ -277,13 +349,25 @@
                 window.location.href = '/verify';
             } else {
                 const errorData = await response.json();
-                alert(errorData.message)
+                Swal.fire({
+                  text: errorData.message,
+                  icon: "error",
+                  confirmButtonColor: '#7066e0'
+                });
             }
           } catch (error) {
-            alert('Terjadi kesalahan dalam melakukan pendaftaran, coba lagi nanti.');
+            Swal.fire({
+              text: "Terjadi kesalahan dalam melakukan pendaftaran, coba lagi nanti.",
+              icon: "error",
+              confirmButtonColor: '#7066e0'
+            });
           }
         } else {
-            alert('Email tidak valid, tolong memasukkan email yang valid');
+          Swal.fire({
+            text: "Alamat pos-el tidak valid. Sila masukkan alamat pos-el yang valid",
+            icon: "error",
+            confirmButtonColor: '#7066e0'
+          });
         }
       });
   </script>

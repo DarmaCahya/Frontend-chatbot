@@ -1,0 +1,136 @@
+{
+  "header" : {
+    "home": "首頁",
+    "feature" : "特徵",
+    "guide" : "指導"
+  },
+  "index" : {
+    "btn-try-now": "開始使用",
+    "feature-1-title": "BIPA 學習以文化內容",
+    "feature-1-text": "Satria BIPA 為印尼語學習提供文化背景，作為印尼各種傳統、習俗和文化價值觀的見解和資訊。",
+    "feature-2-title": "推薦學習材料",
+    "feature-2-text": "Satria BIPA 推薦與使用者問題、難度調整和印尼語學習技巧相關的印尼語學習材料。",
+    "feature-3-title": "印尼語會話",
+    "feature-3-text": "透過印尼語地道會話文本進行口語練習，以提高印尼語口語的信心和流利程度。",
+    "learn-more" : "了解更多",
+    "watch-video" : "觀看以下有關使用 Satria BIPA 的影片教學",
+    "start" : "開始"
+  },
+  "login" : {
+    "title" : "登入",
+    "email" : "電子郵件",
+    "password" : "密碼",
+    "dont-have-account" : "還沒有帳號？在這裡註冊",
+    "forgot-password" : "忘記密碼",
+    "fill-email-password" : "电子邮件和密码必须填写。",
+    "still-logged-in" : "您已登入，將被重定向到主頁。",
+    "failed-login": "登錄失敗。未知錯誤。",
+    "error-login": "發生錯誤，請稍後再試。"
+  },
+  "chats" : {
+    "chat-label" : "對話",
+    "start-new-chat" : "開始新聊天",
+    "chat-history" : "聊天記錄",
+    "yesterday" : "昨天",
+    "show-more" : "顯示更多",
+    "show-less" : "顯示更少",
+    "dashboard" : "儀表板",
+    "help" : "幫助",
+    "settings" : "設置",
+    "logout" : "登出",
+    "greeting" : "你好",
+    "greeting-question" : "今天你想學什麼？",
+    "question-1" : "如何詢問價格？",
+    "question-2" : "如何問路",
+    "question-3" : "讓我們聊天！",
+    "question-4" : "'我們'和'我們'的區別",
+    "rename" : "重新命名",
+    "delete" : "刪除",
+    "language" : "語言",
+    "ask-anything" : "問任何事情 ...",
+    "datatopic-1": {
+      "title": "問候和介紹",
+      "subtopic": {
+        "text-1": "如何詢問某人的來歷",
+        "text-2": "如何在正式場合請求許可",
+        "text-3": "如何在正式和非正式場合介紹自己",
+        "text-4": "如何用印尼語開始輕鬆的對話"
+      }
+    },
+    "datatopic-2": {
+      "title": "日常活動",
+      "subtopic": {
+        "text-1": "如何提到數字",
+        "text-2": "如何詢問和提到時間",
+        "text-3": "如何詢問方向和位置",
+        "text-4": "如何在市場上詢問和討價還價"
+      }
+    },
+    "datatopic-3": {
+      "title": "家庭和朋友",
+      "subtopic": {
+        "text-1": "如何介紹家庭成員",
+        "text-2": "如何詢問某人的愛好",
+        "text-3": "如何說生日快樂",
+        "text-4": "如何給予讚美"
+      }
+    },
+    "datatopic-4": {
+      "title": "購物和食物",
+      "subtopic": {
+        "text-1": "如何點餐",
+        "text-2": "在餐廳點餐的重要詞彙",
+        "text-3": "如何禮貌地拒絕食物",
+        "text-4": "如何詢問食材或味道"
+      }
+    },
+    "datatopic-5": {
+      "title": "健康",
+      "subtopic": {
+        "text-1": "如何請求藥物",
+        "text-2": "如何解釋症狀",
+        "text-3": "如何預約醫生",
+        "text-4": "如何詢問某人的健康狀況"
+      }
+    },
+    "datatopic-6": {
+      "title": "旅行和交通",
+      "subtopic": {
+        "text-1": "如何尋找住宿",
+        "text-2": "如何預訂機票或火車票",
+        "text-3": "如何詢問出發時間",
+        "text-4": "談論公共交通的重要詞彙"
+      }
+    },
+    "datatopic-7": {
+      "title": "緊急情況",
+      "subtopic": {
+        "text-1": "如何報告丟失的物品",
+        "text-2": "如何在緊急情況下尋求幫助",
+        "text-3": "緊急情況下需要知道的重要電話號碼",
+        "text-4": "如何解釋緊急健康狀況"
+      }
+    },
+    "datatopic-8": {
+      "title": "教育",
+      "subtopic": {
+        "text-1": "如何請假不上課",
+        "text-2": "如何參與課堂討論",
+        "text-3": "如何詢問課程或學校時間表",
+        "text-4": "如何用印尼語解釋課程或課程時間表"
+      }
+    },
+    "other" : "其他",
+    "err-msg": {
+      "failed-rename": "無法更新伺服器上的聊天名稱",
+      "send-first-rename": "請先發送消息以更新對話名稱",
+      "confirm-delete-history": "你確定要刪除這個對話嗎？",
+      "success-delete-history": "對話已成功刪除",
+      "failed-delete-history": "無法從伺服器刪除聊天。"
+    }
+  },
+  "confirm": {
+    "ok": "OK",
+    "cancel": "取消"
+  }
+}

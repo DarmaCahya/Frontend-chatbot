@@ -73,10 +73,18 @@
 			font-family: "Plus Jakarta Sans", sans-serif;
 			;
 		}
+
+		body[lang=en-GB]  [lang]:not([lang=en-GB]),
+		body[lang=id-ID] [lang]:not([lang=id-ID]),
+		body[lang=zh-HANT] [lang]:not([lang=zh-HANT]),
+		body[lang=zh-HANS] [lang]:not([lang=zh-HANS])
+		{
+			display: none;
+		}
 	</style>
 </head>
 
-<body class="bg-white relative overflow-x-hidden dark:bg-gray-900 text-black dark:text-white transition duration-75">
+<body lang="id-ID" class="bg-white relative overflow-x-hidden dark:bg-gray-900 text-black dark:text-white transition duration-75">
 	<%- include('partials/header') %>
 		<main class="mb-24">
 			<section class="scroll-mt-56" id="beranda">
@@ -101,7 +109,7 @@
 							</div>
 							<button onclick="redirectUser()"
 								class="hover:cursor-pointer px-4 py-2 flex text-black bg-white rounded hover:bg-neutral-800 font-semibold hover:text-white focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-white dark:hover:bg-white/80 dark:focus:ring-white dark:text-black">
-								Coba Sekarang
+								<%= i18n.t("index.btn-try-now")%>
 							</button>
 						</div>
 						<div class="absolute top-0 left-0 w-full h-full object-cover bg-black/10 dark:hidden">
@@ -130,13 +138,10 @@
 						</div>
 						<div class="w-full md:w-1/2 p-4 md:p-8 flex items-center justify-center">
 							<div class="flex flex-col pt-4 md:pt-0 gap-y-4 w-full items-start justify-center">
-								<div class="text-2xl md:text-5xl font-extrabold">Pembelajaran BIPA dengan Muatan Konten
-									Budaya</div>
-								<span
-									class="text-base md:text-xl dark:text-gray-300 font-semibold text-justify">Satria
-									BIPA memberikan pembelajaran bahasa Indonesia dengan konteks budaya sebagai wawasan
-									dan informasi tentang berbagai tradisi, adat istiadat, dan nilai-nilai budaya
-									Indonesia.</span>
+								<p class="text-2xl md:text-5xl font-extrabold"><%= i18n.t("index.feature-1-title")%></p>
+								<span class="text-base md:text-xl dark:text-gray-300 font-semibold text-justify">
+									<%= i18n.t("index.feature-1-text")%>
+								</span>
 							</div>
 						</div>
 					</div>
@@ -151,12 +156,10 @@
 						</div>
 						<div class="w-full md:w-1/2 p-4 md:p-8 flex items-center justify-center">
 							<div class="flex flex-col pt-4 md:pt-0 gap-y-4 w-full items-start justify-center">
-								<div class="text-2xl md:text-5xl font-extrabold">Rekomendasi Materi Pembelajaran</div>
-								<span
-									class="text-base text-justify md:text-xl text-gray-400 dark:text-gray-300 font-semibold"> Satria BIPA menyarankan
-									materi
-									pembelajaran bahasa Indonesia yang terkait dengan pertanyaan pengguna, penyesuaian
-									tingkat kesulitan, dan kiat-kiat belajar bahasa Indonesia.</span>
+								<p class="text-2xl md:text-5xl font-extrabold"><%= i18n.t("index.feature-2-title")%></p>
+								<span class="text-base text-justify md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
+									<%= i18n.t("index.feature-2-text")%>
+								</span>
 							</div>
 						</div>
 					</div>
@@ -171,12 +174,10 @@
 						</div>
 						<div class="w-full md:w-1/2 p-4 md:p-8 flex items-center justify-center">
 							<div class="flex flex-col pt-4 md:pt-0 gap-y-4 w-full items-start justify-center">
-								<div class="text-2xl md:text-5xl font-extrabold">Percakapan Bahasa Indonesia</div>
-								<span
-									class="text-base md:text-xl text-gray-400 dark:text-gray-300 font-semibold">Latihan
-									berbicara melalui
-									teks berbentuk percakapan alami dalam Bahasa Indonesia untuk meningkatkan
-									kepercayaan diri dan kelancaran berbicara dalam berbahasa Indonesia.</span>
+								<p class="text-2xl md:text-5xl font-extrabold"><%= i18n.t("index.feature-2-title")%></p>
+								<span class="text-base md:text-xl text-gray-400 dark:text-gray-300 font-semibold">
+									<%= i18n.t("index.feature-3-text")%>
+								</span>
 							</div>
 						</div>
 					</div>
@@ -221,15 +222,18 @@
 				<div class="w-full flex items-center justify-center flex-col-reverse md:flex-row gap-x-24">
 					<div class="w-full md:w-1/2 p-8 pt-0">
 						<div class="flex flex-col gap-y-4 w-full items-start justify-center px-4 md:px-0">
-							<div class="text-xl md:text-4xl font-extrabold text-white">Pelajari lebih lanjut</div>
-							<div class="text-sm md:text-xl text-neutral-100 font-semibold">Tonton video tutorial berikut
-								untuk menggunakan Satria BIPA</div>
+							<div class="text-xl md:text-4xl font-extrabold text-white">
+								<p><%= i18n.t("index.learn-more")%></p>
+							</div>
+							<div class="text-sm md:text-xl text-neutral-100 font-semibold">
+								<p><%= i18n.t("index.watch-video")%></p>
+							</div>
 							<a href="/login"
 								class="flex flex-col items-center justify-center gap-y-8 py-4 rounded-xl w-full">
-								<button onclick="location.href='/login'"
-									class="px-4 py-3 rounded-xl bg-red-600 text-white flex w-full gap-x-2 items-center justify-center group">Mulai
-									<span
-										class="group-hover:translate-x-2 transition-all duration-300 ease-in-out">→</span></button>
+								<button onclick="location.href='/login'" class="px-4 py-3 rounded-xl bg-red-600 text-white flex w-full gap-x-2 items-center justify-center group">
+									<label><p><%= i18n.t("index.start")%></p></label>
+									<span class="group-hover:translate-x-2 transition-all duration-300 ease-in-out">→</span>
+								</button>
 							</a>
 						</div>
 					</div>

@@ -5,7 +5,41 @@ const env = require('dotenv').config();
 require('dotenv-expand').expand(env);
 const jwt = require('jsonwebtoken');
 
+const i18n = require('i18next');
+const Backend = require('i18next-node-fs-backend');
+const middleware = require('i18next-http-middleware');
+const LanguageDetector = require('i18next-browser-languagedetector');
+
+i18n.use(Backend).use(middleware.LanguageDetector).init({
+    backend: {
+        loadPath: __dirname + '/locales/{{lng}}/{{ns}}.json'
+    },
+    detection: {
+        order: ['cookie','localStorage','querystring', 'header'],
+
+        lookupQuerystring: 'lng',
+        lookupCookie: 'i18next',
+        lookupHeader: 'accept-language',
+        lookupLocalStorage: 'i18nextLng',
+        lookupSessionStorage: 'i18nextLng',
+        lookupSession: 'lng',
+        lookupPath: 'lng',
+        lookupFromPathIndex: 0,
+        lookupFromSubdomainIndex: 0,
+
+        caches: ['localStorage', 'cookie'],
+        excludeCacheFor: ['cimode'],
+    },
+    saveMissing: true,
+    debug: true,
+    fallbackLng: 'id',
+    preload: ['en', 'id', 'zh', 'zh-HANT'],
+    });
+
 const app = express();
+app.use(
+    middleware.handle(i18n)
+);
 app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
@@ -15,7 +49,7 @@ app.set('view engine', 'ejs');
 let isAdmin = false;
 
 app.get('/index', (req, res) => {
-    res.render('index');
+    res.render('index', {t: i18n.t.bind(i18n.t)});
 });
 
 app.get('/opening', (req, res) => {
@@ -23,7 +57,7 @@ app.get('/opening', (req, res) => {
 });
 
 app.get('/chats', (req, res) => {
-    res.render('chatAI');
+    res.render('chatAI', {t: i18n.t.bind(i18n.t)});
 });
 
 app.get('/verify', (req, res) => {
@@ -295,7 +329,7 @@ app.post('/api/register', async (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.render('login');
+    res.render('login', {t: i18n.t.bind(i18n.t)});
 });
 app.post('/api/login', async (req, res) => {
     try {

@@ -12,6 +12,8 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<link id="sweetalert2-theme" rel="stylesheet">
 
 	<script>
 		tailwind.config = {
@@ -46,9 +48,21 @@
 				localStorage.theme = 'dark';
 			}
 			applyTheme();
+			setSweetAlertTheme();
 		}
 
 		document.addEventListener('DOMContentLoaded', initMode);
+
+		const setSweetAlertTheme = () => {
+			const isDark = localStorage.getItem("theme");
+			const themeLink = document.getElementById('sweetalert2-theme');
+
+			if (isDark === "dark") {
+				themeLink.href = "https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css";
+			} else {
+				themeLink.href = "";  // Tema default
+			}
+		};
 	</script>
 
 	<style>
@@ -95,17 +109,6 @@
 			flex-shrink: 0;
 		}
 
-		main {
-			flex: 1;
-			display: flex;
-			flex-direction: column;
-		}
-
-		.chat-area {
-			flex: 1;
-			display: flex;
-			flex-direction: column;
-		}
 
 		.chat-box {
 			flex: 1;
@@ -204,7 +207,7 @@
 			/* Show text by default */
 		}
 	</style>
-	<script	script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+	<script	src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
 </head>
 
 <body class="overflow-x-hidden text-black transition duration-75 bg-gray-100 dark:bg-gray-700 dark:text-white">
@@ -237,33 +240,29 @@
 			<div class="flex flex-col flex-1 w-full space-y-6">
 
 				<!-- Konten Sidebar -->
-				<button id="new-chat-btn" class="flex px-3 py-2 w-fit bg-white/10 rounded-xl">
-					<div>
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-							stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-							class="lucide lucide-plus">
-							<path d="M5 12h14" />
-							<path d="M12 5v14" />
-						</svg>
-					</div>
-					<span class="ml-2 sidebar-text">Mulai Percakapan Baru</span>
+				<button id="new-chat-btn" class="flex px-3 py-2 w-fit bg-white/10 dark:hover:bg-white/20 rounded-xl bg-gray-200 hover:bg-gray-300 active:bg-gray-300">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+						 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+						 class="lucide lucide-plus">
+						<path d="M5 12h14" />
+						<path d="M12 5v14" />
+					</svg>
+					<span class="ml-2 sidebar-text"><%= i18n.t("chats.start-new-chat")%></span>
 				</button>
 				<div class="sidebar-content-wrapper minimized">
 					<!-- Daftar Riwayat Chat -->
 					<section id="chat-history-list" class="scrollbar-custom">
 						<div>
-							<p class="mb-3 font-semibold">Riwayat Percakapan</p>
+							<p class="mb-3 font-semibold"><%= i18n.t("chats.chat-history")%></p>
 							<ul id="chat-list" class="flex flex-col pr-3 space-y-3 font-medium">
 								<!-- Chat items will be added here -->
 							</ul>
-							<button id="show-more-btn" class="hidden text-sm text-blue-500 underline">Tampilkan lebih
-								banyak</button>
-							<button id="show-less-btn" class="hidden text-sm text-blue-500 underline">Tampilkan lebih
-								sedikit</button>
+							<button id="show-more-btn" class="hidden text-sm text-blue-500 underline"><%= i18n.t("chats.show-more")%></button>
+							<button id="show-less-btn" class="hidden text-sm text-blue-500 underline"><%= i18n.t("chats.show-less")%></button>
 						</div>
 						<hr class="my-3">
 						<div>
-							<p class="mb-3 text-base font-bold">Kemarin</p>
+							<p class="mb-3 text-base font-bold"><%= i18n.t("chats.yesterday")%></p>
 							<ul id="chat-list-2" class="space-y-2 font-medium">
 								<!-- Chat items akan ditambahkan di sini -->
 							</ul>
@@ -282,7 +281,7 @@
 								<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
 							</svg>
 
-							<p class="ml-3 [&_.minimized_&_.flex]:hidden">Dasbor</p>
+							<p class="ml-3 [&_.minimized_&_.flex]:hidden"><%= i18n.t("chats.dashboard")%></p>
 					</a>
 
 
@@ -300,18 +299,17 @@
 								</clipPath>
 							</defs>
 						</svg>
-						<p class="ml-3 [&_.minimized_&_.flex]:hidden">Bantuan</p>
+						<p class="ml-3 [&_.minimized_&_.flex]:hidden"><%= i18n.t("chats.help")%></p>
 					</a>
 
-					<a href="#" class="flex items-center p-3 rounded-md hover:bg-white/10 icon">
-						<!-- Icon Pengaturan dan Teks -->
+					<button data-dropdown-toggle="dropdownNavbar" id="dropdownNavbarLink" class="flex items-center p-3 rounded-md hover:bg-white/10 icon">
 						<svg width="24" height="24" class="text-gray-800 fill-current dark:text-white"
-							viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							 viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<g clip-path="url(#clip0_401_332)">
 								<path fill-rule="evenodd" clip-rule="evenodd"
-									d="M9.16977 14.83C9.92977 15.58 10.9298 16 11.9998 16C13.0698 16 14.0798 15.59 14.8298 14.83C15.5798 14.07 15.9998 13.07 15.9998 12C15.9998 10.93 15.5898 9.93 14.8298 9.17C14.0698 8.42 13.0698 8 11.9998 8C10.9298 8 9.92977 8.42 9.16977 9.17C8.41977 9.93 7.99977 10.93 7.99977 12C7.99977 13.07 8.40977 14.08 9.16977 14.83ZM10.5898 10.59C10.9598 10.21 11.4698 10 11.9998 10H12.0098C12.5298 10 13.0398 10.22 13.4198 10.59C13.7998 10.96 14.0098 11.48 14.0098 12C14.0098 12.52 13.7898 13.04 13.4198 13.41C12.6698 14.15 11.3398 14.15 10.5898 13.41C10.2098 13.04 9.99977 12.53 9.99977 12C9.99977 11.47 10.2198 10.97 10.5898 10.59Z" />
+									  d="M9.16977 14.83C9.92977 15.58 10.9298 16 11.9998 16C13.0698 16 14.0798 15.59 14.8298 14.83C15.5798 14.07 15.9998 13.07 15.9998 12C15.9998 10.93 15.5898 9.93 14.8298 9.17C14.0698 8.42 13.0698 8 11.9998 8C10.9298 8 9.92977 8.42 9.16977 9.17C8.41977 9.93 7.99977 10.93 7.99977 12C7.99977 13.07 8.40977 14.08 9.16977 14.83ZM10.5898 10.59C10.9598 10.21 11.4698 10 11.9998 10H12.0098C12.5298 10 13.0398 10.22 13.4198 10.59C13.7998 10.96 14.0098 11.48 14.0098 12C14.0098 12.52 13.7898 13.04 13.4198 13.41C12.6698 14.15 11.3398 14.15 10.5898 13.41C10.2098 13.04 9.99977 12.53 9.99977 12C9.99977 11.47 10.2198 10.97 10.5898 10.59Z" />
 								<path fill-rule="evenodd" clip-rule="evenodd"
-									d="M9.34976 19.92C9.65977 21.16 10.7198 22 11.9998 22L12.0098 21.98C13.2898 21.98 14.3598 21.14 14.6598 19.9C14.6798 19.79 14.7398 19.69 14.8098 19.6C14.8798 19.51 14.9798 19.44 15.0798 19.4C15.1798 19.35 15.2998 19.34 15.4098 19.35C15.5198 19.35 15.6298 19.39 15.7298 19.45C16.8198 20.12 18.1598 19.95 19.0698 19.05C19.9798 18.15 20.1398 16.8 19.4698 15.71C19.4098 15.62 19.3698 15.51 19.3698 15.39C19.3598 15.28 19.3798 15.16 19.4198 15.06C19.4698 14.96 19.5398 14.86 19.6198 14.79C19.7098 14.72 19.8098 14.67 19.9198 14.64C21.1598 14.33 21.9998 13.27 21.9998 11.99C21.9998 10.71 21.1698 9.64 19.9198 9.34C19.8098 9.32 19.6998 9.26 19.6198 9.19C19.5298 9.12 19.4598 9.02 19.4198 8.92C19.3698 8.82 19.3698 8.7 19.3698 8.59C19.3698 8.48 19.4098 8.37 19.4698 8.27C20.1398 7.18 19.9798 5.84 19.0698 4.93C18.1698 4.02 16.8198 3.86 15.7298 4.53C15.6298 4.59 15.5198 4.63 15.4098 4.63C15.2998 4.64 15.1898 4.62 15.0798 4.58C14.9798 4.54 14.8898 4.47 14.8098 4.38C14.7398 4.29 14.6898 4.19 14.6598 4.08C14.3498 2.84 13.2898 2 12.0098 2C10.7298 2 9.65977 2.84 9.35977 4.08C9.29977 4.31 9.13976 4.49 8.92976 4.58C8.71976 4.67 8.47976 4.65 8.27977 4.53C7.18977 3.86 5.84977 4.02 4.93977 4.93C4.02977 5.84 3.86977 7.18 4.53977 8.28C4.59977 8.38 4.63977 8.49 4.63977 8.6C4.64977 8.71 4.62977 8.83 4.58977 8.93C4.53977 9.03 4.47977 9.13 4.38977 9.2C4.29977 9.27 4.19977 9.32 4.08977 9.35C2.84977 9.65 2.00977 10.72 2.00977 12C2.00977 13.28 2.84977 14.35 4.08977 14.65C4.19977 14.68 4.29977 14.73 4.38977 14.81C4.47977 14.88 4.54977 14.97 4.58977 15.08C4.63977 15.18 4.63977 15.3 4.63977 15.41C4.62977 15.52 4.59977 15.63 4.53977 15.73C3.86977 16.82 4.02977 18.16 4.93977 19.07C5.83977 19.97 7.17977 20.14 8.27977 19.47C8.36977 19.41 8.48977 19.37 8.59976 19.37C8.70977 19.35 8.81977 19.38 8.92976 19.42C9.02977 19.46 9.12976 19.53 9.19977 19.62C9.26976 19.71 9.31977 19.81 9.34976 19.92ZM9.68976 17.57C9.35977 17.43 8.99977 17.36 8.64977 17.36V17.38H8.43976C8.00977 17.41 7.58977 17.55 7.22977 17.77C6.77977 18.04 6.43977 17.75 6.33977 17.66C6.23977 17.57 5.94977 17.22 6.22977 16.77C6.44977 16.4 6.58977 15.98 6.61977 15.56C6.64977 15.14 6.57977 14.7 6.41977 14.31C6.25977 13.91 5.99977 13.56 5.67977 13.28C5.35977 13 4.96977 12.8 4.54977 12.7C4.03977 12.58 3.99977 12.13 3.99977 12C3.99977 11.87 4.03977 11.42 4.54977 11.3C4.96977 11.2 5.35977 11 5.67977 10.72C6.00977 10.44 6.26977 10.09 6.42977 9.69C6.58977 9.3 6.65977 8.86 6.62977 8.44C6.59977 8.01 6.45976 7.59 6.23977 7.23C5.96977 6.78 6.25977 6.44 6.34977 6.34C6.43977 6.24 6.78977 5.95 7.23977 6.23C7.98977 6.69 8.88976 6.76 9.69977 6.42C10.5098 6.09 11.0898 5.4 11.2998 4.55C11.4198 4.04 11.8698 4 11.9998 4C12.1298 4 12.5798 4.04 12.6998 4.55C12.8098 4.97 13.0098 5.36 13.2798 5.68C13.5598 6.01 13.9198 6.27 14.3098 6.43C14.6998 6.59 15.1398 6.67 15.5598 6.63C15.9898 6.6 16.4098 6.46 16.7698 6.24C17.2198 5.97 17.5698 6.26 17.6598 6.35C17.7598 6.45 18.0398 6.79 17.7698 7.24C17.5498 7.6 17.4098 8.02 17.3798 8.45C17.3498 8.87 17.4198 9.3 17.5798 9.7C17.7398 10.09 17.9998 10.44 18.3198 10.72C18.6498 11 19.0398 11.2 19.4498 11.3C19.9598 11.42 19.9998 11.87 19.9998 12C19.9998 12.13 19.9598 12.58 19.4498 12.7C19.0398 12.8 18.6498 13 18.3198 13.28C17.9898 13.56 17.7398 13.91 17.5698 14.31C17.4098 14.71 17.3398 15.14 17.3698 15.56C17.3998 15.99 17.5398 16.4 17.7598 16.77C18.0298 17.22 17.7398 17.57 17.6498 17.66C17.5498 17.76 17.2098 18.04 16.7598 17.77C16.3998 17.55 15.9798 17.41 15.5498 17.38C15.1298 17.35 14.6998 17.42 14.2998 17.58C13.9098 17.74 13.5598 18 13.2798 18.32C12.9998 18.64 12.7998 19.03 12.6998 19.45C12.5798 19.96 12.1298 20 11.9998 20C11.8698 20 11.4198 19.96 11.2998 19.45C11.1998 19.04 10.9998 18.65 10.7198 18.32C10.4398 17.99 10.0798 17.73 9.68976 17.57Z" />
+									  d="M9.34976 19.92C9.65977 21.16 10.7198 22 11.9998 22L12.0098 21.98C13.2898 21.98 14.3598 21.14 14.6598 19.9C14.6798 19.79 14.7398 19.69 14.8098 19.6C14.8798 19.51 14.9798 19.44 15.0798 19.4C15.1798 19.35 15.2998 19.34 15.4098 19.35C15.5198 19.35 15.6298 19.39 15.7298 19.45C16.8198 20.12 18.1598 19.95 19.0698 19.05C19.9798 18.15 20.1398 16.8 19.4698 15.71C19.4098 15.62 19.3698 15.51 19.3698 15.39C19.3598 15.28 19.3798 15.16 19.4198 15.06C19.4698 14.96 19.5398 14.86 19.6198 14.79C19.7098 14.72 19.8098 14.67 19.9198 14.64C21.1598 14.33 21.9998 13.27 21.9998 11.99C21.9998 10.71 21.1698 9.64 19.9198 9.34C19.8098 9.32 19.6998 9.26 19.6198 9.19C19.5298 9.12 19.4598 9.02 19.4198 8.92C19.3698 8.82 19.3698 8.7 19.3698 8.59C19.3698 8.48 19.4098 8.37 19.4698 8.27C20.1398 7.18 19.9798 5.84 19.0698 4.93C18.1698 4.02 16.8198 3.86 15.7298 4.53C15.6298 4.59 15.5198 4.63 15.4098 4.63C15.2998 4.64 15.1898 4.62 15.0798 4.58C14.9798 4.54 14.8898 4.47 14.8098 4.38C14.7398 4.29 14.6898 4.19 14.6598 4.08C14.3498 2.84 13.2898 2 12.0098 2C10.7298 2 9.65977 2.84 9.35977 4.08C9.29977 4.31 9.13976 4.49 8.92976 4.58C8.71976 4.67 8.47976 4.65 8.27977 4.53C7.18977 3.86 5.84977 4.02 4.93977 4.93C4.02977 5.84 3.86977 7.18 4.53977 8.28C4.59977 8.38 4.63977 8.49 4.63977 8.6C4.64977 8.71 4.62977 8.83 4.58977 8.93C4.53977 9.03 4.47977 9.13 4.38977 9.2C4.29977 9.27 4.19977 9.32 4.08977 9.35C2.84977 9.65 2.00977 10.72 2.00977 12C2.00977 13.28 2.84977 14.35 4.08977 14.65C4.19977 14.68 4.29977 14.73 4.38977 14.81C4.47977 14.88 4.54977 14.97 4.58977 15.08C4.63977 15.18 4.63977 15.3 4.63977 15.41C4.62977 15.52 4.59977 15.63 4.53977 15.73C3.86977 16.82 4.02977 18.16 4.93977 19.07C5.83977 19.97 7.17977 20.14 8.27977 19.47C8.36977 19.41 8.48977 19.37 8.59976 19.37C8.70977 19.35 8.81977 19.38 8.92976 19.42C9.02977 19.46 9.12976 19.53 9.19977 19.62C9.26976 19.71 9.31977 19.81 9.34976 19.92ZM9.68976 17.57C9.35977 17.43 8.99977 17.36 8.64977 17.36V17.38H8.43976C8.00977 17.41 7.58977 17.55 7.22977 17.77C6.77977 18.04 6.43977 17.75 6.33977 17.66C6.23977 17.57 5.94977 17.22 6.22977 16.77C6.44977 16.4 6.58977 15.98 6.61977 15.56C6.64977 15.14 6.57977 14.7 6.41977 14.31C6.25977 13.91 5.99977 13.56 5.67977 13.28C5.35977 13 4.96977 12.8 4.54977 12.7C4.03977 12.58 3.99977 12.13 3.99977 12C3.99977 11.87 4.03977 11.42 4.54977 11.3C4.96977 11.2 5.35977 11 5.67977 10.72C6.00977 10.44 6.26977 10.09 6.42977 9.69C6.58977 9.3 6.65977 8.86 6.62977 8.44C6.59977 8.01 6.45976 7.59 6.23977 7.23C5.96977 6.78 6.25977 6.44 6.34977 6.34C6.43977 6.24 6.78977 5.95 7.23977 6.23C7.98977 6.69 8.88976 6.76 9.69977 6.42C10.5098 6.09 11.0898 5.4 11.2998 4.55C11.4198 4.04 11.8698 4 11.9998 4C12.1298 4 12.5798 4.04 12.6998 4.55C12.8098 4.97 13.0098 5.36 13.2798 5.68C13.5598 6.01 13.9198 6.27 14.3098 6.43C14.6998 6.59 15.1398 6.67 15.5598 6.63C15.9898 6.6 16.4098 6.46 16.7698 6.24C17.2198 5.97 17.5698 6.26 17.6598 6.35C17.7598 6.45 18.0398 6.79 17.7698 7.24C17.5498 7.6 17.4098 8.02 17.3798 8.45C17.3498 8.87 17.4198 9.3 17.5798 9.7C17.7398 10.09 17.9998 10.44 18.3198 10.72C18.6498 11 19.0398 11.2 19.4498 11.3C19.9598 11.42 19.9998 11.87 19.9998 12C19.9998 12.13 19.9598 12.58 19.4498 12.7C19.0398 12.8 18.6498 13 18.3198 13.28C17.9898 13.56 17.7398 13.91 17.5698 14.31C17.4098 14.71 17.3398 15.14 17.3698 15.56C17.3998 15.99 17.5398 16.4 17.7598 16.77C18.0298 17.22 17.7398 17.57 17.6498 17.66C17.5498 17.76 17.2098 18.04 16.7598 17.77C16.3998 17.55 15.9798 17.41 15.5498 17.38C15.1298 17.35 14.6998 17.42 14.2998 17.58C13.9098 17.74 13.5598 18 13.2798 18.32C12.9998 18.64 12.7998 19.03 12.6998 19.45C12.5798 19.96 12.1298 20 11.9998 20C11.8698 20 11.4198 19.96 11.2998 19.45C11.1998 19.04 10.9998 18.65 10.7198 18.32C10.4398 17.99 10.0798 17.73 9.68976 17.57Z" />
 							</g>
 							<defs>
 								<clipPath id="clip0_401_332">
@@ -319,8 +317,28 @@
 								</clipPath>
 							</defs>
 						</svg>
-						<p class="ml-3">Pengaturan</p>
-					</a>
+						<p class="ml-3 [&_.minimized_&_.flex]:hidden"><%= i18n.t("chats.settings")%></p>
+						<svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+						</svg>
+					</button>
+					<div id="dropdownNavbar" class="z-10 w-auto border hidden bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
+						<div class="py-1">
+							<a href="#" class="block px-4 py-2 text-sm text-gray-700  dark:text-gray-200 "><%= i18n.t("chats.settings")%></a>
+						</div>
+						<ul class="px-4 py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+							<li class="relative">
+								<label for="language-select-chats"><%= i18n.t("chats.language")%></label>
+								<select id="language-select-chats" onchange="changeLanguage()" class="my-2 w-full bg-transparent placeholder:text-slate-400 text-slate-700 dark:text-white text-sm border border-slate-200 rounded pl-3 pr-8 py-3 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer">
+									<option class="dark:bg-gray-800" value="id">Indonesia</option>
+									<option class="dark:bg-gray-800" value="en">English</option>
+									<option class="dark:bg-gray-800" value="zh-HANT">中文 (Traditional)</option>
+									<option class="dark:bg-gray-800" value="zh">中文 (Simplified)</option>
+								</select>
+							</li>
+						</ul>
+					</div>
+
 					<a onclick="toggleMode()" class="flex items-center p-3 rounded-md hover:bg-white/10 hover:cursor-pointer icon">
 						<!-- Toggle Dark Mode -->
 						<div class="flex items-center">
@@ -334,7 +352,7 @@
 							<path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
 							<path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
 						</svg>
-						<p class="ml-3">Keluar</p>
+						<p class="ml-3"><%= i18n.t("chats.logout")%></p>
 					</a>
 				</div>
 
@@ -373,7 +391,7 @@
 					</div>
 
 					<div class="flex items-center justify-center text-white dark:text-black">
-						<span id="icon-light" id="theme-toggle-btn" class="hover:cursor-pointer" onclick="toggleMode()">
+						<span id="icon-light" class="hover:cursor-pointer" onclick="toggleMode()">
 						<!-- Light theme icon SVG -->
 						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
 					</span>
@@ -383,7 +401,7 @@
 			</section>
 		</aside>
 
-		<div id="main-content" class="flex flex-col flex-1 transition-all">
+		<div id="main-content" class="flex flex-col flex-1 transition-all overflow-y-auto">
 			<!-- Header -->
 			<header class="sticky top-0 z-10 flex w-full p-5">
 				<div class="flex items-center justify-end flex-1">
@@ -399,36 +417,21 @@
 			</header>
 
 			<!-- Area Chat Utama -->
-			<main class="flex flex-col flex-1 lg:ml-12 xl:ml-0">
+			<main class="main-box flex flex-col flex-1 lg:ml-12 xl:ml-0 overflow-y-auto scrollbar-custom">
 				<!-- Salam dan Rekomendasi Chat -->
 				<div class="flex flex-col items-center h-full p-5 greeting-section">
 					<div class="flex items-center">
 						<img src="/images/waving hand.png" class="mr-5 xl:h-16" alt="Waving Hand">
 						<h1 id="greeting"
 							class="text-3xl xl:mb-2 md:text-left text-center xl:text-6xl font-bold text-[#AE020B] dark:bg-clip-text dark:text-transparent pb-2 dark:bg-gradient-to-r from-yellow-500 via-yellow-200 to-yellow-500">
-							Halo</h1>
+							<%= i18n.t("chats.greeting")%></h1>
 					</div>
-					<p class="font-bold">Mau belajar apa hari ini?</p>
-					<div class="grid grid-cols-2 gap-3 my-3 chat-recom lg:grid-cols-3">
-						<a href="#" data-message="Bagaimana cara bertanya tentang harga?"
-						   class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
-							<p class="text-sm font-normal">Bagaimana <span class="font-bold">cara bertanya tentang harga? </span></p>
-						</a>
-						<a href="#" data-message="Cara bertanya tentang arah"
-							class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
-							<p class="text-sm font-normal">Cara <span class="font-bold">bertanya tentang
-									arah</span></p>
-						</a>
-						<a href="#" data-message="Ayo, ngobrol!"
-						   class="flex items-center justify-center p-4 border border-gray-800 rounded-md chat-recom-item dark:border-gray-100">
-							<p class="text-sm font-normal"><span class="font-normal">Ayo, <span class="font-bold italic">ngobrol!</span></span></p>
-						</a>
-					</div>
+					<p class="font-bold text-lg xl:text-xl"><%= i18n.t("chats.greeting-question")%></p>
 				</div>
 
 				<!-- Area Chat -->
-				<div class="flex flex-col flex-1 chat-area">
-					<div id="chat-box" class="chat-box flex flex-col max-h-[42rem] space-y-4 scrollbar-custom">
+				<div class="flex flex-col flex-1 chat-area overflow-y-auto scrollbar-custom">
+					<div id="chat-box" class="chat-box flex flex-col space-y-4">
 						<!-- Pesan chat akan ditambahkan di sini -->
 					</div>
 				</div>
@@ -436,7 +439,7 @@
 				<!-- Input Chat -->
 				<div class="bg-gray-100 input-area dark:bg-gray-700">
 					<div class="relative flex items-center w-full">
-						<input id="message-input" placeholder="Tanya apa saja dalam bahasa Indonesia...." type="text"
+						<input id="message-input" placeholder="<%= i18n.t("chats.ask-anything")%>" type="text"
 							class="flex-1 px-4 py-3 pr-10 text-sm bg-gray-200 border border-gray-800 rounded-2xl dark:bg-gray-800 dark:border-gray-100" />
 						<button id="send-btn" class="absolute transform -translate-y-1/2 right-5 top-1/2">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -448,6 +451,17 @@
 							</svg>
 						</button>
 					</div>
+
+					<div id="chat-topic" class="flex flex-row flex-wrap justify-center gap-2 my-3 px-[5rem] overflow-y-auto">
+						<button id="chat-topic-other" class="flex order-last items-center rounded-md dark:bg-gray-800 bg-gray-200 py-2 px-3 border border-gray-800 dark:border-gray-400 text-center text-sm dark:text-white transition-all  focus:bg-black/10 dark:focus:bg-slate-700  active:bg-black/10 dark:active:bg-slate-700 hover:bg-black/10 dark:hover:bg-slate-700 disabled:pointer-events-none disabled:opacity-50" type="button">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-3">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+							</svg>
+							<%= i18n.t("chats.other")%>
+						</button>
+					</div>
+
+					<div id="chat-subtopic" class="my-1 relative justify-center flex"></div>
 				</div>
 			</main>
 			<%- include('partials/footer') %>
@@ -522,6 +536,24 @@
 			}
 			const userData = getUserDataFromToken();
 
+			function applyLanguage(){
+				let lang = localStorage.getItem('language');
+				if(!lang){
+					localStorage.setItem('language', 'id');
+					lang = localStorage.getItem('language');
+				}
+				document.getElementById('language-select-chats').value = lang;
+				//document.getElementsByTagName('body')[0].setAttribute('lang', lang);
+			}
+
+			function changeLanguage(){
+				const lang = document.getElementById('language-select-chats').value ?? 'id';
+				localStorage.setItem('language', lang);
+				document.cookie = `i18next=${lang}`;
+				window.location.href = window.location.origin + window.location.pathname;
+				applyLanguage();
+			}
+
 			async function getAllHistory() {
 				try{
 					const response = await fetch(`/history-lists/${userData.userId}`,{
@@ -547,7 +579,7 @@
 			}
 
 			if (userData && userData.username) {
-				document.getElementById("greeting").textContent = `Halo, ${userData.username}`;
+				document.getElementById("greeting").textContent = `<%= i18n.t("chats.greeting")%>, ${userData.username}`;
 			}
 			const sidebar = document.getElementById('default-sidebar');
 			const closeButton = document.getElementById('toggle-sidebar');
@@ -571,6 +603,106 @@
 				sidebarContentWrapper.classList.toggle('minimized')
 			})
 
+			const dataTopic = [
+				{
+					num: 1,
+					icon: `<p class="mr-2 mb-2" style="font-size: 25px;">🙏</p>`,
+					topic: `<%= i18n.t("chats.datatopic-1.title")%>`,
+					subtopic :
+							[
+							{text: `<%= i18n.t("chats.datatopic-1.subtopic.text-1")%>`},
+							{text: `<%= i18n.t("chats.datatopic-1.subtopic.text-2")%>`},
+							{text: `<%= i18n.t("chats.datatopic-1.subtopic.text-3")%>`},
+							{text: `<%= i18n.t("chats.datatopic-1.subtopic.text-4")%>`},
+							]
+				},
+				{
+					num: 2,
+					icon: `<p class="mr-2 mb-2" style="font-size: 25px;">🏠</p>`,
+					topic: `<%= i18n.t("chats.datatopic-2.title")%>`,
+					subtopic :
+							[
+								{text: `<%= i18n.t("chats.datatopic-2.subtopic.text-1")%>`},
+								{text: `<%= i18n.t("chats.datatopic-2.subtopic.text-2")%>`},
+								{text: `<%= i18n.t("chats.datatopic-2.subtopic.text-3")%>`},
+								{text: `<%= i18n.t("chats.datatopic-2.subtopic.text-4")%>`},
+							]
+				},
+				{
+					num: 3,
+					icon: `<p class="mr-2 mb-2" style="font-size: 25px;">👨‍👩‍👧‍👦</p>`,
+					topic: `<%= i18n.t("chats.datatopic-3.title")%>`,
+					subtopic :
+							[
+								{text: `<%= i18n.t("chats.datatopic-3.subtopic.text-1")%>`},
+								{text: `<%= i18n.t("chats.datatopic-3.subtopic.text-2")%>`},
+								{text: `<%= i18n.t("chats.datatopic-3.subtopic.text-3")%>`},
+								{text: `<%= i18n.t("chats.datatopic-3.subtopic.text-4")%>`},
+							]
+				},
+			];
+
+			const dataTopicOther = [{
+				num: 4,
+				icon: `<p class="mr-2 mb-2" style="font-size: 25px;">🛒</p>`,
+				topic: `<%= i18n.t("chats.datatopic-4.title")%>`,
+				subtopic :
+						[
+							{text: `<%= i18n.t("chats.datatopic-4.subtopic.text-1")%>`},
+							{text: `<%= i18n.t("chats.datatopic-4.subtopic.text-2")%>`},
+							{text: `<%= i18n.t("chats.datatopic-4.subtopic.text-3")%>`},
+							{text: `<%= i18n.t("chats.datatopic-4.subtopic.text-4")%>`},
+						]
+			},
+				{
+					num: 5,
+					icon: `<p class="mr-2 mb-2" style="font-size:25px;">🏥</p>`,
+					topic: `<%= i18n.t("chats.datatopic-5.title")%>`,
+					subtopic :
+							[
+								{text: `<%= i18n.t("chats.datatopic-5.subtopic.text-1")%>`},
+								{text: `<%= i18n.t("chats.datatopic-5.subtopic.text-2")%>`},
+								{text: `<%= i18n.t("chats.datatopic-5.subtopic.text-3")%>`},
+								{text: `<%= i18n.t("chats.datatopic-5.subtopic.text-4")%>`},
+							]
+				},
+				{
+					num: 6,
+					icon: `<p class="mr-2 mb-2" style="font-size: 25px;">🚗</p>`,
+					topic: `<%= i18n.t("chats.datatopic-6.title")%>`,
+					subtopic :
+							[
+								{text: `<%= i18n.t("chats.datatopic-6.subtopic.text-1")%>`},
+								{text: `<%= i18n.t("chats.datatopic-6.subtopic.text-2")%>`},
+								{text: `<%= i18n.t("chats.datatopic-6.subtopic.text-3")%>`},
+								{text: `<%= i18n.t("chats.datatopic-6.subtopic.text-4")%>`},
+							]
+				},
+				{
+					num: 7,
+					icon: `<p class="mr-2 mb-2" style="font-size: 25px;">⚠️</p>`,
+					topic: `<%= i18n.t("chats.datatopic-7.title")%>`,
+					subtopic :
+							[
+								{text: `<%= i18n.t("chats.datatopic-7.subtopic.text-1")%>`},
+								{text: `<%= i18n.t("chats.datatopic-7.subtopic.text-2")%>`},
+								{text: `<%= i18n.t("chats.datatopic-7.subtopic.text-3")%>`},
+								{text: `<%= i18n.t("chats.datatopic-7.subtopic.text-4")%>`},
+							]
+				},
+				{
+					num: 8,
+					icon: `<p class="mr-2 mb-2" style="font-size: 25px;">🎓</p>`,
+					topic: `<%= i18n.t("chats.datatopic-8.title")%>`,
+					subtopic :
+							[
+								{text: `<%= i18n.t("chats.datatopic-8.subtopic.text-1")%>`},
+								{text: `<%= i18n.t("chats.datatopic-8.subtopic.text-2")%>`},
+								{text: `<%= i18n.t("chats.datatopic-8.subtopic.text-3")%>`},
+								{text: `<%= i18n.t("chats.datatopic-8.subtopic.text-4")%>`},
+							]
+				},]
+
 			document.addEventListener("DOMContentLoaded", async function () {
 				const newChatBtn = document.getElementById("new-chat-btn");
 				const sendBtn = document.getElementById("send-btn");
@@ -578,11 +710,12 @@
 				const chatBox = document.getElementById("chat-box");
 				const greetingSection = document.querySelector(".greeting-section");
 				const chatList = document.getElementById("chat-list");
-				const chatRecomSection = document.querySelector(".chat-recom");
 				const showMoreBtn = document.getElementById("show-more-btn");
 				const showLessBtn = document.getElementById("show-less-btn");
 				const alertPopup = document.getElementById("alert-popup");
 				const dashboardBtn = document.getElementById("dashboard-link");
+				const chatTopic = document.getElementById('chat-topic');
+				const chatSubTopic = document.getElementById('chat-subtopic');
 				const isAdmin = userData.role === 'ADMIN'
 
 				let messageCount = 0;
@@ -590,6 +723,7 @@
 				const maxVisibleChats = 4;
 				let chatCounter = 2;
 				let isShowingMore = false;
+				await renderChatTopic(dataTopic);
 				await getAllHistory();
 				renderChatList();
 
@@ -598,7 +732,68 @@
 						document.getElementById(`chat-list-${index}`).className = 'chat-item dark:hover:bg-white/10 hover:bg-black/10 block p-3 rounded-md cursor-pointer flex justify-between items-center'
 					})
 				}
-				
+
+				async function renderChatTopic(dataTopic){
+					const chatTopic = document.getElementById('chat-topic');
+					dataTopic.forEach((item, index) => {
+						chatTopic.innerHTML += `<button id="chat-topic-${item.num}" class="flex items-center rounded-md dark:bg-gray-800 bg-gray-200 py-2 px-3 border border-gray-800 dark:border-gray-400 text-center text-sm dark:text-white transition-all  focus:bg-black/10 dark:focus:bg-slate-700  active:bg-black/10 dark:active:bg-slate-700 hover:bg-black/10 dark:hover:bg-slate-700 disabled:pointer-events-none disabled:opacity-50" type="button">
+							${item.icon}
+							${item.topic}
+						</button>`
+						const chatSubTopic = document.getElementById('chat-subtopic');
+						chatSubTopic.innerHTML += `	<nav id="chat-subtopic-${item.num}" class="pt-10 hidden min-w-[10rem] flex-col gap-1 p-1.5 rounded-lg shadow-sm border border-gray-800 dark:border-gray-400 relative">
+						<button id="chat-subtopic-closebtn-${item.num}" onclick="document.getElementById('chat-subtopic').classList.add('hidden')" class="flex flex-row items-center justify-center transition-all w-8 h-8 rounded-md dark:text-white text-gray-800 hover:bg-white/10 active:bg-white/10 absolute top-1.5 right-1.5" type="button">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+						</button>
+						</nav>`
+						item.subtopic.forEach((itemSubTopic, index) => {
+							document.getElementById(`chat-subtopic-${item.num}`).innerHTML += `<div role="button" class="chat-subtopic-item text-slate-800 dark:text-gray-200 flex w-full items-center rounded-md p-3 transition-all duration-300 hover:bg-slate-200 dark:hover:bg-slate-600 focus:bg-slate-200 dark:focus:bg-slate-600 active:bg-slate-200 dark:active:bg-slate-600">${itemSubTopic.text}</div>`;
+						})
+					});
+					runAfter(dataTopic);
+				}
+
+				function runAfter(dataTopic){
+					dataTopic.forEach((itemSubTopic, index) => {
+						toggleChatTopic(itemSubTopic.num, dataTopic);
+						inputTopic(itemSubTopic.num);
+					});
+				}
+
+
+				function resetChatTopic(topic){
+					topic.forEach((itemSubTopic, index) => {
+						document.getElementById(`chat-subtopic-${itemSubTopic.num}`).classList.add('hidden');
+					});
+				}
+
+				function toggleChatTopic(id, dataTopic){
+					document.getElementById(`chat-topic-${id}`).addEventListener('click', function(){
+						const chatSubtopic = document.getElementById(`chat-subtopic-${id}`);
+						resetChatTopic(dataTopic);
+						document.getElementById('chat-subtopic').classList.remove('hidden');
+						chatSubtopic.classList.remove('hidden');
+						chatSubtopic.classList.add('flex');
+						chatSubtopic.scrollIntoView();
+					});
+				}
+
+				function inputTopic(id){
+					document.getElementById(`chat-subtopic-${id}`).addEventListener('click', function(e){
+						e.preventDefault();
+						const item = e.target.closest('.chat-subtopic-item');
+						messageInput.value = item ? item.textContent : '';
+						this.classList.toggle('hidden');
+					});
+				}
+
+				document.getElementById('chat-topic-other').addEventListener('click', function(e){
+					const newArr = dataTopic.concat(dataTopicOther);
+					chatTopic.innerHTML = '';
+					chatSubTopic.innerHTML = '';
+					renderChatTopic(newArr);
+				})
+
 				// Fungsi untuk merender daftar chat
 				function renderChatList() {
 					chatList.innerHTML = '';
@@ -633,19 +828,19 @@
 						a.appendChild(ellipsisButton);
 
 						const dropdownMenu = document.createElement('div');
-						dropdownMenu.className = 'z-10 absolute border bg-gray-500 right-0 top-full mt-2 w-32 text-white shadow-lg rounded-lg p-2 hidden';
+						dropdownMenu.className = 'z-10 absolute border bg-white dark:bg-gray-700 right-0 top-full mt-2 w-32 text-gray-700 dark:text-gray-200 rounded-lg p-2 hidden';
 						dropdownMenu.id = `dropdown-${index}`;
 
 						const optionRename = document.createElement('div');
-						optionRename.className = 'p-2 hover:bg-gray-100 cursor-pointer';
-						optionRename.textContent = 'Ubah Nama';
+						optionRename.className = 'p-2 hover:bg-gray-200 dark:hover:bg-white/10 cursor-pointer rounded-md';
+						optionRename.textContent = '<%= i18n.t("chats.rename")%>';
 						optionRename.addEventListener('click', function () {
 							const input = document.createElement('input');
 							input.type = 'text';
-							input.value = chat.historyName; 
+							input.value = chat.historyName ?? chat.name;
 							input.className = 'p-2 border-none bg-transparent outline-none'; 
 								
-							input.style.width = `${chat.historyName.length + 1}ch`;
+							input.style.width = chat.historyName ?  `${chat.historyName.length + 1}` : `${chat.name.length + 1}`;
 								
 							a.innerHTML = ''; 
 							a.appendChild(input); 
@@ -655,31 +850,44 @@
 								const newHistoryName = input.value;
 								chat.historyName = newHistoryName;
 								a.textContent = newHistoryName ;
-								try {
-									const historyId = chat.id;
-									const response = await fetch(`/histories/${historyId}`, {
-										method: 'PUT',
-										headers: {
-											'Content-Type': 'application/json',
-											'Authorization': token_jwt 
-										},
-										body: JSON.stringify({ historyName: newHistoryName, status: chat.status, userId: `${userData.userId}` }) 
+								if(chat.id){
+									try {
+										const historyId = chat.id;
+										const response = await fetch(`/histories/${historyId}`, {
+											method: 'PUT',
+											headers: {
+												'Content-Type': 'application/json',
+												'Authorization': token_jwt
+											},
+											body: JSON.stringify({ historyName: newHistoryName, status: chat.status, userId: `${userData.userId}` })
+										});
+										if (!response.ok) {
+											throw new Error(`<%= i18n.t("chats.err-msg.failed-rename")%>`);
+										}
+
+										const data = await response.json();
+										const chatIndex = chats.indexOf(chat);
+										if (chatIndex > -1) {
+											chats.splice(chatIndex, 1);
+										}
+
+										chats.unshift(chat);
+
+										renderChatList();
+									} catch (error) {
+										console.error("Error:", error);
+										Swal.fire({
+											text: `<%= i18n.t("chats.err-msg.failed-rename")%>`,
+											icon: "error",
+											confirmButtonColor: '#7066e0'
+										});
+									}
+								} else {
+									Swal.fire({
+										text: `<%= i18n.t("chats.err-msg.send-first-rename")%>`,
+										icon: "warning",
+										confirmButtonColor: '#7066e0'
 									});
-									if (!response.ok) {
-										throw new Error('Gagal memperbarui nama chat di server');
-									}
-									const data = await response.json();
-									const chatIndex = chats.indexOf(chat);
-									if (chatIndex > -1) {
-										chats.splice(chatIndex, 1);
-									}
-
-									chats.unshift(chat);
-
-									renderChatList();
-								} catch (error) {
-									console.error("Error:", error);
-									alert("Gagal memperbarui nama chat di server.");
 								}
 								a.appendChild(ellipsisButton);
 							});
@@ -693,37 +901,56 @@
 						dropdownMenu.appendChild(optionRename);
 						
 						const optionDelete = document.createElement('div');
-						optionDelete.className = 'p-2 hover:bg-gray-100 cursor-pointer';
-						optionDelete.textContent = 'Hapus';
+						optionDelete.className = 'p-2 hover:bg-gray-200 dark:hover:bg-white/10 cursor-pointer rounded-md';
+						optionDelete.textContent = '<%= i18n.t("chats.delete")%>';
 						optionDelete.addEventListener('click', async function () {
-							const confirmDelete = confirm("Apakah kamu yakin akan menghapus chat ini?");
-							if (confirmDelete) {
-								try {
-									const historyId = chat.id;
-									const response = await fetch(`/histories/${historyId}`, {
-										method: 'DELETE',
-										headers: {
-											'Content-Type': 'application/json',
-											'Authorization': token_jwt 
+							Swal.fire({
+								text: `<%= i18n.t("chats.err-msg.confirm-delete-history")%>`,
+								icon: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#3085d6",
+								cancelButtonColor: "#d33",
+								confirmButtonText: `<%= i18n.t("confirm.ok")%>`,
+								cancelButtonText: `<%= i18n.t("confirm.cancel")%>`
+							}).then(async (result) => {
+								if (result.isConfirmed) {
+									try {
+										const historyId = chat.id;
+										const response = await fetch(`/histories/${historyId}`, {
+											method: 'DELETE',
+											headers: {
+												'Content-Type': 'application/json',
+												'Authorization': token_jwt
+											}
+										});
+
+										if (response && !response.ok && historyId) {
+											throw new Error('Gagal menghapus chat');
 										}
-									});
 
-									if (!response.ok) {
-										throw new Error('Gagal menghapus chat');
+										chats.splice(index, 1);
+										currentChatIndex = null;
+										Swal.fire({
+											text: `<%= i18n.t("chats.err-msg.success-delete-history")%>`,
+											icon: "success",
+											confirmButtonColor: '#7066e0'
+										});
+
+										renderChatList();
+
+										chatBox.innerHTML = '';
+										greetingSection.classList.remove('hidden');
+										chatTopic.classList.remove('hidden');
+									} catch (error) {
+										Swal.fire({
+											text: `<%= i18n.t("chats.err-msg.failed-delete-history")%>`,
+											icon: "error",
+											confirmButtonColor: '#7066e0'
+										});
+										console.error("Error:", error);
 									}
-
-									chats.splice(index, 1); 
-									currentChatIndex = null;
-										
-									renderChatList();
-										
-									chatBox.innerHTML = '';
-									greetingSection.classList.remove('hidden'); 
-								} catch (error) {
-									console.error("Error:", error);
-									alert("Gagal menghapus chat dari server.");
 								}
-							}
+							});
 						});
 						dropdownMenu.appendChild(optionDelete);
 
@@ -779,6 +1006,7 @@
 					});
 					showMoreBtn.classList.add('hidden');
 					showLessBtn.classList.remove('hidden');
+					sidebar.scrollTop = sidebar.scrollHeight;
 				});
 
 				// Logika untuk tombol show less
@@ -839,7 +1067,7 @@
 				// Fungsi untuk membuat chat baru
 				async function createNewChat() {
 					const chatId = `chat-${Date.now()}`;
-					const chatName = `Percakapan ${chatCounter++}`;
+					const chatName = `<%= i18n.t("chats.chat-label")%> ${chatCounter++}`;
 					const newChat = {
 						name: chatName,
 						messages: []
@@ -847,8 +1075,14 @@
 					await getAllHistory();
 					chats.push(newChat);
 					currentChatIndex = chats.length - 1;
+					isShowingMore = true;
 					renderChatList();
-					// switchToChat(chats.length - 1); 
+					sidebar.scrollTop = sidebar.scrollHeight;
+
+					const chatIndex = currentChatIndex;
+					document.getElementById(`chat-list-${chatIndex}`).className = 'chat-item dark:bg-white/10 bg-black/10 block p-3 rounded-md cursor-pointer flex justify-between items-center';
+					await showHistoryMessage(chats, chatIndex);
+					// switchToChat(chats.length - 1);
 					if (!userData) {
 						console.error("User not authenticated.");
 						return;
@@ -915,6 +1149,7 @@
 					messageInput.value = '';
 					if (selectedChat.messages.length === 1) {
 						greetingSection.classList.add('hidden');
+						chatTopic.classList.add('hidden');
 					}
 
 					messageCount++;
@@ -991,44 +1226,43 @@
 				}
 
 				async function showHistoryMessage(chat, chatIndex){
-					historyId = chat.id;
+					const historyId = chat.id;
 					currentChatIndex = chatIndex;
 					chatBox.innerHTML = '';
-					greetingSection.classList.add('hidden');
 					try{
-						const response = await fetch(`/chat-history/${historyId}`,{
-							method: 'GET',
-							headers: {
-								'Content-Type': 'application/json',
-								'Authorization': token_jwt
-							}
-						})
+						if(historyId){
+							greetingSection.classList.add('hidden');
+							chatTopic.classList.add('hidden');
+							const response = await fetch(`/chat-history/${historyId}`,{
+								method: 'GET',
+								headers: {
+									'Content-Type': 'application/json',
+									'Authorization': token_jwt
+								}
+							})
 
-						const data = await response.json();
-						data.forEach(el => {
-							if(el.chat){
-								showUserMessage(el.chat)
-							}
-							if(el.response){
-								showBotMessage(el.response)
-							}
-						})
+							const data = await response.json();
+							data.forEach(el => {
+								if(el.chat){
+									showUserMessage(el.chat)
+								}
+								if(el.response){
+									showBotMessage(el.response)
+								}
+							})
 
-						if (!response.ok) {
-							throw new Error('Gagal mengambil daftar chat');
+							if (!response.ok) {
+								throw new Error('Gagal mengambil daftar chat');
+							}
+						} else {
+							greetingSection.classList.remove('hidden');
+							chatTopic.classList.remove('hidden');
 						}
+
 					}catch (error) {
 						console.log(error);
 					}
 				}
-
-				chatRecomSection.addEventListener('click', function (e) {
-					const chatItem = e.target.closest('.chat-recom-item');
-					if (chatItem) {
-						const messageText = chatItem.getAttribute('data-message');
-						sendMessage(messageText);
-					}
-				});
 
 				// Event listener untuk tombol New Chat dan kirim pesan
 				newChatBtn.addEventListener('click', function () {
@@ -1046,6 +1280,7 @@
 				// Inisialisasi dengan chat pertama
 				renderChatList();
 				onLoadDashboard(userData);
+				applyLanguage();
 
 				dashboardBtn.addEventListener('click', function(evt){
 					evt.preventDefault();

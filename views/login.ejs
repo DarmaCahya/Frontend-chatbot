@@ -11,6 +11,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link id="sweetalert2-theme" rel="stylesheet">
 
     <script>
       tailwind.config = {
@@ -54,6 +56,16 @@
         initMode();
       });
 
+      const setSweetAlertTheme = () => {
+        const isDark = localStorage.getItem("theme");
+        const themeLink = document.getElementById('sweetalert2-theme');
+
+        if (isDark === "dark") {
+          themeLink.href = "https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css";
+        } else {
+          themeLink.href = "";  // Tema default
+        }
+      };
     </script>
 
     <style>
@@ -64,24 +76,32 @@
       .login-btn:hover svg path{
         fill: white;
       }
+
+      body[lang=en-GB]  [lang]:not([lang=en-GB]),
+      body[lang=id-ID] [lang]:not([lang=id-ID]),
+      body[lang=zh-HANT] [lang]:not([lang=zh-HANT]),
+      body[lang=zh-HANS] [lang]:not([lang=zh-HANS])
+      {
+        display: none;
+      }
     </style>
   </head>
 
-  <body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex items-center justify-center min-h-screen">
+  <body lang="id-ID" class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 flex items-center justify-center min-h-screen">
   <%- include('partials/header') %>
     <main class=" dark:bg-gray-800 flex items-center justify-center w-full h-600 p-0 dark:border-gray-700 mt-12">
       <div class="relative flex flex-col md:flex-row w-full h-full border-l border-r border-gray dark:border-gray-700 bg-[url(/images/batik-bg.jpg)] dark:bg-none bg-cover ">
         <!-- Bagian kiri untuk form login -->
         <div class="flex-1 flex items-center justify-center p-8">
           <form id="login-form" class="w-full max-w-sm">
-            <h2 class="text-3xl font-bold mb-6 text-center mt-5 dark:text-white">Masuk</h2>
+            <h2 class="text-3xl font-bold mb-6 text-center mt-5 dark:text-white"><%= i18n.t("login.title")%></h2>
             <div class="mb-4">
-              <label class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2" for="email">Pos-el(Email)</label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline bg-white dark:bg-gray-700" id="email" type="text" placeholder="Email">
+              <label class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2" for="email"><%= i18n.t("login.email")%></label>
+              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-900 dark:text-gray-200 leading-tight focus:outline-none focus:shadow-outline bg-white dark:bg-gray-700" id="email" type="text" placeholder="<%= i18n.t("login.email")%>">
             </div>
             <div class="mb-6">
               <label class="block text-gray-700 dark:text-gray-200 text-sm font-bold mb-2" for="password">
-                  Sandi
+                <%= i18n.t("login.password")%>
               </label>
               <div class="relative">
                   <input
@@ -100,11 +120,11 @@
               </div>
             </div>
             <div class="flex items-center justify-between">
-              <button class="bg-black dark:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">Masuk</button>
+              <button class="bg-black dark:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit"><%= i18n.t("login.title")%></button>
             </div>
             <div class="text-center flex flex-col">
-              <a href="/register" class="text-blue-500 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-400 text-sm my-1">Belum punya akun? Daftar disini</a>
-              <a href="/forgot-password" class="text-blue-500 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-400 text-sm my-1">Lupa sandi</a>
+              <a href="/register" class="text-blue-500 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-400 text-sm my-1"><%= i18n.t("login.dont-have-account")%></a>
+              <a href="/forgot-password" class="text-blue-500 dark:text-blue-300 hover:text-blue-700 dark:hover:text-blue-400 text-sm my-1"><%= i18n.t("login.forgot-password")%></a>
             </div>
           </form>
         </div>
@@ -118,7 +138,7 @@
       </div>
     </main>
     <!-- <%- include('partials/footer') %> -->
-    <script>
+    <script>      
       const passwordInput = document.getElementById("password");
       const togglePasswordIcon = document.getElementById("togglePassword");
 
@@ -135,7 +155,11 @@
       const token = sessionStorage.getItem('token');
       if (token) {
         window.location.href = '/index';
-        alert('Anda sudah login, akan diarahkan ke halaman utama.');
+        Swal.fire({
+					text: `<%= i18n.t("login.still-logged-in")%>`,
+					icon: "success",
+          confirmButtonColor: '#7066e0'
+				});
       }
 
       document.getElementById('login-form').addEventListener('submit', async function (event) {
@@ -145,8 +169,12 @@
         const password = document.getElementById('password').value;
 
         if (!email || !password) {
-            alert('Email dan password harus diisi.');
-            return;
+          Swal.fire({
+            text: `<%= i18n.t("login.fill-email-password")%>`,
+            icon: "warning",
+            confirmButtonColor: '#7066e0'
+          });
+          return;
         }
     
         const data = {
@@ -170,10 +198,18 @@
           } else {
             console.error('Response error:', response);
             const errorData = await response.json();
-            alert('Masuk gagal: ' + (errorData.message || 'Kesalahan tidak diketahui.'));
+            Swal.fire({
+              text: `<%= i18n.t("login.failed-login")%>`,
+              icon: "error",
+              confirmButtonColor: '#7066e0'
+            });
           }
         } catch (error) {
-          alert('Terjadi kesalahan, coba lagi nanti.');
+          Swal.fire({
+            text: `<%= i18n.t("login.error-login")%>`,
+            icon: "error",
+            confirmButtonColor: '#7066e0'
+          });
         }
       });
     </script>    
