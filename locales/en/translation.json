@@ -182,5 +182,16 @@
       "error": "An error occurred, please try again later.",
       "unknown": "Unknown error."
     }
+  },
+  "change-password": {
+    "verify-token": "Verify Token",
+    "verify": "Verify",
+    "reset-password": "Reset Password",
+    "reset": "Reset",
+    "back-to-home": "Back to Home",
+    "fill-password": "Password must be filled.",
+    "failed-reset": "Password reset failed.",
+    "unknown": "Unknown error.",
+    "error": "An error occurred, please try again later."
   }
 }

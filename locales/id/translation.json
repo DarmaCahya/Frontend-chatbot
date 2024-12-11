@@ -182,5 +182,16 @@
       "error" : "Terjadi kesalahan, coba lagi nanti.",
       "unknown": "Kesalahan tidak diketahui."
     }
+  },
+  "change-password" : {
+    "verify-token" : "Verifikasi Token",
+    "verify" : "Verifikasi",
+    "reset-password" : "Atur ulang sandi",
+    "reset" : "Atur Ulang",
+    "back-to-home" : "Kembali ke halaman utama",
+    "fill-password" : "Password harus diisi.",
+    "failed-reset" : "Atur ulang sandi gagal. ",
+    "unknown" : "Kesalahan tidak diketahui.",
+    "error" : "Terjadi kesalahan, coba lagi nanti."
   }
 }

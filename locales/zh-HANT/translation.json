@@ -182,5 +182,16 @@
       "error": "發生錯誤，請稍後再試。",
       "unknown": "未知錯誤。"
     }
+  },
+  "change-password": {
+    "verify-token": "驗證令牌",
+    "verify": "驗證",
+    "reset-password": "重置密碼",
+    "reset": "重置",
+    "back-to-home": "返回主頁",
+    "fill-password": "密碼必須填寫。",
+    "failed-reset": "密碼重置失敗。",
+    "unknown": "未知錯誤。",
+    "error": "發生錯誤，請稍後再試。"
   }
 }
