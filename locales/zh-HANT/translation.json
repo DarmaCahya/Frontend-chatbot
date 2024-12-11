@@ -168,5 +168,19 @@
   "verify": {
     "title": "註冊成功！請檢查您的電子郵件以繼續驗證",
     "login": "返回登錄"
+  },
+  "forgot-password": {
+    "title": "忘記密碼",
+    "alert": "輸入您的電子郵件地址。我們將發送一個鏈接來重置您的密碼。",
+    "email": "電子郵件",
+    "send-link": "發送鏈接",
+    "back": "返回",
+    "message": {
+      "email-filled": "電子郵件必須填寫。",
+      "successfully-send-link": "鏈接發送成功",
+      "login-failed": "登錄失敗：",
+      "error": "發生錯誤，請稍後再試。",
+      "unknown": "未知錯誤。"
+    }
   }
 }

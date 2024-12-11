@@ -168,5 +168,19 @@
   "verify" : {
     "title" : "Pendaftaran berhasil! Silakan cek pos-el (email) Anda untuk melanjutkan verifikasi",
     "login" : "Kembali ke masuk"
+  },
+  "forgot-password" : {
+    "title" : "Lupa Sandi",
+    "alert" : "Masukkan alamat pos-el Anda. Kami akan mengirimkan tautan untuk mengatur ulang sandi Anda.",
+    "email" : "Pos-el(Email)",
+    "send-link" : "Kirim tautan",
+    "back" : "Kembali",
+    "message" : {
+      "email-filled" : "Pos-el harus diisi.",
+      "successfully-send-link" : "Tautan berhasil dikirim",
+      "login-failed" : "Masuk gagal: ",
+      "error" : "Terjadi kesalahan, coba lagi nanti.",
+      "unknown": "Kesalahan tidak diketahui."
+    }
   }
 }

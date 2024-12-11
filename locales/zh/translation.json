@@ -168,5 +168,19 @@
   "verify": {
     "title": "注册成功！请检查您的电子邮件以继续验证",
     "login": "返回登录"
+  },
+  "forgot-password": {
+    "title": "忘记密码",
+    "alert": "输入您的电子邮件地址。我们将发送一个链接来重置您的密码。",
+    "email": "电子邮件",
+    "send-link": "发送链接",
+    "back": "返回",
+    "message": {
+      "email-filled": "电子邮件必须填写。",
+      "successfully-send-link": "链接发送成功",
+      "login-failed": "登录失败：",
+      "error": "发生错误，请稍后再试。",
+      "unknown": "未知错误。"
+    }
   }
 }

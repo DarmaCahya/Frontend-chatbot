@@ -168,5 +168,19 @@
   "verify": {
     "title": "Registration successful! Please check your email to continue verification",
     "login": "Back to login"
+  },
+  "forgot-password": {
+    "title": "Forgot Password",
+    "alert": "Enter your email address. We will send a link to reset your password.",
+    "email": "Email",
+    "send-link": "Send Link",
+    "back": "Back",
+    "message": {
+      "email-filled": "Email must be filled.",
+      "successfully-send-link": "Link successfully sent",
+      "login-failed": "Login failed: ",
+      "error": "An error occurred, please try again later.",
+      "unknown": "Unknown error."
+    }
   }
 }
