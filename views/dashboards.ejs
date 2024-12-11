@@ -77,7 +77,7 @@
 
         <div class="container px-6 mx-auto grid">
             <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-white">
-                Dasbor
+                <%= i18n.t("dashboard.title")%>
             </h2>
 
             <div class="grid gap-6 my-3 md:grid-cols-2 xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2">
@@ -88,8 +88,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"> Total Interaksi</p>
-                        <p id="total-chats" class="text-lg font-semibold text-gray-700 dark:text-gray-100"> memuat... </p>
+                        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"><%= i18n.t("dashboard.interaction-total")%></p>
+                        <p id="total-chats" class="text-lg font-semibold text-gray-700 dark:text-gray-100"> <%= i18n.t("dashboard.loading")%></p>
                     </div>
                 </div>
 
@@ -100,8 +100,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"> Pengguna Aktif </p>
-                        <p id="total-users" class="text-lg font-semibold text-gray-700 dark:text-gray-100"> memuat... </p>
+                        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"> <%= i18n.t("dashboard.active-users")%></p>
+                        <p id="total-users" class="text-lg font-semibold text-gray-700 dark:text-gray-100"> <%= i18n.t("dashboard.loading")%> </p>
                     </div>
                 </div>
 
@@ -112,8 +112,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"> Total Histori yang dibuat </p>
-                        <p id="total-historys" class="text-lg font-semibold text-gray-700 dark:text-gray-100"> memuat... </p>
+                        <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-200"> <%= i18n.t("dashboard.created-history")%> </p>
+                        <p id="total-historys" class="text-lg font-semibold text-gray-700 dark:text-gray-100"> <%= i18n.t("dashboard.loading")%> </p>
                     </div>
                 </div>
             </div>
@@ -127,7 +127,7 @@
 
                 <div class="relative flex flex-col my-3 bg-white dark:bg-gray-800 shadow-xs rounded-lg">
                     <div class="mx-3 mb-0 border-b border-slate-200 dark:border-slate-200/10 py-5 px-5">
-                        <span class="text-md font-medium text-gray-600 dark:text-gray-200">Jumlah Pengguna</span>
+                        <span class="text-md font-medium text-gray-600 dark:text-gray-200"><%= i18n.t("dashboard.user-count")%></span>
                     </div>
 
                     <div class="p-4">
@@ -139,11 +139,11 @@
 
                 <div class="relative flex flex-col my-3 bg-white dark:bg-gray-800 shadow-xs rounded-lg">
                     <div class="mx-3 mb-0 border-b border-slate-200 dark:border-slate-200/10 py-5 px-5">
-                        <span class="text-md font-medium text-gray-600 dark:text-gray-200" >Aktivitas Terbaru</span>
+                        <span class="text-md font-medium text-gray-600 dark:text-gray-200" ><%= i18n.t("dashboard.recent-activities")%></span>
                     </div>
 
                     <nav class="flex min-w-[240px] flex-col gap-1 p-1.5" id="user-new-activity">
-                        <p class="text-lg font-semibold text-gray-700 dark:text-gray-100"> memuat... </p>
+                        <p class="text-lg font-semibold text-gray-700 dark:text-gray-100"> <%= i18n.t("dashboard.loading")%> </p>
                     </nav>
                 </div>
 
@@ -157,7 +157,7 @@
 
                 <div class="relative flex flex-col my-3 bg-white dark:bg-gray-800 shadow-xs rounded-lg">
                     <div class="mx-3 mb-0 border-b border-slate-200 dark:border-slate-200/10 py-5 px-5">
-                        <span class="text-md font-medium text-gray-600 dark:text-gray-200">Sebaran Asal Negara Pengguna</span>
+                        <span class="text-md font-medium text-gray-600 dark:text-gray-200"><%= i18n.t("dashboard.user-origin")%></span>
                     </div>
 
                     <div class="p-4 text-gray-800" style="width: auto; height: 350px">
@@ -167,16 +167,16 @@
 
                 <div class="relative flex flex-col my-3 bg-white dark:bg-gray-800 shadow-xs rounded-lg">
                     <div class="mx-3 mb-0 border-b border-slate-200 dark:border-slate-200/10 py-5 px-5">
-                        <span class="text-md font-medium text-gray-600 dark:text-gray-200" >Papan Peringkat Negara</span>
+                        <span class="text-md font-medium text-gray-600 dark:text-gray-200" ><%= i18n.t("dashboard.leaderboard")%></span>
                     </div>
 
                     <div class="overflow-x-auto m-5">
                         <table class="table-fixed w-full text-left border-collapse">
                             <thead>
                                 <tr class="bg-gray-100 dark:bg-gray-700">
-                                    <th class="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300">Peringkat</th>
-                                    <th class="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300">Negara</th>
-                                    <th class="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300">Total Pengguna</th>
+                                    <th class="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300"><%= i18n.t("dashboard.rank")%></th>
+                                    <th class="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300"><%= i18n.t("dashboard.country")%></th>
+                                    <th class="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-300"><%= i18n.t("dashboard.user-total")%></th>
                                 </tr>
                             </thead>
                             <tbody id="leaderboard-body" class="text-gray-700 dark:text-gray-100"></tbody>
@@ -205,7 +205,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                     </svg>
-                    Kembali
+                    <%= i18n.t("dashboard.back")%>
                 </button>
             </div>
         </div>

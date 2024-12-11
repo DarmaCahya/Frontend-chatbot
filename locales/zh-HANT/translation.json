@@ -193,5 +193,20 @@
     "failed-reset": "密碼重置失敗。",
     "unknown": "未知錯誤。",
     "error": "發生錯誤，請稍後再試。"
+  },
+  "dashboard": {
+    "title": "儀表板",
+    "interaction-total": "總互動",
+    "loading": "加載中...",
+    "active-users": "活躍用戶",
+    "created-history": "創建的歷史總數",
+    "user-count": "用戶數",
+    "recent-activities": "最新活動",
+    "user-origin": "用戶國家分佈",
+    "leaderboard": "國家排行榜",
+    "rank": "排名",
+    "country": "國家",
+    "user-total": "用戶總數",
+    "back": "返回"
   }
 }

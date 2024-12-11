@@ -193,5 +193,20 @@
     "failed-reset": "Password reset failed.",
     "unknown": "Unknown error.",
     "error": "An error occurred, please try again later."
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "interaction-total": "Total Interactions",
+    "loading": "loading...",
+    "active-users": "Active Users",
+    "created-history": "Total History Created",
+    "user-count": "User Count",
+    "recent-activities": "Recent Activities",
+    "user-origin": "User Country Distribution",
+    "leaderboard": "Country Leaderboard",
+    "rank": "Rank",
+    "country": "Country",
+    "user-total": "Total Users",
+    "back": "Back"
   }
 }

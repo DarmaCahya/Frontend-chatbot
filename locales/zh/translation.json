@@ -193,5 +193,20 @@
     "failed-reset": "密码重置失败。",
     "unknown": "未知错误。",
     "error": "发生错误，请稍后再试。"
+  },
+  "dashboard": {
+    "title": "仪表板",
+    "interaction-total": "总互动",
+    "loading": "加载中...",
+    "active-users": "活跃用户",
+    "created-history": "创建的历史总数",
+    "user-count": "用户数",
+    "recent-activities": "最新活动",
+    "user-origin": "用户国家分布",
+    "leaderboard": "国家排行榜",
+    "rank": "排名",
+    "country": "国家",
+    "user-total": "用户总数",
+    "back": "返回"
   }
 }

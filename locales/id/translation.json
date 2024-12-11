@@ -193,5 +193,20 @@
     "failed-reset" : "Atur ulang sandi gagal. ",
     "unknown" : "Kesalahan tidak diketahui.",
     "error" : "Terjadi kesalahan, coba lagi nanti."
+  },
+  "dashboard" : {
+    "title" : "Dasbor",
+    "interaction-total" : "Total Interaksi",
+    "loading" : "memuat... ",
+    "active-users" : "Pengguna Aktif",
+    "created-history" : "Total Histori yang dibuat",
+    "user-count" : "Jumlah Pengguna",
+    "recent-activities" : "Aktivitas Terbaru",
+    "user-origin" : "Sebaran Asal Negara Pengguna",
+    "leaderboard" : "Papan Peringkat Negara",
+    "rank" : "Peringkat",
+    "country" : "Negara",
+    "user-total" : "Total Pengguna",
+    "back" : "Kembali"
   }
 }
