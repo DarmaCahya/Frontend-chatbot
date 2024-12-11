@@ -132,5 +132,41 @@
   "confirm": {
     "ok": "OK",
     "cancel": "Cancel"
+  },
+  "register": {
+    "title": "Register Account",
+    "username" : "Username",
+    "email": "Email",
+    "country": "Country of Origin",
+    "choose-country" : "Choose Country",
+    "register" : "Register",
+    "password": "Password",
+    "confirm-password": "Confirm Password",
+    "password-caption": "Password must be at least 8 characters long, including uppercase letters, lowercase letters, numbers, and one of the following symbols: ! @ # $ % ^ & *",
+    "already-have-account": "Already have an account? Sign in here",
+    "message": {
+      "login-success": {
+        "title": "Login Successful!",
+        "text": "You will be redirected to the main page."
+      },
+      "all-fields-filled": "All fields must be filled.",
+      "success-email-verif": "Email successfully verified!",
+      "failed-email-verif": "Verification failed.",
+      "error-email-verif": "An error occurred during email verification.",
+      "pass-8-char": "Password must be at least 8 characters long.",
+      "pass-lowercase": "Password must contain at least one lowercase letter.",
+      "pass-uppercase": "Password must contain at least one uppercase letter.",
+      "pass-number": "Password must contain at least one number.",
+      "pass-symbol": "Password must contain at least one symbol: ! @ # $ % ^ & *",
+      "pass-invalid": "Invalid password.",
+      "pass-confirm-same": "Password and Confirm Password must match.",
+      "register-success": "Registration successful:",
+      "register-error": "An error occurred during registration, please try again later.",
+      "email-invalid": "Invalid email address. Please enter a valid email address."
+    }
+  },
+  "verify": {
+    "title": "Registration successful! Please check your email to continue verification",
+    "login": "Back to login"
   }
 }

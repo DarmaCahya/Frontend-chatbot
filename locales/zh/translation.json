@@ -132,5 +132,41 @@
   "confirm": {
     "ok": "OK",
     "cancel": "取消"
+  },
+  "register": {
+    "title": "注册账户",
+    "username" : "用户名",
+    "email": "电子邮件",
+    "country": "国家",
+    "choose-country" : "选择国家",
+    "register" : "注册",
+    "password": "密码",
+    "confirm-password": "确认密码",
+    "password-caption": "密码必须至少包含8个字符，包括大写字母、小写字母、数字和以下符号之一：! @ # $ % ^ & *",
+    "already-have-account": "已经有账户？在这里登录",
+    "message": {
+      "login-success": {
+        "title": "登录成功！",
+        "text": "您将被重定向到主页。"
+      },
+      "all-fields-filled": "所有字段必须填写。",
+      "success-email-verif": "电子邮件验证成功！",
+      "failed-email-verif": "验证失败。",
+      "error-email-verif": "电子邮件验证时发生错误。",
+      "pass-8-char": "密码必须至少包含8个字符。",
+      "pass-lowercase": "密码必须包含至少一个小写字母。",
+      "pass-uppercase": "密码必须包含至少一个大写字母。",
+      "pass-number": "密码必须包含至少一个数字。",
+      "pass-symbol": "密码必须包含至少一个符号：! @ # $ % ^ & *",
+      "pass-invalid": "密码无效。",
+      "pass-confirm-same": "密码和确认密码必须匹配。",
+      "register-success": "注册成功：",
+      "register-error": "注册时发生错误，请稍后再试。",
+      "email-invalid": "电子邮件地址无效。请输入有效的电子邮件地址。"
+    }
+  },
+  "verify": {
+    "title": "注册成功！请检查您的电子邮件以继续验证",
+    "login": "返回登录"
   }
 }

@@ -132,5 +132,41 @@
   "confirm" : {
     "ok" : "OK",
     "cancel" : "Batal"
+  },
+  "register" : {
+    "title" : "Daftar Akun",
+    "username" : "Nama Pengguna",
+    "email" : "Pos-el(Email)",
+    "country" : "Asal Negara",
+    "choose-country" : "Pilih Negara",
+    "register" : "Daftar",
+    "password" : "Sandi",
+    "confirm-password" : "Konfirmasi Sandi",
+    "password-caption" : "Kata sandi harus memiliki minimal 8 karakter, terdiri atas huruf kapital, huruf kecil, angka, dan salah satu simbol berikut: ! @ # $ % ^ & *",
+    "already-have-account" : "Sudah punya akun? Masuk di sini",
+    "message" :{
+      "login-success" : {
+        "title" : "Berhasil Login!",
+        "text" : "Anda akan diarahkan ke halaman utama."
+      },
+      "all-fields-filled" : "Semua field harus diisi.",
+      "success-email-verif" : "Pos-el berhasil diverifikasi!",
+      "failed-email-verif" : "Verifikasi gagal.",
+      "error-email-verif" : "Terjadi kesalahan pada verifikasi pos-el.",
+      "pass-8-char" : "Sandi harus memiliki minimal 8 karakter.",
+      "pass-lowercase" : "Sandi harus mengandung minimal satu huruf kecil.",
+      "pass-uppercase": "Sandi harus mengandung minimal satu huruf kapital.",
+      "pass-number" : "Sandi harus mengandung minimal satu angka.",
+      "pass-symbol" : "Sandi harus mengandung minimal satu simbol: ! @ # $ % ^ & *",
+      "pass-invalid" : "Sandi tidak valid.",
+      "pass-confirm-same" : "Sandi dan Konfirmasi Sandi harus sama.",
+      "register-success" : "Pendaftaran berhasil:",
+      "register-error" : "Terjadi kesalahan dalam melakukan pendaftaran, coba lagi nanti.",
+      "email-invalid" : "Alamat pos-el tidak valid. Sila masukkan alamat pos-el yang valid"
+    }
+  },
+  "verify" : {
+    "title" : "Pendaftaran berhasil! Silakan cek pos-el (email) Anda untuk melanjutkan verifikasi",
+    "login" : "Kembali ke masuk"
   }
 }
